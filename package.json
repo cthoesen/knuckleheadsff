@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "export": "next build",
-    "minify:js": "terser public/js/common/header.dev.js -o public/js/common/header.js -c -m && terser public/js/common/footer.dev.js -o public/js/common/footer.js -c -m && terser public/js/common/scoreboard.js -o public/js/common/scoreboard.min.js -c -m",
+    "minify:js": "terser public/js/common/header.js -o public/js/common/header.min.js -c -m && terser public/js/common/footer.js -o public/js/common/footer.min.js -c -m && terser public/js/common/scoreboard.js -o public/js/common/scoreboard.min.js -c -m",
     "minify:css": "csso public/css/dark-2026.css -o public/css/dark-2026.min.css",
     "minify": "npm run minify:js && npm run minify:css"
   },
