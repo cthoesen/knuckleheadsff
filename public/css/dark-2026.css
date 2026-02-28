@@ -1091,14 +1091,14 @@ body:has(#body-kkl) .homepagemodule:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
-/* Modernized Table Styling */
+/* Modernized Table Styling 
 body:has(:is(#body-kkl, #body-kdl, #body-mmh, #body-bsb)) .oddtablerow td {
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 body:has(:is(#body-kkl, #body-kdl, #body-mmh, #body-bsb)) .eventablerow td {
   background: rgba(255, 255, 255, 0.02);
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-}
+} */
 /* Custom Scrollbar Styling */
 body:has(#body-kkl) ::-webkit-scrollbar {
   width: 8px;
@@ -6556,7 +6556,7 @@ a[id*="hideAssets"]:hover {
 .bottomteam,
 .topteam,
 .bracket {
-  border-color: var(--primary, red);
+  border-color: var(--primary, #ff4200);
 }
 
 #hsubmenu ul li {
