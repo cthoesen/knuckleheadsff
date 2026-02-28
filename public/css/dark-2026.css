@@ -1099,6 +1099,9 @@ body:has(:is(#body-kkl, #body-kdl, #body-mmh, #body-bsb)) .eventablerow td {
   background: rgba(255, 255, 255, 0.02);
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 } */
+body:has(:is(#body-kkl, #body-kdl, #body-mmh, #body-bsb)) .eventablerow td {
+  background: rgba(255, 255, 255, 0.02);
+}
 /* Custom Scrollbar Styling */
 body:has(#body-kkl) ::-webkit-scrollbar {
   width: 8px;
