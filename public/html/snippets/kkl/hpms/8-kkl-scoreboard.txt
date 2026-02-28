@@ -22,7 +22,7 @@ var lsAppearance = 1;        		// set to 0,1,2,3,4,5,6,7 based on desired appear
 
 var lsm_hideIDP = true;     		// set to true to hide the IDP table on NFL Boxscores
 var lsm_hidePunt = true;		// set to true to hide the Punting table on NFL Boxscores
-var rowCount = 4; 		        // define how many teams in each row - example 16 teams - set to 8 to show 2 rows of 4
+var rowCount = 3; 		        // define how many teams in each row - example 16 teams - set to 8 to show 2 rows of 4
 var lsmPMR = true; 	        	// set to false to remove the row P - YTP - PMR
 var lsm_customPositions = false;	// if your league defines custom player positions , set this to true
 var lsm_swipe = true;			// enable swiping on mobile devices to swipe through matchups
@@ -36,7 +36,7 @@ var lsm_use_probability = true;          // set to true or false to show win pro
 /* ADJUST ICON SIZE FOR ICONS IN FANTASY MATCHUP BOXSCORE */
 .matchup-box-scroll-wrap .franchise-icon-scroll img {
   margin-right: 0.5rem;
-  width: 9rem;
+  max-width: 9rem;
   max-height: 3rem;
 }
 /* MOBILES */
@@ -53,23 +53,9 @@ var lsm_use_probability = true;          // set to true or false to show win pro
   max-width: 28rem;
   max-height: 9rem;
 }
-
-/* ADJUST NFL ICON SIZE IN FANTASY MATCHUP BOXSCORE */
-<!--- .nfl-box-scroll-wrap .matchup_container .ls-nfl-team-img img { --->
-<!---  text-align: center; --->
-<!---  height: 1.375rem; --->
-<!---  width: 1.375rem; --->
-<!---} --->
-/* MOBILES */
-<!---@media only screen and (max-width: 620px) { --->
-<!---  .nfl-box-scroll-wrap .matchup_container .ls-nfl-team-img img { --->
-<!---    height: 1.125rem; --->
-<!---    width: 1.125rem; --->
-<!---  } --->
-<!---} ---> /* NFL icon size settings were deleted from new website settings */
-
 </style>
 
 <!--- LINK SCRIPT --->
-<!--- <script src="https://knuckleheads.netlify.app/scripts/scoreboard-min.js"></script> --->
-<script src="https://mflscripts.com/mfl-apps/scoreboard/moduleScoreboard/script.js?v=8.93"></script>
+<!--- <script src="https://knuckleheads.netlify.app/scripts/scoreboard-min.js"></script>  --->
+<!--- <script src="https://mflscripts.com/mfl-apps/scoreboard/moduleScoreboard/script.js?v=8.93"></script> --->
+<script src="https://mfl-leagues.com/js/common/scoreboard.min.js"></script>

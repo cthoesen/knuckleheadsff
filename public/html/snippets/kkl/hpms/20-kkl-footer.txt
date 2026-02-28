@@ -32,9 +32,9 @@ var hideTilClk = true; // Set to true to hide the calculations tables until play
 
 // LIVE SCORING OPTIONS
 var ls_scoreboardName = "SCOREBOARD";   //enter text to name your scoreboard
-var ls_commish_id = "0001";			//set the franchise ID of commissioners franchise to show that matchup 1st when commish
-var ls_loader = true;				//use loading screen if scoreboard takes too long to load
-var largeLeagueSB = false;			//set to true if scoreboard doesn't load all the time - this is for large leagues
+var ls_commish_id = "0001";			//set the franchise ID of commissioners franchise to show those matchup first when logged in as commissioner
+var ls_loader = false;				//use loading screen if scoreboard takes too long to load
+var largeLeagueSB = false;			//set to true if scoreboard doesn't load all the time - this if for large leagues
 var showTeamName = false;                      //set to true to display franchise names in scoreboard header
 var showTeamIcon = true;                       //set to true to display franchise icons in scoreboard header
 var ls_includeProjections = true;              //set to true to display projections next to player scores
@@ -101,10 +101,13 @@ var notification_duration_seconds = 1.5;        // 2.5 seconds
 
 <!-- GLOBAL FOOTER  -->
 <!-- <script src="https://www.mflscripts.com/mfl-apps/global/footer.js?v=1.00"></script> -->
-<script src="https://knuckleheads.netlify.app/scripts/footer-new.js"></script>
+<script src="https://mfl-leagues.com/js/common/footer.min.js"></script>
 
 <!-- STANDINGS COLUMNS SETUP  -->
 <script src="https://mflscripts.com/mfl-apps/playoffs/standingsColumns.js"></script>
+
+<!-- Cyber FAB  -->
+<script src="https://mfl-leagues.com/js/common/cyber-fab.min.js"></script>
 
 
 </div><!--- CLOSE CONTAINER WRAP IN HEADER -->
@@ -113,7 +116,7 @@ var notification_duration_seconds = 1.5;        // 2.5 seconds
 <div class="footercontainer-outer"><div class="footercontainer"><div class="container first-container">
 <div>
 <span class="f-title-icon">Defending League Champion</span>
-<span class="f-icon"><img alt=Wa Wa Wee Wa height=75 src="https://knuckleheads.netlify.app/images/teams/kkl/Icon-KKL-WaWa.png" title="2024 - Wa Wa Wee Wa"></span>
+<span class="f-icon"><img alt=Wa Wa Wee Wa height=75 src="https://mfl-leagues.com/images/teams/kkl/icon-kkl-wawa.png" title="2024 - Wa Wa Wee Wa"></span>
 <span class="f-link"><a>2024 - Wa Wa Wee Wa </a></span>
 </div></div>
 <div class="container"><div><span class="f-title">Management</span>
@@ -122,8 +125,7 @@ var notification_duration_seconds = 1.5;        // 2.5 seconds
 <span class="f-link"><a href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=05">Trades</a></span>
 <span class="f-link"><a href="//%HOST%/%YEAR%/csetup?L=%LEAGUEID%&C=FRANCHISE">Setup</a></span>
 </div></div>
-<div class="container"><div>
-<span class="f-title">Franchise</span>
+<div class="container"><div><span class="f-title">Franchise</span>
 <span class="f-link"><a href="//%HOST%/%YEAR%/accounting_report?L=%LEAGUEID%">Accounting</a></span>
 <span class="f-link"><a href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=03">Transactions</a></span>
 <span class="f-link"><a href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=07">League Rosters</a></span>

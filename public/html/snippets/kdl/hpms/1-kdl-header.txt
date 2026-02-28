@@ -6,14 +6,8 @@
 <!-- Pre-resolve DNS and preconnect -->
 <link rel="dns-prefetch" href="https://www.mflscripts.com">
 <link rel="preconnect" href="https://www.mflscripts.com" crossorigin>
-<link rel="dns-prefetch" href="https://knuckleheads.netlify.app/">
-<link rel="preconnect" href="https://knuckleheads.netlify.app/" crossorigin>
 <link rel="dns-prefetch" href="https://mfl-leagues.com">
 <link rel="preconnect" href="https://mfl-leagues.com" crossorigin>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=News+Cycle:wght@400;700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
 
 <style>
 #tabmenu-wrap li#tab7 a:before, #tabmenu-wrap #tab_title.tab7:before{content:"\f155";}
@@ -28,7 +22,7 @@
 </style>
 
 <script>
-var lsmHPM = '8';          // set the # of the homepage message where you have installed the new scoreboard script
+var lsmHPM = '8';  // set the # of the homepage message where you have installed the new scoreboard script
 const lsmHPMurl = `${baseURLDynamic}/${year}/options?L=${league_id}&O=247&SEQNO=${lsmHPM}`;
 $(document).ready(function () {
    $.each(
@@ -71,7 +65,7 @@ function getStoredTheme(year, league_id, defaultTheme) {
   return storedTheme || defaultTheme;
 }
 (function() {
-  const defaultTheme = 'theme-creamsicle';
+  const defaultTheme = 'theme-dk-purple';
   const storedTheme = getStoredTheme(year, league_id, defaultTheme);
   applyTheme(storedTheme);
 })();
@@ -100,52 +94,53 @@ document.head.appendChild(linkRelIco);
 <div id="myMFLSkinSelection" class="MFLSkinSelection-content" style="display:none">
 <div id="popup-selectLeagues-caption" style="position:relative">Select Skin<span id="MFLPlayerPopupClose" class="as_close_btn" style="transform:none;top:0;right:0;font-size:0.813rem;font-family:'Open Sans',sans-serif">X</span></div>
 
-<a href="#" onclick="setTheme('theme-dk-green')" style="color:#008c9f!important"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Aqua"></i>Aqua</a>
-<a href="#" onclick="setTheme('theme-dk-blue')" style="color:#117DFF!important"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Blue"></i>Blue</a>
-<a href="#" onclick="setTheme('theme-dk-gold')" style="color:#b2784a!important"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Gold"></i>Gold</a>
-<a href="#" onclick="setTheme('theme-dk-grey')" style="color:#555!important"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Grey"></i>Grey</a>
-<a href="#" onclick="setTheme('theme-dk-orange')" style="color:#ff4200!important"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Orange"></i>Orange</a>
-<a href="#" onclick="setTheme('theme-dk-purple')" style="color:#8430c2!important"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Purple"></i>Purple</a>
-<a href="#" onclick="setTheme('theme-dk-red')" style="color:#da3636!important"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Red"></i>Red</a>
-<a href="#" onclick="setTheme('theme-dk-yellow')" style="color:#f7b534!important"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Yellow"></i>Yellow</a>
-<a href="#" onclick="setTheme('theme-dk-rasta')" style="color:#FCDD09;!important"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Rasta"></i>Rasta</a>
-<a href="#" onclick="setTheme('theme-jade')" style="color:#38b569;!important"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Jade"></i>Jade</a>
-<a href="#" onclick="setTheme('theme-cerulean')" style="color:#007BA7;!important"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Cerulean"></i>Cerulean</a>
-<a href="#" onclick="setTheme('theme-creamsicle')" style="color:#fa7c2a;!important"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Creamsicle"></i>Creamsicle</a>
-<a onclick="setTheme('theme-niners nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/SFO.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">49ers</a>
-<a onclick="setTheme('theme-bears nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/CHI.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Bears</a>
-<a onclick="setTheme('theme-bengals nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/CIN.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Bengals</a>
-<a onclick="setTheme('theme-bills nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/BUF.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Bills</a>
-<a onclick="setTheme('theme-broncos nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/DEN.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Broncos</a>
-<a onclick="setTheme('theme-browns nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/CLE.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Browns</a>
-<a onclick="setTheme('theme-bucs nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/TBB.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Bucs</a>
-<a onclick="setTheme('theme-cardinals nfltheme')" style="color:#fff;cursor:pointer;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/ARI.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Cardinals</a>
-<a onclick="setTheme('theme-charger nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/LAC.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Chargers</a>
-<a onclick="setTheme('theme-chiefs nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/KCC.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Chiefs</a>
-<a onclick="setTheme('theme-colts nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/IND.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Colts</a>
-<a onclick="setTheme('theme-redskins nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/WAS.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Commanders</a>
-<a onclick="setTheme('theme-cowboys nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/DAL.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Cowboys</a>
-<a onclick="setTheme('theme-dolphins nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/MIA.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Dolphins</a>
-<a onclick="setTheme('theme-eagles nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/PHI.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Eagles</a>
-<a onclick="setTheme('theme-falcons nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/ATL.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Falcons</a>
-<a onclick="setTheme('theme-giants nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/NYG.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Giants</a>
-<a onclick="setTheme('theme-jaguars nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/JAC.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Jaguars</a>
-<a onclick="setTheme('theme-jets nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/NYJ.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Jets</a>
-<a onclick="setTheme('theme-lions nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/DET.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Lions</a>
-<a onclick="setTheme('theme-packers nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/GBP.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Packers</a>
-<a onclick="setTheme('theme-panthers nfltheme')" style="color:#fff"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/CAR.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Panthers</a>
-<a onclick="setTheme('theme-patriots nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/NEP.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Patriots</a>
-<a onclick="setTheme('theme-raiders nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/OAK.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Raiders</a>
-<a onclick="setTheme('theme-rams nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/LAR.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Rams</a>
-<a onclick="setTheme('theme-ravens nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/BAL.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Ravens</a>
-<a onclick="setTheme('theme-saints nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/NOS.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Saints</a>
-<a onclick="setTheme('theme-seahawks nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/SEA.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Seahawks</a>
-<a onclick="setTheme('theme-steelers nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/PIT.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Steelers</a>
-<a onclick="setTheme('theme-texans nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/HOU.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Texans</a>
-<a onclick="setTheme('theme-titans nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/TEN.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Titans</a>
-<a onclick="setTheme('theme-vikings nfltheme')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/MIN.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Vikings</a>
-</div></div>
+<a href="#" onclick="setTheme('theme-dk-yellow')" style="color:#f7b534"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Yellow"></i>Yellow</a>
+<a href="#" onclick="setTheme('theme-dk-gold')" style="color:#d4af37"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Gold"></i>Gold</a>
+<a href="#" onclick="setTheme('theme-dk-gray')" style="color:#676767"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Grey"></i>Grey</a>
+<a href="#" onclick="setTheme('theme-dk-purple')" style="color:#7e22ce"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Purple"></i>Purple</a>
+<a href="#" onclick="setTheme('theme-dk-orange')" style="color:#ff4200"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Orange"></i>Orange</a>
+<a href="#" onclick="setTheme('theme-dk-red')" style="color:#d93636"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Red"></i>Red</a>
+<a href="#" onclick="setTheme('theme-dk-blue')" style="color:#1353f2"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Blue"></i>Blue</a>
+<a href="#" onclick="setTheme('theme-dk-aqua')" style="color:#008c9e"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Aqua"></i>Aqua</a>
+<a href="#" onclick="setTheme('theme-dk-lime')" style="color:#31cc31"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Lime"></i>Lime</a>
+<a href="#" onclick="setTheme('theme-dk-rasta')" style="color:#078930"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Rasta"></i>Rasta</a>
+<a href="#" onclick="setTheme('theme-jade')" style="color:#38b569"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Jade"></i>Jade</a>
+<a href="#" onclick="setTheme('theme-cerulean')" style="color:#1f4fd1"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Cerulean"></i>Cerulean</a>
+<a href="#" onclick="setTheme('theme-creamsicle')" style="color:#ff570f"><i class="fa-regular fa-paintbrush" aria-hidden="true" title="Creamsicle"></i>Creamsicle</a>
 
+<a href="#" onclick="setTheme('theme-niners')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/SFO.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">49ers</a>
+<a href="#" onclick="setTheme('theme-bears')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/CHI.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Bears</a>
+<a href="#" onclick="setTheme('theme-bengals')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/CIN.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Bengals</a>
+<a href="#" onclick="setTheme('theme-bills')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/BUF.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Bills</a>
+<a href="#" onclick="setTheme('theme-broncos')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/DEN.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Broncos</a>
+<a href="#" onclick="setTheme('theme-browns')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/CLE.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Browns</a>
+<a href="#" onclick="setTheme('theme-bucs')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/TBB.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Bucs</a>
+<a href="#" onclick="setTheme('theme-cardinals')" style="color:#fff;cursor:pointer;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/ARI.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Cardinals</a>
+<a href="#" onclick="setTheme('theme-chargers')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/LAC.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Chargers</a>
+<a href="#" onclick="setTheme('theme-chiefs')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/KCC.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Chiefs</a>
+<a href="#" onclick="setTheme('theme-colts')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/IND.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Colts</a>
+<a href="#" onclick="setTheme('theme-commanders')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/WAS.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Commanders</a>
+<a href="#" onclick="setTheme('theme-cowboys')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/DAL.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Cowboys</a>
+<a href="#" onclick="setTheme('theme-dolphins')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/MIA.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Dolphins</a>
+<a href="#" onclick="setTheme('theme-eagles')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/PHI.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Eagles</a>
+<a href="#" onclick="setTheme('theme-falcons')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/ATL.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Falcons</a>
+<a href="#" onclick="setTheme('theme-giants')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/NYG.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Giants</a>
+<a href="#" onclick="setTheme('theme-jaguars')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/JAC.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Jaguars</a>
+<a href="#" onclick="setTheme('theme-jets')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/NYJ.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Jets</a>
+<a href="#" onclick="setTheme('theme-lions')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/DET.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Lions</a>
+<a href="#" onclick="setTheme('theme-packers')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/GBP.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Packers</a>
+<a href="#" onclick="setTheme('theme-panthers')" style="color:#fff"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/CAR.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Panthers</a>
+<a href="#" onclick="setTheme('theme-patriots')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/NEP.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Patriots</a>
+<a href="#" onclick="setTheme('theme-raiders')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/OAK.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Raiders</a>
+<a href="#" onclick="setTheme('theme-rams')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/LAR.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Rams</a>
+<a href="#" onclick="setTheme('theme-ravens')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/BAL.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Ravens</a>
+<a href="#" onclick="setTheme('theme-saints')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/NOS.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Saints</a>
+<a href="#" onclick="setTheme('theme-seahawks')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/SEA.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Seahawks</a>
+<a href="#" onclick="setTheme('theme-steelers')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/PIT.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Steelers</a>
+<a href="#" onclick="setTheme('theme-texans')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/HOU.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Texans</a>
+<a href="#" onclick="setTheme('theme-titans')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/TEN.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Titans</a>
+<a href="#" onclick="setTheme('theme-vikings')" style="color:#fff;cursor:pointer"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/MIN.svg" style="width:1.875rem;margin-right:0.625rem;max-height:1.25rem">Vikings</a>
+</div></div>
 
 
 <!-------------------------------------->
@@ -159,9 +154,9 @@ document.head.appendChild(linkRelIco);
 	<div class="banner-container-wrap-full">
 		<a class="full_height_banner" href="//%HOST%/%YEAR%/home/%LEAGUEID%" title="Return to home page">
 
-			<!-- INSERT URL PATH OF YOUR OWN CUSTOM BANNER - RECOMMENDED DIMENSIONS ARE 1148px wide and 220px tall -->
-			<img src="https://mfl-leagues.com/images/league/kdl/kdl-banner.webp" alt="Desktop Banner" class="desktop-only">
-      <img src="https://mfl-leagues.com/images/league/kdl/kdl-banner-small.webp" alt="Mobile Banner" class="mobile-only">
+        <!-- INSERT URL PATH OF YOUR OWN CUSTOM BANNER - RECOMMENDED DIMENSIONS ARE 1148px wide and 220px tall -->
+	<img src="https://mfl-leagues.com/images/league/kdl/kdl-banner.webp" alt="Desktop Banner" class="desktop-only">
+        <img src="https://mfl-leagues.com/images/league/kdl/kdl-banner-small.webp" alt="Mobile Banner" class="mobile-only">
 
 		</a>
 	</div>
@@ -169,17 +164,17 @@ document.head.appendChild(linkRelIco);
 
 <!-- LOAD SVG ICONS FROM EXTERNAL SVG SPRITES FILE -->
 
-<script>
-  const ajax = new XMLHttpRequest();
-  ajax.open( "GET" , "https://mfl-leagues.com/images/shared/icons/svg-sprites.svg" , true );
-  ajax.send();
-  ajax.onload = function (e) {
-  const div = document .createElement( "div" );
-  div.className = "svgSprite" ;
-  div.innerHTML = ajax.responseText;
-  document .body.insertBefore(div, document .body.childNodes[ 0 ]);
-  };
-</script>
+<!-- <script> -->
+  <!-- const ajax = new XMLHttpRequest(); -->
+  <!-- ajax.open( "GET" , "https://mfl-leagues.com/images/shared/icons/svg-sprites.svg" , true ); -->
+  <!-- ajax.send(); -->
+  <!-- ajax.onload = function (e) { -->
+  <!-- const div = document .createElement( "div" ); -->
+  <!-- div.className = "svgSprite" ; -->
+  <!-- div.innerHTML = ajax.responseText; -->
+  <!-- document .body.insertBefore(div, document .body.childNodes[ 0 ]); -->
+  <!-- }; -->
+<!-- </script> -->
 
 <!-- LOAD ICONS UNDER BANNER -->
 
@@ -198,6 +193,15 @@ document.head.appendChild(linkRelIco);
 </a> -->
 
 
+<!-- STANDINGS SVG -->
+<a class="svg-iconlink" href="//%HOST%/%YEAR%/standings?L=%LEAGUEID%">
+<svg class="svg-icon icon-crown" viewBox="0 0 98.6 78.36">
+<use xlink:href="#icon-crown"></use>
+</svg>
+<div class="svg-text">League<br>Standings</div>
+</a>
+
+
 <!-- SCOREBOARD SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/ajax_ls?L=%LEAGUEID%">
 <svg class="svg-icon icon-touchdown" viewBox="0 0 72.24 73.82">
@@ -209,10 +213,10 @@ document.head.appendChild(linkRelIco);
 
 <!-- LINEUP SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/lineup?L=%LEAGUEID%">
-<svg class="svg-icon icon-lineup" viewBox="0 0 81.45 72">
-<use xlink:href="#icon-lineup"></use>
+<svg class="svg-icon icon-chess" viewBox="0 0 99 99">
+<use xlink:href="#icon-chess"></use>
 </svg>
-<div class="svg-text">Submit<br>Lineup</div>
+<div class="svg-text">Set<br>Lineup</div>
 </a>
 
 
@@ -227,17 +231,17 @@ document.head.appendChild(linkRelIco);
 
 
 <!-- AUCTION SVG - Hide after auction ends -->
-<!-- <a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=43"> -->
-<!-- <svg class="svg-icon icon-auction" viewBox="0 0 72.4 72"> -->
-<!-- <use xlink:href="#icon-auction"></use> -->
-<!-- </svg> -->
-<!-- <div class="svg-text">Auction<br>Bid</div> -->
-<!-- </a> -->
+<a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=43">
+<svg class="svg-icon icon-auction-tag" viewBox="0 0 99.73 97.35">
+<use xlink:href="#icon-auction-tag"></use>
+</svg>
+<div class="svg-text">Auction<br>Bid</div>
+</a>
          
    
 <!-- ADD DROP SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/add_drop?L=%LEAGUEID%">
-<svg class="svg-icon icon-add-drop" viewBox="0 0 73.14 72">
+<svg class="svg-icon icon-add-drop" viewBox="0 0 98.8 98.23">
 <use xlink:href="#icon-add-drop"></use>
 </svg>
 <div class="svg-text">Add-Drop<br>Players</div>
@@ -246,10 +250,10 @@ document.head.appendChild(linkRelIco);
  
 <!-- PLAYER RESEARCH SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/top?L=%LEAGUEID%&SEARCHTYPE=BASIC&COUNT=150&YEAR=%YEAR%&START_WEEK=1&END_WEEK=17&CATEGORY=freeagent&POSITION=*&DISPLAY=points&TEAM=*">
-<svg class="svg-icon icon-player-research" viewBox="0 0 76.29 72">
-<use xlink:href="#icon-player-research"></use>
+<svg class="svg-icon icon-statistics" viewBox="0 0 93.13 99">
+<use xlink:href="#icon-statistics"></use>
 </svg>
-<div class="svg-text">Player<br>Research</div>
+<div class="svg-text">Player<br>Stats</div>
 </a>
  
 
@@ -264,8 +268,8 @@ document.head.appendChild(linkRelIco);
 
 <!-- TAXI SQUAD SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=98">
-<svg class="svg-icon icon-taxi" viewBox="0 0 84.11 72">
-<use xlink:href="#icon-taxi"></use>
+<svg class="svg-icon icon-taxi-squad" viewBox="0 0 99.72 96.42">
+<use xlink:href="#icon-taxi-squad"></use>
 </svg>
 <div class="svg-text">Taxi<br>Squad</div>
 </a>
@@ -273,8 +277,8 @@ document.head.appendChild(linkRelIco);
 
 <!-- INJURED RESERVE SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=18">
-<svg class="svg-icon icon-doctor" viewBox="0 0 72 82.24">
-<use xlink:href="#icon-doctor"></use>
+<svg class="svg-icon icon-skull" viewBox="0 0 92.54 99">
+<use xlink:href="#icon-skull"></use>
 </svg>
 <div class="svg-text">Injured<br>Reserve</div>
 </a>
@@ -291,8 +295,8 @@ document.head.appendChild(linkRelIco);
 
 <!-- MESSAGE BOARD SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/mb/board_show.pl?bid=%YEAR%%LEAGUEID%">
-<svg class="svg-icon icon-message" viewBox="0 0 72.05 72">
-<use xlink:href="#icon-message"></use>
+<svg class="svg-icon icon-comic-bubble" viewBox="0 0 97.24 99">
+<use xlink:href="#icon-comic-bubble"></use>
 </svg>
 <div class="svg-text">Message<br>Board</div>
 </a>
@@ -318,39 +322,47 @@ document.head.appendChild(linkRelIco);
 
 <!-- CALENDAR SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=123">
-<svg class="svg-icon icon-calendar" viewBox="0 0 72.01 79.02">
+<svg class="svg-icon icon-calendar" viewBox="0 0 92.1 99">
 <use href="#icon-calendar"></use>
 </svg>
 <div class="svg-text">League<br>Calendar</div>
 </a>
 
 
-<!-- LOCKER SVG -->
+<!-- VIP CLUB SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=01">
-<svg class="svg-icon icon-locker" viewBox="0 0 72 80.08">
-<use xlink:href="#icon-locker"></use>
+<svg class="svg-icon icon-whiskey-glass" viewBox="0 0 74.25 99">
+<use xlink:href="#icon-whiskey-glass"></use>
 </svg>
-<div class="svg-text">Locker<br>Room</div>
+<div class="svg-text">VIP<br>Club</div>
 </a>
+
+
+<!-- Load popup gallery script -->
+<script src="https://mfl-leagues.com/js/common/popup-gallery.min.js"></script>
+
+<!-- LEAGUE CHAMPIONS SVG -->
+<a class="svg-iconlink popup-gallery-trigger" href="#" onclick="return false">
+<svg class="svg-icon icon-trophy" viewBox="0 0 74.43 99">
+<use xlink:href="#icon-trophy"></use>
+</svg>
+<div class="svg-text">League<br>Champs</div>
+</a>
+
+<!-- Initialize gallery (auto-detects league from body ID) -->
+<script>initPopupGallery();</script>
 
 
 <!-- HISTORY SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=247&SEQNO=6">
-<svg class="svg-icon icon-turntable" viewBox="0 0 91.5 72">
-<use xlink:href="#icon-turntable"></use>
+<svg class="svg-icon icon-joystick" viewBox="0 0 82.56 99">
+<use xlink:href="#icon-joystick"></use>
 </svg>
-<div class="svg-text">Old<br>School</div>
+<div class="svg-text">Retro<br>Cool</div>
 </a>
 
 
 <!-- RULES SVG -->
-<!-- <a class="svg-iconlink" href="//%HOST%/%YEAR%/home/%LEAGUEID%?MODULE=MESSAGE2"> 
-<svg class="svg-icon icon-rules" viewBox="0 0 135.12 194.78"> 
-<use href="#icon-rules"></use> 
-</svg> 
-<div class="svg-text">League <br> Bylaws</div> 
-</a> -->
-
 <a class="svg-iconlink" href="https://mfl-leagues.com/docs/kdl/kdl-bylaws.pdf" target="_blank">
 <svg class="svg-icon icon-logo-kdl" viewBox="0 0 72.05 98.54">
 <use href="#icon-logo-kdl"></use>
@@ -358,10 +370,9 @@ document.head.appendChild(linkRelIco);
 <div class="svg-text">League<br>Bylaws</div>
 </a>
 
-	</div> <!--- Close icon-bar-full --->
+</div> <!--- Close icon-bar-full --->
 
 </div> <!--- Close bannerlinkicons-full --->
-
 
 
 <!-------------------------------------->
@@ -589,8 +600,8 @@ var controlsRed     = "red";                           // set color for the cont
 <script>
 // Below is an example of the 2025 season - start date 1 day prior to preseason game 1 , end date 1 day after Superbowl
 //var setCustomDates = true;
-//var nflStartWk = "08/01/2025";  // define a date 1 day prior to when you want offseason script to start
-//var nflEndWk   = "02/01/2026";  // define a date 1 day after you want offseason scripts to be removed
+//var nflStartWk = "08/01/2026";  // define a date 1 day prior to when you want offseason script to start
+//var nflEndWk   = "02/01/2027";  // define a date 1 day after you want offseason scripts to be removed
 
 // Hide these scripts in offseason
 var deactivate_all_offseason = false;     //set to true to deactivate ALL eligible scripts during the offseason
@@ -599,7 +610,8 @@ var deactivate_all_offseason = false;     //set to true to deactivate ALL eligib
 //var hide_extra = ".offseason-hide,#tab7,#tab8,#playoffTable,#tab306,#tab307,#tab301"; // use id(#) or class(.) element name to hide any item during NFL offseason
 </script>
 
-<script src="https://www.mflscripts.com/mfl-apps/global/header.js?v=1.60"></script>
+<!-- <script src="https://www.mflscripts.com/mfl-apps/global/header.js?v=1.60"></script> -->
+<script src="https://mfl-leagues.com/js/common/header.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://www.mflscripts.com/mfl-apps/global/css/300x50-icons.css">
 
 <!-- WRAP ALL CONTENT -->

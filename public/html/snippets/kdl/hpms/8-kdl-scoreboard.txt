@@ -36,8 +36,8 @@ var lsm_use_probability = true;          // set to true or false to show win pro
 /* ADJUST ICON SIZE FOR ICONS IN FANTASY MATCHUP BOXSCORE */
 .matchup-box-scroll-wrap .franchise-icon-scroll img {
   margin-right: 0.5rem;
-  width: 9rem;
-  max-height: 2rem;
+  max-width: 9rem;
+  max-height: 3rem;
 }
 /* MOBILES */
 @media only screen and (max-width: 620px) {
@@ -50,11 +50,12 @@ var lsm_use_probability = true;          // set to true or false to show win pro
 /* ADJUST ICON SIZE FOR ICONS IN PLAYER LIVE SCORE BOX */
 #LSscoringBox .franchise-icon img {
   width: 100%;
-  max-width: 20rem;
-  max-height: 4rem;
+  max-width: 28rem;
+  max-height: 9rem;
 }
 </style>
 
 <!--- LINK SCRIPT --->
 <!--- <script src="https://knuckleheads.netlify.app/scripts/scoreboard-min.js"></script>  --->
-<script src="https://mflscripts.com/mfl-apps/scoreboard/moduleScoreboard/script.js?v=8.93"></script>
+<!--- <script src="https://mflscripts.com/mfl-apps/scoreboard/moduleScoreboard/script.js?v=8.93"></script> --->
+<script src="https://mfl-leagues.com/js/common/scoreboard.min.js"></script>
