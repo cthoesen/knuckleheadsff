@@ -856,13 +856,13 @@ body:has(#body-kdl)::before {
     radial-gradient(circle 5px at 50% 50%, rgba(190, 137, 236, 0.15) 0%, transparent 100%),
     radial-gradient(circle 5px at 50% 50%, rgba(190, 137, 236, 0.12) 0%, transparent 100%);
   background-size:
-    256px 90px, 256px 90px, 256px 90px,
-    256px 90px, 256px 90px, 256px 90px,
-    256px 90px, 256px 90px;
+    312px 180px, 312px 180px, 312px 180px,
+    312px 180px, 312px 180px, 312px 180px,
+    312px 180px, 312px 180px;
   background-position:
     0 0, 0 0, 0 0,
-    78px 45px, 78px 45px, 78px 45px,
-    0 0, 78px 45px;
+    156px 90px, 156px 90px, 156px 90px,
+    0 0, 156px 90px;
   animation: kdlHexPulse 6s ease-in-out infinite alternate;
 }
 
