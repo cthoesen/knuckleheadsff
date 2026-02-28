@@ -6556,7 +6556,7 @@ a[id*="hideAssets"]:hover {
 .bottomteam,
 .topteam,
 .bracket {
-  border-color: var(--bg-opacity-brighter, rgba(181, 47, 0, .2));
+  border-color: var(--primary, red);
 }
 
 #hsubmenu ul li {
