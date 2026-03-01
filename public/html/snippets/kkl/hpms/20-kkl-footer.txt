@@ -116,7 +116,7 @@ var notification_duration_seconds = 1.5;        // 2.5 seconds
 <div class="footercontainer-outer"><div class="footercontainer"><div class="container first-container">
 <div>
 <span class="f-title-icon">Defending League Champion</span>
-<span class="f-icon"><img alt=Wa Wa Wee Wa height=75 src="https://mfl-leagues.com/images/teams/kkl/icon-kkl-wawa.png" title="2024 - Wa Wa Wee Wa"></span>
+<span class="f-icon"><img alt=Wa Wa Wee Wa height=75 src="https://mfl-leagues.com/images/league/kkl/icon-kkl-wawa.png" title="2024 - Wa Wa Wee Wa"></span>
 <span class="f-link"><a>2024 - Wa Wa Wee Wa </a></span>
 </div></div>
 <div class="container"><div><span class="f-title">Management</span>
