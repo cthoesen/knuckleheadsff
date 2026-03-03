@@ -1247,6 +1247,179 @@ body:has(#body-bsb) .homepagemodule {
 .icon-bar-full .svg-iconlink:nth-child(11) { animation-delay: 0.55s; }
 .icon-bar-full .svg-iconlink:nth-child(12) { animation-delay: 0.60s; }
 
+
+/***********************************************
+ * SVG ICON ANIMATION LIBRARY
+ *
+ * Reusable animation classes for individual icons.
+ * Add a class to any <svg class="svg-icon"> element:
+ *
+ *   CONTINUOUS (always animating):
+ *     anim-pulse, anim-bounce, anim-float, anim-spin,
+ *     anim-spin-slow, anim-wobble, anim-shake, anim-swing,
+ *     anim-heartbeat, anim-jello, anim-flip, anim-ring,
+ *     anim-glow-pulse
+ *
+ *   HOVER-ONLY (animates when parent .svg-iconlink is hovered):
+ *     anim-hover-pulse, anim-hover-bounce, anim-hover-float,
+ *     anim-hover-spin, anim-hover-wobble, anim-hover-shake,
+ *     anim-hover-swing, anim-hover-heartbeat, anim-hover-jello,
+ *     anim-hover-flip, anim-hover-ring, anim-hover-glow-pulse
+ *
+ *   COMBO — mix one continuous + one hover on the same icon:
+ *     The hover animation overrides the idle animation on hover,
+ *     and the idle animation resumes when hover ends.
+ *
+ *   Example HTML:
+ *     Continuous only:   <svg class="svg-icon icon-trophy anim-glow-pulse">
+ *     Hover only:        <svg class="svg-icon icon-skull anim-hover-shake">
+ *     Combo:             <svg class="svg-icon icon-trophy anim-float anim-hover-bounce">
+ *     Combo:             <svg class="svg-icon icon-crown anim-glow-pulse anim-hover-wobble">
+ *
+ *   To apply by icon name instead of adding a class:
+ *     .icon-trophy { animation: iconBounce 2s ease infinite; }
+ *
+ ***********************************************/
+
+
+/* ---- KEYFRAMES ---- */
+
+/* Pulse — gentle scale breathing */
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.12); }
+}
+
+/* Bounce — vertical bounce with squash */
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0); }
+  30%      { transform: translateY(-6px); }
+  50%      { transform: translateY(0); }
+  65%      { transform: translateY(-3px); }
+  80%      { transform: translateY(0); }
+}
+
+/* Float — smooth up/down hovering */
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+
+/* Spin — full 360 rotation */
+@keyframes iconSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Wobble — tilt side to side */
+@keyframes iconWobble {
+  0%, 100% { transform: rotate(0deg); }
+  15%      { transform: rotate(-8deg); }
+  30%      { transform: rotate(6deg); }
+  45%      { transform: rotate(-4deg); }
+  60%      { transform: rotate(2deg); }
+  75%      { transform: rotate(-1deg); }
+}
+
+/* Shake — quick horizontal shake */
+@keyframes iconShake {
+  0%, 100% { transform: translateX(0); }
+  10%, 50%, 90% { transform: translateX(-3px); }
+  30%, 70% { transform: translateX(3px); }
+}
+
+/* Swing — pendulum motion */
+@keyframes iconSwing {
+  0%, 100% { transform: rotate(0deg); }
+  20%      { transform: rotate(12deg); }
+  40%      { transform: rotate(-8deg); }
+  60%      { transform: rotate(5deg); }
+  80%      { transform: rotate(-3deg); }
+}
+
+/* Heartbeat — rapid double-pulse */
+@keyframes iconHeartbeat {
+  0%, 100% { transform: scale(1); }
+  14%      { transform: scale(1.15); }
+  28%      { transform: scale(1); }
+  42%      { transform: scale(1.15); }
+  56%      { transform: scale(1); }
+}
+
+/* Jello — elastic squish */
+@keyframes iconJello {
+  0%, 100% { transform: skewX(0deg) skewY(0deg); }
+  22%      { transform: skewX(-6deg) skewY(-6deg); }
+  33%      { transform: skewX(4deg) skewY(4deg); }
+  44%      { transform: skewX(-3deg) skewY(-3deg); }
+  55%      { transform: skewX(2deg) skewY(2deg); }
+  66%      { transform: skewX(-1deg) skewY(-1deg); }
+}
+
+/* Flip — Y-axis flip */
+@keyframes iconFlip {
+  0%   { transform: perspective(400px) rotateY(0deg); }
+  40%  { transform: perspective(400px) rotateY(-180deg); }
+  100% { transform: perspective(400px) rotateY(-360deg); }
+}
+
+/* Ring — bell-ring motion */
+@keyframes iconRing {
+  0%, 100% { transform: rotate(0deg); }
+  4%       { transform: rotate(15deg); }
+  8%       { transform: rotate(-12deg); }
+  12%      { transform: rotate(9deg); }
+  16%      { transform: rotate(-6deg); }
+  20%      { transform: rotate(3deg); }
+  24%      { transform: rotate(0deg); }
+}
+
+/* Glow Pulse — pulsing drop-shadow using --primary */
+@keyframes iconGlowPulse {
+  0%, 100% { filter: drop-shadow(0 0 2px var(--primary, rgba(255, 66, 0, 0.3))); }
+  50%      { filter: drop-shadow(0 0 10px var(--primary, rgba(255, 66, 0, 0.7))); }
+}
+
+
+/* ---- CONTINUOUS ANIMATION CLASSES ---- */
+/* Add directly to <svg class="svg-icon icon-name anim-pulse"> */
+
+.anim-pulse      { animation: iconPulse 2s ease-in-out infinite; }
+.anim-bounce     { animation: iconBounce 2s ease infinite; }
+.anim-float      { animation: iconFloat 3s ease-in-out infinite; }
+.anim-spin       { animation: iconSpin 1.5s linear infinite; }
+.anim-spin-slow  { animation: iconSpin 4s linear infinite; }
+.anim-wobble     { animation: iconWobble 1.5s ease infinite; }
+.anim-shake      { animation: iconShake 0.8s ease infinite; }
+.anim-swing      { animation: iconSwing 1.5s ease infinite; transform-origin: top center; }
+.anim-heartbeat  { animation: iconHeartbeat 2s ease infinite; }
+.anim-jello      { animation: iconJello 2s ease infinite; }
+.anim-flip       { animation: iconFlip 3s ease infinite; }
+.anim-ring       { animation: iconRing 3s ease infinite; transform-origin: top center; }
+.anim-glow-pulse { animation: iconGlowPulse 2s ease-in-out infinite; }
+
+
+/* ---- HOVER-ONLY ANIMATION CLASSES ---- */
+/* Add to <svg class="svg-icon icon-name anim-hover-bounce">              */
+/* Animations loop while hovered, stop on mouse-out.                      */
+/* Can be used standalone OR combined with a continuous anim-* class.      */
+/* In a combo, the hover animation overrides the idle one on hover,       */
+/* and the idle animation resumes automatically when hover ends.          */
+
+.svg-iconlink:hover .anim-hover-pulse      { animation: iconPulse 1.2s ease-in-out infinite; }
+.svg-iconlink:hover .anim-hover-bounce     { animation: iconBounce 1s ease infinite; }
+.svg-iconlink:hover .anim-hover-float      { animation: iconFloat 1.5s ease-in-out infinite; }
+.svg-iconlink:hover .anim-hover-spin       { animation: iconSpin 0.8s linear infinite; }
+.svg-iconlink:hover .anim-hover-wobble     { animation: iconWobble 1s ease infinite; }
+.svg-iconlink:hover .anim-hover-shake      { animation: iconShake 0.6s ease infinite; }
+.svg-iconlink:hover .anim-hover-swing      { animation: iconSwing 1s ease infinite; transform-origin: top center; }
+.svg-iconlink:hover .anim-hover-heartbeat  { animation: iconHeartbeat 1.2s ease infinite; }
+.svg-iconlink:hover .anim-hover-jello      { animation: iconJello 1.2s ease infinite; }
+.svg-iconlink:hover .anim-hover-flip       { animation: iconFlip 1.5s ease infinite; }
+.svg-iconlink:hover .anim-hover-ring       { animation: iconRing 2s ease infinite; transform-origin: top center; }
+.svg-iconlink:hover .anim-hover-glow-pulse { animation: iconGlowPulse 1.2s ease-in-out infinite; }
+
+
 body {
   color: var(--accent, #f8f7c3);
   text-rendering: optimizeLegibility;
