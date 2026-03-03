@@ -1223,6 +1223,30 @@ body:has(#body-bsb) .homepagemodule {
   animation: fadeSlideUp 0.4s ease forwards;
 }
 
+/* Icon Bar — Stagger Fade-In on Page Load */
+@keyframes iconFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.icon-bar-full .svg-iconlink {
+  opacity: 0;
+  animation: iconFadeIn 0.4s ease forwards;
+}
+
+.icon-bar-full .svg-iconlink:nth-child(1)  { animation-delay: 0.05s; }
+.icon-bar-full .svg-iconlink:nth-child(2)  { animation-delay: 0.10s; }
+.icon-bar-full .svg-iconlink:nth-child(3)  { animation-delay: 0.15s; }
+.icon-bar-full .svg-iconlink:nth-child(4)  { animation-delay: 0.20s; }
+.icon-bar-full .svg-iconlink:nth-child(5)  { animation-delay: 0.25s; }
+.icon-bar-full .svg-iconlink:nth-child(6)  { animation-delay: 0.30s; }
+.icon-bar-full .svg-iconlink:nth-child(7)  { animation-delay: 0.35s; }
+.icon-bar-full .svg-iconlink:nth-child(8)  { animation-delay: 0.40s; }
+.icon-bar-full .svg-iconlink:nth-child(9)  { animation-delay: 0.45s; }
+.icon-bar-full .svg-iconlink:nth-child(10) { animation-delay: 0.50s; }
+.icon-bar-full .svg-iconlink:nth-child(11) { animation-delay: 0.55s; }
+.icon-bar-full .svg-iconlink:nth-child(12) { animation-delay: 0.60s; }
+
 body {
   color: var(--accent, #f8f7c3);
   text-rendering: optimizeLegibility;
@@ -1749,7 +1773,13 @@ body.chat_popup .banner-container-wrap {
 
 .svg-icon,
 .svg-iconlink {
-  transition: all 0.6s ease;
+  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+}
+
+/* Float the entire icon link (icon + label) on hover */
+.icon-bar-full .svg-iconlink:hover,
+.icon-bar .svg-iconlink:hover {
+  transform: translateY(-4px);
 }
 
 /*IMAGE ICONS LINKS FORMATTING*/
@@ -1784,16 +1814,13 @@ body.chat_popup .banner-container-wrap {
 
 .icon-bar .svg-icon,
 .icon-bar-full .svg-icon {
-  -webkit-transition: .3s ease-out;
-  -moz-transition: .3s ease-out;
-  transition: .3s ease-out;
+  transition: transform .3s ease-out, filter .3s ease-out;
 }
 
 .icon-bar a:hover .svg-icon,
 .icon-bar-full a:hover .svg-icon {
-  -webkit-transform: scale(.9);
-  -moz-transform: scale(.9);
-  transform: scale(.9);
+  transform: translateY(-4px);
+  filter: drop-shadow(0 4px 8px var(--primary, rgba(255, 66, 0, 0.5)));
 }
 
 /****** ADDED 6-4-23 for font awesome icons in icon bar ********/
@@ -1836,7 +1863,8 @@ body.chat_popup .banner-container-wrap {
 
 .icon-bar a:hover i,
 .icon-bar-full a:hover i {
-  transform: scale(0.9);
+  transform: translateY(-4px);
+  filter: drop-shadow(0 4px 8px var(--primary, rgba(255, 66, 0, 0.5)));
 }
 
 .icon-bar-full span.fa-stack i:nth-child(1):before,
