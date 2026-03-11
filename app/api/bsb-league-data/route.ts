@@ -1,34 +1,16 @@
 import { NextResponse } from 'next/server';
 
-export const dynamic = 'force-dynamic'; 
+export const dynamic = 'force-dynamic';
 
-// --- BSB TEAM OWNERS LOOKUP ---
-// Update these with the actual BSB owner names
-const TEAM_OWNERS: Record<string, string> = {
-  "The One Who Knocks": "Corey Thoesen",
-  "Victorious Secret": "Joshua Scott",
-  "WWJeff": "Jeff Reeve",
-  "I'm Drunk Bitches!!": "Paul Pultz",
-  "Keep Austin Weirder": "George Dugan", // Note: I removed the extra space from the end if it existed
-  "Keep Austin Weirder ": "George Dugan", // Kept this just in case MFL has the typo
-  "Moneyball": "Jesse Jimenez",
-  "Memory Hole": "Ken Goldberg",
-  "Fourth & Fondle": "Jared Higgins",
-  "Stephen Hawking’s Football Cleats": "Tyler Beck",
-  "Grit Happens": "Josiah James",
-  "Ball Sacks n All That": "Kyle Kober",
-  "Urine Trouble": "Mike Pollack",
-  "Appleton Avalanche": "Scott Sell", // Note: I removed the extra space from the end if it existed
-  "Appleton Avalanche ": "Scott Sell", // Kept this just in case MFL has the typo
-  "89ers": "Mike Stewart",
-  "Cajun Wild Turkeys": "Mark Bergeaux, Daryl Cetnar",
-  "CJ Oliva Franchise": "CJ Oliva",
-  // Add all 16 teams above...
-};
+// --- LEAGUE SETTINGS ---
+// Update this year when ready to roll to new season
+const SEASON_YEAR = '2025';
+const SERVER = 'www47';
+const LEAGUE_ID = '62908';
 
 export async function GET() {
-  const MFL_URL = "https://www47.myfantasyleague.com/2025/options?L=62908&O=07&PRINTER=1";
-  
+  const MFL_URL = `https://${SERVER}.myfantasyleague.com/${SEASON_YEAR}/options?L=${LEAGUE_ID}&O=07&PRINTER=1`;
+
   try {
     const response = await fetch(MFL_URL, {
       headers: {
@@ -36,25 +18,24 @@ export async function GET() {
       },
       next: { revalidate: 0 }
     });
-    
+
     if (!response.ok) {
       return NextResponse.json({ error: "Failed to fetch MFL data" }, { status: 500 });
     }
-    
+
     const htmlText = await response.text();
     const players = [];
-    
+
     const sections = htmlText.split('<caption');
 
     for (let i = 1; i < sections.length; i++) {
       const section = sections[i];
 
-      // 1. Get Team Name & Owner
+      // Extract Team Name directly from the caption's <a> tag
       const teamMatch = section.match(/<a[^>]*>([\s\S]*?)<\/a>/);
-      const rawTeamName = teamMatch ? teamMatch[1].trim() : "Unknown Team";
-      const ownerName = TEAM_OWNERS[rawTeamName] || rawTeamName;
+      const teamName = teamMatch ? teamMatch[1].replace(/<[^>]*>/g, '').trim() : "Unknown Team";
 
-      // 2. Process Rows
+      // Process Rows
       const rows = section.split('<tr');
       let isTaxiSquad = false;
 
@@ -69,7 +50,6 @@ export async function GET() {
 
         if (!row.includes('class="player"')) continue;
 
-        // 3. Robust Data Extraction
         const playerMatch = row.match(/class="player">([\s\S]*?)<\/td>/);
         const yearsMatch = row.match(/class="contractyear">([\s\S]*?)<\/td>/);
         const acquiredMatch = row.match(/class="drafted">([\s\S]*?)<\/td>/);
@@ -78,8 +58,7 @@ export async function GET() {
           const clean = (text: string) => text.replace(/<[^>]*>/g, '').trim();
 
           players.push({
-            Team: rawTeamName,
-            Owner: ownerName,
+            Team: teamName,
             Player: clean(playerMatch[1]),
             Years: yearsMatch ? clean(yearsMatch[1]) : '',
             Acquired: acquiredMatch ? clean(acquiredMatch[1]) : '',
@@ -90,7 +69,7 @@ export async function GET() {
     }
 
     return NextResponse.json(players);
-    
+
   } catch (error: any) {
     console.error("BSB API Route Error:", error);
     return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });

@@ -7,7 +7,6 @@ import { Search, DollarSign, XCircle, CheckCircle } from 'lucide-react';
 interface MMHPlayer {
   Player: string;
   Team: string;
-  Owner: string;
   Salary: string;
   Base: string;
   Years: string;
@@ -111,7 +110,7 @@ export default function MMHKeeperApp() {
     const teamMap = new Map();
     players.forEach(player => {
       if (!teamMap.has(player.Team)) {
-        teamMap.set(player.Team, { name: player.Team, owner: player.Owner, players: [] });
+        teamMap.set(player.Team, { name: player.Team, players: [] });
       }
       teamMap.get(player.Team).players.push({
         ...player,
@@ -252,7 +251,6 @@ export default function MMHKeeperApp() {
               <div className="card-header">
                 <div style={{ marginBottom: '1rem' }}>
                   <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>{team.name}</h2>
-                  <p style={{ color: '#71717a', fontSize: '0.875rem', fontFamily: 'monospace' }}>{team.owner}</p>
                 </div>
 
                 {/* Financial Dashboard */}

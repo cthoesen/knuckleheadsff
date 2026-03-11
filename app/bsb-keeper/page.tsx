@@ -7,7 +7,6 @@ import { Search, Flame, XCircle, CheckCircle } from 'lucide-react';
 interface BSBPlayer {
   Player: string;
   Team: string;
-  Owner: string;
   Years: string;
   Acquired: string; // e.g. "21.15"
   IsTaxi: boolean;
@@ -133,7 +132,7 @@ export default function BSBKeeperApp() {
     const teamMap = new Map();
     players.forEach(player => {
       if (!teamMap.has(player.Team)) {
-        teamMap.set(player.Team, { name: player.Team, owner: player.Owner, players: [] });
+        teamMap.set(player.Team, { name: player.Team, players: [] });
       }
       teamMap.get(player.Team).players.push({
         ...player,
@@ -259,7 +258,6 @@ export default function BSBKeeperApp() {
             <div className="card-header">
               <div>
                 <h2 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: 'white' }}>{team.name}</h2>
-                <p style={{ color: '#71717a', fontSize: '0.875rem', margin: '0.25rem 0 0 0' }}>{team.owner}</p>
               </div>
             </div>
             

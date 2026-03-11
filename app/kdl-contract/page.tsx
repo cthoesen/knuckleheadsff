@@ -10,13 +10,12 @@ import { Search, Crown, ArrowLeft, Calendar, TrendingUp } from 'lucide-react';
 
 interface KDLPlayer {
   Player: string;
-  Position: string; 
+  Position: string;
   Team: string;
-  Owner: string;
   Salary: string;
   Years: string;
-  Status: string; 
-  Info: string;   
+  Status: string;
+  Info: string;
   IsTaxi: boolean;
 }
 
@@ -121,7 +120,7 @@ export default function KDLContractApp() {
     const teamMap = new Map();
     players.forEach(player => {
       if (!teamMap.has(player.Team)) {
-        teamMap.set(player.Team, { name: player.Team, owner: player.Owner, players: [] });
+        teamMap.set(player.Team, { name: player.Team, players: [] });
       }
       teamMap.get(player.Team).players.push({
         ...player,
@@ -235,7 +234,6 @@ export default function KDLContractApp() {
                 <div className="p-6 border-b border-zinc-800/50 bg-zinc-900/30 flex flex-col md:flex-row md:items-center justify-between gap-6">
                   <div>
                     <h2 className="text-2xl font-bold text-white mb-1">{team.name}</h2>
-                    <p className="text-zinc-500 text-sm font-mono">{team.owner}</p>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div className="bg-zinc-950 p-3 rounded border border-zinc-800 text-center">

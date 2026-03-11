@@ -2,30 +2,15 @@ import { NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
-// --- KDL TEAM OWNERS LOOKUP ---
-// Update with actual KDL owners
-const TEAM_OWNERS: Record<string, string> = {
-  "Fargin Sneaky Bastages": "Corey Thoesen",
-  "Marauders": "Rodney Sasher", // Note: I removed the extra space from the end if it existed
-  "Marauders ": "Rodney Sasher", // Kept this just in case MFL has the typo
-  "The W's": "Chris Culbreath",
-  "Fightin' Irish Mist": "Craig Mayo",
-  "CommishThePhish": "Craig Wiesen",
-  "Pigskin Prophets": "Ryan Bassett",
-  "13 seconds Never again!": "Ever Rivera", // Note: I removed the extra space from the end if it existed
-  "13 seconds Never again! ": "Ever Rivera", // Kept this just in case MFL has the typo
-  "💪HuRRiCaNe DiTKa 💪": "Brad Thoesen", // Note: I removed the extra space from the end if it existed
-  " 💪HuRRiCaNe DiTKa 💪 ": "Brad Thoesen", // Kept this just in case MFL has the typo
-  "I'm Drunk Bitches!!": "Paul Pultz",
-  "Victorious Secret": "Josh Scott",
-  "Twisters": "Drew Stephen",
-  "Tenacious D": "Paul Houser",
-  // Add all 12 teams here...
-};
+// --- LEAGUE SETTINGS ---
+// Update this year when ready to roll to new season
+const SEASON_YEAR = '2025';
+const SERVER = 'www47';
+const LEAGUE_ID = '68756';
 
 export async function GET() {
-  const MFL_URL = "https://www47.myfantasyleague.com/2025/options?L=68756&O=07&PRINTER=1";
-  
+  const MFL_URL = `https://${SERVER}.myfantasyleague.com/${SEASON_YEAR}/options?L=${LEAGUE_ID}&O=07&PRINTER=1`;
+
   try {
     const response = await fetch(MFL_URL, {
       headers: {
@@ -33,25 +18,24 @@ export async function GET() {
       },
       next: { revalidate: 0 }
     });
-    
+
     if (!response.ok) {
       return NextResponse.json({ error: "Failed to fetch MFL data" }, { status: 500 });
     }
-    
+
     const htmlText = await response.text();
     const players = [];
-    
+
     const sections = htmlText.split('<caption');
 
     for (let i = 1; i < sections.length; i++) {
       const section = sections[i];
 
-      // 1. Get Team Name & Owner
+      // Extract Team Name directly from the caption's <a> tag
       const teamMatch = section.match(/<a[^>]*>([\s\S]*?)<\/a>/);
-      const rawTeamName = teamMatch ? teamMatch[1].trim() : "Unknown Team";
-      const ownerName = TEAM_OWNERS[rawTeamName] || rawTeamName;
+      const teamName = teamMatch ? teamMatch[1].replace(/<[^>]*>/g, '').trim() : "Unknown Team";
 
-      // 2. Process Rows
+      // Process Rows
       const rows = section.split('<tr');
       let isTaxiSquad = false;
 
@@ -65,7 +49,6 @@ export async function GET() {
 
         if (!row.includes('class="player"')) continue;
 
-        // 3. Extraction
         const playerMatch = row.match(/class="player">([\s\S]*?)<\/td>/);
         const salaryMatch = row.match(/class="salary">([\s\S]*?)<\/td>/);
         const yearsMatch = row.match(/class="contractyear">([\s\S]*?)<\/td>/);
@@ -74,27 +57,22 @@ export async function GET() {
 
         if (playerMatch) {
           const clean = (text: string) => text.replace(/<[^>]*>/g, '').trim();
-          
+
           const pName = clean(playerMatch[1]);
-          const pSalary = salaryMatch ? clean(salaryMatch[1]).replace(/[^0-9.]/g, '') : '0';
-          const pYears = yearsMatch ? clean(yearsMatch[1]) : '0';
-          const pStatus = statusMatch ? clean(statusMatch[1]) : '';
-          const pInfo = infoMatch ? clean(infoMatch[1]) : '';
-          
+
           // Position Extraction
           const nameParts = pName.split(' ');
           const rawPos = nameParts.length > 1 ? nameParts[nameParts.length - 1] : 'UNK';
           const position = rawPos.replace(/[^a-zA-Z]/g, '');
 
           players.push({
-            Team: rawTeamName,
-            Owner: ownerName,
+            Team: teamName,
             Player: pName,
             Position: position,
-            Salary: pSalary,
-            Years: pYears,
-            Status: pStatus, // e.g. "R25"
-            Info: pInfo,     // e.g. "4.04"
+            Salary: salaryMatch ? clean(salaryMatch[1]).replace(/[^0-9.]/g, '') : '0',
+            Years: yearsMatch ? clean(yearsMatch[1]) : '0',
+            Status: statusMatch ? clean(statusMatch[1]) : '',
+            Info: infoMatch ? clean(infoMatch[1]) : '',
             IsTaxi: isTaxiSquad
           });
         }
@@ -102,7 +80,7 @@ export async function GET() {
     }
 
     return NextResponse.json(players);
-    
+
   } catch (error: any) {
     console.error("KDL API Route Error:", error);
     return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });

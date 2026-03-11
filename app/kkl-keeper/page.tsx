@@ -9,7 +9,6 @@ interface PlayerData {
   Acquired?: string;
   Years?: string | number;
   Team?: string;
-  Owner?: string;
   Keeper?: string;
 }
 
@@ -132,10 +131,9 @@ export default function KKLKeeperApp() {
     players.forEach(player => {
       if (!player.Player) return;
       if (!teamMap.has(player.Team)) {
-        teamMap.set(player.Team, { 
-          name: player.Team, 
-          owner: player.Owner, 
-          players: [] 
+        teamMap.set(player.Team, {
+          name: player.Team,
+          players: []
         });
       }
       teamMap.get(player.Team).players.push({ 
@@ -449,7 +447,6 @@ export default function KKLKeeperApp() {
                   }}>
                     {team.name}
                   </h2>
-                  <p style={{ color: 'rgba(177, 156, 217, 0.6)', fontSize: '0.875rem' }}>{team.owner}</p>
                 </div>
                 
                 <div style={{ overflowX: 'auto' }}>
