@@ -112,23 +112,26 @@ export default function MMHHub() {
             </div>
           </div>
 
-          {/* League Constitution - Coming Soon */}
-          <div className="tool-card opacity-60 cursor-not-allowed">
-            <div className="flex items-start gap-4">
-              <div className="p-3 bg-zinc-700/50 rounded-lg">
-                <FileText size={24} className="text-zinc-500" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-bold text-zinc-400 mb-1">League Constitution</h3>
-                <p className="text-sm text-zinc-500 mb-3">
-                  Official rules, salary structure, and roster limits
-                </p>
-                <div className="inline-flex items-center gap-1 text-xs text-zinc-500 font-mono">
-                  COMING SOON
+          {/* League Constitution - Active */}
+          <a href="/docs/mmh/mmh-bylaws.pdf" target="_blank" rel="noopener noreferrer">
+            <div className="tool-card group">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-emerald-500/10 rounded-lg group-hover:bg-emerald-500/20 transition-colors">
+                  <FileText size={24} className="text-emerald-400" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-white mb-1">League Constitution</h3>
+                  <p className="text-sm text-zinc-400 mb-3">
+                    Official rules, salary structure, and roster limits
+                  </p>
+                  <div className="inline-flex items-center gap-1 text-xs text-emerald-400 font-mono">
+                    <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                    ACTIVE
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
 
         {/* Quick Links */}
