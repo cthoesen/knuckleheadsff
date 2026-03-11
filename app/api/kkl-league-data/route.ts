@@ -1,28 +1,181 @@
 import { NextResponse } from 'next/server';
+import * as cheerio from 'cheerio';
 
-export const dynamic = 'force-dynamic'; 
+export const dynamic = 'force-dynamic';
 
-// --- 1. THE LOOKUP TABLE ---
-// I've pre-filled this with the data from your original project.
-// If a name is wrong or missing, just edit it right here!
-const TEAM_OWNERS: Record<string, string> = {
-  "Hipster Doofus": "Corey Thoesen",
-  "Midnight Marauders": "Rodney Sasher",
-  "Wa Wa Wee Wa": "Mike Stein", // Note: I removed the extra space from the end if it existed
-  "Wa Wa Wee Wa ": "Mike Stein", // Kept this just in case MFL has the typo
-  "Over the Hill and Tua the Waddle we go!": "Craig Wiesen",
-  "Phoenix Force": "Chris Culbreath",
-  "Guinness All Blacks": "Rob Sherman",
-  "Karaoke Craig": "Ever Rivera",
-  "Foladelphia Iggles": "Mike Foley",
-  "Sleepy Hollow Stranglers": "Damien Long",
-  "Hail Marys": "Bill Davidson",
-  "Fightin Irish Mist": "Craig Mayo",
-  "BoRaDLeSHoW": "Brad Thoesen", // Note: I removed the extra space from the end if it existed
-  "BoRaDLeSHoW ": "Brad Thoesen", // Kept this just in case MFL has the typo
-  // If there is a 12th team not listed here, add it below:
-  // "Team Name From MFL Site": "Owner Name"
-};
+interface RosterRow {
+  Player: string;
+  Position?: string;
+  Status?: string;
+  Bye?: string;
+  '2024 Pts'?: string; // Dynamic column - year changes
+  Years?: string;
+  Keeper?: string;
+  Acquired?: string;
+}
+
+interface ProcessedPlayer {
+  Team: string;
+  Player: string;
+  'PY Status': string | null;
+  'PY Points': number;
+  'PY Years': string;
+  'PY Keeper Status': string;
+  'PY Acquired': string;
+  'New Keeper Years': string | number;
+  'New Keeper Round': string;
+}
+
+// Mimics fxGetRosterData function from Power Query
+function processTeamRoster(teamData: RosterRow[], teamName: string): ProcessedPlayer[] {
+  try {
+    const results: ProcessedPlayer[] = [];
+    
+    for (const row of teamData) {
+      // Skip header rows or empty rows
+      if (!row.Player || row.Player.includes('Player')) continue;
+      
+      // 1. Find dynamic points column (any column with "Pts")
+      const pointsKey = Object.keys(row).find(k => k.includes('Pts'));
+      let pyPoints = pointsKey ? row[pointsKey as keyof RosterRow] : '0';
+      
+      // Replace dashes with 0
+      pyPoints = pyPoints === '‐' || pyPoints === '-' || !pyPoints ? '0' : pyPoints;
+      
+      // 2. Split player name by parentheses to extract rookie status
+      const playerMatch = row.Player.match(/^(.+?)\s*\(([^)]*)\)?/);
+      const playerName = playerMatch ? playerMatch[1].trim() : row.Player.trim();
+      const statusCode = playerMatch ? playerMatch[2] : null;
+      const isRookie = statusCode === 'R';
+      
+      // 3. Parse Acquired and Years
+      const acquired = row.Acquired?.trim();
+      const years = row.Years?.trim();
+      
+      // Acquired Step 1: If null, default to 12
+      const acquiredStep1 = acquired ? Math.floor(parseFloat(acquired)) : 12;
+      
+      // Years Step 1: If null, default to 3, else subtract 1
+      const yearsStep1 = years ? parseFloat(years) - 1 : 3;
+      
+      // 4. Calculate New Keeper Years
+      let newKeeperYears: string | number;
+      if (yearsStep1 === 0) {
+        newKeeperYears = 'NA';
+      } else if (acquiredStep1 <= 3) {
+        newKeeperYears = 'NA'; // Rounds 1-3 ineligible
+      } else {
+        newKeeperYears = yearsStep1;
+      }
+      
+      // 5. Calculate Acquired Step 2 (New Keeper Round number)
+      let acquiredStep2: number | string;
+      if (newKeeperYears === 'NA') {
+        acquiredStep2 = 'NA';
+      } else if (isRookie) {
+        acquiredStep2 = acquiredStep1; // Rookies stay in same round
+      } else if (!acquired) {
+        acquiredStep2 = acquiredStep1; // Undrafted/FA = 12
+      } else {
+        acquiredStep2 = acquiredStep1 - 2; // Regular players move up 2 rounds
+      }
+      
+      // 6. Calculate New Keeper Round (formatted)
+      const newKeeperRound = acquiredStep2 === 'NA' ? 'NA' : `K${acquiredStep2}`;
+      
+      // 7. Determine PY Status
+      const pyStatus = isRookie ? 'Rookie' : null;
+      
+      results.push({
+        Team: teamName,
+        Player: playerName,
+        'PY Status': pyStatus,
+        'PY Points': parseFloat(pyPoints) || 0,
+        'PY Years': years || '',
+        'PY Keeper Status': row.Keeper || '',
+        'PY Acquired': acquired || '',
+        'New Keeper Years': newKeeperYears,
+        'New Keeper Round': newKeeperRound
+      });
+    }
+    
+    // Sort by Acquired (keeper round) ascending
+    return results.sort((a, b) => {
+      const aRound = a['New Keeper Round'] === 'NA' ? 999 : parseInt(a['New Keeper Round'].substring(1));
+      const bRound = b['New Keeper Round'] === 'NA' ? 999 : parseInt(b['New Keeper Round'].substring(1));
+      return aRound - bRound;
+    });
+    
+  } catch (error) {
+    console.error(`Error processing team ${teamName}:`, error);
+    return [{
+      Team: teamName,
+      Player: '** ERROR OR EMPTY ROSTER **',
+      'PY Status': null,
+      'PY Points': 0,
+      'PY Years': '',
+      'PY Keeper Status': '',
+      'PY Acquired': '',
+      'New Keeper Years': 'NA',
+      'New Keeper Round': 'NA'
+    }];
+  }
+}
+
+// Parse HTML table into structured data (mimics Web.Page)
+function parseHTMLTable(html: string): { teamName: string; rows: RosterRow[] }[] {
+  const $ = cheerio.load(html);
+  const teams: { teamName: string; rows: RosterRow[] }[] = [];
+  
+  // Find all tables with captions (team tables)
+  $('table').each((tableIndex, table) => {
+    const caption = $(table).find('caption');
+    if (caption.length === 0) return; // Skip tables without captions
+    
+    // Extract team name from caption
+    const teamLink = caption.find('a').first();
+    const teamName = teamLink.text().trim() || 'Unknown Team';
+    
+    // Extract table headers
+    const headers: string[] = [];
+    $(table).find('thead th, tr:first th').each((i, th) => {
+      headers.push($(th).text().trim());
+    });
+    
+    // If no headers in thead, try first row
+    if (headers.length === 0) {
+      $(table).find('tr').first().find('th, td').each((i, cell) => {
+        headers.push($(cell).text().trim());
+      });
+    }
+    
+    // Extract rows
+    const rows: RosterRow[] = [];
+    $(table).find('tbody tr, tr').each((i, tr) => {
+      // Skip if it's the header row
+      if ($(tr).find('th').length > 0) return;
+      
+      const cells = $(tr).find('td');
+      if (cells.length === 0) return;
+      
+      const row: any = {};
+      cells.each((cellIndex, td) => {
+        const headerName = headers[cellIndex] || `Column${cellIndex}`;
+        row[headerName] = $(td).text().trim();
+      });
+      
+      if (row.Player) {
+        rows.push(row as RosterRow);
+      }
+    });
+    
+    if (rows.length > 0) {
+      teams.push({ teamName, rows });
+    }
+  });
+  
+  return teams;
+}
 
 export async function GET() {
   const MFL_URL = "https://www47.myfantasyleague.com/2025/options?L=45267&O=07&PRINTER=1";
@@ -30,72 +183,36 @@ export async function GET() {
   try {
     const response = await fetch(MFL_URL, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
       },
       next: { revalidate: 0 }
     });
     
     if (!response.ok) {
-      console.error(`MFL Fetch Error: ${response.status}`);
       return NextResponse.json({ error: "Failed to fetch MFL data" }, { status: 500 });
     }
     
     const htmlText = await response.text();
-    const players = [];
     
-    // Split by caption to isolate each team's table
-    const sections = htmlText.split('<caption');
-
-    for (let i = 1; i < sections.length; i++) {
-      const section = sections[i];
-
-      // --- SIMPLIFIED LOGIC ---
-      
-      // 1. Extract Team Name
-      const teamMatch = section.match(/<a[^>]*>([\s\S]*?)<\/a>/);
-      const rawTeamName = teamMatch ? teamMatch[1].trim() : "Unknown Team";
-      
-      // 2. Look up Owner directly (No HTML parsing needed!)
-      // We default to "Unknown Owner" only if the team isn't in your list above
-      const ownerName = TEAM_OWNERS[rawTeamName] || "Unknown Owner";
-
-      // Log if we miss one so you can fix the list
-      if (ownerName === "Unknown Owner" && rawTeamName !== "Unknown Team") {
-        console.warn(`MISSING OWNER for team: "${rawTeamName}"`);
-      }
-
-      // ------------------------
-
-      const rowMatches = section.matchAll(/<tr[^>]*>(.*?)<\/tr>/gs);
-
-      for (const row of rowMatches) {
-        const rowContent = row[1];
-        if (rowContent.includes('<th')) continue;
-        
-        const playerMatch = rowContent.match(/<td class="player">(.*?)<\/td>/s);
-        const yearsMatch = rowContent.match(/<td class="contractyear">([^<]*)<\/td>/);
-        const keeperMatch = rowContent.match(/<td class="contractinfo">([^<]*)/);
-        const acquiredMatch = rowContent.match(/<td class="drafted">([^<]*)<\/td>/);
-
-        if (playerMatch) {
-          const cleanPlayerName = playerMatch[1].replace(/<[^>]*>/g, '').trim();
-
-          players.push({
-            Team: rawTeamName,
-            Owner: ownerName,
-            Player: cleanPlayerName,
-            Years: yearsMatch ? yearsMatch[1].trim() : '',
-            Keeper: keeperMatch ? keeperMatch[1].replace(/\n/g, ' ').trim() : '',
-            Acquired: acquiredMatch ? acquiredMatch[1].trim() : ''
-          });
-        }
-      }
+    // Parse HTML into structured tables (mimics Web.Page)
+    const allTeams = parseHTMLTable(htmlText);
+    
+    // Keep only tables 1-12 (the 12 KKL franchises)
+    const kklTeams = allTeams.slice(0, 12);
+    
+    // Process each team's roster (mimics fxGetRosterData invocation)
+    const allPlayers: ProcessedPlayer[] = [];
+    for (const team of kklTeams) {
+      const processedRoster = processTeamRoster(team.rows, team.teamName);
+      allPlayers.push(...processedRoster);
     }
-
-    return NextResponse.json(players);
+    
+    return NextResponse.json(allPlayers);
     
   } catch (error: any) {
-    console.error("API Route Error:", error);
-    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
+    console.error("KKL API Route Error:", error);
+    return NextResponse.json({ 
+      error: error.message || "Internal Server Error" 
+    }, { status: 500 });
   }
 }

@@ -1,25 +1,114 @@
 import { NextResponse } from 'next/server';
+import * as cheerio from 'cheerio';
 
-export const dynamic = 'force-dynamic'; 
+export const dynamic = 'force-dynamic';
 
-// --- MMH TEAM OWNERS LOOKUP ---
-// Please update these names to match the MMH league owners!
-const TEAM_OWNERS: Record<string, string> = {
-  "Fat Guy in a Little Coat": "Corey Thoesen",
-  "Tenacious D": "Paul Houser",
-  "Adrenaline Mob": "Chuck Majewski",
-  "BreakTables": "Neal Skillman",
-  "Stephen Grigg": "Stephen Grigg",
-  "Bench Don't Kill My Vibe": "Ivan Black",
-  "WASHINGTON FANTASY TEAM": "Joshua Lee",
-  "Beetlejuice": "Ron Pittman",
-  "Pigskin Reapers": "George VanDuzer",
-  "New Team": "Andrew Combs",
-  "Twisters Auction": "Drew Stephen", // Note: I removed the extra space from the end if it existed
-  "Twisters Auction ": "Drew Stephen", // Kept this just in case MFL has the typo
-  "I'm Drunk Bitches!!": "Paul Pultz",
-  // Add your MMH teams here...
-};
+interface RosterRow {
+  Player: string;
+  Salary?: string;
+  Base?: string;
+  Years?: string;
+  Info?: string;
+  Acquired?: string;
+  [key: string]: string | undefined;
+}
+
+interface ProcessedPlayer {
+  Team: string;
+  Owner: string;
+  Player: string;
+  Salary: string;
+  Base: string;
+  Years: string;
+  Info: string;
+  Acquired: string;
+  IsTaxi: boolean;
+}
+
+// Parse HTML table into structured data
+function parseHTMLTable(html: string): { teamName: string; rows: RosterRow[] }[] {
+  const $ = cheerio.load(html);
+  const teams: { teamName: string; rows: RosterRow[] }[] = [];
+  
+  $('table').each((tableIndex, table) => {
+    const caption = $(table).find('caption');
+    if (caption.length === 0) return;
+    
+    // Extract team name from caption
+    const teamLink = caption.find('a').first();
+    const teamName = teamLink.text().trim() || 'Unknown Team';
+    
+    // Extract table headers
+    const headers: string[] = [];
+    $(table).find('thead th, tr:first th').each((i, th) => {
+      headers.push($(th).text().trim());
+    });
+    
+    if (headers.length === 0) {
+      $(table).find('tr').first().find('th, td').each((i, cell) => {
+        headers.push($(cell).text().trim());
+      });
+    }
+    
+    // Extract rows
+    const rows: RosterRow[] = [];
+    let isTaxiSection = false;
+    
+    $(table).find('tr').each((i, tr) => {
+      // Check for Taxi Squad header
+      const headerCell = $(tr).find('th');
+      if (headerCell.length > 0 && headerCell.text().includes('Taxi Squad')) {
+        isTaxiSection = true;
+        return;
+      }
+      
+      // Skip header rows
+      if ($(tr).find('th').length > 0) return;
+      
+      const cells = $(tr).find('td');
+      if (cells.length === 0) return;
+      
+      const row: any = { IsTaxi: isTaxiSection };
+      cells.each((cellIndex, td) => {
+        const headerName = headers[cellIndex] || `Column${cellIndex}`;
+        row[headerName] = $(td).text().trim();
+      });
+      
+      if (row.Player) {
+        rows.push(row as RosterRow);
+      }
+    });
+    
+    if (rows.length > 0) {
+      teams.push({ teamName, rows });
+    }
+  });
+  
+  return teams;
+}
+
+// Process MMH roster data
+function processTeamRoster(teamData: RosterRow[], teamName: string): ProcessedPlayer[] {
+  const results: ProcessedPlayer[] = [];
+  
+  for (const row of teamData) {
+    if (!row.Player || row.Player.includes('Player')) continue;
+    
+    results.push({
+      Team: teamName,
+      Owner: teamName, // Team name is the owner for display purposes
+      Player: row.Player.trim(),
+      Salary: row.Salary?.replace(/[^0-9.]/g, '') || '0',
+      Base: row.Base?.replace(/[^0-9.]/g, '') || '0',
+      Years: row.Years?.trim() || '',
+      Info: row.Info?.trim() || '',
+      Acquired: row.Acquired?.trim() || '',
+      IsTaxi: (row as any).IsTaxi || false
+    });
+  }
+  
+  return results;
+}
 
 export async function GET() {
   const MFL_URL = "https://www47.myfantasyleague.com/2025/options?L=72966&O=07&PRINTER=1";
@@ -27,7 +116,7 @@ export async function GET() {
   try {
     const response = await fetch(MFL_URL, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
       },
       next: { revalidate: 0 }
     });
@@ -37,83 +126,21 @@ export async function GET() {
     }
     
     const htmlText = await response.text();
-    const players = [];
+    const allTeams = parseHTMLTable(htmlText);
+    const mmhTeams = allTeams.slice(0, 12);
     
-    const sections = htmlText.split('<caption');
-
-    for (let i = 1; i < sections.length; i++) {
-      const section = sections[i];
-
-      // 1. Get Team Name & Owner
-      const teamMatch = section.match(/<a[^>]*>([\s\S]*?)<\/a>/);
-      const rawTeamName = teamMatch ? teamMatch[1].trim() : "Unknown Team";
-      const ownerName = TEAM_OWNERS[rawTeamName] || rawTeamName;
-
-      // 2. Process Rows
-      const rows = section.split('<tr');
-      let isTaxiSquad = false;
-
-      for (const rowFragment of rows) {
-        const row = '<tr' + rowFragment;
-
-        // Check for Taxi Squad Header
-        if (row.includes('Taxi Squad') && row.includes('<th')) {
-          isTaxiSquad = true;
-          continue;
-        }
-
-        if (!row.includes('class="player"')) continue;
-
-        // 3. Robust Extraction (Now handles newlines [\s\S]*? and strips tags)
-        
-        // Player Name
-        const playerMatch = row.match(/class="player">([\s\S]*?)<\/td>/);
-        
-        // Salary (removes $ and commas)
-        const salaryMatch = row.match(/class="salary">([\s\S]*?)<\/td>/);
-        
-        // Years
-        const yearsMatch = row.match(/class="contractyear">([\s\S]*?)<\/td>/);
-        
-        // Base Salary
-        const baseMatch = row.match(/class="contractstatus">([\s\S]*?)<\/td>/);
-        
-        // Info (Rookie Status) - IMPORTANT: Use [\s\S] to catch multi-line
-        const infoMatch = row.match(/class="contractinfo">([\s\S]*?)<\/td>/);
-        
-        // Acquired (Draft Pick) - IMPORTANT: Use [\s\S] to catch multi-line
-        const acquiredMatch = row.match(/class="drafted">([\s\S]*?)<\/td>/);
-
-        if (playerMatch) {
-          // Helper to clean HTML tags and whitespace
-          const clean = (text: string) => text.replace(/<[^>]*>/g, '').trim();
-
-          const pName = clean(playerMatch[1]);
-          const pSalary = salaryMatch ? clean(salaryMatch[1]).replace(/[^0-9.]/g, '') : '0';
-          const pBase = baseMatch ? clean(baseMatch[1]).replace(/[^0-9.]/g, '') : '0';
-          const pYears = yearsMatch ? clean(yearsMatch[1]) : '';
-          const pInfo = infoMatch ? clean(infoMatch[1]) : '';
-          const pAcquired = acquiredMatch ? clean(acquiredMatch[1]) : '';
-
-          players.push({
-            Team: rawTeamName,
-            Owner: ownerName,
-            Player: pName,
-            Salary: pSalary,
-            Years: pYears,
-            Base: pBase,
-            Info: pInfo,         // e.g. "R25"
-            Acquired: pAcquired, // e.g. "5.10"
-            IsTaxi: isTaxiSquad
-          });
-        }
-      }
+    const allPlayers: ProcessedPlayer[] = [];
+    for (const team of mmhTeams) {
+      const processedRoster = processTeamRoster(team.rows, team.teamName);
+      allPlayers.push(...processedRoster);
     }
-
-    return NextResponse.json(players);
+    
+    return NextResponse.json(allPlayers);
     
   } catch (error: any) {
     console.error("MMH API Route Error:", error);
-    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
+    return NextResponse.json({ 
+      error: error.message || "Internal Server Error" 
+    }, { status: 500 });
   }
 }

@@ -1,27 +1,115 @@
 import { NextResponse } from 'next/server';
+import * as cheerio from 'cheerio';
 
 export const dynamic = 'force-dynamic';
 
-// --- KDL TEAM OWNERS LOOKUP ---
-// Update with actual KDL owners
-const TEAM_OWNERS: Record<string, string> = {
-  "Fargin Sneaky Bastages": "Corey Thoesen",
-  "Marauders": "Rodney Sasher", // Note: I removed the extra space from the end if it existed
-  "Marauders ": "Rodney Sasher", // Kept this just in case MFL has the typo
-  "The W's": "Chris Culbreath",
-  "Fightin' Irish Mist": "Craig Mayo",
-  "CommishThePhish": "Craig Wiesen",
-  "Pigskin Prophets": "Ryan Bassett",
-  "13 seconds Never again!": "Ever Rivera", // Note: I removed the extra space from the end if it existed
-  "13 seconds Never again! ": "Ever Rivera", // Kept this just in case MFL has the typo
-  "💪HuRRiCaNe DiTKa 💪": "Brad Thoesen", // Note: I removed the extra space from the end if it existed
-  " 💪HuRRiCaNe DiTKa 💪 ": "Brad Thoesen", // Kept this just in case MFL has the typo
-  "I'm Drunk Bitches!!": "Paul Pultz",
-  "Victorious Secret": "Josh Scott",
-  "Twisters": "Drew Stephen",
-  "Tenacious D": "Paul Houser",
-  // Add all 12 teams here...
-};
+interface RosterRow {
+  Player: string;
+  Position?: string;
+  Status?: string;
+  Salary?: string;
+  Years?: string;
+  [key: string]: string | undefined;
+}
+
+interface ProcessedPlayer {
+  Team: string;
+  Owner: string;
+  Player: string;
+  Position: string;
+  Salary: string;
+  Years: string;
+  IsTaxi: boolean;
+}
+
+// Parse HTML table into structured data
+function parseHTMLTable(html: string): { teamName: string; rows: RosterRow[] }[] {
+  const $ = cheerio.load(html);
+  const teams: { teamName: string; rows: RosterRow[] }[] = [];
+  
+  $('table').each((tableIndex, table) => {
+    const caption = $(table).find('caption');
+    if (caption.length === 0) return;
+    
+    // Extract team name from caption
+    const teamLink = caption.find('a').first();
+    const teamName = teamLink.text().trim() || 'Unknown Team';
+    
+    // Extract table headers
+    const headers: string[] = [];
+    $(table).find('thead th, tr:first th').each((i, th) => {
+      headers.push($(th).text().trim());
+    });
+    
+    if (headers.length === 0) {
+      $(table).find('tr').first().find('th, td').each((i, cell) => {
+        headers.push($(cell).text().trim());
+      });
+    }
+    
+    // Extract rows
+    const rows: RosterRow[] = [];
+    let isTaxiSection = false;
+    
+    $(table).find('tr').each((i, tr) => {
+      // Check for Taxi Squad header
+      const headerCell = $(tr).find('th');
+      if (headerCell.length > 0 && headerCell.text().includes('Taxi Squad')) {
+        isTaxiSection = true;
+        return;
+      }
+      
+      // Skip header rows
+      if ($(tr).find('th').length > 0) return;
+      
+      const cells = $(tr).find('td');
+      if (cells.length === 0) return;
+      
+      const row: any = { IsTaxi: isTaxiSection };
+      cells.each((cellIndex, td) => {
+        const headerName = headers[cellIndex] || `Column${cellIndex}`;
+        row[headerName] = $(td).text().trim();
+      });
+      
+      if (row.Player) {
+        rows.push(row as RosterRow);
+      }
+    });
+    
+    if (rows.length > 0) {
+      teams.push({ teamName, rows });
+    }
+  });
+  
+  return teams;
+}
+
+// Process KDL roster data
+function processTeamRoster(teamData: RosterRow[], teamName: string): ProcessedPlayer[] {
+  const results: ProcessedPlayer[] = [];
+  
+  for (const row of teamData) {
+    if (!row.Player || row.Player.includes('Player')) continue;
+    
+    const playerName = row.Player.trim();
+    
+    // Extract position (usually last word in player name)
+    const nameParts = playerName.split(' ');
+    const position = nameParts.length > 1 ? nameParts[nameParts.length - 1] : 'UNK';
+    
+    results.push({
+      Team: teamName,
+      Owner: teamName, // Team name is the owner for display purposes
+      Player: playerName,
+      Position: position,
+      Salary: row.Salary?.replace(/[^0-9.]/g, '') || '0',
+      Years: row.Years?.trim() || '0',
+      IsTaxi: (row as any).IsTaxi || false
+    });
+  }
+  
+  return results;
+}
 
 export async function GET() {
   const MFL_URL = "https://www47.myfantasyleague.com/2025/options?L=68756&O=07&PRINTER=1";
@@ -29,7 +117,7 @@ export async function GET() {
   try {
     const response = await fetch(MFL_URL, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
       },
       next: { revalidate: 0 }
     });
@@ -39,72 +127,21 @@ export async function GET() {
     }
     
     const htmlText = await response.text();
-    const players = [];
+    const allTeams = parseHTMLTable(htmlText);
+    const kdlTeams = allTeams.slice(0, 12);
     
-    const sections = htmlText.split('<caption');
-
-    for (let i = 1; i < sections.length; i++) {
-      const section = sections[i];
-
-      // 1. Get Team Name & Owner
-      const teamMatch = section.match(/<a[^>]*>([\s\S]*?)<\/a>/);
-      const rawTeamName = teamMatch ? teamMatch[1].trim() : "Unknown Team";
-      const ownerName = TEAM_OWNERS[rawTeamName] || rawTeamName;
-
-      // 2. Process Rows
-      const rows = section.split('<tr');
-      let isTaxiSquad = false;
-
-      for (const rowFragment of rows) {
-        const row = '<tr' + rowFragment;
-
-        if (row.includes('Taxi Squad') && row.includes('<th')) {
-          isTaxiSquad = true;
-          continue;
-        }
-
-        if (!row.includes('class="player"')) continue;
-
-        // 3. Extraction
-        const playerMatch = row.match(/class="player">([\s\S]*?)<\/td>/);
-        const salaryMatch = row.match(/class="salary">([\s\S]*?)<\/td>/);
-        const yearsMatch = row.match(/class="contractyear">([\s\S]*?)<\/td>/);
-        const statusMatch = row.match(/class="contractstatus">([\s\S]*?)<\/td>/);
-        const infoMatch = row.match(/class="contractinfo">([\s\S]*?)<\/td>/);
-
-        if (playerMatch) {
-          const clean = (text: string) => text.replace(/<[^>]*>/g, '').trim();
-          
-          const pName = clean(playerMatch[1]);
-          const pSalary = salaryMatch ? clean(salaryMatch[1]).replace(/[^0-9.]/g, '') : '0';
-          const pYears = yearsMatch ? clean(yearsMatch[1]) : '0';
-          const pStatus = statusMatch ? clean(statusMatch[1]) : '';
-          const pInfo = infoMatch ? clean(infoMatch[1]) : '';
-          
-          // Position Extraction
-          const nameParts = pName.split(' ');
-          const rawPos = nameParts.length > 1 ? nameParts[nameParts.length - 1] : 'UNK';
-          const position = rawPos.replace(/[^a-zA-Z]/g, '');
-
-          players.push({
-            Team: rawTeamName,
-            Owner: ownerName,
-            Player: pName,
-            Position: position,
-            Salary: pSalary,
-            Years: pYears,
-            Status: pStatus, // e.g. "R25"
-            Info: pInfo,     // e.g. "4.04"
-            IsTaxi: isTaxiSquad
-          });
-        }
-      }
+    const allPlayers: ProcessedPlayer[] = [];
+    for (const team of kdlTeams) {
+      const processedRoster = processTeamRoster(team.rows, team.teamName);
+      allPlayers.push(...processedRoster);
     }
-
-    return NextResponse.json(players);
+    
+    return NextResponse.json(allPlayers);
     
   } catch (error: any) {
     console.error("KDL API Route Error:", error);
-    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
+    return NextResponse.json({ 
+      error: error.message || "Internal Server Error" 
+    }, { status: 500 });
   }
 }
