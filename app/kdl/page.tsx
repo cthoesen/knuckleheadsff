@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Crown, ArrowLeft, DollarSign, TrendingUp, Users, FileText, Target } from 'lucide-react';
+import { Crown, ArrowLeft, DollarSign, TrendingUp, Users, FileText, Target, ClipboardList } from 'lucide-react';
 
 export default function KDLHub() {
   return (
@@ -58,23 +58,26 @@ export default function KDLHub() {
             </div>
           </Link>
 
-          {/* Salary Cap Tracker - Coming Soon */}
-          <div className="tool-card opacity-60 cursor-not-allowed">
-            <div className="flex items-start gap-4">
-              <div className="p-3 bg-zinc-700/50 rounded-lg">
-                <Target size={24} className="text-zinc-500" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-bold text-zinc-400 mb-1">Salary Cap Tracker</h3>
-                <p className="text-sm text-zinc-500 mb-3">
-                  Monitor cap space, projected salaries, and contract years
-                </p>
-                <div className="inline-flex items-center gap-1 text-xs text-zinc-500 font-mono">
-                  COMING SOON
+          {/* Unassigned Years - Active */}
+          <Link href="/kdl-years">
+            <div className="tool-card group">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-violet-500/10 rounded-lg group-hover:bg-violet-500/20 transition-colors">
+                  <ClipboardList size={24} className="text-violet-400" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-white mb-1">Unassigned Years</h3>
+                  <p className="text-sm text-zinc-400 mb-3">
+                    Track waiver pickups that still need contract years assigned
+                  </p>
+                  <div className="inline-flex items-center gap-1 text-xs text-violet-400 font-mono">
+                    <span className="w-2 h-2 bg-violet-400 rounded-full animate-pulse" />
+                    ACTIVE
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* Tag Calculator - Active */}
           <Link href="/kdl-tags">
