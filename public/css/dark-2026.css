@@ -8,8 +8,9 @@
 
 /* 
 CSS target for all habman sites is body.habskin 
-CSS targets for individual habman sites - body.bettis
-Example of 3 deep variable - background: var(--primary2 , var(--neutral2 , var(--th-bg2 , #000000)))
+var(--neutral2,
+var(--th-bg2,
+#000000)))
 */
 html,
 div,
@@ -81,18 +82,6 @@ td {
 }
 
 /* ADD THEME TO ROOT TO SET AS DEFAULT - DEFAULT ROOT MUST BE DEFINED FOR ONE THEME */
-html.theme-dk-yellow {
-  --primary: #f7b534;
-  --fa-main-color: #f7b534;
-  --primary-light: #f9ca6f;
-  --primary-lighter: #fbd893; /* mfl scoreboard font */
-  --primary-dark: #db9409;
-  --primary-darker: #a06c06;
-  --accent: #f7e534; /* accent color for button icons */
-  --bg-opacity: rgba(219, 148, 9, 0.05);
-  --bg-opacity-brighter: rgba(219, 148, 9, 0.2);
-}
-
 html.theme-dk-gold {
   --primary: #d4af37;
   --fa-main-color: #d4af37;
@@ -1634,20 +1623,6 @@ label[for='sub100']+#homepagetabs {
   color: #222 !important;
 }
 
-.theme-dk-yellow .draft_warning {
-  background: var(--primary, #ff4200) !important;
-  color: #000 !important;
-  font-weight: 700 !important;
-}
-
-.theme-dk-yellow .draft_warning a {
-  color: red !important;
-}
-
-.theme-dk-yellow .draft_warning a:hover {
-  color: #000 !important;
-}
-
 @media only screen and (min-width: 48em) {
   li[id*="tab"] {
     position: relative;
@@ -2729,10 +2704,6 @@ input[type="submit"] {
   color: #fff;
   background: var(--primary, #ff4200);
   background-image: none;
-  background-image: -webkit-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
-  background-image: -moz-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
-  background-image: -ms-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
-  background-image: -o-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
   background-image: linear-gradient(to bottom, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
 }
 
@@ -2742,10 +2713,6 @@ input[type="submit"]:hover {
   color: #fff;
   background: var(--primary, #ff4200);
   background-image: none;
-  background-image: -webkit-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
-  background-image: -moz-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
-  background-image: -ms-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
-  background-image: -o-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
   background-image: linear-gradient(to bottom, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
 }
 
@@ -3386,10 +3353,6 @@ div.mobile-wrap .reportform {
   color: #fff;
   background: var(--primary, #ff4200);
   background-image: none;
-  background-image: -webkit-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
-  background-image: -moz-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
-  background-image: -ms-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
-  background-image: -o-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
   background-image: linear-gradient(to bottom, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
 }
 
@@ -3399,10 +3362,6 @@ div.mobile-wrap .reportform {
   color: #fff;
   background: var(--primary, #ff4200);
   background-image: none;
-  background-image: -webkit-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
-  background-image: -moz-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
-  background-image: -ms-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
-  background-image: -o-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
   background-image: linear-gradient(to bottom, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
 }
 
@@ -3712,15 +3671,6 @@ body.full-width {
 #commissioner_setup th#use_with_caution {
   background: red;
   color: #fff;
-}
-
-.theme-dk-yellow #commissioner_setup th#use_with_caution {
-  background: var(--primary, #ff4200);
-  color: #111;
-}
-
-.theme-dk-yellow #commissioner_setup table.two_column_layout th#use_with_caution:before {
-  color: #111;
 }
 
 #commissioner_setup th#use_with_caution:before {
@@ -5507,10 +5457,6 @@ Team Logos
   color: #fff !important;
   background: #9c2000;
   background-image: none;
-  background-image: -webkit-linear-gradient(to bottom, #cb2a01, #9c2000);
-  background-image: -moz-linear-gradient(to bottom, #cb2a01, #9c2000);
-  background-image: -ms-linear-gradient(to bottom, #cb2a01, #9c2000);
-  background-image: -o-linear-gradient(to bottom, #cb2a01, #9c2000);
   background-image: linear-gradient(to bottom, #cb2a01, #9c2000);
 }
 
@@ -5519,10 +5465,6 @@ Team Logos
   color: #fff;
   background: #cb2a01;
   background-image: none;
-  background-image: -webkit-linear-gradient(to bottom, #9c2000, #cb2a01);
-  background-image: -moz-linear-gradient(to bottom, #9c2000, #cb2a01);
-  background-image: -ms-linear-gradient(to bottom, #9c2000, #cb2a01);
-  background-image: -o-linear-gradient(to bottom, #9c2000, #cb2a01);
   background-image: linear-gradient(to bottom, #9c2000, #cb2a01);
 }
 
@@ -5530,10 +5472,6 @@ Team Logos
 .ovStartTiebreak {
   background: #007341;
   background-image: none;
-  background-image: -webkit-linear-gradient(to bottom, #0c9f5e, #007341);
-  background-image: -moz-linear-gradient(to bottom, #0c9f5e, #007341);
-  background-image: -ms-linear-gradient(to bottom, #0c9f5e, #007341);
-  background-image: -o-linear-gradient(to bottom, #0c9f5e, #007341);
   background-image: linear-gradient(to bottom, #0c9f5e, #007341);
 }
 
@@ -5542,10 +5480,6 @@ Team Logos
   color: #fff;
   background: #0c9f5e;
   background-image: none;
-  background-image: -webkit-linear-gradient(to bottom, #007341, #0c9f5e);
-  background-image: -moz-linear-gradient(to bottom, #007341, #0c9f5e);
-  background-image: -ms-linear-gradient(to bottom, #007341, #0c9f5e);
-  background-image: -o-linear-gradient(to bottom, #007341, #0c9f5e);
   background-image: linear-gradient(to bottom, #007341, #0c9f5e);
 }
 
@@ -8111,10 +8045,6 @@ span[id*="collapseAvg_"] {
   box-shadow: 0 0 0.063rem 0.063rem rgba(0, 0, 0, 0.1);
   background: var(--primary, #ff4200);
   background-image: none;
-  background-image: -webkit-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
-  background-image: -moz-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
-  background-image: -ms-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
-  background-image: -o-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
   background-image: linear-gradient(to bottom, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
   vertical-align: middle;
 }
@@ -8125,10 +8055,6 @@ span[id*="collapseAvg_"] {
 #nflTotalInactive:hover {
   background: var(--primary, #ff4200);
   background-image: none;
-  background-image: -webkit-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
-  background-image: -moz-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
-  background-image: -ms-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
-  background-image: -o-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
   background-image: linear-gradient(to bottom, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
 }
 
@@ -8353,10 +8279,6 @@ span[id*="collapseAvg_"] {
 
 /***************************************/
 
-td::-webkit-scrollbar {
-  background: #151515;
-}
-
 /* Track */
 ::-webkit-scrollbar {
   width: 0.75rem;
@@ -8381,10 +8303,7 @@ td::-webkit-scrollbar {
   border-radius: 0.313rem;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-light, #FA5C25);
-}
-
+::-webkit-scrollbar-thumb:hover,
 ::-webkit-scrollbar-thumb:active {
   background: var(--primary-light, #FA5C25);
 }
@@ -8466,11 +8385,7 @@ td::-webkit-scrollbar {
 .selectbox div::-webkit-scrollbar-thumb:hover,
 #destination_list::-webkit-scrollbar-thumb:hover,
 #body_csetup_chngpick table td div::-webkit-scrollbar-thumb:hover,
-#MSG::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-light, #FA5C25);
-  border-color: var(--primary-light, #FA5C25);
-}
-
+#MSG::-webkit-scrollbar-thumb:hover,
 .selectbox div::-webkit-scrollbar-thumb:active,
 #destination_list::-webkit-scrollbar-thumb:active,
 #body_csetup_chngpick table td div::-webkit-scrollbar-thumb:active,
@@ -9438,104 +9353,43 @@ div.ls_team_points {
   background-color: var(--bg-opacity-brighter, rgba(181, 47, 0, .2)) !important;
 }
 
-#league-history-wrapper .hs_tabs_wrap .hz-main-table thead th,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table thead th:first-of-type,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table th.fixed-side,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table .oddtablerow td,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table .eventablerow td,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table .lh_defunct_check.rowheader th,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table .lh_defunct_check.rowheader th:first-of-type,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view td,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view td,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view td,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view td.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view td.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view td.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view th,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view th,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view th,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view th.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view th.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view th.lh_rank,
-#league-history-wrapper #team_points_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #team_points_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td,
-#league-history-wrapper #team_points_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td.lh_rank,
-#league-history-wrapper #team_points_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td.lh_rank,
-#league-history-wrapper #misc_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #misc_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td,
-#league-history-wrapper #player_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #player_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td {
+#league-history-wrapper .hs_tabs_wrap .hz-main-table :is(thead th, thead th:first-of-type, th.fixed-side, .oddtablerow td, .eventablerow td, .lh_defunct_check.rowheader th, .lh_defunct_check.rowheader th:first-of-type),
+#league-history-wrapper .hs_tabs_wrap :is(#team_points_content, #player_content, #misc_content) td.mobile-view :is(td, td.lh_rank, th, th.lh_rank),
+#league-history-wrapper :is(#team_points_content, #misc_content, #player_content) :is(tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow, tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow) :is(td, td.lh_rank) {
   border-style: solid;
   margin: 0;
 }
 
-#league-history-wrapper .hs_tabs_wrap .hz-main-table thead th,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table thead th:first-of-type,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table th.fixed-side,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view th,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view th,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view th,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view th.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view th.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view th.lh_rank {
+#league-history-wrapper .hs_tabs_wrap .hz-main-table :is(thead th, thead th:first-of-type, th.fixed-side),
+#league-history-wrapper .hs_tabs_wrap :is(#team_points_content, #player_content, #misc_content) td.mobile-view :is(th, th.lh_rank) {
   border-color: #111;
 }
 
-#league-history-wrapper .hs_tabs_wrap .hz-main-table .oddtablerow td,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table .eventablerow td,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view td,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view td,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view td,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view td.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view td.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view td.lh_rank,
-#league-history-wrapper #team_points_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #team_points_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td,
-#league-history-wrapper #team_points_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td.lh_rank,
-#league-history-wrapper #team_points_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td.lh_rank,
-#league-history-wrapper #misc_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #misc_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td,
-#league-history-wrapper #player_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #player_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td {
+#league-history-wrapper .hs_tabs_wrap .hz-main-table :is(.oddtablerow td, .eventablerow td),
+#league-history-wrapper .hs_tabs_wrap :is(#team_points_content, #player_content, #misc_content) td.mobile-view :is(td, td.lh_rank),
+#league-history-wrapper :is(#team_points_content, #misc_content, #player_content) :is(tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow, tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow) :is(td, td.lh_rank) {
   border-color: #151515;
 }
 
 #league-history-wrapper .hs_tabs_wrap .hz-main-table thead th,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view th,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view th,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view th {
+#league-history-wrapper .hs_tabs_wrap :is(#team_points_content, #player_content, #misc_content) td.mobile-view th {
   border-width: 0.063rem 0.063rem 0.063rem 0;
 }
 
 #league-history-wrapper .hs_tabs_wrap .hz-main-table thead th:first-of-type,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view th.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view th.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view th.lh_rank {
+#league-history-wrapper .hs_tabs_wrap :is(#team_points_content, #player_content, #misc_content) td.mobile-view th.lh_rank {
   border-width: 0.063rem;
 }
 
 #league-history-wrapper .hs_tabs_wrap .hz-main-table th.fixed-side,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view td.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view td.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view td.lh_rank,
-#league-history-wrapper #team_points_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td.lh_rank,
-#league-history-wrapper #team_points_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td.lh_rank,
-#league-history-wrapper #player_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td.lh_rank,
-#league-history-wrapper #player_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td.lh_rank {
+#league-history-wrapper .hs_tabs_wrap :is(#team_points_content, #player_content, #misc_content) td.mobile-view td.lh_rank,
+#league-history-wrapper :is(#team_points_content, #player_content) :is(tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow, tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow) td.lh_rank {
     border-width: 0 0.063rem 0.063rem;
 }
 
-#league-history-wrapper .hs_tabs_wrap .hz-main-table .oddtablerow td,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table .eventablerow td,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view td,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view td,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view td,
-#league-history-wrapper #team_points_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #team_points_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td,
-#league-history-wrapper #misc_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #misc_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td,
-#league-history-wrapper #player_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #player_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td {
+#league-history-wrapper .hs_tabs_wrap .hz-main-table :is(.oddtablerow td, .eventablerow td),
+#league-history-wrapper .hs_tabs_wrap :is(#team_points_content, #player_content, #misc_content) td.mobile-view td,
+#league-history-wrapper :is(#team_points_content, #misc_content, #player_content) :is(tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow, tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow) td {
     border-width: 0 0.063rem 0.063rem 0;
 }
 
@@ -11799,126 +11653,9 @@ div.sub-content.editable .insertIcons {
   }
 }
 /********* Bettis / Habskin Settings below - May Be Able to Delete 
-body.bettis .newposition th,
-body.bettis .newposition td,
-.theme-dk-yellow .newposition th,
-.theme-dk-yellow .newposition td {
-  border-color: #5e4618
-}
-
-body.bettis .oddtablerow {
-  background-color: #111
-}
-
-body.bettis .eventablerow {
-  background-color: #000
-}
-
-body.bettis #MFLBoxContainer .MFLLiveTeam img {
-  max-height: 1.25rem
-}
-
-body.bettis #MFLBoxContainer .MFLLiveTeam img {
-  max-height: 1.25rem
-}
-
-body.bettis th {
-  background-color: var(--primary-darker, rgba(0, 0, 0, .2))
-}
-
-body.bettis .myfantasyleague_menu,
-body.bettis .banner-container {
-  border-color: var(--primary-dark, var(--primary, #ff4200))
-}
-
-body.bettis .footercontainer-outer {
-  border-top-color: var(--primary-dark, var(--primary, #ff4200))
-}
-
-body.bettis #tabmenu-wrap li#tab1 a:before,
-body.bettis #tabmenu-wrap #tab_title.tab1:before {
-  content: "\f0c0"
-}
-
-body.bettis #tabmenu-wrap li#tab4 a:before,
-body.bettis #tabmenu-wrap #tab_title.tab4:before {
-  content: "\f0d6"
-}
-
-body.bettis #tabmenu-wrap li#tab6 a:before,
-body.bettis #tabmenu-wrap #tab_title.tab6:before {
-  content: "\f24a"
-}
-
-body.bettis .myfantasyleague_tabmenu #homepagetabs li.currenttab a,
-body.bettis .myfantasyleague_tabmenu #homepagetabs li.currenttab:hover a,
-body.bettis .myfantasyleague_menuMobile>ul>li.arrow-down>a,
-body.bettis .myfantasyleague_menuMobile>ul>li.arrow-down>a:hover,
-body.bettis .myfantasyleague_menuMobile>ul>li.has-sub.arrow-down>a:after,
-body.bettis #myfantasyleague_tabs .myfantasyleague_tabmenu #homepagetabs li.currenttab a,
-body.bettis #myfantasyleague_tabs .myfantasyleague_tabmenu #homepagetabs li.currenttab:hover a,
-body.bettis ul.MFLPlayerPopupTab li a.active,
-body.bettis ul.MFLPlayerPopupTab li a.active:hover,
-body.bettis ul.MFLPlayerPopupTab li a.current,
-body.bettis ul.MFLPlayerPopupTab li a.current:hover,
-body.bettis #MFLPlayerPopupClose:hover,
-body.bettis #MFLBoxWrapper .MFLBoxPlayerDetailsClose:hover,
-body.bettis #MFLBoxContainer input[style="cursor:default"],
-body.bettis #MFLBoxContainer input[type="button"]:hover,
-body.bettis .mflModal-content button:hover,
-body.bettis input[type="button"],
-body.bettis input[type="submit"],
-body.bettis input[type="button"]:hover,
-body.bettis input[type="submit"]:hover,
-body.bettis #tooltip,
-#body_submit_lineups body.bettis h4.warning,
-body.bettis #make_pick #current_nominator,
-body.bettis .weekly-navbar a:hover,
-body.bettis .weekly-navbar a:link:hover,
-body.bettis .weekly-navbar a:active:hover,
-body.bettis .weekly-navbar a:visited:hover,
-body.bettis .weekly-navbar .currentweek,
-body.bettis .offerer::before,
-#body_ajax_ls body.bettis #ls_ticker_tab_id td:first-of-type,
-.theme-dk-yellow .myfantasyleague_tabmenu #homepagetabs li.currenttab a,
-.theme-dk-yellow .myfantasyleague_tabmenu #homepagetabs li.currenttab:hover a,
-.theme-dk-yellow .myfantasyleague_menuMobile>ul>li.arrow-down>a,
-.theme-dk-yellow .myfantasyleague_menuMobile>ul>li.arrow-down>a:hover,
-.theme-dk-yellow .myfantasyleague_menuMobile>ul>li.has-sub.arrow-down>a:after,
-.theme-dk-yellow #myfantasyleague_tabs .myfantasyleague_tabmenu #homepagetabs li.currenttab a,
-.theme-dk-yellow #myfantasyleague_tabs .myfantasyleague_tabmenu #homepagetabs li.currenttab:hover a,
-.theme-dk-yellow ul.MFLPlayerPopupTab li a.active,
-.theme-dk-yellow ul.MFLPlayerPopupTab li a.active:hover,
-.theme-dk-yellow ul.MFLPlayerPopupTab li a.current,
-.theme-dk-yellow ul.MFLPlayerPopupTab li a.current:hover,
-.theme-dk-yellow #MFLPlayerPopupClose:hover,
-.theme-dk-yellow #MFLBoxWrapper .MFLBoxPlayerDetailsClose:hover,
-.theme-dk-yellow #MFLBoxContainer input[style="cursor:default"],
-.theme-dk-yellow #MFLBoxContainer input[type="button"]:hover,
-.theme-dk-yellow .mflModal-content button:hover,
-.theme-dk-yellow input[type="button"],
-.theme-dk-yellow input[type="submit"],
-.theme-dk-yellow input[type="button"]:hover,
-.theme-dk-yellow input[type="submit"]:hover,
-.theme-dk-yellow #tooltip,
-.theme-dk-yellow #body_submit_lineups body h4.warning,
-.theme-dk-yellow #make_pick #current_nominator,
-.theme-dk-yellow .weekly-navbar a:hover,
-.theme-dk-yellow .weekly-navbar a:link:hover,
-.theme-dk-yellow .weekly-navbar a:active:hover,
-.theme-dk-yellow .weekly-navbar a:visited:hover,
-.theme-dk-yellow .weekly-navbar .currentweek,
-.theme-dk-yellow .offerer::before,
-.theme-dk-yellow #body_ajax_ls body #ls_ticker_tab_id td:first-of-type {
-  color: #111
-}
-
 body.habskin #roster_column_left td.no_icons a {
-  display: none
-}
-
-body.habskin #roster_column_left td.no_icons a {
-  max-width: unset
+  display: none;
+  max-width: unset;
 }
 
 body.habskin .ls-matchup caption {
@@ -11936,340 +11673,18 @@ body.habskin #LS_TopTableHolder .franchiseicon {
   max-height: 3.125rem;
 }
 
-body.bettis .ls-modal-header .close:hover,
-body.bettis .ls-modal-header .close:focus,
-.theme-dk-yellow .ls-modal-header .close:hover,
-.theme-dk-yellow .ls-modal-header .close:focus {
-  color: #111 !important
-}
-
 @media only screen and (max-width:48em) {
 
-  body.bettis .myfantasyleague_tabmenu>label span:before,
-  body.bettis .myfantasyleague_tabmenu>label span:after,
-  .theme-dk-yellow .myfantasyleague_tabmenu>label span:before,
-  .theme-dk-yellow .myfantasyleague_tabmenu>label span:after {
-    background: #111
-  }
-}
-
-body.bettis #scoreboardTooltip:after,
-.theme-dk-yellow #scoreboardTooltip:after {
-  width: 0;
-  height: 0;
-  border-left: 1.125rem solid transparent !important;
-  border-right: 1.125rem solid transparent !important;
-  border-top: 1.25rem solid #f7b534 !important;
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: -0.625rem !important;
-  margin-left: -1.188rem !important
-}
-
-body.bettis #scoreboardTooltip div.mobile-wrap,
-.theme-dk-yellow #scoreboardTooltip div.mobile-wrap {
-  background-image: none !important;
-  background-color: #222;
-  border: 0.125rem solid #f7b534
-}
-
-body.bettis #league_chat img[title="New Window"],
-.theme-dk-yellow #league_chat img[title="New Window"] {
-  display: none
-}
-
-body.bettis #league_chat .fa-comments,
-.theme-dk-yellow #league_chat .fa-comments {
-  margin-top: -0.313rem
-}
-
-body.bettis #player_history .mobile-wrap table.report td:nth-child(1),
-body.bettis #player_history .mobile-wrap table.report td:nth-child(2) {
-  text-align: center
-}
-
-body.bettis .calendar_event_waiver_lock,
-.theme-dk-yellow .calendar_event_waiver_lock {
-  color: #fff;
-  text-shadow: 0 0.125rem 0.125rem #000;
-  background: #f50;
-  background-image: linear-gradient(to bottom right, #f50, #f00, #f50);
-  border: 0.063rem solid red;
-  box-shadow: inset 0 0 0.625rem red;
-  padding: 0.25rem
-}
-
-body.bettis .calendar_event_waiver_bbid,
-.theme-dk-yellow .calendar_event_waiver_bbid {
-  color: #000;
-  text-shadow: 0 0.125rem 0.125rem #fff;
-  background: #af0;
-  background-image: linear-gradient(to bottom right, #ff0, #af0, #ff0);
-  border: 0.063rem solid #070;
-  box-shadow: inset 0 0 0.625rem #070;
-  padding: 0.25rem
-}
-
-body.bettis .calendar_event_waiver_bbid a,
-body.bettis .calendar_event_waiver_bbid a:hover,
-body.bettis .calendar_event_waiver_bbid a:visited,
-body.bettis .calendar_event_waiver_bbid a:link,
-body.bettis .calendar_event_waiver_bbid a:active,
-.theme-dk-yellow .calendar_event_waiver_bbid a,
-.theme-dk-yellow .calendar_event_waiver_bbid a:hover,
-.theme-dk-yellow .calendar_event_waiver_bbid a:visited,
-.theme-dk-yellow .calendar_event_waiver_bbid a:link,
-.theme-dk-yellow .calendar_event_waiver_bbid a:active {
-  color: #000 !important;
-  text-shadow: 0 0.125rem 0.125rem #fff
-}
-
-body.bettis .calendar_event_waiver_none,
-.theme-dk-yellow .calendar_event_waiver_none {
-  color: #fff;
-  text-shadow: 0 0.125rem 0.125rem #000;
-  background: #0d0;
-  background-image: linear-gradient(to bottom right, #0d0, #0a0, #0d0);
-  border: 0.063rem solid #070;
-  box-shadow: inset 0 0 0.625rem #070;
-  padding: 0.25rem
-}
-
-body.bettis .svg-iconlink:active,
-body.bettis .svg-iconlink:link,
-body.bettis .svg-iconlink:visited,
-.theme-dk-yellow .svg-iconlink:active,
-.theme-dk-yellow .svg-iconlink:link,
-.theme-dk-yellow .svg-iconlink:visited,
-body.bettis .svg-iconlink a,
-body.bettis .svg-iconlink a:hover,
-.theme-dk-yellow .svg-iconlink a,
-.theme-dk-yellow .svg-iconlink a:hover {
-  color: #777;
-}
-
-body.bettis .svg-iconlink:active:hover,
-body.bettis .svg-iconlink:link:hover,
-body.bettis .svg-iconlink:visited:hover,
-.theme-dk-yellow .svg-iconlink:active:hover,
-.theme-dk-yellow .svg-iconlink:link:hover,
-.theme-dk-yellow .svg-iconlink:visited:hover {
-  color: #f9b943
-}
-
-body.bettis .svg-icon,
-.theme-dk-yellow .svg-icon {
-  fill: var(--primary, #ff4200);
-  color: #777;
-}
-
-body.bettis .svg-icon:hover,
-body.bettis .svg-iconlink:hover .svg-icon {
-  fill: #777;
-  color: var(--primary, #ff4200);
-}
-
-.theme-dk-yellow .icon-bar-full .svg-iconlink:hover span.fa-stack i.fa-inverse:before,
-.theme-dk-yellow .icon-bar-full .icon-bar i:after,
-.theme-dk-yellow .icon-bar-full .icon-bar a:hover i:before,
-body.bettis .icon-bar-full .icon-bar .svg-iconlink:hover span.fa-stack i.fa-inverse:before,
-body.bettis .icon-bar-full .icon-bar i:after,
-body.bettis .icon-bar-full .icon-bar a:hover i:before {
-  color: #777;
-  opacity: 1;
-}
-
-.theme-dk-yellow .icon-bar-full .svg-icon:hover,
-.theme-dk-yellow .icon-bar-full .svg-iconlink:hover .svg-icon,
-.theme-dk-yellow .svg-icon:hover,
-.theme-dk-yellow .svg-iconlink:hover .svg-icon {
-  fill: #777;
-  color: var(--primary, #ff4200);
-}
-
-.theme-dk-yellow .icon-bar-full span.fa-stack i:nth-child(1):before,
-.theme-dk-yellow .icon-bar-full .svg-iconlink:hover span.fa-stack i:nth-child(2):before,
-.theme-dk-yellow .icon-bar span.fa-stack i:nth-child(1):before,
-.theme-dk-yellow .icon-bar .svg-iconlink:hover span.fa-stack i:nth-child(2):before {
-  color: #777;
-}
-
-.theme-dk-yellow .icon-bar-full span.fa-stack i:nth-child(2):before,
-.theme-dk-yellow .icon-bar-full .svg-iconlink:hover span.fa-stack i:nth-child(1):before,
-.theme-dk-yellow .icon-bar span.fa-stack i:nth-child(2):before,
-.theme-dk-yellow .icon-bar .svg-iconlink:hover span.fa-stack i:nth-child(1):before {
-  color: var(--primary, #ff4200);
-}
-
-body.bettis .icon-bar {
-  white-space: nowrap;
-  vertical-align: middle
-}
-
-body.bettis .svg-iconlink {
-  display: inline-block;
-  text-decoration: none;
-  margin-right: 0.5rem;
-  text-align: center
-}
-
-body.bettis .svg-iconlink:last-of-type {
-  margin-right: 0
-}
-
-body.bettis .svg-icon {
-  width: 3rem;
-  height: 3rem
-}
-
-body.bettis .svg-icon:hover,
-body.bettis .svg-iconlink:hover .svg-icon,
-.theme-dk-yellow .svg-icon:hover,
-.theme-dk-yellow .svg-iconlink:hover .svg-icon {
-  cursor: pointer
-}
-
-body.bettis .svg-text {
-  text-align: center;
-  padding: 0.313rem;
-  text-transform: uppercase;
-  font-size: 0.688rem
-}
-
-body.bettis .bannerlinkicons {
-  text-align: center;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch
-}
-
-body.bettis .logo-text {
-  color: #bbb;
-  font-size: 0.813rem;
-  position: absolute;
-  top: -2.75rem;
-  white-space: nowrap;
-  left: 0.625rem;
-  font-weight: 700;
-  z-index: 1
-}
-
-.theme-dk-yellow .logo-text {
-  color: #bbb;
 }
 
 @media only screen and (max-width:38em) {
-  body.bettis .svg-icon {
-    width: 2.25rem;
-    height: 2.25rem
-  }
 }
 
-body.bettis #weekly_calendar td,
-.theme-dk-yellow #weekly_calendar td {
-  border: 0.063rem solid #333
-}
-
-body.bettis #weekly_calendar tr td:first-child,
-.theme-dk-yellow #weekly_calendar tr td:first-child {
-  border: 0.188rem dotted #da3636
-}
-
-body.bettis #weekly_calendar td ul,
-.theme-dk-yellow #weekly_calendar td ul {
-  list-style-type: none
-}
-
-body.bettis #weekly_calendar td ul li,
-.theme-dk-yellow #weekly_calendar td ul li {
-  margin-left: -2.5rem;
-  width: auto
-}
-
-body.bettis #weekly_calendar td li,
-.theme-dk-yellow #weekly_calendar td li {
-  padding: 0.188rem;
-  background-color: #222;
-  margin-bottom: 0.188rem;
-  border: 0.063rem solid #555
-}
-
-body.bettis #weekly_calendar .oddtablerow td ul li:before,
-body.bettis #weekly_calendar .eventablerow td ul li:before,
-body.bettis #weekly_calendar .sub-content ul li:before,
-.theme-dk-yellow #weekly_calendar .oddtablerow td ul li:before,
-.theme-dk-yellow #weekly_calendar .eventablerow td ul li:before,
-.theme-dk-yellow #weekly_calendar .sub-content ul li:before {
-  display: none
-}
-
-body.bettis .calendar_event_custom,
-.theme-dk-yellow .calendar_event_custom {
-  color: #fff;
-  text-shadow: 0 0.125rem 0.125rem #000;
-  background: #05f;
-  background-image: linear-gradient(to bottom right, #05f, #03f, #05f);
-  border: 0.063rem solid #05f;
-  box-shadow: inset 0 0 0.625rem #05f;
-  padding: 0.25rem;
-}
 /******* habskin and bettis settings may be commented out *******
-#options_100 body.bettis table.report {
-  border-collapse: collapse
-}
-
-#options_100 body.bettis table.report th,
-.theme-dk-yellow #options_100 table.report th,
 #options_100 table.report td {
   border-left: 0.063rem solid #444;
   border-right: 0.063rem solid #444;
   text-align: center
-}
-
-#options_100 body.bettis table.report th,
-.theme-dk-yellow #options_100 table.report th {
-  border-top: 0.063rem solid #444;
-  vertical-align: top
-}
-
-#options_100 body.bettis table.report td img {
-  display: none
-}
-
-[id$="options_113"] body.bettis table.nocaption td,
-.theme-dk-yellow [id$="options_113"] table.nocaption td {
-  text-align: center;
-  border-right: 0.063rem solid #444
-}
-
-[id$="options_113"] body.bettis table.nocaption th,
-.theme-dk-yellow [id$="options_113"] table.nocaption th {
-  text-align: center;
-  border-right: 0.063rem solid #444
-}
-
-#body_options_113 body.bettis table.nocaption td table td {
-  border-right: 0
-}
-
-#body_options_52 body.bettis .custom-draft .head-th td:nth-child(1),
-#body_options_52 body.bettis .mobile-view.leftS table#picker td:nth-child(1) {
-  text-align: left !important;
-  width: 9.375rem;
-  min-width: 9.375rem;
-  max-width: 9.375rem
-}
-
-#body_options_52 body.bettis .custom-draft .head-th td:nth-child(2),
-#body_options_52 body.bettis .mobile-view.leftS table#picker td:nth-child(2) {
-  text-align: center !important;
-  width: 2.5rem;
-  min-width: 2.5rem;
-  max-width: 2.5rem
-}
-
-#body_add_drop body.bettis table.table3 input[name="BBID_AMT"] {
-  width: 4.375rem !important
 }
 
 #body_ajax_ls.bettis div.ls_other_game {
@@ -12277,65 +11692,18 @@ body.bettis .calendar_event_custom,
   width: 12.3%;
 }
 
-body.bettis .ls_other_game .ls_projections {
-  cursor: pointer
-}
-
-body.bettis #other_games .ls_other_game tr {
-  height: 1.625rem
-}
-
-body.bettis .ls_pace_box {
-  display: table-cell !important;
-  cursor: pointer
-}
-
-body.bettis td.ls_pace_box span.ls_projected {
-  display: none !important
-}
-
 #body_ajax_ls.bettis .ls_box_gameover .ls_projections {
   display: none
 }
 
 @media only screen and (max-width:25.625em) {
-  body.bettis td.ls_pace_box {
-    display: table-cell !important
-  }
-}
-
-body.bettis #standings .franchiseicon {
-  min-width: 1.875rem !important;
-  width: 1.875rem !important;
-  background-color: #c18f2f;
-  border-radius: 0.938rem;
-  padding: 0.125rem
-}
-
-body.bettis #standings_legend .minifranchiseicon {
-  min-width: 1.25rem !important;
-  width: 1.25rem !important;
-  background-color: #c18f2f;
-  border-radius: 0.625rem;
-  padding: 0.063rem
 }
 
 @media only screen and (max-width:48em) {
 
-  body.bettis #standings .gb,
-  body.bettis #standings .strk {
-    display: none
-  }
 }
 
 @media only screen and (max-width:32em) {
-
-  body.bettis #standings .bbidbalance,
-  body.bettis #standings .gb,
-  body.bettis #standings .pa,
-  body.bettis #standings .strk {
-    display: none
-  }
 
   .lombardi {
     float: none;
@@ -12344,63 +11712,13 @@ body.bettis #standings_legend .minifranchiseicon {
 }
 
 @media only screen and (max-width:20em) {
-  body.bettis ul.MFLPlayerPopupTab li a {
-    font-size: xx-small
-  }
-}
-
-body.bettis #league_news_feed ul {
-  height: 18.75rem;
-  overflow-y: scroll
 }
 
 #body_home.bettis h2.warning {
   display: none
 }
 
-body.bettis img.ava {
-  min-width: inherit !important
-}
-
-body.bettis #trade_bait .timestamp {
-  display: none
-}
-
-body.bettis #options_08 td.points,
-body.bettis #top td.points {
-  font-size: x-small
-}
-
-body.bettis .hz-main-table tbody th.fixed-side,
-body.bettis .hz-main-table th.lh_overall_franchise.fixed-side {
-  text-align: left !important
-}
-
-body.bettis #arrears-wrapper {
-  display: none
-}
-
-body.bettis #validateLineupReportWrapper {
-  display: none
-}
-
-body.bettis .invalidLineup_illegal,
-body.bettis .invalidLineup_illegal:hover,
-.theme-dk-yellow .invalidLineup_illegal,
-.theme-dk-yellow .invalidLineup_illegal:hover {
-  color: red !important
-}
-
-body.bettis .invalidLineup_warning,
-body.bettis .invalidLineup_warning:hover,
-.theme-dk-yellow .invalidLineup_warning,
-.theme-dk-yellow .invalidLineup_warning:hover {
-  color: goldenrod !important
-}
-
-#csetup_transfr body.bettis table.report tr td:nth-child(6),
-#csetup_transfr table.report tr td:nth-child(7),
-#csetup_transfr body.bettis table.report tr td:nth-child(8) {
+#csetup_transfr table.report tr td:nth-child(7) {
   text-align: center
 }
 ********************** Bettis / Habskin above **********************/
@@ -13271,10 +12589,6 @@ span.total_contract_bracketed span {
   color: #777 !important;
   background: #111 !important;
   background-image: none !important;
-  background-image: -webkit-linear-gradient(top, #555, #333) !important;
-  background-image: -moz-linear-gradient(top, #555, #333) !important;
-  background-image: -ms-linear-gradient(top, #555, #333) !important;
-  background-image: -o-linear-gradient(top, #555, #333) !important;
   background-image: linear-gradient(to bottom, #555, #333) !important;
 }
 
@@ -13596,13 +12910,6 @@ div.banner-container a:link img.sister-league:hover {
   color: red;
 }
 /***** Bettis Settings - could delete *****
-body.bettis #accounting_table th span.warning,
-.theme-dk-yellow #accounting_table th span.warning {
-  color: #f15f5f;
-}
-
-body.bettis .alert-info-table,
-.theme-dk-yellow .alert-info-table,
 .tdalert span {
   background: var(--primary-darker, rgba(0, 0, 0, .2));
 }
@@ -13642,26 +12949,11 @@ body.bettis .alert-info-table,
 }
 
 body.habskin.bettis #contractReportPopupContainer,
-.theme-dk-yellow #contractReportPopupContainer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 100000;
-  background-color: crimson;
-  color: white;
-  border: 0.188rem solid crimson
-}
-
 body.habskin.bettis #contractPopupTable th {
   font-size: 0.75rem !important
 }
 
 body.habskin.bettis #contractPopupTable td,
-.theme-dk-yellow #contractPopupTable td {
-  font-size: 0.625rem !important;
-  border-right: 0.063rem solid var(--primary)
-}
-
 body.habskin.bettis #contractTable td,
 body.habskin.bettis #taxiSquadTable td,
 body.habskin.bettis #contractPopupTable th {
@@ -13677,27 +12969,9 @@ body.habskin.bettis #contractPopupTable th {
 }
 
 body.habskin.bettis .bbid_ir-modal-content,
-.theme-dk-yellow .bbid_ir-modal-content {
-  background-color: var(--mobile-wrap-bg);
-  border: 0.063rem solid var(--neutral);
-}
-
 body.habskin.bettis #options_113 table.report td,
-.theme-dk-yellow #options_113 table.report td {
-  text-align: center;
-  border-left: 0.063rem solid #444
-}
-
 body.habskin.bettis #options_113 table.report td:last-child,
-.theme-dk-yellow #options_113 table.report td:last-child {
-  border-right: 0.063rem solid #444
-}
-
 body.habskin.bettis #options_113 table.report td table td,
-.theme-dk-yellow #options_113 table.report td table td {
-  border: 0 !important
-}
-
 body.habskin.bettis #contract_9999 td {
   width: 6%
 }
@@ -13714,18 +12988,7 @@ body.habskin.bettis #contract_9999 tr:nth-child(1) th,
 body.habskin.bettis #contract_9999 tr:nth-child(2) th:nth-child(even),
 body.habskin.bettis #contract_9999 td:nth-child(even),
 body.habskin.bettis #contract_9999 td:nth-child(1),
-.theme-dk-yellow #contract_9999 tr:nth-child(1) th,
-.theme-dk-yellow #contract_9999 tr:nth-child(2) th:nth-child(even),
-.theme-dk-yellow #contract_9999 td:nth-child(even),
-.theme-dk-yellow #contract_9999 td:nth-child(1) {
-  border-right: 0.063rem solid #555;
-}
-
 body.habskin.bettis #contract_9999 th:last-child,
-.theme-dk-yellow #contract_9999 td:last-child {
-  border-right: 0;
-}
-
 body.habskin.bettis #contract_9999 table,
 body.habskin.bettis #contract_9999 table {
   border: 0.063rem solid #555
@@ -14030,26 +13293,9 @@ body.habskin #standings img[id*="franchiseicon_"] {
   background-position: -17.5rem -2.5rem !important
 }
 
-#body_lineup.custom_lineup_body.bettis form td.pos-rank,
-#body_lineup.custom_lineup_body.bettis .starter_count_reason_more,
-#body_lineup.custom_lineup_body.bettis .starter_count_reason_less,
 #body_lineup.bettis .form_buttons.default-btn::after,
 #body_lineup.bettis .form_buttons::before,
-#body_lineup.custom_lineup_body.bettis .reportnavigation a,
-#body_lineup.custom_lineup_body.bettis .links_nav a,
-#body_lineup.custom_lineup_body.bettis .links_nav a:hover,
-.bettis .target_report tr.lineup_player_row td.pos-rank,
-#body_lineup.custom_lineup_body.bettis form tr.player_row td.pos-rank,
-.theme-dk-yellow #body_lineup.custom_lineup_body form td.pos-rank,
-.theme-dk-yellow #body_lineup.custom_lineup_body .starter_count_reason_more,
-.theme-dk-yellow #body_lineup.custom_lineup_body .starter_count_reason_less,
-.theme-dk-yellow #body_lineup .form_buttons.default-btn::after,
-.theme-dk-yellow #body_lineup .form_buttons::before,
-.theme-dk-yellow #body_lineup.custom_lineup_body .reportnavigation a,
-.theme-dk-yellow #body_lineup.custom_lineup_body .links_nav a,
-.theme-dk-yellow #body_lineup.custom_lineup_body .links_nav a:hover,
-.theme-dk-yellow .target_report tr.lineup_player_row td.pos-rank,
-.theme-dk-yellow #body_lineup.custom_lineup_body form tr.player_row td.pos-rank {
+.bettis .target_report tr.lineup_player_row td.pos-rank {
   color: #000;
 }
 
@@ -14174,42 +13420,6 @@ body.habskin #standings img[id*="franchiseicon_"] {
     top: 0.725rem !important;
 }
 
-.theme-dk-yellow .banner-container,
-.theme-dk-yellow .footercontainer-outer {
-  background-color: rgba(247, 181, 52, .05);
-}
-
-.theme-dk-yellow th {
-  background: rgba(0, 0, 0, .7);
-}
-
-.theme-dk-yellow tr.header th[class*="week"] {
-  background: rgba(0, 0, 0, .6);
-}
-
-.theme-dk-yellow .eventablerow {
-  background: rgba(0, 0, 0, .3);
-}
-
-.theme-dk-yellow .oddtablerow {
-  background: rgba(0, 0, 0, .5);
-}
-
-.theme-dk-yellow .bottomteam,
-.theme-dk-yellow .topteam,
-.theme-dk-yellow .bracket {
-  border-color: rgba(255, 255, 255, .2);
-}
-
-.theme-dk-yellow #body_ajax_ls #ls_ticker_tab_id td:first-of-type {
-  color: #111;
-}
-
-.theme-dk-yellow .toggle-btn-main::before,
-.theme-dk-yellow .toggle-btn-main::after {
-  background: #111;
-}
-
 /* SCOREBOARD MODULE */
 
 /* SET FONT FAMILY */
@@ -14299,10 +13509,6 @@ h2.lsm_error.error_box {
   background: var(--primary, #ff4200);
 }
 
-.theme-dk-yellow #LSscoringBox .player-position {
-  color: #000;
-}
-
 #LSscoringBox .player-image img {
   background: #111;
 }
@@ -14336,10 +13542,6 @@ h2.lsm_error.error_box {
   height: 0.125rem;
   background: var(--primary, #ff4200);
   margin-top: -0.063rem;
-}
-
-.theme-dk-yellow  #LSscoringBox div[class*="positionChange"] {
-  background: #5e4618;
 }
 
 #LSscoringBox div.franchise-score {
@@ -14703,10 +13905,6 @@ div.ym {
 }
 
 /* mfl scripts color adjustment for dark template ONLY */
-.theme-dk-yellow .cus_player_images .position_name_roster_mobile {
-    color: #000;
-}
-
 /* hide mobile position and team name for desktop */
 .team_name_roster_circle {
     display: none;
@@ -14788,15 +13986,9 @@ div.ym {
     background: var(--accent-two, #ffb431);
     color: #000;
 }
-.theme-dk-yellow .playerImgTable .teamPositionCircle {
-    color: #000;
-}
 /*set bg color for team position circle - visible on mobile displays and color of text in circle in th - table headers*/
 th a[data-pimg-processed] .playerImgTable .teamPositionCircle {
     color: #fff;
-}
-.theme-dk-yellow th a[data-pimg-processed] .playerImgTable .teamPositionCircle {
-    color: #000;
 }
 /*set color for up arrows - seen on weekly results reports */
 .playerFirstName .shouldHavestart i {
@@ -15070,16 +14262,10 @@ th a[data-pimg-processed] .playerImgTable .teamPositionCircle {
     color: #fff;
     background: var(--accent-two, var(--accent, #B82601));
 }
-.theme-dk-yellow #AddDropForm .sort-btn:hover {
-    color: #000;
-}
 #AddDropForm .sort-btn.activated {
     color: #fff;
     background: var(--accent-two, var(--accent, #B82601));
     border: 0;
-}
-.theme-dk-yellow #AddDropForm .sort-btn.activated {
-    color: #000;
 }
 #AddDropForm .player-pos {
     border-radius: 0.675rem;
@@ -15573,14 +14759,6 @@ th a[data-pimg-processed] .playerImgTable .teamPositionCircle {
     #AddDropForm #add-player-list .add-drop-player-row.eventablerow:hover,
     #AddDropForm #drop-player-list .add-drop-player-row.eventablerow:hover {
         background: none !important;
-    }
-    .theme-dk-yellow #AddDropForm #add-player-list .add-drop-player-row.oddtablerow:hover,
-    .theme-dk-yellow #AddDropForm #drop-player-list .add-drop-player-row.oddtablerow:hover {
-        background: rgba(0, 0, 0, .5)!important;
-    }
-    .theme-dk-yellow #AddDropForm #add-player-list .add-drop-player-row.eventablerow:hover,
-    .theme-dk-yellow #AddDropForm #drop-player-list .add-drop-player-row.eventablerow:hover {
-        background: rgba(0, 0, 0, .3)!important;
     }
     #AddDropForm #add-player-list .add-drop-player-row.selected-player.oddtablerow:hover,
     #AddDropForm #add-player-list .add-drop-player-row.selected-player.eventablerow:hover {
