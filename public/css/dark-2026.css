@@ -1,7 +1,6 @@
 @import url(https://mflscripts.com/font-awesome/css/all.min.css);
 @import url(https://mflscripts.com/font-awesome/css/v4-shims.min.css);
 @import url(https://www.mfl-leagues.com/css/font-awesome-animation-min.css);
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
 
 /* old font awesome 4.7 file
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
@@ -9,13 +8,14 @@
 
 /* 
 CSS target for all habman sites is body.habskin 
-CSS targets for individual habman sites - body.bettis
-Example of 3 deep variable - background: var(--primary2 , var(--neutral2 , var(--th-bg2 , #000000)))
+var(--neutral2,
+var(--th-bg2,
+#000000)))
 */
 html,
 div,
 td {
-    scrollbar-color: var(--primary-dark, #333) var(--neutral-dark, #111) !important;
+    scrollbar-color: auto !important;
 }
 
 :root {
@@ -23,9 +23,6 @@ td {
   --neutral-light: #cbcbcb;
   --neutral-dark: #0c0c0c;
   --neutral-blur: rgba(69, 69, 69, 0.15);
-  --glass-bg: rgba(20, 20, 20, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-blur: blur(12px);
   --primary: #38b569; /*this is the primary color for button icons*/
   --fa-main-color: #38b569;
   --primary-light: #24da6d;
@@ -62,6 +59,7 @@ td {
   position: absolute;
   top: 50%;
   left: 50%;
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 
@@ -84,18 +82,6 @@ td {
 }
 
 /* ADD THEME TO ROOT TO SET AS DEFAULT - DEFAULT ROOT MUST BE DEFINED FOR ONE THEME */
-html.theme-dk-yellow {
-  --primary: #f7b534;
-  --fa-main-color: #f7b534;
-  --primary-light: #f9ca6f;
-  --primary-lighter: #fbd893; /* mfl scoreboard font */
-  --primary-dark: #db9409;
-  --primary-darker: #a06c06;
-  --accent: #f7e534; /* accent color for button icons */
-  --bg-opacity: rgba(219, 148, 9, 0.05);
-  --bg-opacity-brighter: rgba(219, 148, 9, 0.2);
-}
-
 html.theme-dk-gold {
   --primary: #d4af37;
   --fa-main-color: #d4af37;
@@ -115,7 +101,7 @@ html.theme-dk-purple {
   --primary-lighter: #be89ec; /* mfl scoreboard font */
   --primary-dark: #591891;
   --primary-darker: #380f5c;
-  --accent: #ffb30f; /* accent color for button icons */
+  --accent: #a7a0a0; /* accent color for button icons */
   --bg-opacity: rgba(89, 24, 145, 0.05);
   --bg-opacity-brighter: rgba(89, 24, 145, 0.2);
 }
@@ -127,7 +113,7 @@ html.theme-dk-red {
   --primary-lighter: #eda1a1; /* mfl scoreboard font */
   --primary-dark: #a82020;
   --primary-darker: #741616;
-  --accent: #d9d736; /* accent color for button icons */
+  --accent: #dc9cae; /* accent color for button icons */
   --bg-opacity: rgba(168, 32, 32, 0.05);
   --bg-opacity-brighter: rgba(168, 32, 32, 0.2);
 }
@@ -637,36 +623,6 @@ html.theme-vikings {
 }
 /***************************************/
 
-/* Universal Glassmorphism on Report Containers */
-.mobile-wrap,
-.settings-mobile-wrap,
-.homepagemodule {
-  background: var(--glass-bg, rgba(20, 20, 20, 0.6)) !important;
-  backdrop-filter: var(--glass-blur, blur(12px));
-  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08)) !important;
-  border-radius: 0.5rem !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
-}
-
-.homepagemodule:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px var(--neutral-blur, rgba(0, 0, 0, 0.5)) !important;
-}
-
-/* Neon Pulse Animation for Live Events */
-@keyframes neonPulse {
-  0% { box-shadow: 0 0 5px var(--primary-dark); }
-  50% { box-shadow: 0 0 16px var(--primary-light), 0 0 8px var(--primary); }
-  100% { box-shadow: 0 0 5px var(--primary-dark); }
-}
-
-.MFLLiveScore, .MFLNFLLiveScore {
-  animation: neonPulse 5s infinite ease-in-out;
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
 .b_name {
   text-transform: uppercase;
   font-weight: 600;
@@ -696,6 +652,8 @@ html.theme-vikings {
 }
 
 html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   position: relative;
   min-height: 100%;
@@ -722,705 +680,65 @@ input[type="radio"] {
 *,
 *::before,
 *::after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
   box-sizing: inherit;
 }
+/*CGT - PC background image and settings - if using this custom element, must uncomment the body-fixed div id on HPM #1 - Header */
+/*#body-fixed {
+  background-color: #000;
+  background-image: url(//knuckleheads.netlify.app/images/backgrounds/Side-Particles-MMH.png), url(//knuckleheads.netlify.app/images/backgrounds/BG-Dark-Grunge.jpg);
+  position: fixed;
+  background-position: 50% -10%, center top;
+  background-repeat: no-repeat repeat;
+  left: 51%;
+  margin-left: -981px;
+  top: 0;
+  height: 100%;
+  width: 1925px;
+  z-index: -1;
+}*/
 
-/* ============================================= */
-/*  LEAGUE CYBERPUNK THEMES                      */
-/* ============================================= */
-
-/* Common Keyframes for Cyberpunk Themes */
-@keyframes cyberGridScroll {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 60px; }
-}
-
-@keyframes cyberCrtFlicker {
-  0% { opacity: 0.97; }
-  50% { opacity: 1; }
-  100% { opacity: 0.98; }
-}
-
-@keyframes captionGlitch {
-  0% { transform: translate(0); text-shadow: -2px 0 var(--primary-light), 2px 0 var(--accent); }
-  25% { transform: translate(-2px, 1px); }
-  50% { transform: translate(2px, -1px); text-shadow: 2px 0 var(--primary-light), -2px 0 var(--accent); }
-  75% { transform: translate(-1px, -1px); }
-  100% { transform: translate(0); text-shadow: none; }
-}
-
-/* CRT / Scanline Overlay for all Leagues (desktop only) */
-@media only screen and (min-width: 48.1em) {
-  body:has(#body-kkl)::after,
-  body:has(#body-kdl)::after,
-  body:has(#body-mmh)::after,
-  body:has(#body-bsb)::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    pointer-events: none;
-    background: repeating-linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.1) 0px,
-      rgba(0, 0, 0, 0.1) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-    animation: cyberCrtFlicker 0.15s infinite;
-  }
-}
-
-/* KKL Theme (Cyan) — Animated Grid / Matrix Lines */
 body:has(#body-kkl) {
-  background-color: #030303;
-  background-image:
-    radial-gradient(ellipse at 10% 20%, rgba(0, 255, 255, 0.07) 0%, transparent 50%),
-    radial-gradient(ellipse at 90% 80%, rgba(0, 180, 220, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(0, 100, 150, 0.03) 0%, transparent 70%);
+  background-image: url(https://mfl-leagues.com/images/league/kkl/side-particles.png), url(https://mfl-leagues.com/images/shared/dark-grunge.jpg);
   background-attachment: fixed;
-  animation: kklNeonShift 10s ease-in-out infinite alternate, kklGlitch 20s step-end infinite;
+  background-position: 50% 0%, center top;
+  background-repeat: no-repeat repeat;
+  background-color: #030303;
 }
 
-body:has(#body-kkl)::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    linear-gradient(transparent 95%, rgba(0, 255, 255, 0.03) 95%),
-    linear-gradient(90deg, transparent 95%, rgba(0, 255, 255, 0.03) 95%);
-  background-size: 60px 60px;
-  animation: cyberGridScroll 4s linear infinite;
-}
-
-/* KKL neon glow shift */
-@keyframes kklNeonShift {
-  0% {
-    background-image:
-      radial-gradient(ellipse at 10% 20%, rgba(0, 255, 255, 0.07) 0%, transparent 50%),
-      radial-gradient(ellipse at 90% 80%, rgba(0, 180, 220, 0.05) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(0, 100, 150, 0.03) 0%, transparent 70%);
-  }
-  100% {
-    background-image:
-      radial-gradient(ellipse at 15% 70%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
-      radial-gradient(ellipse at 85% 20%, rgba(0, 180, 220, 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 40% 40%, rgba(0, 100, 150, 0.04) 0%, transparent 70%);
-  }
-}
-
-/* KKL glitch — cyan color shift */
-@keyframes kklGlitch {
-  0%, 95%, 100% { filter: none; }
-  96% { filter: hue-rotate(20deg) saturate(1.3); }
-  97% { filter: hue-rotate(-15deg) brightness(1.1); }
-  98% { filter: hue-rotate(10deg) saturate(1.1); }
-}
-
-/* KDL Theme (Violet) — Honeycomb / Hex Matrix */
 body:has(#body-kdl) {
-  background-color: #030303;
-  background-image:
-    radial-gradient(ellipse at 10% 20%, rgba(139, 92, 246, 0.07) 0%, transparent 50%),
-    radial-gradient(ellipse at 90% 80%, rgba(124, 58, 237, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(109, 40, 217, 0.03) 0%, transparent 70%);
+  background-image: url(https://mfl-leagues.com/images/league/kdl/side-particles.png), url(https://mfl-leagues.com/images/shared/dark-grunge.jpg);
   background-attachment: fixed;
-  animation: kdlNeonShift 12s ease-in-out infinite alternate, kdlGlitch 20s step-end infinite;
+  background-position: 50% 0%, center top;
+  background-repeat: no-repeat repeat;
+  background-color: #030303;
 }
 
-/* Honeycomb hex grid — two offset rows creating the hex stagger */
-body:has(#body-kdl)::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    /* Hex edges — row 1 (0°, 60°, 120° creates hexagonal intersections) */
-    linear-gradient(0deg,   transparent 47%, rgba(126, 34, 206, 0.12) 49%, rgba(156, 76, 225, 0.18) 50%, rgba(126, 34, 206, 0.12) 51%, transparent 53%),
-    linear-gradient(60deg,  transparent 47%, rgba(126, 34, 206, 0.12) 49%, rgba(156, 76, 225, 0.18) 50%, rgba(126, 34, 206, 0.12) 51%, transparent 53%),
-    linear-gradient(120deg, transparent 47%, rgba(126, 34, 206, 0.12) 49%, rgba(156, 76, 225, 0.18) 50%, rgba(126, 34, 206, 0.12) 51%, transparent 53%),
-    /* Hex edges — row 2 (offset by half a cell for honeycomb stagger) */
-    linear-gradient(0deg,   transparent 47%, rgba(126, 34, 206, 0.10) 49%, rgba(139, 92, 246, 0.15) 50%, rgba(126, 34, 206, 0.10) 51%, transparent 53%),
-    linear-gradient(60deg,  transparent 47%, rgba(126, 34, 206, 0.10) 49%, rgba(139, 92, 246, 0.15) 50%, rgba(126, 34, 206, 0.10) 51%, transparent 53%),
-    linear-gradient(120deg, transparent 47%, rgba(126, 34, 206, 0.10) 49%, rgba(139, 92, 246, 0.15) 50%, rgba(126, 34, 206, 0.10) 51%, transparent 53%),
-    /* Glow at hex cell centers */
-    radial-gradient(circle 5px at 50% 50%, rgba(190, 137, 236, 0.15) 0%, transparent 100%),
-    radial-gradient(circle 5px at 50% 50%, rgba(190, 137, 236, 0.12) 0%, transparent 100%);
-  background-size:
-    312px 180px, 312px 180px, 312px 180px,
-    312px 180px, 312px 180px, 312px 180px,
-    312px 180px, 312px 180px;
-  background-position:
-    0 0, 0 0, 0 0,
-    156px 90px, 156px 90px, 156px 90px,
-    0 0, 156px 90px;
-  animation: kdlHexPulse 6s ease-in-out infinite alternate;
-}
-
-/* KDL neon glow shift */
-@keyframes kdlNeonShift {
-  0% {
-    background-image:
-      radial-gradient(ellipse at 10% 20%, rgba(139, 92, 246, 0.07) 0%, transparent 50%),
-      radial-gradient(ellipse at 90% 80%, rgba(124, 58, 237, 0.05) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(109, 40, 217, 0.03) 0%, transparent 70%);
-  }
-  100% {
-    background-image:
-      radial-gradient(ellipse at 20% 75%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 15%, rgba(124, 58, 237, 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 45% 45%, rgba(109, 40, 217, 0.04) 0%, transparent 70%);
-  }
-}
-
-/* Honeycomb pulses — force field breathing effect */
-@keyframes kdlHexPulse {
-  0% {
-    opacity: 0.6;
-    filter: brightness(0.85);
-  }
-  50% {
-    opacity: 1;
-    filter: brightness(1.15);
-  }
-  100% {
-    opacity: 0.7;
-    filter: brightness(0.9);
-  }
-}
-
-/* KDL glitch — violet color shift */
-@keyframes kdlGlitch {
-  0%, 93%, 100% { filter: none; }
-  94% { filter: hue-rotate(30deg) saturate(1.4); }
-  95% { filter: hue-rotate(-20deg) brightness(1.15); }
-  96% { filter: hue-rotate(15deg) saturate(1.2); }
-}
-
-/* MMH Theme (Emerald) — Forest Canopy / Network Branches */
 body:has(#body-mmh) {
-  background-color: #030303;
-  background-image:
-    radial-gradient(ellipse at 10% 20%, rgba(52, 211, 153, 0.07) 0%, transparent 50%),
-    radial-gradient(ellipse at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(5, 150, 105, 0.03) 0%, transparent 70%);
+  background-image: url(https://mfl-leagues.com/images/league/mmh/side-particles.png), url(https://mfl-leagues.com/images/shared/dark-grunge.jpg);
   background-attachment: fixed;
-  animation: mmhNeonShift 15s ease-in-out infinite alternate, mmhGlitch 20s step-end infinite;
+  background-position: 50% 0%, center top;
+  background-repeat: no-repeat repeat;
+  background-color: #030303;
 }
 
-/* Animated grid — larger squares than KKL, diagonal scroll direction */
-body:has(#body-mmh)::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    linear-gradient(transparent 95%, rgba(52, 211, 153, 0.04) 95%),
-    linear-gradient(90deg, transparent 95%, rgba(52, 211, 153, 0.04) 95%);
-  background-size: 90px 90px;
-  animation: mmhGridScroll 5s linear infinite;
-}
-
-/* MMH neon glow shift */
-@keyframes mmhNeonShift {
-  0% {
-    background-image:
-      radial-gradient(ellipse at 10% 20%, rgba(52, 211, 153, 0.07) 0%, transparent 50%),
-      radial-gradient(ellipse at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(5, 150, 105, 0.03) 0%, transparent 70%);
-  }
-  100% {
-    background-image:
-      radial-gradient(ellipse at 18% 65%, rgba(52, 211, 153, 0.08) 0%, transparent 50%),
-      radial-gradient(ellipse at 82% 25%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 42% 42%, rgba(5, 150, 105, 0.04) 0%, transparent 70%);
-  }
-}
-
-/* Grid scrolls diagonally — differentiates from KKL's vertical scroll */
-@keyframes mmhGridScroll {
-  0% { background-position: 0 0; }
-  100% { background-position: 90px 90px; }
-}
-
-/* MMH glitch — emerald color shift */
-@keyframes mmhGlitch {
-  0%, 94%, 100% { filter: none; }
-  95% { filter: hue-rotate(-25deg) saturate(1.3) brightness(1.1); }
-  96% { filter: hue-rotate(15deg) saturate(1.2); }
-  97% { filter: hue-rotate(-10deg) brightness(1.05); }
-}
-
-/* BSB Theme (Rose) — Blood Drip / Sweat */
 body:has(#body-bsb) {
-  background-color: #030303;
-  background-image:
-    radial-gradient(ellipse at 10% 20%, rgba(225, 29, 72, 0.07) 0%, transparent 50%),
-    radial-gradient(ellipse at 90% 80%, rgba(190, 18, 60, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(159, 18, 57, 0.03) 0%, transparent 70%);
+  background-image: url(https://mfl-leagues.com/images/league/bsb/side-particles.png), url(https://mfl-leagues.com/images/shared/dark-grunge.jpg);
   background-attachment: fixed;
-  animation: bsbNeonShift 8s ease-in-out infinite alternate, bsbGlitch 25s step-end infinite;
+  background-position: 50% 0%, center top;
+  background-repeat: no-repeat repeat;
+  background-color: #030303;
 }
-
-/* Lava veins — glowing cracks with molten red light bleeding through */
-body:has(#body-bsb)::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    /* Diagonal cracks at various angles — irregular fracture pattern */
-    linear-gradient(25deg,  transparent 49.5%, rgba(225, 29, 72, 0.18) 49.8%, rgba(255, 60, 60, 0.25) 50%, rgba(225, 29, 72, 0.18) 50.2%, transparent 50.5%),
-    linear-gradient(155deg, transparent 49.5%, rgba(190, 18, 60, 0.15) 49.8%, rgba(240, 50, 50, 0.22) 50%, rgba(190, 18, 60, 0.15) 50.2%, transparent 50.5%),
-    linear-gradient(70deg,  transparent 49.5%, rgba(180, 10, 40, 0.14) 49.8%, rgba(255, 70, 40, 0.20) 50%, rgba(180, 10, 40, 0.14) 50.2%, transparent 50.5%),
-    linear-gradient(110deg, transparent 49.5%, rgba(200, 20, 55, 0.12) 49.8%, rgba(250, 55, 55, 0.18) 50%, rgba(200, 20, 55, 0.12) 50.2%, transparent 50.5%),
-    linear-gradient(170deg, transparent 49.5%, rgba(160, 12, 35, 0.13) 49.8%, rgba(240, 45, 45, 0.19) 50%, rgba(160, 12, 35, 0.13) 50.2%, transparent 50.5%),
-    linear-gradient(40deg,  transparent 49.5%, rgba(225, 29, 72, 0.10) 49.8%, rgba(255, 65, 50, 0.16) 50%, rgba(225, 29, 72, 0.10) 50.2%, transparent 50.5%),
-    linear-gradient(130deg, transparent 49.5%, rgba(140, 8, 30, 0.11) 49.8%, rgba(230, 40, 40, 0.17) 50%, rgba(140, 8, 30, 0.11) 50.2%, transparent 50.5%),
-    /* Lava glow bleeding out from cracks */
-    radial-gradient(ellipse at 20% 30%, rgba(255, 50, 30, 0.06) 0%, transparent 40%),
-    radial-gradient(ellipse at 75% 60%, rgba(255, 40, 40, 0.05) 0%, transparent 40%),
-    radial-gradient(ellipse at 50% 80%, rgba(225, 29, 72, 0.04) 0%, transparent 35%);
-  /* Each crack tile is a different size so they don't align uniformly */
-  background-size:
-    300px 300px, 450px 350px, 250px 400px, 500px 280px,
-    350px 450px, 400px 320px, 280px 380px,
-    100% 100%, 100% 100%, 100% 100%;
-  animation: bsbLavaPulse 4s ease-in-out infinite alternate;
-}
-
-/* BSB neon glow shift */
-@keyframes bsbNeonShift {
-  0% {
-    background-image:
-      radial-gradient(ellipse at 10% 20%, rgba(225, 29, 72, 0.07) 0%, transparent 50%),
-      radial-gradient(ellipse at 90% 80%, rgba(190, 18, 60, 0.05) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(159, 18, 57, 0.03) 0%, transparent 70%);
-  }
-  100% {
-    background-image:
-      radial-gradient(ellipse at 15% 70%, rgba(225, 29, 72, 0.09) 0%, transparent 50%),
-      radial-gradient(ellipse at 85% 15%, rgba(190, 18, 60, 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 45% 40%, rgba(159, 18, 57, 0.04) 0%, transparent 70%);
-  }
-}
-
-/* Lava veins pulse — cracks glow brighter then dim, like molten rock breathing */
-@keyframes bsbLavaPulse {
-  0% {
-    opacity: 0.6;
-    filter: brightness(0.9);
-  }
-  100% {
-    opacity: 1;
-    filter: brightness(1.2);
-  }
-}
-
-/* BSB glitch — rose/red color shift, fires more frequently for aggressive feel */
-@keyframes bsbGlitch {
-  0%, 90%, 100% { filter: none; }
-  91% { filter: hue-rotate(-15deg) saturate(1.5) brightness(1.15); }
-  92% { filter: hue-rotate(25deg) contrast(1.2); }
-  93% { filter: hue-rotate(-10deg) saturate(1.3); }
-  94% { filter: none; }
-}
-
-caption:hover {
-  animation: captionGlitch 0.4s step-end;
-  cursor: crosshair;
-}
-
-/* Glassmorphism on Report Containers */
-body:has(#body-kkl) .mobile-wrap,
-body:has(#body-kkl) .settings-mobile-wrap {
-  background: rgba(20, 20, 20, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-/* Smooth Hover Transitions on Links & Table Rows */
-body:has(:is(#body-kkl, #body-kdl, #body-mmh, #body-bsb)) a,
-body:has(:is(#body-kkl, #body-kdl, #body-mmh, #body-bsb)) .oddtablerow,
-body:has(:is(#body-kkl, #body-kdl, #body-mmh, #body-bsb)) .eventablerow {
-  transition: all 0.2s ease;
-}
-body:has(:is(#body-kkl, #body-kdl, #body-mmh, #body-bsb)) .oddtablerow:hover,
-body:has(:is(#body-kkl, #body-kdl, #body-mmh, #body-bsb)) .eventablerow:hover {
-  background: rgba(255, 255, 255, 0.05);
-}
-/* Caption glow effect */
-body:has(#body-kkl) caption {
-  text-shadow: 0 0 8px var(--primary-light), 0.5px 0.5px rgb(212, 212, 212);
-}
-/* Smoother Border Radius on Containers */
-body:has(#body-kkl) .mobile-wrap,
-body:has(#body-kkl) .settings-mobile-wrap {
-  border-radius: 0.5rem;
-}
-/* Animated Gradient Border on the Banner */
-body:has(#body-kkl) .banner-container {
-  border-bottom: none;
-  background-image: linear-gradient(var(--bg-opacity), var(--bg-opacity)),
-    linear-gradient(90deg, var(--primary-dark), var(--primary-light), var(--primary-dark));
-  background-clip: padding-box, border-box;
-  background-origin: padding-box, border-box;
-  border-bottom: 3px solid transparent;
-}
-/* Card-Style Homepage Modules */
-body:has(#body-kkl) .homepagemodule {
-  background: rgba(15, 15, 15, 0.7);
-  backdrop-filter: blur(8px);
-  border-radius: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  margin-bottom: 0.75rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-body:has(#body-kkl) .homepagemodule:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-/* Modernized Table Styling */
-body:has(:is(#body-kkl, #body-kdl, #body-mmh, #body-bsb)) .eventablerow td {
-  background: rgba(255, 255, 255, 0.02);
-}
-/* Custom Scrollbar Styling */
-body:has(#body-kkl) ::-webkit-scrollbar {
-  width: 8px;
-}
-body:has(#body-kkl) ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.3);
-}
-body:has(#body-kkl) ::-webkit-scrollbar-thumb {
-  background: var(--primary-dark);
-  border-radius: 4px;
-}
-body:has(#body-kkl) ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
-}
-/* ============================================= */
-/*  FLOATING ACTION BUTTON (FAB)                 */
-/* ============================================= */
-.cyber-fab-container {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 99999;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  gap: 1rem;
-}
-
-.cyber-fab-main {
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 50%;
-  background: var(--primary);
-  border: 2px solid var(--primary-light);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 0 15px var(--primary-dark);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  font-size: 1.5rem;
-}
-
-.cyber-fab-main:hover {
-  transform: scale(1.1) rotate(90deg);
-  box-shadow: 0 0 25px var(--primary-light);
-}
-
-.cyber-fab-menu {
-  display: none;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
-  animation: fabFadeIn 0.3s ease forwards;
-}
-
-.cyber-fab-menu.active {
-  display: flex;
-}
-
-.cyber-fab-item {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  color: var(--primary-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none !important;
-  transition: all 0.2s ease;
-  position: relative;
-}
-
-.cyber-fab-item:hover {
-  background: var(--primary-darker);
-  border-color: var(--primary);
-  color: white;
-  transform: translateX(-5px);
-}
-
-.cyber-fab-item::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  right: 4rem;
-  background: var(--neutral-dark);
-  padding: 0.4rem 0.8rem;
-  border-radius: 0.4rem;
-  font-size: 0.75rem;
-  font-family: "Rajdhani";
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-  border: 1px solid var(--glass-border);
-  color: white;
-}
-
-.cyber-fab-item:hover::after {
-  opacity: 1;
-}
-
-@keyframes fabFadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Entrance Animations on Page Load */
-body:has(#body-kkl) .homepagemodule {
-  animation: fadeSlideUp 0.4s ease forwards;
-}
-@keyframes fadeSlideUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-
-/* Entrance Animations on Page Load */
-body:has(#body-kkl) .homepagemodule,
-body:has(#body-kdl) .homepagemodule,
-body:has(#body-mmh) .homepagemodule,
-body:has(#body-bsb) .homepagemodule {
-  animation: fadeSlideUp 0.4s ease forwards;
-}
-
-/* Icon Bar — Stagger Fade-In on Page Load */
-@keyframes iconFadeIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.icon-bar-full .svg-iconlink {
-  opacity: 0;
-  animation: iconFadeIn 0.4s ease forwards;
-}
-
-.icon-bar-full .svg-iconlink:nth-child(1)  { animation-delay: 0.05s; }
-.icon-bar-full .svg-iconlink:nth-child(2)  { animation-delay: 0.10s; }
-.icon-bar-full .svg-iconlink:nth-child(3)  { animation-delay: 0.15s; }
-.icon-bar-full .svg-iconlink:nth-child(4)  { animation-delay: 0.20s; }
-.icon-bar-full .svg-iconlink:nth-child(5)  { animation-delay: 0.25s; }
-.icon-bar-full .svg-iconlink:nth-child(6)  { animation-delay: 0.30s; }
-.icon-bar-full .svg-iconlink:nth-child(7)  { animation-delay: 0.35s; }
-.icon-bar-full .svg-iconlink:nth-child(8)  { animation-delay: 0.40s; }
-.icon-bar-full .svg-iconlink:nth-child(9)  { animation-delay: 0.45s; }
-.icon-bar-full .svg-iconlink:nth-child(10) { animation-delay: 0.50s; }
-.icon-bar-full .svg-iconlink:nth-child(11) { animation-delay: 0.55s; }
-.icon-bar-full .svg-iconlink:nth-child(12) { animation-delay: 0.60s; }
-
-
-/***********************************************
- * SVG ICON ANIMATION LIBRARY
- *
- * Reusable animation classes for individual icons.
- * Add a class to any <svg class="svg-icon"> element:
- *
- *   CONTINUOUS (always animating):
- *     anim-pulse, anim-bounce, anim-float, anim-spin,
- *     anim-spin-slow, anim-wobble, anim-shake, anim-swing,
- *     anim-heartbeat, anim-jello, anim-flip, anim-ring,
- *     anim-glow-pulse
- *
- *   HOVER-ONLY (animates when parent .svg-iconlink is hovered):
- *     anim-hover-pulse, anim-hover-bounce, anim-hover-float,
- *     anim-hover-spin, anim-hover-wobble, anim-hover-shake,
- *     anim-hover-swing, anim-hover-heartbeat, anim-hover-jello,
- *     anim-hover-flip, anim-hover-ring, anim-hover-glow-pulse
- *
- *   COMBO — mix one continuous + one hover on the same icon:
- *     The hover animation overrides the idle animation on hover,
- *     and the idle animation resumes when hover ends.
- *
- *   Example HTML:
- *     Continuous only:   <svg class="svg-icon icon-trophy anim-glow-pulse">
- *     Hover only:        <svg class="svg-icon icon-skull anim-hover-shake">
- *     Combo:             <svg class="svg-icon icon-trophy anim-float anim-hover-bounce">
- *     Combo:             <svg class="svg-icon icon-crown anim-glow-pulse anim-hover-wobble">
- *
- *   To apply by icon name instead of adding a class:
- *     .icon-trophy { animation: iconBounce 2s ease infinite; }
- *
- ***********************************************/
-
-
-/* ---- KEYFRAMES ---- */
-
-/* Pulse — gentle scale breathing */
-@keyframes iconPulse {
-  0%, 100% { transform: scale(1); }
-  50%      { transform: scale(1.12); }
-}
-
-/* Bounce — vertical bounce with squash */
-@keyframes iconBounce {
-  0%, 100% { transform: translateY(0); }
-  30%      { transform: translateY(-6px); }
-  50%      { transform: translateY(0); }
-  65%      { transform: translateY(-3px); }
-  80%      { transform: translateY(0); }
-}
-
-/* Float — smooth up/down hovering */
-@keyframes iconFloat {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-5px); }
-}
-
-/* Spin — full 360 rotation */
-@keyframes iconSpin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-/* Wobble — tilt side to side */
-@keyframes iconWobble {
-  0%, 100% { transform: rotate(0deg); }
-  15%      { transform: rotate(-8deg); }
-  30%      { transform: rotate(6deg); }
-  45%      { transform: rotate(-4deg); }
-  60%      { transform: rotate(2deg); }
-  75%      { transform: rotate(-1deg); }
-}
-
-/* Shake — quick horizontal shake */
-@keyframes iconShake {
-  0%, 100% { transform: translateX(0); }
-  10%, 50%, 90% { transform: translateX(-3px); }
-  30%, 70% { transform: translateX(3px); }
-}
-
-/* Swing — pendulum motion */
-@keyframes iconSwing {
-  0%, 100% { transform: rotate(0deg); }
-  20%      { transform: rotate(12deg); }
-  40%      { transform: rotate(-8deg); }
-  60%      { transform: rotate(5deg); }
-  80%      { transform: rotate(-3deg); }
-}
-
-/* Heartbeat — rapid double-pulse */
-@keyframes iconHeartbeat {
-  0%, 100% { transform: scale(1); }
-  14%      { transform: scale(1.15); }
-  28%      { transform: scale(1); }
-  42%      { transform: scale(1.15); }
-  56%      { transform: scale(1); }
-}
-
-/* Jello — elastic squish */
-@keyframes iconJello {
-  0%, 100% { transform: skewX(0deg) skewY(0deg); }
-  22%      { transform: skewX(-6deg) skewY(-6deg); }
-  33%      { transform: skewX(4deg) skewY(4deg); }
-  44%      { transform: skewX(-3deg) skewY(-3deg); }
-  55%      { transform: skewX(2deg) skewY(2deg); }
-  66%      { transform: skewX(-1deg) skewY(-1deg); }
-}
-
-/* Flip — Y-axis flip */
-@keyframes iconFlip {
-  0%   { transform: perspective(400px) rotateY(0deg); }
-  40%  { transform: perspective(400px) rotateY(-180deg); }
-  100% { transform: perspective(400px) rotateY(-360deg); }
-}
-
-/* Ring — bell-ring motion */
-@keyframes iconRing {
-  0%, 100% { transform: rotate(0deg); }
-  4%       { transform: rotate(15deg); }
-  8%       { transform: rotate(-12deg); }
-  12%      { transform: rotate(9deg); }
-  16%      { transform: rotate(-6deg); }
-  20%      { transform: rotate(3deg); }
-  24%      { transform: rotate(0deg); }
-}
-
-/* Glow Pulse — pulsing drop-shadow using --primary */
-@keyframes iconGlowPulse {
-  0%, 100% { filter: drop-shadow(0 0 2px var(--primary, rgba(255, 66, 0, 0.3))); }
-  50%      { filter: drop-shadow(0 0 10px var(--primary, rgba(255, 66, 0, 0.7))); }
-}
-
-
-/* ---- CONTINUOUS ANIMATION CLASSES ---- */
-/* Add directly to <svg class="svg-icon icon-name anim-pulse"> */
-
-.anim-pulse      { animation: iconPulse 2s ease-in-out infinite; }
-.anim-bounce     { animation: iconBounce 2s ease infinite; }
-.anim-float      { animation: iconFloat 3s ease-in-out infinite; }
-.anim-spin       { animation: iconSpin 1.5s linear infinite; }
-.anim-spin-slow  { animation: iconSpin 4s linear infinite; }
-.anim-wobble     { animation: iconWobble 1.5s ease infinite; }
-.anim-shake      { animation: iconShake 0.8s ease infinite; }
-.anim-swing      { animation: iconSwing 1.5s ease infinite; transform-origin: top center; }
-.anim-heartbeat  { animation: iconHeartbeat 2s ease infinite; }
-.anim-jello      { animation: iconJello 2s ease infinite; }
-.anim-flip       { animation: iconFlip 3s ease infinite; }
-.anim-ring       { animation: iconRing 3s ease infinite; transform-origin: top center; }
-.anim-glow-pulse { animation: iconGlowPulse 2s ease-in-out infinite; }
-
-
-/* ---- HOVER-ONLY ANIMATION CLASSES ---- */
-/* Add to <svg class="svg-icon icon-name anim-hover-bounce">              */
-/* Animations loop while hovered, stop on mouse-out.                      */
-/* Can be used standalone OR combined with a continuous anim-* class.      */
-/* In a combo, the hover animation overrides the idle one on hover,       */
-/* and the idle animation resumes automatically when hover ends.          */
-
-.svg-iconlink:hover .anim-hover-pulse      { animation: iconPulse 1.2s ease-in-out infinite; }
-.svg-iconlink:hover .anim-hover-bounce     { animation: iconBounce 1s ease infinite; }
-.svg-iconlink:hover .anim-hover-float      { animation: iconFloat 1.5s ease-in-out infinite; }
-.svg-iconlink:hover .anim-hover-spin       { animation: iconSpin 0.8s linear infinite; }
-.svg-iconlink:hover .anim-hover-wobble     { animation: iconWobble 1s ease infinite; }
-.svg-iconlink:hover .anim-hover-shake      { animation: iconShake 0.6s ease infinite; }
-.svg-iconlink:hover .anim-hover-swing      { animation: iconSwing 1s ease infinite; transform-origin: top center; }
-.svg-iconlink:hover .anim-hover-heartbeat  { animation: iconHeartbeat 1.2s ease infinite; }
-.svg-iconlink:hover .anim-hover-jello      { animation: iconJello 1.2s ease infinite; }
-.svg-iconlink:hover .anim-hover-flip       { animation: iconFlip 1.5s ease infinite; }
-.svg-iconlink:hover .anim-hover-ring       { animation: iconRing 2s ease infinite; transform-origin: top center; }
-.svg-iconlink:hover .anim-hover-glow-pulse { animation: iconGlowPulse 1.2s ease-in-out infinite; }
-
 
 body {
   color: var(--accent, #f8f7c3);
   text-rendering: optimizeLegibility;
   background-color: #030303;
-  font-family: "Rajdhani", "Google Sans", "Lato", sans-serif;
-  font-size: 0.938rem; /* Slightly larger for Rajdhani */
+  font-family: "Google Sans", "Lato", "Noto Sans", "News Cycle", "Oswald", "Open Sans", sans-serif;
+  font-size: 0.813rem;
   font-optical-sizing: auto;
-  font-weight: 500;
+  font-weight: 400;
   font-style: normal;
   -webkit-font-smoothing: antialiased !important;
   height: 1200px;
@@ -1429,31 +747,10 @@ body {
   overflow-y: scroll;
 }
 
-caption, h1, h2, h3, h4, .b_name {
-  font-family: "Orbitron", sans-serif !important;
-  letter-spacing: 1px;
-}
-
-/* Custom Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--neutral-dark, #0c0c0c);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--primary-dark, #333);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary, #38b569);
-}
-
 /* Added below logo before captions for kkl */
 #body-kkl caption::before {
   padding: 1.25rem 1.75rem 1.75rem 1.25rem;
-  background: url(https://mfl-leagues.com/images/shared/icons/caption-logo.svg) no-repeat;
+  background: url(https://mfl-leagues.com/images/shared/caption-logo.svg) no-repeat;
   background-size: contain;
   background-position: 25% center;
   vertical-align: 0.5rem;
@@ -1467,26 +764,10 @@ caption, h1, h2, h3, h4, .b_name {
     text-indent: 0;
 }
 
-/* KKL caption — cyan grid / matrix pattern */
-#body-kkl caption,
-#body-kkl .homepagecolumn .homepagemodule caption {
-  background:
-    /* Grid lines */
-    linear-gradient(transparent 92%, rgba(0, 255, 255, 0.08) 92%, rgba(0, 255, 255, 0.08) 100%),
-    linear-gradient(90deg, transparent 92%, rgba(0, 255, 255, 0.08) 92%, rgba(0, 255, 255, 0.08) 100%),
-    /* Intersection glow dots */
-    radial-gradient(circle 1.5px at 100% 100%, rgba(0, 255, 255, 0.20) 100%, transparent 100%),
-    /* Neon sweep highlight */
-    linear-gradient(90deg, transparent 0%, rgba(0, 255, 255, 0.05) 40%, rgba(0, 220, 255, 0.08) 50%, rgba(0, 255, 255, 0.05) 60%, transparent 100%),
-    /* Dark base */
-    linear-gradient(180deg, rgba(5, 12, 15, 0.92) 0%, rgba(8, 18, 22, 0.88) 100%);
-  background-size: 30px 30px, 30px 30px, 30px 30px, 100% 100%, 100% 100%;
-}
-
 /* Added below logo before captions for kdl */
 #body-kdl caption::before {
   padding: 1.25rem 1.75rem 1.75rem 1.25rem;
-  background: url(https://mfl-leagues.com/images/shared/icons/caption-logo.svg) no-repeat;
+  background: url(https://mfl-leagues.com/images/icons/caption-logo.svg) no-repeat;
   background-size: contain;
   background-position: 25% center;
   vertical-align: 0.5rem;
@@ -1500,25 +781,10 @@ caption, h1, h2, h3, h4, .b_name {
     text-indent: 0;
 }
 
-/* KDL caption — honeycomb / hex pattern */
-#body-kdl caption,
-#body-kdl .homepagecolumn .homepagemodule caption {
-  background:
-    /* Hex edges at 0°, 60°, 120° */
-    linear-gradient(0deg,   transparent 46%, rgba(126, 34, 206, 0.15) 49%, rgba(156, 76, 225, 0.22) 50%, rgba(126, 34, 206, 0.15) 51%, transparent 54%),
-    linear-gradient(60deg,  transparent 46%, rgba(126, 34, 206, 0.15) 49%, rgba(156, 76, 225, 0.22) 50%, rgba(126, 34, 206, 0.15) 51%, transparent 54%),
-    linear-gradient(120deg, transparent 46%, rgba(126, 34, 206, 0.15) 49%, rgba(156, 76, 225, 0.22) 50%, rgba(126, 34, 206, 0.15) 51%, transparent 54%),
-    /* Node glow */
-    radial-gradient(circle 2px at 50% 50%, rgba(190, 137, 236, 0.20) 0%, transparent 100%),
-    /* Dark base */
-    linear-gradient(180deg, rgba(10, 5, 18, 0.92) 0%, rgba(15, 8, 25, 0.88) 100%);
-  background-size: 45px 26px, 45px 26px, 45px 26px, 45px 26px, 100% 100%;
-}
-
 /* Added below logo before captions for mmh */
 #body-mmh caption::before {
   padding: 1.25rem 1.75rem 1.75rem 1.25rem;
-  background: url(https://mfl-leagues.com/images/shared/icons/caption-logo.svg) no-repeat;
+  background: url(https://mfl-leagues.com/images/shared/caption-logo.svg) no-repeat;
   background-size: contain;
   background-position: 25% center;
   vertical-align: 0.5rem;
@@ -1532,27 +798,10 @@ caption, h1, h2, h3, h4, .b_name {
     text-indent: 0;
 }
 
-/* MMH caption — forest canopy / network branches background */
-#body-mmh caption,
-#body-mmh .homepagecolumn .homepagemodule caption {
-  background:
-    /* Branch lines at varying angles */
-    linear-gradient(35deg,  transparent 49%, rgba(52, 211, 153, 0.18) 49.5%, rgba(52, 211, 153, 0.18) 50.5%, transparent 51%),
-    linear-gradient(140deg, transparent 49%, rgba(34, 197, 140, 0.15) 49.5%, rgba(34, 197, 140, 0.15) 50.5%, transparent 51%),
-    linear-gradient(80deg,  transparent 49%, rgba(16, 185, 129, 0.12) 49.5%, rgba(16, 185, 129, 0.12) 50.5%, transparent 51%),
-    /* Junction node glows */
-    radial-gradient(circle 3px at 25% 50%, rgba(52, 211, 153, 0.25) 0%, transparent 100%),
-    radial-gradient(circle 2.5px at 70% 40%, rgba(34, 197, 140, 0.20) 0%, transparent 100%),
-    radial-gradient(circle 2px at 50% 65%, rgba(16, 185, 129, 0.18) 0%, transparent 100%),
-    /* Dark forest base */
-    linear-gradient(180deg, rgba(5, 15, 10, 0.92) 0%, rgba(8, 20, 14, 0.88) 100%);
-  background-size: 180px 70px, 150px 55px, 220px 65px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
-}
-
 /* Added below logo before captions for bsb */
 #body-bsb caption::before {
   padding: 1.25rem 1.75rem 1.75rem 1.25rem;
-  background: url(https://mfl-leagues.com/images/shared/icons/caption-logo.svg) no-repeat; 
+  background: url(https://mfl-leagues.com/images/shared/caption-logo.svg) no-repeat; 
   background-size: contain;
   background-position: 25% center;
   vertical-align: 0.5rem;
@@ -1564,22 +813,6 @@ caption, h1, h2, h3, h4, .b_name {
     padding: 0.313rem 0;
     text-align: center !important;
     text-indent: 0;
-}
-
-/* BSB caption — lava veins cracked earth background */
-#body-bsb caption,
-#body-bsb .homepagecolumn .homepagemodule caption {
-  background:
-    /* Glowing cracks */
-    linear-gradient(25deg,  transparent 49%, rgba(225, 29, 72, 0.25) 49.5%, rgba(255, 80, 60, 0.4) 50%, rgba(225, 29, 72, 0.25) 50.5%, transparent 51%),
-    linear-gradient(155deg, transparent 49%, rgba(190, 18, 60, 0.20) 49.5%, rgba(240, 60, 50, 0.35) 50%, rgba(190, 18, 60, 0.20) 50.5%, transparent 51%),
-    linear-gradient(80deg,  transparent 49%, rgba(180, 10, 40, 0.15) 49.5%, rgba(255, 70, 40, 0.28) 50%, rgba(180, 10, 40, 0.15) 50.5%, transparent 51%),
-    /* Molten underglow */
-    radial-gradient(ellipse at 20% 50%, rgba(255, 50, 30, 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 50%, rgba(225, 29, 72, 0.10) 0%, transparent 60%),
-    /* Dark charred base */
-    linear-gradient(180deg, rgba(15, 5, 5, 0.9) 0%, rgba(25, 8, 8, 0.85) 100%);
-  background-size: 200px 80px, 160px 60px, 250px 70px, 100% 100%, 100% 100%, 100% 100%;
 }
 
 /* Added below for mfl live score box font settings */
@@ -1605,78 +838,6 @@ caption, h1, h2, h3, h4, .b_name {
     filter: brightness(0.5) blur(0.1px);
   }
 }*/
-
-/* ============================================= */
-/*  MOBILE PLAYER CARD LAYOUT                    */
-/*  Scoped to specific report pages only —       */
-/*  does NOT affect rosters, MFLBox, standings    */
-/* ============================================= */
-@media only screen and (max-width: 48em) {
-  /* Only target reports that have data-label attributes (injected via JS for card layout) */
-  .report[data-card-layout],
-  .report[data-card-layout] > tbody,
-  .report[data-card-layout] > tbody > tr,
-  .report[data-card-layout] > tbody > tr > td {
-    display: block !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Hide standard table headers on card-layout tables only */
-  .report[data-card-layout] thead,
-  .report[data-card-layout] .rowheader,
-  .report[data-card-layout] tr[class*="header"] {
-    display: none !important;
-  }
-
-  /* Transform table rows into cards */
-  .report[data-card-layout] tr.oddtablerow,
-  .report[data-card-layout] tr.eventablerow {
-    margin-bottom: 1.25rem !important;
-    padding: 1rem !important;
-    background: var(--glass-bg, rgba(20, 20, 20, 0.6)) !important;
-    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08)) !important;
-    border-radius: 1rem !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important;
-  }
-
-  /* Card styling for cells */
-  .report[data-card-layout] tr td {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    border: none !important;
-    padding: 0.5rem 0 !important;
-    text-align: right !important;
-    min-height: 1.5rem;
-  }
-
-  /* Player name/icon cell - highlight it */
-  .report[data-card-layout] tr td.player,
-  .report[data-card-layout] tr td:first-child {
-    font-size: 1.1rem !important;
-    font-weight: 700 !important;
-    border-bottom: 1px solid var(--glass-border) !important;
-    margin-bottom: 0.5rem !important;
-    padding-bottom: 0.75rem !important;
-    justify-content: center !important;
-    text-align: center !important;
-    color: var(--primary-light) !important;
-  }
-
-  /* This will show the label we inject via JS */
-  .report[data-card-layout] tr td:before {
-    content: attr(data-label);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-family: "Orbitron";
-    font-weight: 600;
-    text-align: left;
-    margin-right: 1rem;
-    flex: 1;
-  }
-}
 
 /*CGT - mobile background settings*/
 @media only screen and (max-width: 48em) {
@@ -1848,6 +1009,7 @@ body.chat_popup .banner-container-wrap {
 .banner-rightside {
   margin: 0.313rem 0;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .banner-icon {
@@ -1922,6 +1084,7 @@ body.chat_popup .banner-container-wrap {
 .svg-icon {
   fill: var(--primary, #FA5C25); /* main color on svg icons */
   color: var(--accent, #FA5C25); /* accent color on svg icons */
+  -webkit-filter: drop-shadow(0.125rem 0.125rem 0.313rem #000);
   filter: drop-shadow(0.125rem 0.125rem 0.313rem #000);
   width: 3.2rem;
   height: 3.2rem;
@@ -1937,13 +1100,7 @@ body.chat_popup .banner-container-wrap {
 
 .svg-icon,
 .svg-iconlink {
-  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
-}
-
-/* Float the entire icon link (icon + label) on hover */
-.icon-bar-full .svg-iconlink:hover,
-.icon-bar .svg-iconlink:hover {
-  transform: translateY(-4px);
+  transition: all 0.6s ease;
 }
 
 /*IMAGE ICONS LINKS FORMATTING*/
@@ -1978,13 +1135,16 @@ body.chat_popup .banner-container-wrap {
 
 .icon-bar .svg-icon,
 .icon-bar-full .svg-icon {
-  transition: transform .3s ease-out, filter .3s ease-out;
+  -webkit-transition: .3s ease-out;
+  -moz-transition: .3s ease-out;
+  transition: .3s ease-out;
 }
 
 .icon-bar a:hover .svg-icon,
 .icon-bar-full a:hover .svg-icon {
-  transform: translateY(-4px);
-  filter: drop-shadow(0 4px 8px var(--primary, rgba(255, 66, 0, 0.5)));
+  -webkit-transform: scale(.9);
+  -moz-transform: scale(.9);
+  transform: scale(.9);
 }
 
 /****** ADDED 6-4-23 for font awesome icons in icon bar ********/
@@ -2027,8 +1187,7 @@ body.chat_popup .banner-container-wrap {
 
 .icon-bar a:hover i,
 .icon-bar-full a:hover i {
-  transform: translateY(-4px);
-  filter: drop-shadow(0 4px 8px var(--primary, rgba(255, 66, 0, 0.5)));
+  transform: scale(0.9);
 }
 
 .icon-bar-full span.fa-stack i:nth-child(1):before,
@@ -2089,6 +1248,7 @@ body.chat_popup .banner-container-wrap {
 .bannerlinkicons-full {
   text-align: center;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
   margin-top: 0.625rem;
 }
 
@@ -2222,6 +1382,7 @@ body.chat_popup .banner-container-wrap {
   border: 0;
   border-radius: 0.188rem;
   color: #fff;
+  -webkit-overflow-scrolling: touch
 }
 
 .mflModal-content .mobile-wrap {
@@ -2462,20 +1623,6 @@ label[for='sub100']+#homepagetabs {
   color: #222 !important;
 }
 
-.theme-dk-yellow .draft_warning {
-  background: var(--primary, #ff4200) !important;
-  color: #000 !important;
-  font-weight: 700 !important;
-}
-
-.theme-dk-yellow .draft_warning a {
-  color: red !important;
-}
-
-.theme-dk-yellow .draft_warning a:hover {
-  color: #000 !important;
-}
-
 @media only screen and (min-width: 48em) {
   li[id*="tab"] {
     position: relative;
@@ -2691,6 +1838,8 @@ span.custom_collapse:hover + .plus-toggle span:after {
 .myfantasyleague_menuMobile li.has-sub ul li a:before {
     left: 0.5rem;
     top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     position: absolute;
     display: inline-block;
@@ -2741,6 +1890,8 @@ li.has-sub ul li.mm_sizing_head a,
 .myfantasyleague_menuMobile li.has-sub ul li#cache-addon li a:before {
   left: 1.5rem;
   top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   position: absolute;
   display: inline-block;
@@ -2797,6 +1948,8 @@ li.has-sub ul li.mm_sizing_head a,
   right: 0.313rem;
   border-radius: 0.313rem;
   top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   display: block;
   background: var(--neutral, #111) !important;
@@ -2839,6 +1992,7 @@ li.has-sub ul li.mm_sizing_head a,
 .myfantasyleague_menuMobile .sub-arrow-down > a span.menu_arrow:before,
 .myfantasyleague_menuMobile .arrow-down > a span.menu_arrow:after,
 .myfantasyleague_menuMobile .sub-arrow-down > a span.menu_arrow:after {
+  -webkit-transform: rotate(315deg);
   transform: rotate(315deg);
   transition: all .25s ease;
   background: #fff;
@@ -2885,6 +2039,7 @@ table,
     padding: 0.625rem;
     overflow-x: auto;
     max-width: 100%;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* style for report containers */
@@ -3356,6 +2511,7 @@ td.player_photo img {
 }
 
 img {
+  image-rendering: -webkit-optimize-contrast;
   image-rendering: optimize-contrast;
 }
 
@@ -3464,6 +2620,8 @@ input[type="button"],
 input[type="submit"] {
   cursor: pointer;
   border: 0;
+  -moz-appearance: none;
+  -webkit-appearance: none;
   appearance: none; /* added standard property */
   border: 0 !important;
   font-size: 1rem;
@@ -4515,15 +3673,6 @@ body.full-width {
   color: #fff;
 }
 
-.theme-dk-yellow #commissioner_setup th#use_with_caution {
-  background: var(--primary, #ff4200);
-  color: #111;
-}
-
-.theme-dk-yellow #commissioner_setup table.two_column_layout th#use_with_caution:before {
-  color: #111;
-}
-
 #commissioner_setup th#use_with_caution:before {
   content: "\f071"; /* triangle-exclamation - Font Awesome icon next to Use These Items with Caution */
 }
@@ -5506,6 +4655,7 @@ html[xmlns] .flexslider .slides {
 .flex-viewport {
   max-height: 125rem;
   -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
   -ms-transition: all 1s ease;
   -o-transition: all 1s ease;
   transition: all 1s ease;
@@ -5538,6 +4688,7 @@ html[xmlns] .flexslider .slides {
   color: #000c;
     text-shadow: 0.063rem 0.063rem 0 #ffffff4d;
     -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
     -ms-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
@@ -5682,6 +4833,7 @@ html[xmlns] .flexslider .slides {
   -moz-user-select: none;
   user-select: none; /* added standard property */
   -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
   -ms-transition: all 1s ease;
   -o-transition: all 1s ease;
   transition: all 1s ease;
@@ -6696,7 +5848,7 @@ a[id*="hideAssets"]:hover {
 .bottomteam,
 .topteam,
 .bracket {
-  border-color: var(--primary-darker, #ff4200);
+  border-color: var(--bg-opacity-brighter, rgba(181, 47, 0, .2));
 }
 
 #hsubmenu ul li {
@@ -8817,16 +7969,19 @@ span.plus-toggle-stats {
     left: 0;
     right: 0;
     margin: auto;
+    -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
 
 .nflStatsTotalRow span[style="display: none;"] + span + .plus-toggle-stats span::before,
 .nflStatsAvgRow span[style="display: none;"] + span + .plus-toggle-stats span::before {
+    -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
     width: 0.15rem;
 }
 .nflStatsTotalRow span[style="display: none;"] + span + .plus-toggle-stats span::after,
 .nflStatsAvgRow span[style="display: none;"] + span + .plus-toggle-stats span::after {
+    -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
     opacity: 0;
 }
@@ -9124,10 +8279,6 @@ span[id*="collapseAvg_"] {
 
 /***************************************/
 
-td::-webkit-scrollbar {
-  background: #151515;
-}
-
 /* Track */
 ::-webkit-scrollbar {
   width: 0.75rem;
@@ -9152,10 +8303,7 @@ td::-webkit-scrollbar {
   border-radius: 0.313rem;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-light, #FA5C25);
-}
-
+::-webkit-scrollbar-thumb:hover,
 ::-webkit-scrollbar-thumb:active {
   background: var(--primary-light, #FA5C25);
 }
@@ -9237,11 +8385,7 @@ td::-webkit-scrollbar {
 .selectbox div::-webkit-scrollbar-thumb:hover,
 #destination_list::-webkit-scrollbar-thumb:hover,
 #body_csetup_chngpick table td div::-webkit-scrollbar-thumb:hover,
-#MSG::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-light, #FA5C25);
-  border-color: var(--primary-light, #FA5C25);
-}
-
+#MSG::-webkit-scrollbar-thumb:hover,
 .selectbox div::-webkit-scrollbar-thumb:active,
 #destination_list::-webkit-scrollbar-thumb:active,
 #body_csetup_chngpick table td div::-webkit-scrollbar-thumb:active,
@@ -10209,104 +9353,43 @@ div.ls_team_points {
   background-color: var(--bg-opacity-brighter, rgba(181, 47, 0, .2)) !important;
 }
 
-#league-history-wrapper .hs_tabs_wrap .hz-main-table thead th,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table thead th:first-of-type,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table th.fixed-side,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table .oddtablerow td,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table .eventablerow td,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table .lh_defunct_check.rowheader th,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table .lh_defunct_check.rowheader th:first-of-type,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view td,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view td,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view td,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view td.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view td.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view td.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view th,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view th,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view th,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view th.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view th.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view th.lh_rank,
-#league-history-wrapper #team_points_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #team_points_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td,
-#league-history-wrapper #team_points_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td.lh_rank,
-#league-history-wrapper #team_points_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td.lh_rank,
-#league-history-wrapper #misc_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #misc_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td,
-#league-history-wrapper #player_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #player_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td {
+#league-history-wrapper .hs_tabs_wrap .hz-main-table :is(thead th, thead th:first-of-type, th.fixed-side, .oddtablerow td, .eventablerow td, .lh_defunct_check.rowheader th, .lh_defunct_check.rowheader th:first-of-type),
+#league-history-wrapper .hs_tabs_wrap :is(#team_points_content, #player_content, #misc_content) td.mobile-view :is(td, td.lh_rank, th, th.lh_rank),
+#league-history-wrapper :is(#team_points_content, #misc_content, #player_content) :is(tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow, tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow) :is(td, td.lh_rank) {
   border-style: solid;
   margin: 0;
 }
 
-#league-history-wrapper .hs_tabs_wrap .hz-main-table thead th,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table thead th:first-of-type,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table th.fixed-side,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view th,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view th,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view th,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view th.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view th.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view th.lh_rank {
+#league-history-wrapper .hs_tabs_wrap .hz-main-table :is(thead th, thead th:first-of-type, th.fixed-side),
+#league-history-wrapper .hs_tabs_wrap :is(#team_points_content, #player_content, #misc_content) td.mobile-view :is(th, th.lh_rank) {
   border-color: #111;
 }
 
-#league-history-wrapper .hs_tabs_wrap .hz-main-table .oddtablerow td,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table .eventablerow td,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view td,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view td,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view td,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view td.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view td.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view td.lh_rank,
-#league-history-wrapper #team_points_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #team_points_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td,
-#league-history-wrapper #team_points_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td.lh_rank,
-#league-history-wrapper #team_points_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td.lh_rank,
-#league-history-wrapper #misc_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #misc_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td,
-#league-history-wrapper #player_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #player_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td {
+#league-history-wrapper .hs_tabs_wrap .hz-main-table :is(.oddtablerow td, .eventablerow td),
+#league-history-wrapper .hs_tabs_wrap :is(#team_points_content, #player_content, #misc_content) td.mobile-view :is(td, td.lh_rank),
+#league-history-wrapper :is(#team_points_content, #misc_content, #player_content) :is(tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow, tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow) :is(td, td.lh_rank) {
   border-color: #151515;
 }
 
 #league-history-wrapper .hs_tabs_wrap .hz-main-table thead th,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view th,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view th,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view th {
+#league-history-wrapper .hs_tabs_wrap :is(#team_points_content, #player_content, #misc_content) td.mobile-view th {
   border-width: 0.063rem 0.063rem 0.063rem 0;
 }
 
 #league-history-wrapper .hs_tabs_wrap .hz-main-table thead th:first-of-type,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view th.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view th.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view th.lh_rank {
+#league-history-wrapper .hs_tabs_wrap :is(#team_points_content, #player_content, #misc_content) td.mobile-view th.lh_rank {
   border-width: 0.063rem;
 }
 
 #league-history-wrapper .hs_tabs_wrap .hz-main-table th.fixed-side,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view td.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view td.lh_rank,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view td.lh_rank,
-#league-history-wrapper #team_points_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td.lh_rank,
-#league-history-wrapper #team_points_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td.lh_rank,
-#league-history-wrapper #player_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td.lh_rank,
-#league-history-wrapper #player_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td.lh_rank {
+#league-history-wrapper .hs_tabs_wrap :is(#team_points_content, #player_content, #misc_content) td.mobile-view td.lh_rank,
+#league-history-wrapper :is(#team_points_content, #player_content) :is(tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow, tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow) td.lh_rank {
     border-width: 0 0.063rem 0.063rem;
 }
 
-#league-history-wrapper .hs_tabs_wrap .hz-main-table .oddtablerow td,
-#league-history-wrapper .hs_tabs_wrap .hz-main-table .eventablerow td,
-#league-history-wrapper .hs_tabs_wrap #team_points_content td.mobile-view td,
-#league-history-wrapper .hs_tabs_wrap #player_content td.mobile-view td,
-#league-history-wrapper .hs_tabs_wrap #misc_content td.mobile-view td,
-#league-history-wrapper #team_points_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #team_points_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td,
-#league-history-wrapper #misc_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #misc_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td,
-#league-history-wrapper #player_content tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow td,
-#league-history-wrapper #player_content tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow td {
+#league-history-wrapper .hs_tabs_wrap .hz-main-table :is(.oddtablerow td, .eventablerow td),
+#league-history-wrapper .hs_tabs_wrap :is(#team_points_content, #player_content, #misc_content) td.mobile-view td,
+#league-history-wrapper :is(#team_points_content, #misc_content, #player_content) :is(tr.oddtablerow.myfranchise + tr.myfranchise.eventablerow, tr.eventablerow.myfranchise + tr.myfranchise.oddtablerow) td {
     border-width: 0 0.063rem 0.063rem 0;
 }
 
@@ -11391,6 +10474,7 @@ div.sub-content.editable .insertIcons {
     top: 50%;
     margin-left: -0.563rem;
     margin-top: -0.063rem;
+    -webkit-transition: 0.25s;
     transition: 0.25s;
   }
 
@@ -11405,6 +10489,7 @@ div.sub-content.editable .insertIcons {
     top: 50%;
     margin-left: -0.063rem;
     margin-top: -0.563rem;
+    -webkit-transition: 0.25s;
     transition: 0.25s;
   }
 
@@ -11429,6 +10514,7 @@ div.sub-content.editable .insertIcons {
         position: static;
         max-height: 0;
         overflow: hidden;
+        -webkit-transition: 0.25s;
         transition: 0.25s;
         box-shadow: none;
     }
@@ -11504,9 +10590,11 @@ div.sub-content.editable .insertIcons {
         text-decoration: none;
     }
     .myfantasyleague_menu input:checked ~ label span:before {
+        -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
     .myfantasyleague_menu input:checked ~ label span:after {
+        -webkit-transform: rotate(270deg);
         transform: rotate(270deg);
     }
     .myfantasyleague_menu input:checked ~ ul {
@@ -11650,6 +10738,8 @@ div.sub-content.editable .insertIcons {
     border-radius: 0.313rem;
     background: var(--primary, #ff4200);
     top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
     transform: translateY(-50%);
   }
 
@@ -11753,11 +10843,13 @@ div.sub-content.editable .insertIcons {
   }
 
    .myfantasyleague_tabmenu input:checked ~ label span:before {
+        -webkit-transform: rotate(315deg);
         transform: rotate(315deg);
         transition: all 0.25s ease;
     }
 
   .myfantasyleague_tabmenu input:checked ~ label span:after {
+    -webkit-transform: rotate(314deg);
     transform: rotate(314deg);
     transition: all 0.25s ease;
   }
@@ -12561,126 +11653,9 @@ div.sub-content.editable .insertIcons {
   }
 }
 /********* Bettis / Habskin Settings below - May Be Able to Delete 
-body.bettis .newposition th,
-body.bettis .newposition td,
-.theme-dk-yellow .newposition th,
-.theme-dk-yellow .newposition td {
-  border-color: #5e4618
-}
-
-body.bettis .oddtablerow {
-  background-color: #111
-}
-
-body.bettis .eventablerow {
-  background-color: #000
-}
-
-body.bettis #MFLBoxContainer .MFLLiveTeam img {
-  max-height: 1.25rem
-}
-
-body.bettis #MFLBoxContainer .MFLLiveTeam img {
-  max-height: 1.25rem
-}
-
-body.bettis th {
-  background-color: var(--primary-darker, rgba(0, 0, 0, .2))
-}
-
-body.bettis .myfantasyleague_menu,
-body.bettis .banner-container {
-  border-color: var(--primary-dark, var(--primary, #ff4200))
-}
-
-body.bettis .footercontainer-outer {
-  border-top-color: var(--primary-dark, var(--primary, #ff4200))
-}
-
-body.bettis #tabmenu-wrap li#tab1 a:before,
-body.bettis #tabmenu-wrap #tab_title.tab1:before {
-  content: "\f0c0"
-}
-
-body.bettis #tabmenu-wrap li#tab4 a:before,
-body.bettis #tabmenu-wrap #tab_title.tab4:before {
-  content: "\f0d6"
-}
-
-body.bettis #tabmenu-wrap li#tab6 a:before,
-body.bettis #tabmenu-wrap #tab_title.tab6:before {
-  content: "\f24a"
-}
-
-body.bettis .myfantasyleague_tabmenu #homepagetabs li.currenttab a,
-body.bettis .myfantasyleague_tabmenu #homepagetabs li.currenttab:hover a,
-body.bettis .myfantasyleague_menuMobile>ul>li.arrow-down>a,
-body.bettis .myfantasyleague_menuMobile>ul>li.arrow-down>a:hover,
-body.bettis .myfantasyleague_menuMobile>ul>li.has-sub.arrow-down>a:after,
-body.bettis #myfantasyleague_tabs .myfantasyleague_tabmenu #homepagetabs li.currenttab a,
-body.bettis #myfantasyleague_tabs .myfantasyleague_tabmenu #homepagetabs li.currenttab:hover a,
-body.bettis ul.MFLPlayerPopupTab li a.active,
-body.bettis ul.MFLPlayerPopupTab li a.active:hover,
-body.bettis ul.MFLPlayerPopupTab li a.current,
-body.bettis ul.MFLPlayerPopupTab li a.current:hover,
-body.bettis #MFLPlayerPopupClose:hover,
-body.bettis #MFLBoxWrapper .MFLBoxPlayerDetailsClose:hover,
-body.bettis #MFLBoxContainer input[style="cursor:default"],
-body.bettis #MFLBoxContainer input[type="button"]:hover,
-body.bettis .mflModal-content button:hover,
-body.bettis input[type="button"],
-body.bettis input[type="submit"],
-body.bettis input[type="button"]:hover,
-body.bettis input[type="submit"]:hover,
-body.bettis #tooltip,
-#body_submit_lineups body.bettis h4.warning,
-body.bettis #make_pick #current_nominator,
-body.bettis .weekly-navbar a:hover,
-body.bettis .weekly-navbar a:link:hover,
-body.bettis .weekly-navbar a:active:hover,
-body.bettis .weekly-navbar a:visited:hover,
-body.bettis .weekly-navbar .currentweek,
-body.bettis .offerer::before,
-#body_ajax_ls body.bettis #ls_ticker_tab_id td:first-of-type,
-.theme-dk-yellow .myfantasyleague_tabmenu #homepagetabs li.currenttab a,
-.theme-dk-yellow .myfantasyleague_tabmenu #homepagetabs li.currenttab:hover a,
-.theme-dk-yellow .myfantasyleague_menuMobile>ul>li.arrow-down>a,
-.theme-dk-yellow .myfantasyleague_menuMobile>ul>li.arrow-down>a:hover,
-.theme-dk-yellow .myfantasyleague_menuMobile>ul>li.has-sub.arrow-down>a:after,
-.theme-dk-yellow #myfantasyleague_tabs .myfantasyleague_tabmenu #homepagetabs li.currenttab a,
-.theme-dk-yellow #myfantasyleague_tabs .myfantasyleague_tabmenu #homepagetabs li.currenttab:hover a,
-.theme-dk-yellow ul.MFLPlayerPopupTab li a.active,
-.theme-dk-yellow ul.MFLPlayerPopupTab li a.active:hover,
-.theme-dk-yellow ul.MFLPlayerPopupTab li a.current,
-.theme-dk-yellow ul.MFLPlayerPopupTab li a.current:hover,
-.theme-dk-yellow #MFLPlayerPopupClose:hover,
-.theme-dk-yellow #MFLBoxWrapper .MFLBoxPlayerDetailsClose:hover,
-.theme-dk-yellow #MFLBoxContainer input[style="cursor:default"],
-.theme-dk-yellow #MFLBoxContainer input[type="button"]:hover,
-.theme-dk-yellow .mflModal-content button:hover,
-.theme-dk-yellow input[type="button"],
-.theme-dk-yellow input[type="submit"],
-.theme-dk-yellow input[type="button"]:hover,
-.theme-dk-yellow input[type="submit"]:hover,
-.theme-dk-yellow #tooltip,
-.theme-dk-yellow #body_submit_lineups body h4.warning,
-.theme-dk-yellow #make_pick #current_nominator,
-.theme-dk-yellow .weekly-navbar a:hover,
-.theme-dk-yellow .weekly-navbar a:link:hover,
-.theme-dk-yellow .weekly-navbar a:active:hover,
-.theme-dk-yellow .weekly-navbar a:visited:hover,
-.theme-dk-yellow .weekly-navbar .currentweek,
-.theme-dk-yellow .offerer::before,
-.theme-dk-yellow #body_ajax_ls body #ls_ticker_tab_id td:first-of-type {
-  color: #111
-}
-
 body.habskin #roster_column_left td.no_icons a {
-  display: none
-}
-
-body.habskin #roster_column_left td.no_icons a {
-  max-width: unset
+  display: none;
+  max-width: unset;
 }
 
 body.habskin .ls-matchup caption {
@@ -12698,339 +11673,18 @@ body.habskin #LS_TopTableHolder .franchiseicon {
   max-height: 3.125rem;
 }
 
-body.bettis .ls-modal-header .close:hover,
-body.bettis .ls-modal-header .close:focus,
-.theme-dk-yellow .ls-modal-header .close:hover,
-.theme-dk-yellow .ls-modal-header .close:focus {
-  color: #111 !important
-}
-
 @media only screen and (max-width:48em) {
 
-  body.bettis .myfantasyleague_tabmenu>label span:before,
-  body.bettis .myfantasyleague_tabmenu>label span:after,
-  .theme-dk-yellow .myfantasyleague_tabmenu>label span:before,
-  .theme-dk-yellow .myfantasyleague_tabmenu>label span:after {
-    background: #111
-  }
-}
-
-body.bettis #scoreboardTooltip:after,
-.theme-dk-yellow #scoreboardTooltip:after {
-  width: 0;
-  height: 0;
-  border-left: 1.125rem solid transparent !important;
-  border-right: 1.125rem solid transparent !important;
-  border-top: 1.25rem solid #f7b534 !important;
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: -0.625rem !important;
-  margin-left: -1.188rem !important
-}
-
-body.bettis #scoreboardTooltip div.mobile-wrap,
-.theme-dk-yellow #scoreboardTooltip div.mobile-wrap {
-  background-image: none !important;
-  background-color: #222;
-  border: 0.125rem solid #f7b534
-}
-
-body.bettis #league_chat img[title="New Window"],
-.theme-dk-yellow #league_chat img[title="New Window"] {
-  display: none
-}
-
-body.bettis #league_chat .fa-comments,
-.theme-dk-yellow #league_chat .fa-comments {
-  margin-top: -0.313rem
-}
-
-body.bettis #player_history .mobile-wrap table.report td:nth-child(1),
-body.bettis #player_history .mobile-wrap table.report td:nth-child(2) {
-  text-align: center
-}
-
-body.bettis .calendar_event_waiver_lock,
-.theme-dk-yellow .calendar_event_waiver_lock {
-  color: #fff;
-  text-shadow: 0 0.125rem 0.125rem #000;
-  background: #f50;
-  background-image: linear-gradient(to bottom right, #f50, #f00, #f50);
-  border: 0.063rem solid red;
-  box-shadow: inset 0 0 0.625rem red;
-  padding: 0.25rem
-}
-
-body.bettis .calendar_event_waiver_bbid,
-.theme-dk-yellow .calendar_event_waiver_bbid {
-  color: #000;
-  text-shadow: 0 0.125rem 0.125rem #fff;
-  background: #af0;
-  background-image: linear-gradient(to bottom right, #ff0, #af0, #ff0);
-  border: 0.063rem solid #070;
-  box-shadow: inset 0 0 0.625rem #070;
-  padding: 0.25rem
-}
-
-body.bettis .calendar_event_waiver_bbid a,
-body.bettis .calendar_event_waiver_bbid a:hover,
-body.bettis .calendar_event_waiver_bbid a:visited,
-body.bettis .calendar_event_waiver_bbid a:link,
-body.bettis .calendar_event_waiver_bbid a:active,
-.theme-dk-yellow .calendar_event_waiver_bbid a,
-.theme-dk-yellow .calendar_event_waiver_bbid a:hover,
-.theme-dk-yellow .calendar_event_waiver_bbid a:visited,
-.theme-dk-yellow .calendar_event_waiver_bbid a:link,
-.theme-dk-yellow .calendar_event_waiver_bbid a:active {
-  color: #000 !important;
-  text-shadow: 0 0.125rem 0.125rem #fff
-}
-
-body.bettis .calendar_event_waiver_none,
-.theme-dk-yellow .calendar_event_waiver_none {
-  color: #fff;
-  text-shadow: 0 0.125rem 0.125rem #000;
-  background: #0d0;
-  background-image: linear-gradient(to bottom right, #0d0, #0a0, #0d0);
-  border: 0.063rem solid #070;
-  box-shadow: inset 0 0 0.625rem #070;
-  padding: 0.25rem
-}
-
-body.bettis .svg-iconlink:active,
-body.bettis .svg-iconlink:link,
-body.bettis .svg-iconlink:visited,
-.theme-dk-yellow .svg-iconlink:active,
-.theme-dk-yellow .svg-iconlink:link,
-.theme-dk-yellow .svg-iconlink:visited,
-body.bettis .svg-iconlink a,
-body.bettis .svg-iconlink a:hover,
-.theme-dk-yellow .svg-iconlink a,
-.theme-dk-yellow .svg-iconlink a:hover {
-  color: #777;
-}
-
-body.bettis .svg-iconlink:active:hover,
-body.bettis .svg-iconlink:link:hover,
-body.bettis .svg-iconlink:visited:hover,
-.theme-dk-yellow .svg-iconlink:active:hover,
-.theme-dk-yellow .svg-iconlink:link:hover,
-.theme-dk-yellow .svg-iconlink:visited:hover {
-  color: #f9b943
-}
-
-body.bettis .svg-icon,
-.theme-dk-yellow .svg-icon {
-  fill: var(--primary, #ff4200);
-  color: #777;
-}
-
-body.bettis .svg-icon:hover,
-body.bettis .svg-iconlink:hover .svg-icon {
-  fill: #777;
-  color: var(--primary, #ff4200);
-}
-
-.theme-dk-yellow .icon-bar-full .svg-iconlink:hover span.fa-stack i.fa-inverse:before,
-.theme-dk-yellow .icon-bar-full .icon-bar i:after,
-.theme-dk-yellow .icon-bar-full .icon-bar a:hover i:before,
-body.bettis .icon-bar-full .icon-bar .svg-iconlink:hover span.fa-stack i.fa-inverse:before,
-body.bettis .icon-bar-full .icon-bar i:after,
-body.bettis .icon-bar-full .icon-bar a:hover i:before {
-  color: #777;
-  opacity: 1;
-}
-
-.theme-dk-yellow .icon-bar-full .svg-icon:hover,
-.theme-dk-yellow .icon-bar-full .svg-iconlink:hover .svg-icon,
-.theme-dk-yellow .svg-icon:hover,
-.theme-dk-yellow .svg-iconlink:hover .svg-icon {
-  fill: #777;
-  color: var(--primary, #ff4200);
-}
-
-.theme-dk-yellow .icon-bar-full span.fa-stack i:nth-child(1):before,
-.theme-dk-yellow .icon-bar-full .svg-iconlink:hover span.fa-stack i:nth-child(2):before,
-.theme-dk-yellow .icon-bar span.fa-stack i:nth-child(1):before,
-.theme-dk-yellow .icon-bar .svg-iconlink:hover span.fa-stack i:nth-child(2):before {
-  color: #777;
-}
-
-.theme-dk-yellow .icon-bar-full span.fa-stack i:nth-child(2):before,
-.theme-dk-yellow .icon-bar-full .svg-iconlink:hover span.fa-stack i:nth-child(1):before,
-.theme-dk-yellow .icon-bar span.fa-stack i:nth-child(2):before,
-.theme-dk-yellow .icon-bar .svg-iconlink:hover span.fa-stack i:nth-child(1):before {
-  color: var(--primary, #ff4200);
-}
-
-body.bettis .icon-bar {
-  white-space: nowrap;
-  vertical-align: middle
-}
-
-body.bettis .svg-iconlink {
-  display: inline-block;
-  text-decoration: none;
-  margin-right: 0.5rem;
-  text-align: center
-}
-
-body.bettis .svg-iconlink:last-of-type {
-  margin-right: 0
-}
-
-body.bettis .svg-icon {
-  width: 3rem;
-  height: 3rem
-}
-
-body.bettis .svg-icon:hover,
-body.bettis .svg-iconlink:hover .svg-icon,
-.theme-dk-yellow .svg-icon:hover,
-.theme-dk-yellow .svg-iconlink:hover .svg-icon {
-  cursor: pointer
-}
-
-body.bettis .svg-text {
-  text-align: center;
-  padding: 0.313rem;
-  text-transform: uppercase;
-  font-size: 0.688rem
-}
-
-body.bettis .bannerlinkicons {
-  text-align: center;
-  overflow: auto;
-}
-
-body.bettis .logo-text {
-  color: #bbb;
-  font-size: 0.813rem;
-  position: absolute;
-  top: -2.75rem;
-  white-space: nowrap;
-  left: 0.625rem;
-  font-weight: 700;
-  z-index: 1
-}
-
-.theme-dk-yellow .logo-text {
-  color: #bbb;
 }
 
 @media only screen and (max-width:38em) {
-  body.bettis .svg-icon {
-    width: 2.25rem;
-    height: 2.25rem
-  }
 }
 
-body.bettis #weekly_calendar td,
-.theme-dk-yellow #weekly_calendar td {
-  border: 0.063rem solid #333
-}
-
-body.bettis #weekly_calendar tr td:first-child,
-.theme-dk-yellow #weekly_calendar tr td:first-child {
-  border: 0.188rem dotted #da3636
-}
-
-body.bettis #weekly_calendar td ul,
-.theme-dk-yellow #weekly_calendar td ul {
-  list-style-type: none
-}
-
-body.bettis #weekly_calendar td ul li,
-.theme-dk-yellow #weekly_calendar td ul li {
-  margin-left: -2.5rem;
-  width: auto
-}
-
-body.bettis #weekly_calendar td li,
-.theme-dk-yellow #weekly_calendar td li {
-  padding: 0.188rem;
-  background-color: #222;
-  margin-bottom: 0.188rem;
-  border: 0.063rem solid #555
-}
-
-body.bettis #weekly_calendar .oddtablerow td ul li:before,
-body.bettis #weekly_calendar .eventablerow td ul li:before,
-body.bettis #weekly_calendar .sub-content ul li:before,
-.theme-dk-yellow #weekly_calendar .oddtablerow td ul li:before,
-.theme-dk-yellow #weekly_calendar .eventablerow td ul li:before,
-.theme-dk-yellow #weekly_calendar .sub-content ul li:before {
-  display: none
-}
-
-body.bettis .calendar_event_custom,
-.theme-dk-yellow .calendar_event_custom {
-  color: #fff;
-  text-shadow: 0 0.125rem 0.125rem #000;
-  background: #05f;
-  background-image: linear-gradient(to bottom right, #05f, #03f, #05f);
-  border: 0.063rem solid #05f;
-  box-shadow: inset 0 0 0.625rem #05f;
-  padding: 0.25rem;
-}
 /******* habskin and bettis settings may be commented out *******
-#options_100 body.bettis table.report {
-  border-collapse: collapse
-}
-
-#options_100 body.bettis table.report th,
-.theme-dk-yellow #options_100 table.report th,
 #options_100 table.report td {
   border-left: 0.063rem solid #444;
   border-right: 0.063rem solid #444;
   text-align: center
-}
-
-#options_100 body.bettis table.report th,
-.theme-dk-yellow #options_100 table.report th {
-  border-top: 0.063rem solid #444;
-  vertical-align: top
-}
-
-#options_100 body.bettis table.report td img {
-  display: none
-}
-
-[id$="options_113"] body.bettis table.nocaption td,
-.theme-dk-yellow [id$="options_113"] table.nocaption td {
-  text-align: center;
-  border-right: 0.063rem solid #444
-}
-
-[id$="options_113"] body.bettis table.nocaption th,
-.theme-dk-yellow [id$="options_113"] table.nocaption th {
-  text-align: center;
-  border-right: 0.063rem solid #444
-}
-
-#body_options_113 body.bettis table.nocaption td table td {
-  border-right: 0
-}
-
-#body_options_52 body.bettis .custom-draft .head-th td:nth-child(1),
-#body_options_52 body.bettis .mobile-view.leftS table#picker td:nth-child(1) {
-  text-align: left !important;
-  width: 9.375rem;
-  min-width: 9.375rem;
-  max-width: 9.375rem
-}
-
-#body_options_52 body.bettis .custom-draft .head-th td:nth-child(2),
-#body_options_52 body.bettis .mobile-view.leftS table#picker td:nth-child(2) {
-  text-align: center !important;
-  width: 2.5rem;
-  min-width: 2.5rem;
-  max-width: 2.5rem
-}
-
-#body_add_drop body.bettis table.table3 input[name="BBID_AMT"] {
-  width: 4.375rem !important
 }
 
 #body_ajax_ls.bettis div.ls_other_game {
@@ -13038,65 +11692,18 @@ body.bettis .calendar_event_custom,
   width: 12.3%;
 }
 
-body.bettis .ls_other_game .ls_projections {
-  cursor: pointer
-}
-
-body.bettis #other_games .ls_other_game tr {
-  height: 1.625rem
-}
-
-body.bettis .ls_pace_box {
-  display: table-cell !important;
-  cursor: pointer
-}
-
-body.bettis td.ls_pace_box span.ls_projected {
-  display: none !important
-}
-
 #body_ajax_ls.bettis .ls_box_gameover .ls_projections {
   display: none
 }
 
 @media only screen and (max-width:25.625em) {
-  body.bettis td.ls_pace_box {
-    display: table-cell !important
-  }
-}
-
-body.bettis #standings .franchiseicon {
-  min-width: 1.875rem !important;
-  width: 1.875rem !important;
-  background-color: #c18f2f;
-  border-radius: 0.938rem;
-  padding: 0.125rem
-}
-
-body.bettis #standings_legend .minifranchiseicon {
-  min-width: 1.25rem !important;
-  width: 1.25rem !important;
-  background-color: #c18f2f;
-  border-radius: 0.625rem;
-  padding: 0.063rem
 }
 
 @media only screen and (max-width:48em) {
 
-  body.bettis #standings .gb,
-  body.bettis #standings .strk {
-    display: none
-  }
 }
 
 @media only screen and (max-width:32em) {
-
-  body.bettis #standings .bbidbalance,
-  body.bettis #standings .gb,
-  body.bettis #standings .pa,
-  body.bettis #standings .strk {
-    display: none
-  }
 
   .lombardi {
     float: none;
@@ -13105,63 +11712,13 @@ body.bettis #standings_legend .minifranchiseicon {
 }
 
 @media only screen and (max-width:20em) {
-  body.bettis ul.MFLPlayerPopupTab li a {
-    font-size: xx-small
-  }
-}
-
-body.bettis #league_news_feed ul {
-  height: 18.75rem;
-  overflow-y: scroll
 }
 
 #body_home.bettis h2.warning {
   display: none
 }
 
-body.bettis img.ava {
-  min-width: inherit !important
-}
-
-body.bettis #trade_bait .timestamp {
-  display: none
-}
-
-body.bettis #options_08 td.points,
-body.bettis #top td.points {
-  font-size: x-small
-}
-
-body.bettis .hz-main-table tbody th.fixed-side,
-body.bettis .hz-main-table th.lh_overall_franchise.fixed-side {
-  text-align: left !important
-}
-
-body.bettis #arrears-wrapper {
-  display: none
-}
-
-body.bettis #validateLineupReportWrapper {
-  display: none
-}
-
-body.bettis .invalidLineup_illegal,
-body.bettis .invalidLineup_illegal:hover,
-.theme-dk-yellow .invalidLineup_illegal,
-.theme-dk-yellow .invalidLineup_illegal:hover {
-  color: red !important
-}
-
-body.bettis .invalidLineup_warning,
-body.bettis .invalidLineup_warning:hover,
-.theme-dk-yellow .invalidLineup_warning,
-.theme-dk-yellow .invalidLineup_warning:hover {
-  color: goldenrod !important
-}
-
-#csetup_transfr body.bettis table.report tr td:nth-child(6),
-#csetup_transfr table.report tr td:nth-child(7),
-#csetup_transfr body.bettis table.report tr td:nth-child(8) {
+#csetup_transfr table.report tr td:nth-child(7) {
   text-align: center
 }
 ********************** Bettis / Habskin above **********************/
@@ -14353,13 +12910,6 @@ div.banner-container a:link img.sister-league:hover {
   color: red;
 }
 /***** Bettis Settings - could delete *****
-body.bettis #accounting_table th span.warning,
-.theme-dk-yellow #accounting_table th span.warning {
-  color: #f15f5f;
-}
-
-body.bettis .alert-info-table,
-.theme-dk-yellow .alert-info-table,
 .tdalert span {
   background: var(--primary-darker, rgba(0, 0, 0, .2));
 }
@@ -14399,26 +12949,11 @@ body.bettis .alert-info-table,
 }
 
 body.habskin.bettis #contractReportPopupContainer,
-.theme-dk-yellow #contractReportPopupContainer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 100000;
-  background-color: crimson;
-  color: white;
-  border: 0.188rem solid crimson
-}
-
 body.habskin.bettis #contractPopupTable th {
   font-size: 0.75rem !important
 }
 
 body.habskin.bettis #contractPopupTable td,
-.theme-dk-yellow #contractPopupTable td {
-  font-size: 0.625rem !important;
-  border-right: 0.063rem solid var(--primary)
-}
-
 body.habskin.bettis #contractTable td,
 body.habskin.bettis #taxiSquadTable td,
 body.habskin.bettis #contractPopupTable th {
@@ -14434,27 +12969,9 @@ body.habskin.bettis #contractPopupTable th {
 }
 
 body.habskin.bettis .bbid_ir-modal-content,
-.theme-dk-yellow .bbid_ir-modal-content {
-  background-color: var(--mobile-wrap-bg);
-  border: 0.063rem solid var(--neutral);
-}
-
 body.habskin.bettis #options_113 table.report td,
-.theme-dk-yellow #options_113 table.report td {
-  text-align: center;
-  border-left: 0.063rem solid #444
-}
-
 body.habskin.bettis #options_113 table.report td:last-child,
-.theme-dk-yellow #options_113 table.report td:last-child {
-  border-right: 0.063rem solid #444
-}
-
 body.habskin.bettis #options_113 table.report td table td,
-.theme-dk-yellow #options_113 table.report td table td {
-  border: 0 !important
-}
-
 body.habskin.bettis #contract_9999 td {
   width: 6%
 }
@@ -14471,18 +12988,7 @@ body.habskin.bettis #contract_9999 tr:nth-child(1) th,
 body.habskin.bettis #contract_9999 tr:nth-child(2) th:nth-child(even),
 body.habskin.bettis #contract_9999 td:nth-child(even),
 body.habskin.bettis #contract_9999 td:nth-child(1),
-.theme-dk-yellow #contract_9999 tr:nth-child(1) th,
-.theme-dk-yellow #contract_9999 tr:nth-child(2) th:nth-child(even),
-.theme-dk-yellow #contract_9999 td:nth-child(even),
-.theme-dk-yellow #contract_9999 td:nth-child(1) {
-  border-right: 0.063rem solid #555;
-}
-
 body.habskin.bettis #contract_9999 th:last-child,
-.theme-dk-yellow #contract_9999 td:last-child {
-  border-right: 0;
-}
-
 body.habskin.bettis #contract_9999 table,
 body.habskin.bettis #contract_9999 table {
   border: 0.063rem solid #555
@@ -14787,26 +13293,9 @@ body.habskin #standings img[id*="franchiseicon_"] {
   background-position: -17.5rem -2.5rem !important
 }
 
-#body_lineup.custom_lineup_body.bettis form td.pos-rank,
-#body_lineup.custom_lineup_body.bettis .starter_count_reason_more,
-#body_lineup.custom_lineup_body.bettis .starter_count_reason_less,
 #body_lineup.bettis .form_buttons.default-btn::after,
 #body_lineup.bettis .form_buttons::before,
-#body_lineup.custom_lineup_body.bettis .reportnavigation a,
-#body_lineup.custom_lineup_body.bettis .links_nav a,
-#body_lineup.custom_lineup_body.bettis .links_nav a:hover,
-.bettis .target_report tr.lineup_player_row td.pos-rank,
-#body_lineup.custom_lineup_body.bettis form tr.player_row td.pos-rank,
-.theme-dk-yellow #body_lineup.custom_lineup_body form td.pos-rank,
-.theme-dk-yellow #body_lineup.custom_lineup_body .starter_count_reason_more,
-.theme-dk-yellow #body_lineup.custom_lineup_body .starter_count_reason_less,
-.theme-dk-yellow #body_lineup .form_buttons.default-btn::after,
-.theme-dk-yellow #body_lineup .form_buttons::before,
-.theme-dk-yellow #body_lineup.custom_lineup_body .reportnavigation a,
-.theme-dk-yellow #body_lineup.custom_lineup_body .links_nav a,
-.theme-dk-yellow #body_lineup.custom_lineup_body .links_nav a:hover,
-.theme-dk-yellow .target_report tr.lineup_player_row td.pos-rank,
-.theme-dk-yellow #body_lineup.custom_lineup_body form tr.player_row td.pos-rank {
+.bettis .target_report tr.lineup_player_row td.pos-rank {
   color: #000;
 }
 
@@ -14931,42 +13420,6 @@ body.habskin #standings img[id*="franchiseicon_"] {
     top: 0.725rem !important;
 }
 
-.theme-dk-yellow .banner-container,
-.theme-dk-yellow .footercontainer-outer {
-  background-color: rgba(247, 181, 52, .05);
-}
-
-.theme-dk-yellow th {
-  background: rgba(0, 0, 0, .7);
-}
-
-.theme-dk-yellow tr.header th[class*="week"] {
-  background: rgba(0, 0, 0, .6);
-}
-
-.theme-dk-yellow .eventablerow {
-  background: rgba(0, 0, 0, .3);
-}
-
-.theme-dk-yellow .oddtablerow {
-  background: rgba(0, 0, 0, .5);
-}
-
-.theme-dk-yellow .bottomteam,
-.theme-dk-yellow .topteam,
-.theme-dk-yellow .bracket {
-  border-color: rgba(255, 255, 255, .2);
-}
-
-.theme-dk-yellow #body_ajax_ls #ls_ticker_tab_id td:first-of-type {
-  color: #111;
-}
-
-.theme-dk-yellow .toggle-btn-main::before,
-.theme-dk-yellow .toggle-btn-main::after {
-  background: #111;
-}
-
 /* SCOREBOARD MODULE */
 
 /* SET FONT FAMILY */
@@ -15056,10 +13509,6 @@ h2.lsm_error.error_box {
   background: var(--primary, #ff4200);
 }
 
-.theme-dk-yellow #LSscoringBox .player-position {
-  color: #000;
-}
-
 #LSscoringBox .player-image img {
   background: #111;
 }
@@ -15093,10 +13542,6 @@ h2.lsm_error.error_box {
   height: 0.125rem;
   background: var(--primary, #ff4200);
   margin-top: -0.063rem;
-}
-
-.theme-dk-yellow  #LSscoringBox div[class*="positionChange"] {
-  background: #5e4618;
 }
 
 #LSscoringBox div.franchise-score {
@@ -15460,10 +13905,6 @@ div.ym {
 }
 
 /* mfl scripts color adjustment for dark template ONLY */
-.theme-dk-yellow .cus_player_images .position_name_roster_mobile {
-    color: #000;
-}
-
 /* hide mobile position and team name for desktop */
 .team_name_roster_circle {
     display: none;
@@ -15545,15 +13986,9 @@ div.ym {
     background: var(--accent-two, #ffb431);
     color: #000;
 }
-.theme-dk-yellow .playerImgTable .teamPositionCircle {
-    color: #000;
-}
 /*set bg color for team position circle - visible on mobile displays and color of text in circle in th - table headers*/
 th a[data-pimg-processed] .playerImgTable .teamPositionCircle {
     color: #fff;
-}
-.theme-dk-yellow th a[data-pimg-processed] .playerImgTable .teamPositionCircle {
-    color: #000;
 }
 /*set color for up arrows - seen on weekly results reports */
 .playerFirstName .shouldHavestart i {
@@ -15827,16 +14262,10 @@ th a[data-pimg-processed] .playerImgTable .teamPositionCircle {
     color: #fff;
     background: var(--accent-two, var(--accent, #B82601));
 }
-.theme-dk-yellow #AddDropForm .sort-btn:hover {
-    color: #000;
-}
 #AddDropForm .sort-btn.activated {
     color: #fff;
     background: var(--accent-two, var(--accent, #B82601));
     border: 0;
-}
-.theme-dk-yellow #AddDropForm .sort-btn.activated {
-    color: #000;
 }
 #AddDropForm .player-pos {
     border-radius: 0.675rem;
@@ -16330,14 +14759,6 @@ th a[data-pimg-processed] .playerImgTable .teamPositionCircle {
     #AddDropForm #add-player-list .add-drop-player-row.eventablerow:hover,
     #AddDropForm #drop-player-list .add-drop-player-row.eventablerow:hover {
         background: none !important;
-    }
-    .theme-dk-yellow #AddDropForm #add-player-list .add-drop-player-row.oddtablerow:hover,
-    .theme-dk-yellow #AddDropForm #drop-player-list .add-drop-player-row.oddtablerow:hover {
-        background: rgba(0, 0, 0, .5)!important;
-    }
-    .theme-dk-yellow #AddDropForm #add-player-list .add-drop-player-row.eventablerow:hover,
-    .theme-dk-yellow #AddDropForm #drop-player-list .add-drop-player-row.eventablerow:hover {
-        background: rgba(0, 0, 0, .3)!important;
     }
     #AddDropForm #add-player-list .add-drop-player-row.selected-player.oddtablerow:hover,
     #AddDropForm #add-player-list .add-drop-player-row.selected-player.eventablerow:hover {
