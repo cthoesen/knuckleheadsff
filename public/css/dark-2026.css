@@ -8,8 +8,6 @@
 */
 
 /* 
-CSS target for all habman sites is body.habskin 
-var(--neutral2,
 var(--th-bg2,
 #000000)))
 */
@@ -2233,7 +2231,7 @@ body.chat_popup .banner-container-wrap {
   background: #333;
   border: 0.125rem solid #333;
   color: #fff;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Rajdhani", sans-serif;
 }
 
 .mflModal-content button:hover {
@@ -3393,7 +3391,7 @@ img {
 .warning a:active,
 .warning a:visited {
   color: var(--accent-one, #ff4200);
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Rajdhani", sans-serif;
 }
 
 .warning a:hover,
@@ -3778,7 +3776,7 @@ div.mobile-wrap .reportform {
 /***************************************/
 
 .weekly-navbar {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Rajdhani", sans-serif;
   margin: 0.625rem 0;
   margin-top: 0;
   height: 1.875rem;
@@ -4215,7 +4213,7 @@ div.mobile-wrap .reportform {
 .kickoff-conditions-wrapper,
 .current-conditions-place,
 .starter_count_sub {
-  font-family: "Roboto Condensed", sans-serif !important;
+  font-family: "Rajdhani", sans-serif !important;
 }
 
 /*******************************************/
@@ -5980,7 +5978,7 @@ button[id^="add_to_tab_"] {
     font-weight: 300;
     text-align: center;
     padding: 0.125rem;
-    font-family: "Roboto Condensed", sans-serif;
+    font-family: "Rajdhani", sans-serif;
 }
 
 #hpm_table_0:before {
@@ -6342,7 +6340,7 @@ div.mobile-wrap:empty {
 }
 
 #owner_activity td.franchisename {
-  font-family: "Roboto", sans-serif;
+  font-family: "Rajdhani", sans-serif;
 }
 
 #welcome #welcome caption span i {
@@ -7693,7 +7691,7 @@ a.subhead {
     left: 0.313rem;
     top: 0.375rem;
     font-size: 1.375rem;
-    font-family: "Roboto Condensed", sans-serif;
+    font-family: "Rajdhani", sans-serif;
     text-transform: uppercase;
     font-weight: 700;
     text-decoration: none;
@@ -9153,7 +9151,7 @@ span[id*="collapseAvg_"] {
 #body_ajax_ls .ls-outer-table,
 #body_ajax_ls #ls_ticker_tab_id,
 #body_ajax_ls #ls_mfl_notes {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Rajdhani", sans-serif;
 }
 
 #body_ajax_ls .ls-boxscore {
@@ -10331,7 +10329,7 @@ td.mflLive_details_pace_behind {
 
 #popup-ignoreLeagues-caption {
   color: var(--primary, #ff4200);
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Rajdhani", sans-serif;
 }
 
 #popup-ignoreLeagues-container {
@@ -10499,7 +10497,7 @@ td.mondayLoser .monday_proj_total {
   white-space: nowrap;
   width: 90%;
   font-weight: 700;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Rajdhani", sans-serif;
 }
 
 .editHPMs textarea {
@@ -12362,26 +12360,6 @@ div.sub-content.editable .insertIcons {
   }
 }
 /********* Bettis / Habskin Settings below - May Be Able to Delete 
-body.habskin #roster_column_left td.no_icons a {
-  display: none;
-  max-width: unset;
-}
-
-body.habskin .ls-matchup caption {
-  text-align: center
-}
-
-#body_ajax_ls.habskin .ls-matchup caption img.ls_og_icon {
-  max-height: 2.5rem;
-  max-width: 2.5rem
-}
-
-body.habskin #LS_TopTableHolder .franchiseicon {
-  padding: 0.313rem;
-  max-width: 100%;
-  max-height: 3.125rem;
-}
-
 @media only screen and (max-width:48em) {
 
 }
@@ -12389,48 +12367,9 @@ body.habskin #LS_TopTableHolder .franchiseicon {
 @media only screen and (max-width:38em) {
 }
 
-/******* habskin and bettis settings may be commented out *******
-#options_100 table.report td {
-  border-left: 0.063rem solid #444;
-  border-right: 0.063rem solid #444;
-  text-align: center
-}
-
-#body_ajax_ls.bettis div.ls_other_game {
-  min-width: 8.125rem;
-  width: 12.3%;
-}
-
-#body_ajax_ls.bettis .ls_box_gameover .ls_projections {
-  display: none
-}
-
-@media only screen and (max-width:25.625em) {
-}
-
-@media only screen and (max-width:48em) {
-
-}
-
-@media only screen and (max-width:32em) {
-
-  .lombardi {
-    float: none;
-    padding-left: 0.313rem
-  }
-}
-
-@media only screen and (max-width:20em) {
-}
-
-#body_home.bettis h2.warning {
-  display: none
-}
-
 #csetup_transfr table.report tr td:nth-child(7) {
   text-align: center
 }
-********************** Bettis / Habskin above **********************/
 /* FANTASY SURVIVOR */
 .fantasy_survivor_legend_highscore {
   font-weight: 700;
@@ -12935,7 +12874,6 @@ span.total_contract_bracketed span {
 #habmanAllPlay_tableHTH td {
   white-space: nowrap
 }
-**************** Habman settings above might be able to delete *************/
 #allplay-table .allplay-franchise {
   width: 1%;
 }
@@ -13625,84 +13563,11 @@ div.banner-container a:link img.sister-league:hover {
 
 @media only screen and (max-width:48em) {
 
-  body.habskin #accounting_table tr:nth-child(1) th:nth-child(2),
-  body.habskin #accounting_table tr:nth-child(1) th:nth-child(3),
-  body.habskin #accounting_table tr:nth-child(2) th:nth-child(1),
-  body.habskin #accounting_table tr:nth-child(2) th:nth-child(2),
-  body.habskin #accounting_table tr:nth-child(2) th:nth-child(3),
-  body.habskin #accounting_table tr:nth-child(2) th:nth-child(5),
-  body.habskin #accounting_table tr:nth-child(2) th:nth-child(7),
-  body.habskin #accounting_table tr:nth-child(2) th:nth-child(9),
-  body.habskin #accounting_table tr:nth-child(2) th:nth-child(10),
-  body.habskin #accounting_table td:nth-child(2),
-  body.habskin #accounting_table td:nth-child(3),
-  body.habskin #accounting_table td:nth-child(4),
-  body.habskin #accounting_table td:nth-child(6),
-  body.habskin #accounting_table td:nth-child(8),
-  body.habskin #accounting_table td:nth-child(10),
-  body.habskin #accounting_table td:nth-child(11),
-  body.habskin #accounting_table tr:last-child th:nth-child(2),
-  body.habskin #accounting_table tr:last-child th:nth-child(3),
-  body.habskin #accounting_table tr:last-child th:nth-child(4),
-  body.habskin #accounting_table tr:last-child th:nth-child(6),
-  body.habskin #accounting_table tr:last-child th:nth-child(8),
-  body.habskin #accounting_table tr:last-child th:nth-child(10),
-  body.habskin #accounting_table tr:last-child th:nth-child(11) {
-    display: none;
-  }
-  body.habskin #entry_fee_accounting tr:nth-child(1) th:nth-child(2),
-  body.habskin #entry_fee_accounting td:nth-child(2),
-  body.habskin #entry_fee_accounting td a {
-    display: none;
-  }
-}
-
-body.habskin.bettis #contractReportPopupContainer,
-body.habskin.bettis #contractPopupTable th {
-  font-size: 0.75rem !important
-}
-
-body.habskin.bettis #contractPopupTable td,
-body.habskin.bettis #contractTable td,
-body.habskin.bettis #taxiSquadTable td,
-body.habskin.bettis #contractPopupTable th {
-  white-space: nowrap
 }
 
 @media only screen and (max-width:38em) {
-  body.habskin.bettis .logo-text {
-    top: -1.875rem;
-    left: 0.313rem;
-    font-size: 0.688rem
-  }
 }
 
-body.habskin.bettis .bbid_ir-modal-content,
-body.habskin.bettis #options_113 table.report td,
-body.habskin.bettis #options_113 table.report td:last-child,
-body.habskin.bettis #options_113 table.report td table td,
-body.habskin.bettis #contract_9999 td {
-  width: 6%
-}
-
-body.habskin.bettis #contract_9999 td:nth-child(1) {
-  width: 20%
-}
-
-body.habskin.bettis #contract_9999 td:nth-child(2) {
-  width: 8%
-}
-
-body.habskin.bettis #contract_9999 tr:nth-child(1) th,
-body.habskin.bettis #contract_9999 tr:nth-child(2) th:nth-child(even),
-body.habskin.bettis #contract_9999 td:nth-child(even),
-body.habskin.bettis #contract_9999 td:nth-child(1),
-body.habskin.bettis #contract_9999 th:last-child,
-body.habskin.bettis #contract_9999 table,
-body.habskin.bettis #contract_9999 table {
-  border: 0.063rem solid #555
-}
-************ Bettis Habskin settings above may not be needed **************/
 
 /* ADDED FOR ALL SITES FOR BORDER ON TABLES WITH HORIZONTAL SCROLL BARS */
 .shadow-right:after {
@@ -13820,228 +13685,6 @@ td.allplay-crosshair span {
   font-size: x-large;
   text-align: center;
 }
-/******* habskin settings below may be commented out ********
-body.habskin #standings img[id*="franchiseicon_"] {
-  height: auto !important;
-  width: auto !important;
-  min-width: auto !important;
-}
-
-.habskin .franPlayerFA,
-.habskin a[class*="franPlayer_"] {
-  position: relative;
-  padding-left: 1.5rem !important;
-}
-
-.habskin .franPlayerFA:before {
-  content: "FA";
-  position: absolute;
-  width: 1rem;
-  height: 1rem;
-  left: 0.125rem;
-  text-align: center;
-  background: var(--primary, #B82601);
-  top: 50%;
-  transform: translate(0, -50%);
-  line-height: 1rem;
-  border-radius: 50%;
-  color: white;
-  font-size: 0.563rem;
-  font-weight: bold;
-}
-
-.bettis a[class*="franPlayer_"]:before,
-.bettis div[class*="franTeam_"] {
-  background: url(https://www.mflscripts.com/mfl-apps/global/css/icon_sprite/bettis.png) no-repeat
-}
-
-.habskin a[class*="franPlayer_"]:before {
-  content: "";
-  width: 1.25rem;
-  height: 1.25rem;
-  background-size: 800% 200% !important;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translate(0, -50%)
-}
-
-.habskin a[class*="franPlayer_0001"]:before {
-  background-position: 0 0 !important
-}
-
-.habskin a[class*="franPlayer_0002"]:before {
-  background-position: -1.25rem 0 !important
-}
-
-.habskin a[class*="franPlayer_0003"]:before {
-  background-position: -2.5rem 0 !important
-}
-
-.habskin a[class*="franPlayer_0004"]:before {
-  background-position: -3.75rem 0 !important
-}
-
-.habskin a[class*="franPlayer_0005"]:before {
-  background-position: -5rem 0 !important
-}
-
-.habskin a[class*="franPlayer_0006"]:before {
-  background-position: -6.25rem 0 !important
-}
-
-.habskin a[class*="franPlayer_0007"]:before {
-  background-position: -7.5rem 0 !important
-}
-
-.habskin a[class*="franPlayer_0008"]:before {
-  background-position: -8.75rem 0 !important
-}
-
-.habskin a[class*="franPlayer_0009"]:before {
-  background-position: 0 -1.25rem !important
-}
-
-.habskin a[class*="franPlayer_0010"]:before {
-  background-position: -1.25rem -1.25rem !important
-}
-
-.habskin a[class*="franPlayer_0011"]:before {
-  background-position: -2.5rem -1.25rem !important
-}
-
-.habskin a[class*="franPlayer_0012"]:before {
-  background-position: -3.75rem -1.25rem !important
-}
-
-.habskin a[class*="franPlayer_0013"]:before {
-  background-position: -5rem -1.25rem !important
-}
-
-.habskin a[class*="franPlayer_0014"]:before {
-  background-position: -6.25rem -1.25rem !important
-}
-
-.habskin a[class*="franPlayer_0015"]:before {
-  background-position: -7.5rem -1.25rem !important
-}
-
-.habskin a[class*="franPlayer_0016"]:before {
-  background-position: -8.75rem -1.25rem !important
-}
-
-.habskin div[class*="franTeam_"] {
-  display: inline-block;
-  width: 2.5rem;
-  height: 2.5rem;
-  vertical-align: middle;
-  margin-right: 0.25rem
-}
-
-.habskin div[class*="franTeam_0001"] {
-  background-position: 0 0 !important
-}
-
-.habskin div[class*="franTeam_0002"] {
-  background-position: -2.5rem 0 !important
-}
-
-.habskin div[class*="franTeam_0003"] {
-  background-position: -5rem 0 !important
-}
-
-.habskin div[class*="franTeam_0004"] {
-  background-position: -7.5rem 0 !important
-}
-
-.habskin div[class*="franTeam_0005"] {
-  background-position: -10rem 0 !important
-}
-
-.habskin div[class*="franTeam_0006"] {
-  background-position: -12.5rem 0 !important
-}
-
-.habskin div[class*="franTeam_0007"] {
-  background-position: -15rem 0 !important
-}
-
-.habskin div[class*="franTeam_0008"] {
-  background-position: -17.5rem 0 !important
-}
-
-.habskin div[class*="franTeam_0009"] {
-  background-position: 0 -2.5rem !important
-}
-
-.habskin div[class*="franTeam_0010"] {
-  background-position: -2.5rem -2.5rem !important
-}
-
-.habskin div[class*="franTeam_0011"] {
-  background-position: -5rem -2.5rem !important
-}
-
-.habskin div[class*="franTeam_0012"] {
-  background-position: -7.5rem -2.5rem !important
-}
-
-.habskin div[class*="franTeam_0013"] {
-  background-position: -10rem -2.5rem !important
-}
-
-.habskin div[class*="franTeam_0014"] {
-  background-position: -12.5rem -2.5rem !important
-}
-
-.habskin div[class*="franTeam_0015"] {
-  background-position: -15rem -2.5rem !important
-}
-
-.habskin div[class*="franTeam_0016"] {
-  background-position: -17.5rem -2.5rem !important
-}
-
-#body_lineup.bettis .form_buttons.default-btn::after,
-#body_lineup.bettis .form_buttons::before,
-.bettis .target_report tr.lineup_player_row td.pos-rank {
-  color: #000;
-}
-
-.bettis #roster_column_left div[class*="franTeam_"] {
-  margin: 0 1.125rem
-}
-
-@media only screen and (max-width:65.625em) {
-  .bettis #roster_column_left div[class*="franTeam_"] {
-    margin: 0 0.938rem
-  }
-}
-
-@media only screen and (max-width:58.125em) {
-  .bettis #roster_column_left div[class*="franTeam_"] {
-    margin: 0 0.75rem
-  }
-}
-
-@media only screen and (max-width:50em) {
-  .bettis #roster_column_left div[class*="franTeam_"] {
-    margin: 0 0.438rem
-  }
-}
-
-@media only screen and (max-width:43.75em) {
-  .bettis #roster_column_left div[class*="franTeam_"] {
-    margin: 0 0.188rem
-  }
-}
-
-@media only screen and (max-width:37.5em) {
-  .bettis #roster_column_left div[class*="franTeam_"] {
-    margin: 0
-  }
-}
-****************************************************/
 
 .ls-modal,
 .standings-settings_overlay,
@@ -14113,7 +13756,7 @@ body.habskin #standings img[id*="franchiseicon_"] {
   text-transform: uppercase;
   font-size: 1.25rem;
   color: var(--primary, #ff4200);
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Rajdhani", sans-serif;
   position: sticky !important;
   top: -0.625rem;
   background: var(--neutral, #111) !important;
@@ -14137,7 +13780,7 @@ body.habskin #standings img[id*="franchiseicon_"] {
 .matchup-box-scroll-wrap,
 #LSscoringBox,
 #teamBox {
-    font-family: "Roboto Condensed", sans-serif;
+    font-family: "Rajdhani", sans-serif;
 }
 
 /* COLOR SCOREBOARD MODULE FOR YOUR SITE DARK SKIN */
