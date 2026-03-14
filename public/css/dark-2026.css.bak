@@ -62,6 +62,7 @@ td {
   position: absolute;
   top: 50%;
   left: 50%;
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 
@@ -643,6 +644,7 @@ html.theme-vikings {
 .homepagemodule {
   background: var(--glass-bg, rgba(20, 20, 20, 0.6)) !important;
   backdrop-filter: var(--glass-blur, blur(12px));
+  -webkit-backdrop-filter: var(--glass-blur, blur(12px));
   border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08)) !important;
   border-radius: 0.5rem !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease !important;
@@ -1041,6 +1043,7 @@ body:has(#body-kkl) .mobile-wrap,
 body:has(#body-kkl) .settings-mobile-wrap {
   background: rgba(20, 20, 20, 0.6);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 /* Smooth Hover Transitions on Links & Table Rows */
@@ -1848,6 +1851,7 @@ body.chat_popup .banner-container-wrap {
 .banner-rightside {
   margin: 0.313rem 0;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .banner-icon {
@@ -1922,6 +1926,7 @@ body.chat_popup .banner-container-wrap {
 .svg-icon {
   fill: var(--primary, #FA5C25); /* main color on svg icons */
   color: var(--accent, #FA5C25); /* accent color on svg icons */
+  -webkit-filter: drop-shadow(0.125rem 0.125rem 0.313rem #000);
   filter: drop-shadow(0.125rem 0.125rem 0.313rem #000);
   width: 3.2rem;
   height: 3.2rem;
@@ -2089,6 +2094,7 @@ body.chat_popup .banner-container-wrap {
 .bannerlinkicons-full {
   text-align: center;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
   margin-top: 0.625rem;
 }
 
@@ -2222,6 +2228,7 @@ body.chat_popup .banner-container-wrap {
   border: 0;
   border-radius: 0.188rem;
   color: #fff;
+  -webkit-overflow-scrolling: touch
 }
 
 .mflModal-content .mobile-wrap {
@@ -2691,6 +2698,8 @@ span.custom_collapse:hover + .plus-toggle span:after {
 .myfantasyleague_menuMobile li.has-sub ul li a:before {
     left: 0.5rem;
     top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     position: absolute;
     display: inline-block;
@@ -2741,6 +2750,8 @@ li.has-sub ul li.mm_sizing_head a,
 .myfantasyleague_menuMobile li.has-sub ul li#cache-addon li a:before {
   left: 1.5rem;
   top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   position: absolute;
   display: inline-block;
@@ -2797,6 +2808,8 @@ li.has-sub ul li.mm_sizing_head a,
   right: 0.313rem;
   border-radius: 0.313rem;
   top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   display: block;
   background: var(--neutral, #111) !important;
@@ -2839,6 +2852,7 @@ li.has-sub ul li.mm_sizing_head a,
 .myfantasyleague_menuMobile .sub-arrow-down > a span.menu_arrow:before,
 .myfantasyleague_menuMobile .arrow-down > a span.menu_arrow:after,
 .myfantasyleague_menuMobile .sub-arrow-down > a span.menu_arrow:after {
+  -webkit-transform: rotate(315deg);
   transform: rotate(315deg);
   transition: all .25s ease;
   background: #fff;
@@ -2885,6 +2899,7 @@ table,
     padding: 0.625rem;
     overflow-x: auto;
     max-width: 100%;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* style for report containers */
@@ -3356,6 +3371,7 @@ td.player_photo img {
 }
 
 img {
+  image-rendering: -webkit-optimize-contrast;
   image-rendering: optimize-contrast;
 }
 
@@ -3464,6 +3480,8 @@ input[type="button"],
 input[type="submit"] {
   cursor: pointer;
   border: 0;
+  -moz-appearance: none;
+  -webkit-appearance: none;
   appearance: none; /* added standard property */
   border: 0 !important;
   font-size: 1rem;
@@ -3546,6 +3564,10 @@ input[type="submit"] {
   color: #fff;
   background: var(--primary, #ff4200);
   background-image: none;
+  background-image: -webkit-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
+  background-image: -moz-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
+  background-image: -ms-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
+  background-image: -o-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
   background-image: linear-gradient(to bottom, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
 }
 
@@ -3555,6 +3577,10 @@ input[type="submit"]:hover {
   color: #fff;
   background: var(--primary, #ff4200);
   background-image: none;
+  background-image: -webkit-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
+  background-image: -moz-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
+  background-image: -ms-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
+  background-image: -o-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
   background-image: linear-gradient(to bottom, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
 }
 
@@ -4195,6 +4221,10 @@ div.mobile-wrap .reportform {
   color: #fff;
   background: var(--primary, #ff4200);
   background-image: none;
+  background-image: -webkit-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
+  background-image: -moz-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
+  background-image: -ms-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
+  background-image: -o-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
   background-image: linear-gradient(to bottom, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
 }
 
@@ -4204,6 +4234,10 @@ div.mobile-wrap .reportform {
   color: #fff;
   background: var(--primary, #ff4200);
   background-image: none;
+  background-image: -webkit-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
+  background-image: -moz-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
+  background-image: -ms-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
+  background-image: -o-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
   background-image: linear-gradient(to bottom, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
 }
 
@@ -5506,6 +5540,7 @@ html[xmlns] .flexslider .slides {
 .flex-viewport {
   max-height: 125rem;
   -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
   -ms-transition: all 1s ease;
   -o-transition: all 1s ease;
   transition: all 1s ease;
@@ -5538,6 +5573,7 @@ html[xmlns] .flexslider .slides {
   color: #000c;
     text-shadow: 0.063rem 0.063rem 0 #ffffff4d;
     -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
     -ms-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
@@ -5682,6 +5718,7 @@ html[xmlns] .flexslider .slides {
   -moz-user-select: none;
   user-select: none; /* added standard property */
   -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
   -ms-transition: all 1s ease;
   -o-transition: all 1s ease;
   transition: all 1s ease;
@@ -6305,6 +6342,10 @@ Team Logos
   color: #fff !important;
   background: #9c2000;
   background-image: none;
+  background-image: -webkit-linear-gradient(to bottom, #cb2a01, #9c2000);
+  background-image: -moz-linear-gradient(to bottom, #cb2a01, #9c2000);
+  background-image: -ms-linear-gradient(to bottom, #cb2a01, #9c2000);
+  background-image: -o-linear-gradient(to bottom, #cb2a01, #9c2000);
   background-image: linear-gradient(to bottom, #cb2a01, #9c2000);
 }
 
@@ -6313,6 +6354,10 @@ Team Logos
   color: #fff;
   background: #cb2a01;
   background-image: none;
+  background-image: -webkit-linear-gradient(to bottom, #9c2000, #cb2a01);
+  background-image: -moz-linear-gradient(to bottom, #9c2000, #cb2a01);
+  background-image: -ms-linear-gradient(to bottom, #9c2000, #cb2a01);
+  background-image: -o-linear-gradient(to bottom, #9c2000, #cb2a01);
   background-image: linear-gradient(to bottom, #9c2000, #cb2a01);
 }
 
@@ -6320,6 +6365,10 @@ Team Logos
 .ovStartTiebreak {
   background: #007341;
   background-image: none;
+  background-image: -webkit-linear-gradient(to bottom, #0c9f5e, #007341);
+  background-image: -moz-linear-gradient(to bottom, #0c9f5e, #007341);
+  background-image: -ms-linear-gradient(to bottom, #0c9f5e, #007341);
+  background-image: -o-linear-gradient(to bottom, #0c9f5e, #007341);
   background-image: linear-gradient(to bottom, #0c9f5e, #007341);
 }
 
@@ -6328,6 +6377,10 @@ Team Logos
   color: #fff;
   background: #0c9f5e;
   background-image: none;
+  background-image: -webkit-linear-gradient(to bottom, #007341, #0c9f5e);
+  background-image: -moz-linear-gradient(to bottom, #007341, #0c9f5e);
+  background-image: -ms-linear-gradient(to bottom, #007341, #0c9f5e);
+  background-image: -o-linear-gradient(to bottom, #007341, #0c9f5e);
   background-image: linear-gradient(to bottom, #007341, #0c9f5e);
 }
 
@@ -8817,16 +8870,19 @@ span.plus-toggle-stats {
     left: 0;
     right: 0;
     margin: auto;
+    -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
 
 .nflStatsTotalRow span[style="display: none;"] + span + .plus-toggle-stats span::before,
 .nflStatsAvgRow span[style="display: none;"] + span + .plus-toggle-stats span::before {
+    -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
     width: 0.15rem;
 }
 .nflStatsTotalRow span[style="display: none;"] + span + .plus-toggle-stats span::after,
 .nflStatsAvgRow span[style="display: none;"] + span + .plus-toggle-stats span::after {
+    -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
     opacity: 0;
 }
@@ -8890,6 +8946,10 @@ span[id*="collapseAvg_"] {
   box-shadow: 0 0 0.063rem 0.063rem rgba(0, 0, 0, 0.1);
   background: var(--primary, #ff4200);
   background-image: none;
+  background-image: -webkit-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
+  background-image: -moz-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
+  background-image: -ms-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
+  background-image: -o-linear-gradient(top, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
   background-image: linear-gradient(to bottom, var(--primary-light, #FA5C25), var(--primary-dark, #B52F00));
   vertical-align: middle;
 }
@@ -8900,6 +8960,10 @@ span[id*="collapseAvg_"] {
 #nflTotalInactive:hover {
   background: var(--primary, #ff4200);
   background-image: none;
+  background-image: -webkit-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
+  background-image: -moz-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
+  background-image: -ms-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
+  background-image: -o-linear-gradient(top, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
   background-image: linear-gradient(to bottom, var(--primary-dark, #B52F00), var(--primary-light, #FA5C25));
 }
 
@@ -11391,6 +11455,7 @@ div.sub-content.editable .insertIcons {
     top: 50%;
     margin-left: -0.563rem;
     margin-top: -0.063rem;
+    -webkit-transition: 0.25s;
     transition: 0.25s;
   }
 
@@ -11405,6 +11470,7 @@ div.sub-content.editable .insertIcons {
     top: 50%;
     margin-left: -0.063rem;
     margin-top: -0.563rem;
+    -webkit-transition: 0.25s;
     transition: 0.25s;
   }
 
@@ -11429,6 +11495,7 @@ div.sub-content.editable .insertIcons {
         position: static;
         max-height: 0;
         overflow: hidden;
+        -webkit-transition: 0.25s;
         transition: 0.25s;
         box-shadow: none;
     }
@@ -11504,9 +11571,11 @@ div.sub-content.editable .insertIcons {
         text-decoration: none;
     }
     .myfantasyleague_menu input:checked ~ label span:before {
+        -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
     .myfantasyleague_menu input:checked ~ label span:after {
+        -webkit-transform: rotate(270deg);
         transform: rotate(270deg);
     }
     .myfantasyleague_menu input:checked ~ ul {
@@ -11650,6 +11719,8 @@ div.sub-content.editable .insertIcons {
     border-radius: 0.313rem;
     background: var(--primary, #ff4200);
     top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
     transform: translateY(-50%);
   }
 
@@ -11753,11 +11824,13 @@ div.sub-content.editable .insertIcons {
   }
 
    .myfantasyleague_tabmenu input:checked ~ label span:before {
+        -webkit-transform: rotate(315deg);
         transform: rotate(315deg);
         transition: all 0.25s ease;
     }
 
   .myfantasyleague_tabmenu input:checked ~ label span:after {
+    -webkit-transform: rotate(314deg);
     transform: rotate(314deg);
     transition: all 0.25s ease;
   }
@@ -12902,6 +12975,7 @@ body.bettis .svg-text {
 body.bettis .bannerlinkicons {
   text-align: center;
   overflow: auto;
+  -webkit-overflow-scrolling: touch
 }
 
 body.bettis .logo-text {
@@ -14032,6 +14106,10 @@ span.total_contract_bracketed span {
   color: #777 !important;
   background: #111 !important;
   background-image: none !important;
+  background-image: -webkit-linear-gradient(top, #555, #333) !important;
+  background-image: -moz-linear-gradient(top, #555, #333) !important;
+  background-image: -ms-linear-gradient(top, #555, #333) !important;
+  background-image: -o-linear-gradient(top, #555, #333) !important;
   background-image: linear-gradient(to bottom, #555, #333) !important;
 }
 
