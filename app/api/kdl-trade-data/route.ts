@@ -93,6 +93,12 @@ export async function GET() {
           const playerId = rp.id;
           const info = playerMap.get(playerId);
           if (!info) return null;
+          // Normalize roster status: MFL rosters API uses UPPER_SNAKE_CASE (e.g. INJURED_RESERVE, TAXI_SQUAD)
+          const rawStatus = (rp.status || '').toUpperCase();
+          const rosterStatus = rawStatus.includes('TAXI') ? 'TAXI_SQUAD'
+            : rawStatus.includes('INJURED') ? 'INJURED_RESERVE'
+            : 'ACTIVE';
+
           return {
             id: playerId,
             name: info.name,
@@ -102,6 +108,7 @@ export async function GET() {
             pointsAVG: avgScores.get(playerId) || 0,
             salary: parseFloat(rp.salary) || 0,
             contractYear: parseInt(rp.contractYear) || 0,
+            rosterStatus,
           };
         })
         .filter(Boolean);

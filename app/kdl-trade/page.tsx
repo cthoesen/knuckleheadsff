@@ -13,6 +13,7 @@ interface Player {
   pointsAVG: number;
   salary: number;
   contractYear: number;
+  rosterStatus: 'ACTIVE' | 'TAXI_SQUAD' | 'INJURED_RESERVE';
 }
 
 interface DraftPick {
@@ -163,23 +164,35 @@ export default function KDLTradeAnalyzer() {
     const aYTD = aPlayers.reduce((sum, p) => sum + p.pointsYTD, 0);
     const bYTD = bPlayers.reduce((sum, p) => sum + p.pointsYTD, 0);
 
-    // Salary & contract year totals for traded players
+    // Cap-eligible salary: Taxi = excluded, IR = counts, Active = counts
+    const capSalary = (p: Player) => p.rosterStatus === 'TAXI_SQUAD' ? 0 : p.salary;
+    // Cap-eligible years: Taxi = excluded, IR = excluded, Active = counts
+    const capYears = (p: Player) => p.rosterStatus === 'ACTIVE' ? p.contractYear : 0;
+
+    // Salary & contract year totals for traded players (raw, for display)
     const aTradeSalary = aPlayers.reduce((sum, p) => sum + p.salary, 0);
     const bTradeSalary = bPlayers.reduce((sum, p) => sum + p.salary, 0);
     const aTradeYears = aPlayers.reduce((sum, p) => sum + p.contractYear, 0);
     const bTradeYears = bPlayers.reduce((sum, p) => sum + p.contractYear, 0);
 
-    // Full team salary & years totals (before trade)
-    const aTeamTotalSalary = teamA.players.reduce((sum, p) => sum + p.salary, 0);
-    const bTeamTotalSalary = teamB.players.reduce((sum, p) => sum + p.salary, 0);
-    const aTeamTotalYears = teamA.players.reduce((sum, p) => sum + p.contractYear, 0);
-    const bTeamTotalYears = teamB.players.reduce((sum, p) => sum + p.contractYear, 0);
+    // Cap-eligible totals for traded players
+    const aTradeCapSalary = aPlayers.reduce((sum, p) => sum + capSalary(p), 0);
+    const bTradeCapSalary = bPlayers.reduce((sum, p) => sum + capSalary(p), 0);
+    const aTradeCapYears = aPlayers.reduce((sum, p) => sum + capYears(p), 0);
+    const bTradeCapYears = bPlayers.reduce((sum, p) => sum + capYears(p), 0);
+
+    // Full team cap-eligible totals (before trade)
+    const aTeamTotalSalary = teamA.players.reduce((sum, p) => sum + capSalary(p), 0);
+    const bTeamTotalSalary = teamB.players.reduce((sum, p) => sum + capSalary(p), 0);
+    const aTeamTotalYears = teamA.players.reduce((sum, p) => sum + capYears(p), 0);
+    const bTeamTotalYears = teamB.players.reduce((sum, p) => sum + capYears(p), 0);
 
     // After trade: Team A loses aPlayers, gains bPlayers (and vice versa)
-    const aTeamSalaryAfter = aTeamTotalSalary - aTradeSalary + bTradeSalary;
-    const bTeamSalaryAfter = bTeamTotalSalary - bTradeSalary + aTradeSalary;
-    const aTeamYearsAfter = aTeamTotalYears - aTradeYears + bTradeYears;
-    const bTeamYearsAfter = bTeamTotalYears - bTradeYears + aTradeYears;
+    // Incoming players become ACTIVE on the new team (no longer taxi/IR)
+    const aTeamSalaryAfter = aTeamTotalSalary - aTradeCapSalary + bTradeSalary;
+    const bTeamSalaryAfter = bTeamTotalSalary - bTradeCapSalary + aTradeSalary;
+    const aTeamYearsAfter = aTeamTotalYears - aTradeCapYears + bTradeYears;
+    const bTeamYearsAfter = bTeamTotalYears - bTradeCapYears + aTradeYears;
 
     let fairnessLabel: string;
     let fairnessColor: string;
@@ -572,6 +585,7 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd, tradeSa
           <span style={{ flex: 1 }}>
             <span style={{ color: posColor(p.position), fontWeight: 700, marginRight: '0.5rem', fontSize: '0.75rem' }}>{p.position}</span>
             {p.name}
+            {rosterStatusBadge(p.rosterStatus)}
           </span>
           <span style={{ width: '60px', textAlign: 'right', fontSize: '0.8rem', color: 'rgba(196, 181, 253, 0.7)' }}>${p.salary}</span>
           <span style={{ width: '30px', textAlign: 'center', fontSize: '0.8rem', color: 'rgba(196, 181, 253, 0.7)' }}>{p.contractYear}</span>
@@ -689,6 +703,35 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd, tradeSa
   );
 }
 
+function rosterStatusBadge(status: Player['rosterStatus'], size: 'sm' | 'md' = 'sm') {
+  if (status === 'ACTIVE') return null;
+  const isTaxi = status === 'TAXI_SQUAD';
+  const label = isTaxi ? 'TAXI' : 'IR';
+  const color = isTaxi ? '#ffaa00' : '#ff6b6b';
+  const bg = isTaxi ? 'rgba(255, 170, 0, 0.2)' : 'rgba(255, 107, 107, 0.2)';
+  const border = isTaxi ? 'rgba(255, 170, 0, 0.4)' : 'rgba(255, 107, 107, 0.4)';
+  const fontSize = size === 'sm' ? '0.55rem' : '0.6rem';
+  const padding = size === 'sm' ? '0.05rem 0.3rem' : '0.1rem 0.35rem';
+  return (
+    <span style={{
+      display: 'inline-block',
+      fontSize,
+      fontWeight: 700,
+      color,
+      background: bg,
+      border: `1px solid ${border}`,
+      borderRadius: '3px',
+      padding,
+      lineHeight: 1.2,
+      letterSpacing: '0.05em',
+      marginLeft: '0.35rem',
+      verticalAlign: 'middle',
+    }}>
+      {label}
+    </span>
+  );
+}
+
 function posColor(pos: string) {
   switch (pos) {
     case 'QB': return '#ff6b6b';
@@ -785,6 +828,7 @@ function TeamPanel({
               >
                 <span style={{ color: posColor(p.position), fontSize: '0.7rem', fontWeight: 700 }}>{p.position}</span>
                 {p.name}
+                {rosterStatusBadge(p.rosterStatus, 'md')}
                 <X style={{ width: '12px', height: '12px' }} />
               </button>
             ))}
@@ -860,6 +904,7 @@ function TeamPanel({
                   }}>
                     {selected && <span style={{ marginRight: '0.4rem' }}>✓</span>}
                     {player.name}
+                    {rosterStatusBadge(player.rosterStatus)}
                   </td>
                   <td style={{
                     padding: '0.6rem 0.5rem',
