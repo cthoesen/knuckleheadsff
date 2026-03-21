@@ -121,7 +121,7 @@ export default function Home() {
                 </p>
                 <div className="flex items-center gap-2 text-cyan-400 text-sm font-mono">
                   <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
-                  2 TOOLS ACTIVE
+                  3 TOOLS ACTIVE
                 </div>
               </div>
             </Link>
