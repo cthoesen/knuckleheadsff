@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { DollarSign, ArrowLeft, Calculator, TrendingUp, Users, FileText, Zap } from 'lucide-react';
+import { DollarSign, ArrowLeft, ArrowLeftRight, Calculator, TrendingUp, Users, FileText, Zap } from 'lucide-react';
 
 export default function MMHHub() {
   return (
@@ -94,23 +94,26 @@ export default function MMHHub() {
             </div>
           </div>
 
-          {/* Trade Analyzer - Coming Soon */}
-          <div className="tool-card opacity-60 cursor-not-allowed">
-            <div className="flex items-start gap-4">
-              <div className="p-3 bg-zinc-700/50 rounded-lg">
-                <Users size={24} className="text-zinc-500" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-bold text-zinc-400 mb-1">Trade Analyzer</h3>
-                <p className="text-sm text-zinc-500 mb-3">
-                  Evaluate trades with salary cap implications
-                </p>
-                <div className="inline-flex items-center gap-1 text-xs text-zinc-500 font-mono">
-                  COMING SOON
+          {/* Trade Analyzer - Active */}
+          <Link href="/mmh-trade">
+            <div className="tool-card group">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-emerald-500/10 rounded-lg group-hover:bg-emerald-500/20 transition-colors">
+                  <ArrowLeftRight size={24} className="text-emerald-400" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-white mb-1">Trade Analyzer</h3>
+                  <p className="text-sm text-zinc-400 mb-3">
+                    Evaluate trades with salary cap implications
+                  </p>
+                  <div className="inline-flex items-center gap-1 text-xs text-emerald-400 font-mono">
+                    <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                    ACTIVE
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* League Constitution - Active */}
           <a href="/docs/mmh/mmh-bylaws.pdf" target="_blank" rel="noopener noreferrer">
