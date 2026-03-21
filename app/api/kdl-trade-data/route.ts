@@ -100,6 +100,8 @@ export async function GET() {
             nflTeam: info.team,
             pointsYTD: ytdScores.get(playerId) || 0,
             pointsAVG: avgScores.get(playerId) || 0,
+            salary: parseFloat(rp.salary) || 0,
+            contractYear: parseInt(rp.contractYear) || 0,
           };
         })
         .filter(Boolean);

@@ -11,6 +11,8 @@ interface Player {
   nflTeam: string;
   pointsYTD: number;
   pointsAVG: number;
+  salary: number;
+  contractYear: number;
 }
 
 interface DraftPick {
@@ -161,6 +163,24 @@ export default function KDLTradeAnalyzer() {
     const aYTD = aPlayers.reduce((sum, p) => sum + p.pointsYTD, 0);
     const bYTD = bPlayers.reduce((sum, p) => sum + p.pointsYTD, 0);
 
+    // Salary & contract year totals for traded players
+    const aTradeSalary = aPlayers.reduce((sum, p) => sum + p.salary, 0);
+    const bTradeSalary = bPlayers.reduce((sum, p) => sum + p.salary, 0);
+    const aTradeYears = aPlayers.reduce((sum, p) => sum + p.contractYear, 0);
+    const bTradeYears = bPlayers.reduce((sum, p) => sum + p.contractYear, 0);
+
+    // Full team salary & years totals (before trade)
+    const aTeamTotalSalary = teamA.players.reduce((sum, p) => sum + p.salary, 0);
+    const bTeamTotalSalary = teamB.players.reduce((sum, p) => sum + p.salary, 0);
+    const aTeamTotalYears = teamA.players.reduce((sum, p) => sum + p.contractYear, 0);
+    const bTeamTotalYears = teamB.players.reduce((sum, p) => sum + p.contractYear, 0);
+
+    // After trade: Team A loses aPlayers, gains bPlayers (and vice versa)
+    const aTeamSalaryAfter = aTeamTotalSalary - aTradeSalary + bTradeSalary;
+    const bTeamSalaryAfter = bTeamTotalSalary - bTradeSalary + aTradeSalary;
+    const aTeamYearsAfter = aTeamTotalYears - aTradeYears + bTradeYears;
+    const bTeamYearsAfter = bTeamTotalYears - bTradeYears + aTradeYears;
+
     let fairnessLabel: string;
     let fairnessColor: string;
     if (aPercent >= 40 && aPercent <= 60) {
@@ -179,6 +199,9 @@ export default function KDLTradeAnalyzer() {
       aPlayerValue, bPlayerValue, aPickValue, bPickValue,
       aTotalValue, bTotalValue, aPercent,
       aYTD, bYTD,
+      aTradeSalary, bTradeSalary, aTradeYears, bTradeYears,
+      aTeamTotalSalary, bTeamTotalSalary, aTeamTotalYears, bTeamTotalYears,
+      aTeamSalaryAfter, bTeamSalaryAfter, aTeamYearsAfter, bTeamYearsAfter,
       fairnessLabel, fairnessColor,
     };
   }, [teamA, teamB, teamAPlayerIds, teamBPlayerIds, teamAPickKeys, teamBPickKeys]);
@@ -465,6 +488,12 @@ export default function KDLTradeAnalyzer() {
                   picks={analysis.aPicks}
                   totalValue={analysis.aTotalValue}
                   ytd={analysis.aYTD}
+                  tradeSalary={analysis.aTradeSalary}
+                  tradeYears={analysis.aTradeYears}
+                  teamSalaryBefore={analysis.aTeamTotalSalary}
+                  teamSalaryAfter={analysis.aTeamSalaryAfter}
+                  teamYearsBefore={analysis.aTeamTotalYears}
+                  teamYearsAfter={analysis.aTeamYearsAfter}
                 />
                 <TradeSummaryColumn
                   teamName={teamB.name}
@@ -472,6 +501,12 @@ export default function KDLTradeAnalyzer() {
                   picks={analysis.bPicks}
                   totalValue={analysis.bTotalValue}
                   ytd={analysis.bYTD}
+                  tradeSalary={analysis.bTradeSalary}
+                  tradeYears={analysis.bTradeYears}
+                  teamSalaryBefore={analysis.bTeamTotalSalary}
+                  teamSalaryAfter={analysis.bTeamSalaryAfter}
+                  teamYearsBefore={analysis.bTeamTotalYears}
+                  teamYearsAfter={analysis.bTeamYearsAfter}
                 />
               </div>
 
@@ -499,12 +534,18 @@ export default function KDLTradeAnalyzer() {
   );
 }
 
-function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd }: {
+function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd, tradeSalary, tradeYears, teamSalaryBefore, teamSalaryAfter, teamYearsBefore, teamYearsAfter }: {
   teamName: string;
   players: Player[];
   picks: DraftPick[];
   totalValue: number;
   ytd: number;
+  tradeSalary: number;
+  tradeYears: number;
+  teamSalaryBefore: number;
+  teamSalaryAfter: number;
+  teamYearsBefore: number;
+  teamYearsAfter: number;
 }) {
   return (
     <div>
@@ -522,18 +563,35 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd }: {
         <div key={p.id} style={{
           display: 'flex',
           justifyContent: 'space-between',
+          alignItems: 'center',
           padding: '0.5rem 0',
           borderBottom: '1px solid rgba(167, 139, 250, 0.1)',
           color: '#c4b5fd',
           fontSize: '0.875rem',
         }}>
-          <span>
+          <span style={{ flex: 1 }}>
             <span style={{ color: posColor(p.position), fontWeight: 700, marginRight: '0.5rem', fontSize: '0.75rem' }}>{p.position}</span>
             {p.name}
           </span>
-          <span style={{ fontWeight: 700 }}>{p.pointsAVG.toFixed(1)}</span>
+          <span style={{ width: '60px', textAlign: 'right', fontSize: '0.8rem', color: 'rgba(196, 181, 253, 0.7)' }}>${p.salary}</span>
+          <span style={{ width: '30px', textAlign: 'center', fontSize: '0.8rem', color: 'rgba(196, 181, 253, 0.7)' }}>{p.contractYear}</span>
+          <span style={{ width: '50px', textAlign: 'right', fontWeight: 700 }}>{p.pointsAVG.toFixed(1)}</span>
         </div>
       ))}
+      {players.length > 0 && (
+        <div style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          padding: '0.15rem 0',
+          fontSize: '0.65rem',
+          color: 'rgba(196, 181, 253, 0.4)',
+          gap: '0.25rem',
+        }}>
+          <span style={{ width: '60px', textAlign: 'right' }}>Salary</span>
+          <span style={{ width: '30px', textAlign: 'center' }}>Yrs</span>
+          <span style={{ width: '50px', textAlign: 'right' }}>AVG</span>
+        </div>
+      )}
       {picks.map(p => (
         <div key={pickKey(p)} style={{
           display: 'flex',
@@ -569,6 +627,63 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd }: {
       }}>
         <span>Season YTD</span>
         <span>{ytd.toFixed(1)}</span>
+      </div>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '0.25rem 0',
+        color: 'rgba(196, 181, 253, 0.6)',
+        fontSize: '0.875rem',
+      }}>
+        <span>Trade Salary</span>
+        <span>${tradeSalary}</span>
+      </div>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '0.25rem 0',
+        color: 'rgba(196, 181, 253, 0.6)',
+        fontSize: '0.875rem',
+      }}>
+        <span>Trade Years</span>
+        <span>{tradeYears}</span>
+      </div>
+
+      {/* Team totals before/after */}
+      <div style={{
+        marginTop: '1rem',
+        padding: '0.75rem',
+        background: 'rgba(109, 40, 217, 0.1)',
+        borderRadius: '8px',
+        border: '1px solid rgba(167, 139, 250, 0.15)',
+      }}>
+        <div style={{
+          fontSize: '0.7rem',
+          fontWeight: 700,
+          color: '#a78bfa',
+          letterSpacing: '0.05em',
+          marginBottom: '0.5rem',
+          textTransform: 'uppercase',
+        }}>
+          {teamName} Cap Impact
+        </div>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr auto auto',
+          gap: '0.25rem 0.75rem',
+          fontSize: '0.8rem',
+          color: 'rgba(196, 181, 253, 0.7)',
+        }}>
+          <span></span>
+          <span style={{ fontWeight: 700, textAlign: 'right', fontSize: '0.7rem', color: 'rgba(196, 181, 253, 0.5)' }}>BEFORE</span>
+          <span style={{ fontWeight: 700, textAlign: 'right', fontSize: '0.7rem', color: 'rgba(196, 181, 253, 0.5)' }}>AFTER</span>
+          <span>Total Salary</span>
+          <span style={{ textAlign: 'right' }}>${teamSalaryBefore}</span>
+          <span style={{ textAlign: 'right', color: teamSalaryAfter > 1000 ? '#ff6b6b' : '#00ff88', fontWeight: 700 }}>${teamSalaryAfter}</span>
+          <span>Total Years</span>
+          <span style={{ textAlign: 'right' }}>{teamYearsBefore}</span>
+          <span style={{ textAlign: 'right', color: teamYearsAfter > 65 ? '#ff6b6b' : '#00ff88', fontWeight: 700 }}>{teamYearsAfter}</span>
+        </div>
       </div>
     </div>
   );
@@ -716,6 +831,8 @@ function TeamPanel({
               <th style={{ padding: '0.6rem 1rem', textAlign: 'left', fontWeight: 700 }}>Player</th>
               <th style={{ padding: '0.6rem 0.5rem', textAlign: 'center', fontWeight: 700 }}>Pos</th>
               <th style={{ padding: '0.6rem 0.5rem', textAlign: 'center', fontWeight: 700 }}>Team</th>
+              <th style={{ padding: '0.6rem 0.5rem', textAlign: 'right', fontWeight: 700 }}>Salary</th>
+              <th style={{ padding: '0.6rem 0.5rem', textAlign: 'center', fontWeight: 700 }}>Yrs</th>
               <th style={{ padding: '0.6rem 1rem', textAlign: 'right', fontWeight: 700 }}>AVG</th>
             </tr>
           </thead>
@@ -760,6 +877,24 @@ function TeamPanel({
                     fontSize: '0.75rem',
                   }}>
                     {player.nflTeam}
+                  </td>
+                  <td style={{
+                    padding: '0.6rem 0.5rem',
+                    textAlign: 'right',
+                    color: selected ? '#a78bfa' : 'rgba(196, 181, 253, 0.8)',
+                    fontWeight: 600,
+                    fontSize: '0.8rem',
+                  }}>
+                    ${player.salary}
+                  </td>
+                  <td style={{
+                    padding: '0.6rem 0.5rem',
+                    textAlign: 'center',
+                    color: selected ? '#a78bfa' : 'rgba(196, 181, 253, 0.8)',
+                    fontWeight: 600,
+                    fontSize: '0.8rem',
+                  }}>
+                    {player.contractYear}
                   </td>
                   <td style={{
                     padding: '0.6rem 1rem',
