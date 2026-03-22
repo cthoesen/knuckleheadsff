@@ -9,7 +9,10 @@ This folder contains the player card images used by the **Players of the Week** 
 Each league's homepage includes an MFL homepage module (HPM #7) that:
 
 1. Loads **FlexSlider** (`flex-slider.min.js`) — a jQuery-based image carousel plugin.
-2. Makes an AJAX call to `https://mfl-leagues.com/api/slider-images`, which reads all image files from this folder and returns their URLs as a JSON array, **sorted alphabetically by filename**.
+2. Makes an AJAX call to `https://mfl-leagues.com/api/slider-images?league={league}` (e.g. `?league=kkl`), handled by `/app/api/slider-images/route.ts`. The API resolves images using the following priority:
+   - **League-specific first:** checks `/public/images/league/{league}/cards/` — if this folder exists and contains at least one supported image file (`.jpg`, `.jpeg`, `.png`, `.gif`, `.webp`), those images are used.
+   - **Shared fallback:** if no league-specific folder/images are found, falls back to `/public/images/shared/cards/` (this folder).
+   - The resolved image URLs are returned as a JSON array, **sorted alphabetically by filename**, which is why the numeric position prefix controls display order.
 3. Builds the slide HTML and initializes the FlexSlider carousel with the following settings:
    - **Animation:** Crossfade between slides
    - **Slideshow Speed:** 2 seconds per slide
@@ -64,7 +67,7 @@ The `/inactive/` subfolder holds player card images that are **temporarily or pe
 - Images staged for future use
 - Off-season archiving
 
-To reactivate a card, move it back to this folder (the parent `/cards/` directory) and ensure the filename follows the position-prefix naming convention above.
+To reactivate a card, move it back to the parent `/cards/` directory and ensure the filename follows the position-prefix naming convention above.
 
 ---
 
