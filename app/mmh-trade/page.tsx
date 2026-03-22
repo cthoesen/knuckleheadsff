@@ -11,6 +11,8 @@ interface Player {
   nflTeam: string;
   pointsYTD: number;
   pointsAVG: number;
+  salary: number;
+  rosterStatus: 'ACTIVE' | 'TAXI_SQUAD' | 'INJURED_RESERVE';
 }
 
 interface DraftPick {
@@ -160,6 +162,30 @@ export default function MMHTradeAnalyzer() {
     const aYTD = aPlayers.reduce((sum, p) => sum + p.pointsYTD, 0);
     const bYTD = bPlayers.reduce((sum, p) => sum + p.pointsYTD, 0);
 
+    // MMH cap rules: taxi = 0%, IR = 50%, active = 100% of salary
+    const capSalary = (p: Player) => {
+      if (p.rosterStatus === 'TAXI_SQUAD') return 0;
+      if (p.rosterStatus === 'INJURED_RESERVE') return p.salary * 0.5;
+      return p.salary;
+    };
+
+    // Raw trade salary totals (for display)
+    const aTradeSalary = aPlayers.reduce((sum, p) => sum + p.salary, 0);
+    const bTradeSalary = bPlayers.reduce((sum, p) => sum + p.salary, 0);
+
+    // Cap-eligible trade totals (what each team actually loses from cap)
+    const aTradeCapSalary = aPlayers.reduce((sum, p) => sum + capSalary(p), 0);
+    const bTradeCapSalary = bPlayers.reduce((sum, p) => sum + capSalary(p), 0);
+
+    // Full team cap totals before trade
+    const aTeamTotalSalary = teamA.players.reduce((sum, p) => sum + capSalary(p), 0);
+    const bTeamTotalSalary = teamB.players.reduce((sum, p) => sum + capSalary(p), 0);
+
+    // After trade: sending team loses cap-eligible amount, receiving team gains full salary
+    // (incoming players join active roster — no longer taxi/IR on the new team)
+    const aTeamSalaryAfter = aTeamTotalSalary - aTradeCapSalary + bTradeSalary;
+    const bTeamSalaryAfter = bTeamTotalSalary - bTradeCapSalary + aTradeSalary;
+
     let fairnessLabel: string;
     let fairnessColor: string;
     if (aPercent >= 40 && aPercent <= 60) {
@@ -178,6 +204,9 @@ export default function MMHTradeAnalyzer() {
       aPlayerValue, bPlayerValue, aPickValue, bPickValue,
       aTotalValue, bTotalValue, aPercent,
       aYTD, bYTD,
+      aTradeSalary, bTradeSalary,
+      aTeamTotalSalary, bTeamTotalSalary,
+      aTeamSalaryAfter, bTeamSalaryAfter,
       fairnessLabel, fairnessColor,
     };
   }, [teamA, teamB, teamAPlayerIds, teamBPlayerIds, teamAPickKeys, teamBPickKeys]);
@@ -434,8 +463,26 @@ export default function MMHTradeAnalyzer() {
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-                <TradeSummaryColumn teamName={teamA.name} players={analysis.aPlayers} picks={analysis.aPicks} totalValue={analysis.aTotalValue} ytd={analysis.aYTD} />
-                <TradeSummaryColumn teamName={teamB.name} players={analysis.bPlayers} picks={analysis.bPicks} totalValue={analysis.bTotalValue} ytd={analysis.bYTD} />
+                <TradeSummaryColumn
+                  teamName={teamA.name}
+                  players={analysis.aPlayers}
+                  picks={analysis.aPicks}
+                  totalValue={analysis.aTotalValue}
+                  ytd={analysis.aYTD}
+                  tradeSalary={analysis.aTradeSalary}
+                  teamSalaryBefore={analysis.aTeamTotalSalary}
+                  teamSalaryAfter={analysis.aTeamSalaryAfter}
+                />
+                <TradeSummaryColumn
+                  teamName={teamB.name}
+                  players={analysis.bPlayers}
+                  picks={analysis.bPicks}
+                  totalValue={analysis.bTotalValue}
+                  ytd={analysis.bYTD}
+                  tradeSalary={analysis.bTradeSalary}
+                  teamSalaryBefore={analysis.bTeamTotalSalary}
+                  teamSalaryAfter={analysis.bTeamSalaryAfter}
+                />
               </div>
 
               <div style={{
@@ -461,12 +508,15 @@ export default function MMHTradeAnalyzer() {
   );
 }
 
-function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd }: {
+function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd, tradeSalary, teamSalaryBefore, teamSalaryAfter }: {
   teamName: string;
   players: Player[];
   picks: DraftPick[];
   totalValue: number;
   ytd: number;
+  tradeSalary: number;
+  teamSalaryBefore: number;
+  teamSalaryAfter: number;
 }) {
   return (
     <div>
@@ -484,18 +534,34 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd }: {
         <div key={p.id} style={{
           display: 'flex',
           justifyContent: 'space-between',
+          alignItems: 'center',
           padding: '0.5rem 0',
           borderBottom: '1px solid rgba(52, 211, 153, 0.1)',
           color: '#6ee7b7',
           fontSize: '0.875rem',
         }}>
-          <span>
+          <span style={{ flex: 1 }}>
             <span style={{ color: posColor(p.position), fontWeight: 700, marginRight: '0.5rem', fontSize: '0.75rem' }}>{p.position}</span>
             {p.name}
+            {rosterStatusBadge(p.rosterStatus)}
           </span>
-          <span style={{ fontWeight: 700 }}>{p.pointsAVG.toFixed(1)}</span>
+          <span style={{ width: '60px', textAlign: 'right', fontSize: '0.8rem', color: 'rgba(110, 231, 183, 0.7)' }}>${p.salary}</span>
+          <span style={{ width: '50px', textAlign: 'right', fontWeight: 700 }}>{p.pointsAVG.toFixed(1)}</span>
         </div>
       ))}
+      {players.length > 0 && (
+        <div style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          padding: '0.15rem 0',
+          fontSize: '0.65rem',
+          color: 'rgba(110, 231, 183, 0.4)',
+          gap: '0.25rem',
+        }}>
+          <span style={{ width: '60px', textAlign: 'right' }}>Salary</span>
+          <span style={{ width: '50px', textAlign: 'right' }}>AVG</span>
+        </div>
+      )}
       {picks.map(p => (
         <div key={pickKey(p)} style={{
           display: 'flex',
@@ -532,7 +598,88 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd }: {
         <span>Season YTD</span>
         <span>{ytd.toFixed(1)}</span>
       </div>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '0.25rem 0',
+        color: 'rgba(110, 231, 183, 0.6)',
+        fontSize: '0.875rem',
+      }}>
+        <span>Trade Salary</span>
+        <span>${tradeSalary}</span>
+      </div>
+
+      {/* Team cap impact before/after */}
+      <div style={{
+        marginTop: '1rem',
+        padding: '0.75rem',
+        background: 'rgba(16, 185, 129, 0.1)',
+        borderRadius: '8px',
+        border: '1px solid rgba(52, 211, 153, 0.15)',
+      }}>
+        <div style={{
+          fontSize: '0.7rem',
+          fontWeight: 700,
+          color: '#34d399',
+          letterSpacing: '0.05em',
+          marginBottom: '0.5rem',
+          textTransform: 'uppercase',
+        }}>
+          {teamName} Cap Impact
+        </div>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr auto auto',
+          gap: '0.25rem 0.75rem',
+          fontSize: '0.8rem',
+          color: 'rgba(110, 231, 183, 0.7)',
+        }}>
+          <span></span>
+          <span style={{ fontWeight: 700, textAlign: 'right', fontSize: '0.7rem', color: 'rgba(110, 231, 183, 0.5)' }}>BEFORE</span>
+          <span style={{ fontWeight: 700, textAlign: 'right', fontSize: '0.7rem', color: 'rgba(110, 231, 183, 0.5)' }}>AFTER</span>
+          <span>Total Salary</span>
+          <span style={{ textAlign: 'right' }}>${teamSalaryBefore.toFixed(0)}</span>
+          <span style={{ textAlign: 'right', color: teamSalaryAfter > 1200 ? '#ff6b6b' : '#00ff88', fontWeight: 700 }}>${teamSalaryAfter.toFixed(0)}</span>
+        </div>
+        <div style={{
+          marginTop: '0.4rem',
+          fontSize: '0.65rem',
+          color: 'rgba(110, 231, 183, 0.4)',
+          lineHeight: 1.4,
+        }}>
+          IR counts 50% · Taxi Squad exempt
+        </div>
+      </div>
     </div>
+  );
+}
+
+function rosterStatusBadge(status: Player['rosterStatus'], size: 'sm' | 'md' = 'sm') {
+  if (status === 'ACTIVE') return null;
+  const isTaxi = status === 'TAXI_SQUAD';
+  const label = isTaxi ? 'TAXI' : 'IR';
+  const color = isTaxi ? '#ffaa00' : '#ff6b6b';
+  const bg = isTaxi ? 'rgba(255, 170, 0, 0.2)' : 'rgba(255, 107, 107, 0.2)';
+  const border = isTaxi ? 'rgba(255, 170, 0, 0.4)' : 'rgba(255, 107, 107, 0.4)';
+  const fontSize = size === 'sm' ? '0.55rem' : '0.6rem';
+  const padding = size === 'sm' ? '0.05rem 0.3rem' : '0.1rem 0.35rem';
+  return (
+    <span style={{
+      display: 'inline-block',
+      fontSize,
+      fontWeight: 700,
+      color,
+      background: bg,
+      border: `1px solid ${border}`,
+      borderRadius: '3px',
+      padding,
+      lineHeight: 1.2,
+      letterSpacing: '0.05em',
+      marginLeft: '0.35rem',
+      verticalAlign: 'middle',
+    }}>
+      {label}
+    </span>
   );
 }
 
@@ -614,6 +761,7 @@ function TeamPanel({
               }}>
                 <span style={{ color: posColor(p.position), fontSize: '0.7rem', fontWeight: 700 }}>{p.position}</span>
                 {p.name}
+                {rosterStatusBadge(p.rosterStatus, 'md')}
                 <X style={{ width: '12px', height: '12px' }} />
               </button>
             ))}
@@ -643,6 +791,7 @@ function TeamPanel({
               <th style={{ padding: '0.6rem 1rem', textAlign: 'left', fontWeight: 700 }}>Player</th>
               <th style={{ padding: '0.6rem 0.5rem', textAlign: 'center', fontWeight: 700 }}>Pos</th>
               <th style={{ padding: '0.6rem 0.5rem', textAlign: 'center', fontWeight: 700 }}>Team</th>
+              <th style={{ padding: '0.6rem 0.5rem', textAlign: 'right', fontWeight: 700 }}>Salary</th>
               <th style={{ padding: '0.6rem 1rem', textAlign: 'right', fontWeight: 700 }}>AVG</th>
             </tr>
           </thead>
@@ -661,12 +810,16 @@ function TeamPanel({
                   <td style={{ padding: '0.6rem 1rem', color: selected ? '#34d399' : '#6ee7b7', fontWeight: selected ? 700 : 500, fontSize: '0.875rem' }}>
                     {selected && <span style={{ marginRight: '0.4rem' }}>✓</span>}
                     {player.name}
+                    {rosterStatusBadge(player.rosterStatus)}
                   </td>
                   <td style={{ padding: '0.6rem 0.5rem', textAlign: 'center', color: posColor(player.position), fontWeight: 700, fontSize: '0.75rem' }}>
                     {player.position}
                   </td>
                   <td style={{ padding: '0.6rem 0.5rem', textAlign: 'center', color: 'rgba(110, 231, 183, 0.6)', fontSize: '0.75rem' }}>
                     {player.nflTeam}
+                  </td>
+                  <td style={{ padding: '0.6rem 0.5rem', textAlign: 'right', color: selected ? '#34d399' : 'rgba(110, 231, 183, 0.8)', fontWeight: 600, fontSize: '0.8rem' }}>
+                    ${player.salary}
                   </td>
                   <td style={{ padding: '0.6rem 1rem', textAlign: 'right', color: selected ? '#34d399' : 'rgba(110, 231, 183, 0.8)', fontWeight: 700, fontSize: '0.875rem' }}>
                     {player.pointsAVG.toFixed(1)}

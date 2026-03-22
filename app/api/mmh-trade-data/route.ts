@@ -93,6 +93,12 @@ export async function GET() {
           const playerId = rp.id;
           const info = playerMap.get(playerId);
           if (!info) return null;
+          // Normalize roster status from MFL rosters API (UPPER_SNAKE_CASE)
+          const rawStatus = (rp.status || '').toUpperCase();
+          const rosterStatus = rawStatus.includes('TAXI') ? 'TAXI_SQUAD'
+            : rawStatus.includes('INJURED') ? 'INJURED_RESERVE'
+            : 'ACTIVE';
+
           return {
             id: playerId,
             name: info.name,
@@ -100,6 +106,8 @@ export async function GET() {
             nflTeam: info.team,
             pointsYTD: ytdScores.get(playerId) || 0,
             pointsAVG: avgScores.get(playerId) || 0,
+            salary: parseFloat(rp.salary) || 0,
+            rosterStatus,
           };
         })
         .filter(Boolean);
