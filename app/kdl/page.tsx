@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Crown, ArrowLeft, ArrowLeftRight, DollarSign, TrendingUp, Users, FileText, Target, ClipboardList } from 'lucide-react';
+import { Crown, ArrowLeft, ArrowLeftRight, DollarSign, TrendingUp, Users, FileText, Target, ClipboardList, Skull } from 'lucide-react';
 
 export default function KDLHub() {
   return (
@@ -112,6 +112,27 @@ export default function KDLHub() {
                   <h3 className="text-lg font-bold text-white mb-1">Trade Analyzer</h3>
                   <p className="text-sm text-zinc-400 mb-3">
                     Evaluate trades with contract and cap implications
+                  </p>
+                  <div className="inline-flex items-center gap-1 text-xs text-violet-400 font-mono">
+                    <span className="w-2 h-2 bg-violet-400 rounded-full animate-pulse" />
+                    ACTIVE
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Link>
+
+          {/* Dead Money Tracker - Active */}
+          <Link href="/kdl-dead-money">
+            <div className="tool-card group">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-violet-500/10 rounded-lg group-hover:bg-violet-500/20 transition-colors">
+                  <Skull size={24} className="text-violet-400" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-white mb-1">Dead Money Tracker</h3>
+                  <p className="text-sm text-zinc-400 mb-3">
+                    Track dead money penalties for the {new Date().getFullYear() + 1} season from mid-season cuts
                   </p>
                   <div className="inline-flex items-center gap-1 text-xs text-violet-400 font-mono">
                     <span className="w-2 h-2 bg-violet-400 rounded-full animate-pulse" />
