@@ -6213,11 +6213,8 @@ Team Logos
 /* below settings to add background captions on roster report */
 #roster caption.withfranchiseicon {
   padding-left: 0.188rem;
-  padding-left: .188rem;
   padding-right: 0.188rem;
-  padding-right: .188rem;
-  background: rgba(0, 0, 0, 0) url(https://www.mfl-leagues.com/images/shared/caption-dark.png); /*added*/
-  background-position: center right; /*added*/
+  background-position: center;
 }
 /* below settings to decrease size of icons for standings on mobile devices */
 @media only screen and (max-width: 35.5em) {
