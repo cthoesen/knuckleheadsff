@@ -1493,15 +1493,17 @@ caption, h1, h2, h3, h4, .b_name {
 #body-kdl caption,
 #body-kdl .homepagecolumn .homepagemodule caption {
   background:
-    /* Hex edges at 0°, 60°, 120° */
-    linear-gradient(0deg,   transparent 46%, rgba(126, 34, 206, 0.15) 49%, rgba(156, 76, 225, 0.22) 50%, rgba(126, 34, 206, 0.15) 51%, transparent 54%),
-    linear-gradient(60deg,  transparent 46%, rgba(126, 34, 206, 0.15) 49%, rgba(156, 76, 225, 0.22) 50%, rgba(126, 34, 206, 0.15) 51%, transparent 54%),
-    linear-gradient(120deg, transparent 46%, rgba(126, 34, 206, 0.15) 49%, rgba(156, 76, 225, 0.22) 50%, rgba(126, 34, 206, 0.15) 51%, transparent 54%),
-    /* Node glow */
-    radial-gradient(circle 2px at 50% 50%, rgba(190, 137, 236, 0.20) 0%, transparent 100%),
+    /* Flat 2D hex outline grid — thin edges at 60°, 120°, 0° */
+    linear-gradient(60deg,  transparent 48%, rgba(156, 76, 225, 0.45) 49%, rgba(156, 76, 225, 0.45) 51%, transparent 52%),
+    linear-gradient(120deg, transparent 48%, rgba(156, 76, 225, 0.45) 49%, rgba(156, 76, 225, 0.45) 51%, transparent 52%),
+    linear-gradient(60deg,  transparent 48%, rgba(156, 76, 225, 0.45) 49%, rgba(156, 76, 225, 0.45) 51%, transparent 52%),
+    linear-gradient(120deg, transparent 48%, rgba(156, 76, 225, 0.45) 49%, rgba(156, 76, 225, 0.45) 51%, transparent 52%),
+    linear-gradient(0deg,   transparent 48%, rgba(126, 34, 206, 0.40) 49%, rgba(126, 34, 206, 0.40) 51%, transparent 52%),
+    linear-gradient(0deg,   transparent 48%, rgba(126, 34, 206, 0.40) 49%, rgba(126, 34, 206, 0.40) 51%, transparent 52%),
     /* Dark base */
     linear-gradient(180deg, rgba(10, 5, 18, 0.92) 0%, rgba(15, 8, 25, 0.88) 100%);
-  background-size: 45px 26px, 45px 26px, 45px 26px, 45px 26px, 100% 100%;
+  background-size: 40px 46px, 40px 46px, 40px 46px, 40px 46px, 40px 46px, 40px 46px, 100% 100%;
+  background-position: 0 0, 0 0, 20px 23px, 20px 23px, 0 0, 20px 23px, 0 0;
 }
 
 /* Added below logo before captions for mmh */
@@ -2924,7 +2926,6 @@ a:active {
 caption,
 #commissioner_setup table.two_column_layout th {
   font-size: 1.375rem;
-  background: transparent url(https://www.mfl-leagues.com/images/shared/caption-dark.png);
   background-position: center right; /*added*/
   /*box-shadow:  inset 0 -1.25rem 1.5rem -0.25rem var(--neutral-blur, gray); /*inset shadow from bottom*/
   padding: 0.5rem;
