@@ -1543,7 +1543,7 @@ caption, h1, h2, h3, h4, .b_name {
 #body-bsb caption,
 #body-bsb .homepagecolumn .homepagemodule caption {
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg fill='none' stroke='rgba(225,40,72,0.4)' stroke-width='1'%3E%3Cline x1='0' y1='0' x2='32' y2='0'/%3E%3Cline x1='0' y1='0' x2='0' y2='32'/%3E%3C/g%3E%3Cg fill='none' stroke='rgba(225,40,72,0.65)' stroke-width='1'%3E%3Ccircle cx='0' cy='0' r='2.5'/%3E%3Ccircle cx='32' cy='0' r='2.5'/%3E%3Ccircle cx='0' cy='32' r='2.5'/%3E%3Ccircle cx='32' cy='32' r='2.5'/%3E%3C/g%3E%3Cg fill='rgba(255,80,100,0.7)'%3E%3Ccircle cx='0' cy='0' r='1'/%3E%3Ccircle cx='32' cy='0' r='1'/%3E%3Ccircle cx='0' cy='32' r='1'/%3E%3Ccircle cx='32' cy='32' r='1'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg fill='none' stroke='rgba(225,40,72,0.4)' stroke-width='1'%3E%3Cline x1='0' y1='0' x2='32' y2='0'/%3E%3Cline x1='0' y1='0' x2='0' y2='32'/%3E%3C/g%3E%3Cg fill='none' stroke='rgba(225,40,72,0.65)' stroke-width='1'%3E%3Ccircle cx='0' cy='0' r='1.5'/%3E%3Ccircle cx='32' cy='0' r='2.5'/%3E%3Ccircle cx='0' cy='32' r='1.5'/%3E%3Ccircle cx='32' cy='32' r='2.5'/%3E%3C/g%3E%3Cg fill='rgba(255,80,100,0.7)'%3E%3Ccircle cx='0' cy='0' r='1'/%3E%3Ccircle cx='32' cy='0' r='1'/%3E%3Ccircle cx='0' cy='32' r='1'/%3E%3Ccircle cx='32' cy='32' r='1'/%3E%3C/g%3E%3C/svg%3E"),
     linear-gradient(180deg, rgba(15, 5, 5, 0.90) 0%, rgba(25, 8, 8, 0.85) 100%);
   background-size: 32px 32px, 100% 100%;
   background-position: 0 0, 0 0;
