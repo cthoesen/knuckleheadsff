@@ -739,10 +739,10 @@ input[type="radio"] {
 
 /* CRT / Scanline Overlay for all Leagues (desktop only) */
 @media only screen and (min-width: 48.1em) {
-  body#body-kkl::after,
-  body#body-kdl::after,
-  body#body-mmh::after,
-  body#body-bsb::after  {
+  body:has(#body-kkl)::after,
+  body:has(#body-kdl)::after,
+  body:has(#body-mmh)::after,
+  body:has(#body-bsb)::after  {
     content: "";
     position: fixed;
     inset: 0;
@@ -910,7 +910,7 @@ body:has(#body-mmh)::before {
     linear-gradient(transparent 95%, rgba(52, 211, 153, 0.04) 95%),
     linear-gradient(90deg, transparent 95%, rgba(52, 211, 153, 0.04) 95%);
   background-size: 90px 90px;
-  animation: mmhGridScroll 10s linear infinite;
+  animation: mmhGridScroll 6s linear infinite;
 }
 
 /* MMH neon glow shift */
