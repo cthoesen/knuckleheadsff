@@ -767,7 +767,7 @@ body:has(#body-kkl) {
     radial-gradient(ellipse at 90% 80%, rgba(0, 180, 220, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 50% 50%, rgba(0, 100, 150, 0.03) 0%, transparent 70%);
   background-attachment: fixed;
-  animation: kklNeonShift 10s ease-in-out infinite alternate, kklGlitch 20s step-end infinite;
+  animation: kklNeonShift 20s ease-in-out infinite alternate, kklGlitch 30s step-end infinite;
 }
 
 body:has(#body-kkl)::before {
@@ -815,7 +815,7 @@ body:has(#body-kdl) {
     radial-gradient(ellipse at 90% 80%, rgba(124, 58, 237, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 50% 50%, rgba(109, 40, 217, 0.03) 0%, transparent 70%);
   background-attachment: fixed;
-  animation: kdlNeonShift 12s ease-in-out infinite alternate, kdlGlitch 20s step-end infinite;
+  animation: kdlNeonShift 24s ease-in-out infinite alternate, kdlGlitch 40s step-end infinite;
 }
 
 /* Honeycomb hex grid — two offset rows creating the hex stagger */
@@ -845,7 +845,7 @@ body:has(#body-kdl)::before {
     0 0, 0 0, 0 0,
     156px 90px, 156px 90px, 156px 90px,
     0 0, 156px 90px;
-  animation: kdlHexPulse 6s ease-in-out infinite alternate;
+  animation: kdlHexPulse 12s ease-in-out infinite alternate;
 }
 
 /* KDL neon glow shift */
@@ -896,7 +896,7 @@ body:has(#body-mmh) {
     radial-gradient(ellipse at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 50% 50%, rgba(5, 150, 105, 0.03) 0%, transparent 70%);
   background-attachment: fixed;
-  animation: mmhNeonShift 15s ease-in-out infinite alternate, mmhGlitch 20s step-end infinite;
+  animation: mmhNeonShift 30s ease-in-out infinite alternate, mmhGlitch 40s step-end infinite;
 }
 
 /* Animated grid — larger squares than KKL, diagonal scroll direction */
@@ -910,7 +910,7 @@ body:has(#body-mmh)::before {
     linear-gradient(transparent 95%, rgba(52, 211, 153, 0.04) 95%),
     linear-gradient(90deg, transparent 95%, rgba(52, 211, 153, 0.04) 95%);
   background-size: 90px 90px;
-  animation: mmhGridScroll 5s linear infinite;
+  animation: mmhGridScroll 10s linear infinite;
 }
 
 /* MMH neon glow shift */
@@ -951,7 +951,7 @@ body:has(#body-bsb) {
     radial-gradient(ellipse at 90% 80%, rgba(190, 18, 60, 0.05) 0%, transparent 50%),
     radial-gradient(ellipse at 50% 50%, rgba(159, 18, 57, 0.03) 0%, transparent 70%);
   background-attachment: fixed;
-  animation: bsbNeonShift 8s ease-in-out infinite alternate, bsbGlitch 25s step-end infinite;
+  animation: bsbNeonShift 16s ease-in-out infinite alternate, bsbGlitch 50s step-end infinite;
 }
 
 /* Lava veins — glowing cracks with molten red light bleeding through */
@@ -979,7 +979,7 @@ body:has(#body-bsb)::before {
     300px 300px, 450px 350px, 250px 400px, 500px 280px,
     350px 450px, 400px 320px, 280px 380px,
     100% 100%, 100% 100%, 100% 100%;
-  animation: bsbLavaPulse 4s ease-in-out infinite alternate;
+  animation: bsbLavaPulse 8s ease-in-out infinite alternate;
 }
 
 /* BSB neon glow shift */
@@ -1228,7 +1228,12 @@ body:has(#body-bsb) .homepagemodule {
 .icon-bar-full .svg-iconlink:nth-child(10) { animation-delay: 0.50s; }
 .icon-bar-full .svg-iconlink:nth-child(11) { animation-delay: 0.55s; }
 .icon-bar-full .svg-iconlink:nth-child(12) { animation-delay: 0.60s; }
-
+.icon-bar-full .svg-iconlink:nth-child(13) { animation-delay: 0.65s; }
+.icon-bar-full .svg-iconlink:nth-child(14) { animation-delay: 0.70s; }
+.icon-bar-full .svg-iconlink:nth-child(15) { animation-delay: 0.75s; }
+.icon-bar-full .svg-iconlink:nth-child(16) { animation-delay: 0.80s; }
+.icon-bar-full .svg-iconlink:nth-child(17) { animation-delay: 0.85s; }
+.icon-bar-full .svg-iconlink:nth-child(18) { animation-delay: 0.90s; }
 
 /***********************************************
  * SVG ICON ANIMATION LIBRARY
