@@ -1512,13 +1512,13 @@ caption, h1, h2, h3, h4, .b_name {
     text-indent: 0;
 }
 
-/* MMH caption — isometric grid with ring pads (SVG tile 24×42px) */
+/* MMH caption — diamond circuit board: ±45° traces, ring pad at center X, vias at diamond corners (SVG tile 40×40px) */
 #body-mmh caption,
 #body-mmh .homepagecolumn .homepagemodule caption {
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='42'%3E%3Cg fill='none' stroke='rgba(52,211,153,0.35)' stroke-width='1'%3E%3Cline x1='0' y1='0' x2='24' y2='0'/%3E%3Cline x1='0' y1='21' x2='24' y2='21'/%3E%3Cline x1='0' y1='42' x2='24' y2='0'/%3E%3Cline x1='0' y1='0' x2='24' y2='42'/%3E%3C/g%3E%3Cg fill='none' stroke='rgba(52,211,153,0.6)' stroke-width='1'%3E%3Ccircle cx='0' cy='0' r='1.5'/%3E%3Ccircle cx='24' cy='0' r='1.5'/%3E%3Ccircle cx='12' cy='21' r='2.5'/%3E%3Ccircle cx='0' cy='42' r='1.5'/%3E%3Ccircle cx='24' cy='42' r='1.5'/%3E%3C/g%3E%3Cg fill='rgba(120,255,200,0.7)'%3E%3Ccircle cx='0' cy='0' r='1'/%3E%3Ccircle cx='24' cy='0' r='1'/%3E%3Ccircle cx='12' cy='21' r='1'/%3E%3Ccircle cx='0' cy='42' r='1'/%3E%3Ccircle cx='24' cy='42' r='1'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cg stroke='rgba(52,211,153,0.25)' stroke-width='0.75' fill='none'%3E%3Cline x1='0' y1='0' x2='40' y2='40'/%3E%3Cline x1='0' y1='40' x2='40' y2='0'/%3E%3Cline x1='0' y1='20' x2='20' y2='0'/%3E%3Cline x1='20' y1='0' x2='40' y2='20'/%3E%3Cline x1='40' y1='20' x2='20' y2='40'/%3E%3Cline x1='20' y1='40' x2='0' y2='20'/%3E%3C/g%3E%3Ccircle cx='20' cy='20' r='2.5' fill='none' stroke='rgba(80,230,170,0.5)' stroke-width='1'/%3E%3Ccircle cx='20' cy='20' r='1' fill='rgba(120,255,200,0.6)'/%3E%3Ccircle cx='0' cy='20' r='1.5' fill='rgba(52,200,150,0.4)'/%3E%3Ccircle cx='20' cy='0' r='1.5' fill='rgba(52,200,150,0.4)'/%3E%3Ccircle cx='40' cy='20' r='1.5' fill='rgba(52,200,150,0.4)'/%3E%3Ccircle cx='20' cy='40' r='1.5' fill='rgba(52,200,150,0.4)'/%3E%3C/svg%3E"),
     linear-gradient(180deg, rgba(5, 15, 10, 0.92) 0%, rgba(8, 20, 14, 0.88) 100%);
-  background-size: 24px 42px, 100% 100%;
+  background-size: 40px 40px, 100% 100%;
   background-position: 0 0, 0 0;
 }
 
@@ -1539,13 +1539,13 @@ caption, h1, h2, h3, h4, .b_name {
     text-indent: 0;
 }
 
-/* BSB caption — square grid with ring pads (SVG tile 32×32px) */
+/* BSB caption — circuit board, wider grid than KKL: H/V traces, alternating ring pads + vias (SVG tile 52×52px) */
 #body-bsb caption,
 #body-bsb .homepagecolumn .homepagemodule caption {
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg fill='none' stroke='rgba(225,40,72,0.4)' stroke-width='1'%3E%3Cline x1='0' y1='0' x2='32' y2='0'/%3E%3Cline x1='0' y1='0' x2='0' y2='32'/%3E%3C/g%3E%3Cg fill='none' stroke='rgba(225,40,72,0.65)' stroke-width='1'%3E%3Ccircle cx='0' cy='0' r='2.5'/%3E%3Ccircle cx='32' cy='0' r='2.5'/%3E%3Ccircle cx='0' cy='32' r='2.5'/%3E%3Ccircle cx='32' cy='32' r='2.5'/%3E%3C/g%3E%3Cg fill='rgba(255,80,100,0.7)'%3E%3Ccircle cx='0' cy='0' r='1'/%3E%3Ccircle cx='32' cy='0' r='1'/%3E%3Ccircle cx='0' cy='32' r='1'/%3E%3Ccircle cx='32' cy='32' r='1'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='52'%3E%3Cg stroke='rgba(225,40,72,0.25)' stroke-width='0.75' fill='none'%3E%3Cline x1='0' y1='13' x2='52' y2='13'/%3E%3Cline x1='0' y1='39' x2='52' y2='39'/%3E%3Cline x1='13' y1='0' x2='13' y2='52'/%3E%3Cline x1='39' y1='0' x2='39' y2='52'/%3E%3C/g%3E%3Ccircle cx='13' cy='13' r='2.5' fill='none' stroke='rgba(225,40,72,0.5)' stroke-width='1'/%3E%3Ccircle cx='13' cy='13' r='1' fill='rgba(255,80,100,0.6)'/%3E%3Ccircle cx='39' cy='39' r='2.5' fill='none' stroke='rgba(225,40,72,0.5)' stroke-width='1'/%3E%3Ccircle cx='39' cy='39' r='1' fill='rgba(255,80,100,0.6)'/%3E%3Ccircle cx='39' cy='13' r='1.5' fill='rgba(200,40,72,0.4)'/%3E%3Ccircle cx='13' cy='39' r='1.5' fill='rgba(200,40,72,0.4)'/%3E%3C/svg%3E"),
     linear-gradient(180deg, rgba(15, 5, 5, 0.90) 0%, rgba(25, 8, 8, 0.85) 100%);
-  background-size: 32px 32px, 100% 100%;
+  background-size: 52px 52px, 100% 100%;
   background-position: 0 0, 0 0;
 }
 
