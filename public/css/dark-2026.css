@@ -1460,16 +1460,12 @@ caption, h1, h2, h3, h4, .b_name {
 #body-kkl caption,
 #body-kkl .homepagecolumn .homepagemodule caption {
   background:
-    /* Grid lines */
-    linear-gradient(transparent 92%, rgba(0, 255, 255, 0.08) 92%, rgba(0, 255, 255, 0.08) 100%),
-    linear-gradient(90deg, transparent 92%, rgba(0, 255, 255, 0.08) 92%, rgba(0, 255, 255, 0.08) 100%),
-    /* Intersection glow dots */
-    radial-gradient(circle 1.5px at 100% 100%, rgba(0, 255, 255, 0.20) 100%, transparent 100%),
-    /* Neon sweep highlight */
-    linear-gradient(90deg, transparent 0%, rgba(0, 255, 255, 0.05) 40%, rgba(0, 220, 255, 0.08) 50%, rgba(0, 255, 255, 0.05) 60%, transparent 100%),
+    /* Circuit board — grid traces with ring pads and vias (SVG tile 40×40px) */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cg stroke='rgba(0,200,255,0.25)' stroke-width='0.75' fill='none'%3E%3Cline x1='0' y1='10' x2='40' y2='10'/%3E%3Cline x1='0' y1='30' x2='40' y2='30'/%3E%3Cline x1='10' y1='0' x2='10' y2='40'/%3E%3Cline x1='30' y1='0' x2='30' y2='40'/%3E%3C/g%3E%3Ccircle cx='10' cy='10' r='2.5' fill='none' stroke='rgba(0,230,255,0.5)' stroke-width='1'/%3E%3Ccircle cx='10' cy='10' r='1' fill='rgba(0,255,255,0.6)'/%3E%3Ccircle cx='30' cy='30' r='2.5' fill='none' stroke='rgba(0,230,255,0.5)' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='1' fill='rgba(0,255,255,0.6)'/%3E%3Ccircle cx='30' cy='10' r='1.5' fill='rgba(0,210,255,0.4)'/%3E%3Ccircle cx='10' cy='30' r='1.5' fill='rgba(0,210,255,0.4)'/%3E%3C/svg%3E"),
     /* Dark base */
     linear-gradient(180deg, rgba(5, 12, 15, 0.92) 0%, rgba(8, 18, 22, 0.88) 100%);
-  background-size: 30px 30px, 30px 30px, 30px 30px, 100% 100%, 100% 100%;
+  background-size: 40px 40px, 100% 100%;
+  background-position: 0 0, 0 0;
 }
 
 /* Added below logo before captions for kdl */
@@ -1518,21 +1514,16 @@ caption, h1, h2, h3, h4, .b_name {
     text-indent: 0;
 }
 
-/* MMH caption — forest canopy / network branches background */
+/* MMH caption — interlocking chevron / herringbone (two offset SVG layers, 40×20px) */
 #body-mmh caption,
 #body-mmh .homepagecolumn .homepagemodule caption {
   background:
-    /* Branch lines at varying angles */
-    linear-gradient(35deg,  transparent 49%, rgba(52, 211, 153, 0.18) 49.5%, rgba(52, 211, 153, 0.18) 50.5%, transparent 51%),
-    linear-gradient(140deg, transparent 49%, rgba(34, 197, 140, 0.15) 49.5%, rgba(34, 197, 140, 0.15) 50.5%, transparent 51%),
-    linear-gradient(80deg,  transparent 49%, rgba(16, 185, 129, 0.12) 49.5%, rgba(16, 185, 129, 0.12) 50.5%, transparent 51%),
-    /* Junction node glows */
-    radial-gradient(circle 3px at 25% 50%, rgba(52, 211, 153, 0.25) 0%, transparent 100%),
-    radial-gradient(circle 2.5px at 70% 40%, rgba(34, 197, 140, 0.20) 0%, transparent 100%),
-    radial-gradient(circle 2px at 50% 65%, rgba(16, 185, 129, 0.18) 0%, transparent 100%),
-    /* Dark forest base */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='20'%3E%3Cpolyline fill='none' stroke='rgba(52,211,153,0.35)' stroke-width='1.2' stroke-linejoin='round' points='0,0 20,20 40,0'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='20'%3E%3Cpolyline fill='none' stroke='rgba(52,211,153,0.35)' stroke-width='1.2' stroke-linejoin='round' points='0,0 20,20 40,0'/%3E%3C/svg%3E"),
+    /* Dark base */
     linear-gradient(180deg, rgba(5, 15, 10, 0.92) 0%, rgba(8, 20, 14, 0.88) 100%);
-  background-size: 180px 70px, 150px 55px, 220px 65px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+  background-size: 40px 20px, 40px 20px, 100% 100%;
+  background-position: 0 0, 20px 10px, 0 0;
 }
 
 /* Added below logo before captions for bsb */
@@ -1552,20 +1543,15 @@ caption, h1, h2, h3, h4, .b_name {
     text-indent: 0;
 }
 
-/* BSB caption — lava veins cracked earth background */
+/* BSB caption — baseball stitch (opposing C-curves with crossing thread, SVG tile 50×40px) */
 #body-bsb caption,
 #body-bsb .homepagecolumn .homepagemodule caption {
   background:
-    /* Glowing cracks */
-    linear-gradient(25deg,  transparent 49%, rgba(225, 29, 72, 0.25) 49.5%, rgba(255, 80, 60, 0.4) 50%, rgba(225, 29, 72, 0.25) 50.5%, transparent 51%),
-    linear-gradient(155deg, transparent 49%, rgba(190, 18, 60, 0.20) 49.5%, rgba(240, 60, 50, 0.35) 50%, rgba(190, 18, 60, 0.20) 50.5%, transparent 51%),
-    linear-gradient(80deg,  transparent 49%, rgba(180, 10, 40, 0.15) 49.5%, rgba(255, 70, 40, 0.28) 50%, rgba(180, 10, 40, 0.15) 50.5%, transparent 51%),
-    /* Molten underglow */
-    radial-gradient(ellipse at 20% 50%, rgba(255, 50, 30, 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 50%, rgba(225, 29, 72, 0.10) 0%, transparent 60%),
-    /* Dark charred base */
-    linear-gradient(180deg, rgba(15, 5, 5, 0.9) 0%, rgba(25, 8, 8, 0.85) 100%);
-  background-size: 200px 80px, 160px 60px, 250px 70px, 100% 100%, 100% 100%, 100% 100%;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='40'%3E%3Cg fill='none' stroke='rgba(225,40,72,0.45)' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M16,10 C5,10 5,30 16,30'/%3E%3Cpath d='M34,10 C45,10 45,30 34,30'/%3E%3Cline x1='16' y1='17' x2='34' y2='14'/%3E%3Cline x1='16' y1='23' x2='34' y2='26'/%3E%3C/g%3E%3C/svg%3E"),
+    /* Dark base */
+    linear-gradient(180deg, rgba(15, 5, 5, 0.90) 0%, rgba(25, 8, 8, 0.85) 100%);
+  background-size: 50px 40px, 100% 100%;
+  background-position: 0 0, 0 0;
 }
 
 /* Added below for mfl live score box font settings */
