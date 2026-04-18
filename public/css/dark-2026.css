@@ -1197,13 +1197,13 @@ body:has(#body-kkl) .homepagemodule {
 }
 
 
-/* Entrance Animations on Page Load */
+/* Entrance Animations on Page Load 
 body:has(#body-kkl) .homepagemodule,
 body:has(#body-kdl) .homepagemodule,
 body:has(#body-mmh) .homepagemodule,
 body:has(#body-bsb) .homepagemodule {
   animation: fadeSlideUp 0.4s ease forwards;
-}
+}*/
 
 /* Icon Bar — Stagger Fade-In on Page Load */
 @keyframes iconFadeIn {
