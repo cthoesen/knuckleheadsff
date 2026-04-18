@@ -14405,7 +14405,7 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
     style = document.createElement("style");
     document.head.appendChild(style), style.sheet.insertRule(".hz-table-scroll table{padding-bottom:0!important}");
 }
-window.addEventListener("load", function () {
+document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("#MFLBoxWrapper, #tabmenu-wrap, #container-wrap, .ticker-wrapper").forEach(function (e) {
         e.style.visibility = "visible";
     });
