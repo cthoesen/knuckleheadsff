@@ -739,10 +739,10 @@ input[type="radio"] {
 
 /* CRT / Scanline Overlay for all Leagues (desktop only) */
 @media only screen and (min-width: 48.1em) {
-  /*body#body-kkl::after,
+  body#body-kkl::after,
   body#body-kdl::after,
   body#body-mmh::after,
-  body#body-bsb::after */ body#body_home::before {
+  body#body-bsb::after  {
     content: "";
     position: fixed;
     inset: 0;
