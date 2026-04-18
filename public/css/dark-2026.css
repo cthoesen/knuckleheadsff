@@ -1493,17 +1493,12 @@ caption, h1, h2, h3, h4, .b_name {
 #body-kdl caption,
 #body-kdl .homepagecolumn .homepagemodule caption {
   background:
-    /* Flat 2D hex outline grid — thin edges at 60°, 120°, 0° */
-    linear-gradient(60deg,  transparent 48%, rgba(156, 76, 225, 0.45) 49%, rgba(156, 76, 225, 0.45) 51%, transparent 52%),
-    linear-gradient(120deg, transparent 48%, rgba(156, 76, 225, 0.45) 49%, rgba(156, 76, 225, 0.45) 51%, transparent 52%),
-    linear-gradient(60deg,  transparent 48%, rgba(156, 76, 225, 0.45) 49%, rgba(156, 76, 225, 0.45) 51%, transparent 52%),
-    linear-gradient(120deg, transparent 48%, rgba(156, 76, 225, 0.45) 49%, rgba(156, 76, 225, 0.45) 51%, transparent 52%),
-    linear-gradient(0deg,   transparent 48%, rgba(126, 34, 206, 0.40) 49%, rgba(126, 34, 206, 0.40) 51%, transparent 52%),
-    linear-gradient(0deg,   transparent 48%, rgba(126, 34, 206, 0.40) 49%, rgba(126, 34, 206, 0.40) 51%, transparent 52%),
+    /* Flat 2D hex outline grid — SVG tile, pointy-top, R=20px (35×60px) */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='35' height='60'%3E%3Cpath fill='none' stroke='rgba(156,76,225,0.4)' stroke-width='1' d='M17.5,0 L35,10 L35,30 L17.5,40 L0,30 L0,10Z M17.5,40 L17.5,60'/%3E%3C/svg%3E"),
     /* Dark base */
     linear-gradient(180deg, rgba(10, 5, 18, 0.92) 0%, rgba(15, 8, 25, 0.88) 100%);
-  background-size: 40px 46px, 40px 46px, 40px 46px, 40px 46px, 40px 46px, 40px 46px, 100% 100%;
-  background-position: 0 0, 0 0, 20px 23px, 20px 23px, 0 0, 20px 23px, 0 0;
+  background-size: 35px 60px, 100% 100%;
+  background-position: 0 0, 0 0;
 }
 
 /* Added below logo before captions for mmh */
