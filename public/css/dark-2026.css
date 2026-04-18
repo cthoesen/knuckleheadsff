@@ -742,7 +742,7 @@ input[type="radio"] {
   /*body#body-kkl::after,
   body#body-kdl::after,
   body#body-mmh::after,
-  body#body-bsb::after */body_home::after {
+  body#body-bsb::after */ #body_home::after {
     content: "";
     position: fixed;
     inset: 0;
