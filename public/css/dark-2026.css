@@ -1465,7 +1465,7 @@ caption, h1, h2, h3, h4, .b_name {
     /* Dark base */
     linear-gradient(180deg, rgba(5, 12, 15, 0.92) 0%, rgba(8, 18, 22, 0.88) 100%);
   background-size: 40px 40px, 100% 100%;
-  background-position: 0 45%, 0 45%;
+  background-position: 0 -45%, 0 -45%;
 }
 
 /* Added below logo before captions for kdl */
