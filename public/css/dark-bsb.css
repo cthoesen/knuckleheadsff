@@ -1281,7 +1281,7 @@ caption::before {
 }
 
 /* removes logo before captions for roster report */
-#body-bsb caption.withfranchiseicon:before {
+caption.withfranchiseicon:before {
     padding: 0.313rem 0;
     text-align: center !important;
     text-indent: 0;
