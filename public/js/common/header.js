@@ -1,6 +1,11 @@
 //HEADER VERSION NUMBER
 //console.log('HEADER SCRIPT LAST UPDATED 5-27-23');
 
+// MFL year constants — used by API caching and cache-busting logic
+const CurrentMFLYear = 2026;
+const MFLPastSeason = (CurrentMFLYear !== year);
+let updatedMFLCacheFile = true;
+
 // ONLY USE THIS FOR TEMPLATE TO REMOVE IF ANYONE LOADED A CUSTOM SKIN ONTO THE SITE
 
 ["skin", "responsive"].forEach(id => {
@@ -9,6 +14,31 @@
 });
 
 window.MFL_DEBUG_API = false;
+
+// API dependency map — determines which modules require each API call.
+// Used by needsAPI() to skip unnecessary API fetches when all dependents have cached data.
+const _API_DEPS = {
+	loadMyLeaguesJSON:        ["mflLive"],
+	reportInjuriesAPI:        ["irReport", "contract", "moduleScoreboard", "replaceMFLScoring", "mflLive", "MondayNight", "overview", "miniBoxscore"],
+	reportTransactionsAPI:    ["irReport", "contract"],
+	reportRostersAPI:         ["irReport", "contract"],
+	reportProjectedScoresAPI: ["moduleScoreboard", "replaceMFLScoring", "mflLive", "MondayNight", "Marquee", "overview", "miniBoxscore"],
+	reportLeagueAPI:          ["contract", "allPlay", "mflLive", "prizePayouts", "playoffs", "overview", "survivor"],
+	reportStandingsAPI:       ["moduleScoreboard", "allPlay", "replaceMFLScoring", "MondayNight", "FantasyTicker", "Marquee", "prizePayouts", "playoffs", "overview", "miniBoxscore", "survivor"],
+	reportTopStartersAPI:     ["overview"],
+	reportWeeklyResultsAPI:   ["moduleScoreboard", "allPlay", "replaceMFLScoring", "MondayNight", "FantasyTicker", "Marquee", "prizePayouts", "playoffs", "overview", "miniBoxscore", "survivor"],
+	getLiveScoringAPI:        ["moduleScoreboard", "mflLive", "MondayNight", "FantasyTicker", "Marquee", "miniBoxscore"],
+};
+
+// Returns true if the named API call is needed.
+// Returns false (skip the call) only when every dependent module is confirmed to have cached data.
+function needsAPI(apiName) {
+	const deps = _API_DEPS[apiName];
+	return !deps || deps.some(dep => {
+		const cached = window["useCache_" + dep];
+		return cached === undefined || cached === true;
+	});
+}
 
 function logApi(label, data) {
 	if (!window.MFL_DEBUG_API) return;
