@@ -6464,7 +6464,7 @@ function scoreAdjustmentHtml(which) {
 (function (window, document) {
 	'use strict';
 	const file = 'https://mfl-leagues.com/images/shared/icons/svg-sprites.svg';
-	const revision = 18;
+	const revision = 19;
 
 	if (!document.createElementNS || !document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect) {
 		return true;
