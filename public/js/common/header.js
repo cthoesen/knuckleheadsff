@@ -5917,7 +5917,7 @@ if (is_offseason && hide_extra && typeof window.jQuery === "function") {
 ////////////////////                      SET REM                     ////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-if (typeof useREM === undefined) var useREM = false;
+if (typeof useREM === 'undefined') var useREM = false;
 
 function calcREM(px) {
 	if (!isNaN(px)) {
