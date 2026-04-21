@@ -624,10 +624,10 @@ html.theme-vikings {
 }
 /***************************************/
 
-/* Universal Glassmorphism on Report Containers */
-.mobile-wrap,
-.settings-mobile-wrap,
-.homepagemodule {
+/* Glassmorphism on Report Containers — scoped to managed leagues only */
+body:has(:is(#body-kkl, #body-kdl, #body-mmh, #body-bsb)) .mobile-wrap,
+body:has(:is(#body-kkl, #body-kdl, #body-mmh, #body-bsb)) .settings-mobile-wrap,
+body:has(:is(#body-kkl, #body-kdl, #body-mmh, #body-bsb)) .homepagemodule {
   background: var(--glass-bg, rgba(20, 20, 20, 0.6)) !important;
   backdrop-filter: var(--glass-blur, blur(12px));
   -webkit-backdrop-filter: var(--glass-blur, blur(12px));
@@ -637,7 +637,7 @@ html.theme-vikings {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
 }
 
-.homepagemodule:hover {
+body:has(:is(#body-kkl, #body-kdl, #body-mmh, #body-bsb)) .homepagemodule:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 32px var(--neutral-blur, rgba(0, 0, 0, 0.5)) !important;
 }
