@@ -1048,6 +1048,24 @@ caption:hover {
   cursor: crosshair;
 }
 
+/* Disable body animations on mobile — the glitch keyframes apply filter to the body,
+   which makes Chrome/Safari treat the body as the containing block for position:fixed
+   children (including #menu-trigger). This causes the hamburger to be positioned
+   relative to the body instead of the viewport, putting it in the wrong place.
+   Resetting background-attachment also prevents the iOS Safari position:fixed flicker
+   that occurs when background-attachment:fixed persists on mobile (the plain "body"
+   override in the mobile section below can't win against the higher-specificity
+   body:has(#body-xxx) rule). */
+@media only screen and (max-width: 48em) {
+  body:has(#body-kkl),
+  body:has(#body-kdl),
+  body:has(#body-mmh),
+  body:has(#body-bsb) {
+    animation: none;
+    background-attachment: scroll;
+  }
+}
+
 /* Glassmorphism on Report Containers */
 body:has(:is(#body-kkl, #body-kdl, #body-mmh, #body-bsb)) .mobile-wrap,
 body:has(:is(#body-kkl, #body-kdl, #body-mmh, #body-bsb)) .settings-mobile-wrap {
