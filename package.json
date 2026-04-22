@@ -9,7 +9,7 @@
     "start": "next start",
     "export": "next build",
     "minify:js": "terser public/js/common/header.js -o public/js/common/header.min.js -c -m && terser public/js/common/footer.js -o public/js/common/footer.min.js -c -m && terser public/js/common/scoreboard.js -o public/js/common/scoreboard.min.js -c -m && terser public/js/common/cyber-fab.js -o public/js/common/cyber-fab.min.js -c -m && terser public/js/common/fantasy-ticker.js -o public/js/common/fantasy-ticker.min.js -c -m && terser public/js/common/popup-gallery.js -o public/js/common/popup-gallery.min.js -c -m",
-    "minify:css": "csso public/css/dark-2026.css -o public/css/dark-2026.min.css && csso public/css/dark-bsb.css -o public/css/dark-bsb.min.css && csso public/css/dark-kdl.css -o public/css/dark-kdl.min.css",
+    "minify:css": "csso public/css/dark-2026.css -o public/css/dark-2026.min.css && csso public/css/dark-bsb.css -o public/css/dark-bsb.min.css && csso public/css/dark-kdl.css -o public/css/dark-kdl.min.css && csso public/css/dark-kkl.css -o public/css/dark-kkl.min.css",
     "minify": "npm run minify:js && npm run minify:css"
   },
   "dependencies": {
