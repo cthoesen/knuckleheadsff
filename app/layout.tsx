@@ -1,5 +1,20 @@
-import './globals.css'; // <--- THIS IS THE MISSING KEY!
+import './globals.css';
+import { Orbitron, Rajdhani } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
+
+const orbitron = Orbitron({
+  subsets: ['latin'],
+  weight: ['400', '700', '900'],
+  variable: '--font-orbitron',
+  display: 'swap',
+});
+
+const rajdhani = Rajdhani({
+  subsets: ['latin'],
+  weight: ['300', '400', '600', '700'],
+  variable: '--font-rajdhani',
+  display: 'swap',
+});
 
 export const metadata = {
   title: 'MFL Leagues',
@@ -12,8 +27,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className="bg-zinc-950 text-zinc-100">{children}</body>
+    <html lang="en" className={`${orbitron.variable} ${rajdhani.variable}`}>
+      <body className="bg-zinc-950 text-zinc-100">
+        {children}
+        <Analytics />
+      </body>
     </html>
   )
 }

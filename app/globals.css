@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
 
 /* You can define your theme colors here using standard CSS variables if needed,
    but Tailwind v4 includes all standard colors (zinc, emerald, etc.) by default. */
@@ -11,9 +10,6 @@
 
 /* ... keep any other custom CSS you had below ... */
 @theme {
-  --font-orbitron: 'Orbitron', sans-serif;
-  --font-rajdhani: 'Rajdhani', sans-serif;
-
   --color-cyber-dark: #0a0e27;
   --color-cyber-mid: #1a1347;
   --color-cyber-deep: #2d1b69;
