@@ -1,13 +1,12 @@
 <!------------------------------------------------------>
 <!----------------- Start #1 - Header ------------------>
 <!------------------------------------------------------>
-<div id="body-kdl">
 
 <!-- Pre-resolve DNS and preconnect -->
 <link rel="dns-prefetch" href="https://www.mflscripts.com">
 <link rel="preconnect" href="https://www.mflscripts.com" crossorigin>
-<link rel="dns-prefetch" href="https://mfl-leagues.com">
-<link rel="preconnect" href="https://mfl-leagues.com" crossorigin>
+
+<div id="body-kdl">
 
 <style>
 #tabmenu-wrap li#tab7 a:before, #tabmenu-wrap #tab_title.tab7:before{content:"\f155";}
@@ -322,7 +321,7 @@ document.head.appendChild(linkRelIco);
 
 <!-- CALENDAR SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=123">
-<svg class="svg-icon icon-calendar" viewBox="0 0 92.1 99">
+<svg class="svg-icon icon-calendar" viewBox="0 0 99 98.99">
 <use href="#icon-calendar"></use>
 </svg>
 <div class="svg-text">League<br>Calendar</div>
@@ -339,7 +338,7 @@ document.head.appendChild(linkRelIco);
 
 
 <!-- Load popup gallery script -->
-<script src="https://mfl-leagues.com/js/common/popup-gallery.min.js"></script>
+<script src="https://mfl-leagues.com/js/common/popup-gallery.min.js?v=20260417"></script>
 
 <!-- LEAGUE CHAMPIONS SVG -->
 <a class="svg-iconlink popup-gallery-trigger" href="#" onclick="return false">
@@ -458,7 +457,7 @@ var hideLinks       = false;   // set to true to remove links for "Propose Trade
 
 // DARK SKIN SCORES POPUP CSS - DISREGARD THIS SETTING IF "ENABLE SCORES POPUP" SET TO FALSE
 var detailsOverlay          = "rgba(0,0,0,.5)";            // Set bg color and opacity for overlay background
-var detailsWrapBG           = "var(--site-bg-image,#111)"; // Set color of background for popup box
+var detailsWrapBG           = "var(--neutral-dark,#111)"; // Set color of background for popup box
 var detailsWrapBorder       = "#000";                      // Set color border around the popup box
 var detailsWrapBorWidh      = "0rem";                      // Set width of border around the popup box
 var detailsWrapBoxShdw      = "0 0 1.563rem #000";         // Set popup box shadow
@@ -502,21 +501,21 @@ var showTabsAllPages = false;     // set to false to only show tabs on homepage
 var changeMainTabName = "Home";   // rename to main tab
 var changeAllTabName = true;      // rename the tab title on mobiles to current tab name
 var MFL_customTabs_FakeTabs = new Array();
-var swipeHPM = true;              // set to true to swipe home page tab content on mobiles
+var swipeHPM = false;              // set to true to swipe home page tab content on mobiles
 var swipePosition = "content";    // swipe on tabs or swipe on content - set to "tabs" to swipe on tabs or set on "content" to swipe on content
 
 // HEADER JS FILE OPTIONS
-var load_mobileMenu_script = true;      //Set to true to load https://www.mflscripts.com/mfl-apps/mobileMenu/script.js
-var load_chat_enhanced = true;          //Set to true to load https://www.mflscripts.com/mfl-apps/chat/enhanced.js
-var load_popup = true;                  //Set to true to load https://www.mflscripts.com/mfl-apps/popups/players/script.js
-var load_mini_boxscore = true;          //Set to true to load https://www.mflscripts.com/mfl-apps/scoreboard/mini-boxscore/script.js
-var load_marquee = true;                //Set to true to load https://www.mflscripts.com/mfl-apps/marquee/script.js
-var load_lineups_submit_script = true;  //Set to true to load https://www.mflscripts.com/mfl-apps/lineups/submit/script.js
-var load_tabs_script = true;            //Set to true to load https://www.mflscripts.com/mfl-apps/tabs/script.js
+var load_mobileMenu_script=true;      //Set to true to load https://www.mflscripts.com/mfl-apps/mobileMenu/script.js
+var load_chat_enhanced=true;          //Set to true to load https://www.mflscripts.com/mfl-apps/chat/enhanced.js
+var load_popup=true;                  //Set to true to load https://www.mflscripts.com/mfl-apps/popups/players/script.js
+var load_mini_boxscore=true;          //Set to true to load https://www.mflscripts.com/mfl-apps/scoreboard/mini-boxscore/script.js
+var load_marquee=true;                //Set to true to load https://www.mflscripts.com/mfl-apps/marquee/script.js
+var load_lineups_submit_script=true;  //Set to true to load https://www.mflscripts.com/mfl-apps/lineups/submit/script.js
+var load_tabs_script=true;            //Set to true to load https://www.mflscripts.com/mfl-apps/tabs/script.js
 
 
 // TICKER DISPLAY SETTINGS
-var tickerHomePageOnly      = true;        // SET TO TRUE IF YOU HAVE TICKER AS A HEADER MESSAGE BUT ONLY WANT IT ON HOME PAGE; FALSE FOR ALL PAGES
+var tickerHomePageOnly      = false;        // SET TO TRUE IF YOU HAVE TICKER AS A HEADER MESSAGE BUT ONLY WANT IT ON HOME PAGE; FALSE FOR ALL PAGES
 var tickerName              = "Headlines";// ENTER TICKER NAME
 var responsiveTicker        = true;         // SET TO TRUE IF YOUR MFL THEME/SKIN IS RESPONSIVE FOR MOBILE SO THAT THE MARQUEE WILL BE ALSO
 var isLeagueIDP             = true;        // SET TO TRUE IF YOU WANT TO INCLUDE IDP OPTIONS; IF FALSE THEN ALL IDP SETTINGS BELOW WILL BE IGNORED
@@ -582,7 +581,7 @@ var tickerTxtTrans  = "none";                          // set the text-transform
 var tickerLinkClr   = "#eee";                          // set the color for the links in scrolling text
 var tickerLinkHvr   = "#fff";                          // set the color for the links on hover in scrolling text
 var tickerBoxShdw   = "0 0 0.313rem rgba(0,0,0,.5)";   // set box shadow - if you dont want shadow set to "none"
-var controlsGreen   = "green";                          // set color for the controls boxes when positive setting - current color green
+var controlsGreen   = "lime";                          // set color for the controls boxes when positive setting - current color green
 var controlsRed     = "red";                           // set color for the controls boxes when negative setting - current color red
 </script>
 
@@ -598,10 +597,10 @@ var controlsRed     = "red";                           // set color for the cont
 
 <!-- In-Season Mini Scoreboard -->
 <script>
-// Below is an example of the 2025 season - start date 1 day prior to preseason game 1 , end date 1 day after Superbowl
+// Below is an example - start date 1 day prior to preseason game 1 , end date 1 day after Superbowl
 //var setCustomDates = true;
-//var nflStartWk = "08/01/2026";  // define a date 1 day prior to when you want offseason script to start
-//var nflEndWk   = "02/01/2027";  // define a date 1 day after you want offseason scripts to be removed
+//var nflStartWk = "08/01/2025";  // define a date 1 day prior to when you want offseason script to start
+//var nflEndWk   = "02/01/2026";  // define a date 1 day after you want offseason scripts to be removed
 
 // Hide these scripts in offseason
 var deactivate_all_offseason = false;     //set to true to deactivate ALL eligible scripts during the offseason
@@ -611,7 +610,7 @@ var deactivate_all_offseason = false;     //set to true to deactivate ALL eligib
 </script>
 
 <!-- <script src="https://www.mflscripts.com/mfl-apps/global/header.js?v=1.60"></script> -->
-<script src="https://mfl-leagues.com/js/common/header.min.js"></script>
+<script src="https://mfl-leagues.com/js/common/header.min.js?v=20260420"></script>
 <link rel="stylesheet" type="text/css" href="https://www.mflscripts.com/mfl-apps/global/css/300x50-icons.css">
 
 <!-- WRAP ALL CONTENT -->
