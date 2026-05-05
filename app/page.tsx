@@ -13,7 +13,7 @@ export default function Home() {
         <div className="text-center mb-20 slide-in-up">
           <h1 className="text-7xl md:text-8xl font-black mb-6 glitch-text">
             <span className="bg-linear-to-r from-cyan-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
-              MFL LEAGUES
+              KNUCKLEHEADS FANTASY FOOTBALL
             </span>
           </h1>
           <div className="h-1 w-64 mx-auto bg-linear-to-r from-transparent via-cyan-400 to-transparent mb-8" />

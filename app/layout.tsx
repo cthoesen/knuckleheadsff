@@ -17,8 +17,8 @@ const rajdhani = Rajdhani({
 });
 
 export const metadata = {
-  title: 'MFL Leagues',
-  description: 'Custom CSS, JavaScript, and assets for MyFantasyLeague.com leagues',
+  title: 'Knuckleheads Fantasy Football',
+  description: 'Custom CSS, JavaScript, and assets for Knuckleheads Fantasy Football leagues',
 }
 
 export default function RootLayout({
