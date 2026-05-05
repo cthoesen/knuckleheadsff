@@ -6,7 +6,7 @@
 
 <script type="text/javascript">
 // Start fetching images immediately — don't wait for DOM ready or flex-slider
-var sliderImagesPromise = fetch('https://mfl-leagues.com/api/slider-images?league=kkl')
+var sliderImagesPromise = fetch('https://mfl-leagues.com/api/slider-images')
   .then(function(r) { return r.json(); });
 
 jQuery(document).ready(function() {
