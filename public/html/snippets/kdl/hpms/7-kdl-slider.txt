@@ -2,33 +2,33 @@
 <!----------------- Start #7 - Slider ------------------>
 <!------------------------------------------------------>
 
-<script src="https://mfl-leagues.com/js/common/flex-slider.min.js"></script>
+<script defer src="https://mfl-leagues.com/js/common/flex-slider.min.js?v=20260417"></script>
 
 <script type="text/javascript">
-jQuery(document).ready(function() {
-  $.ajax({
-    url: 'https://mfl-leagues.com/api/slider-images',
-    dataType: 'json',
-    success: function(images) {
-      var slidesHtml = '';
-      for (var i = 0; i < images.length; i++) {
-        slidesHtml += '<li><img class="slider" src="' + images[i] + '" /></li>';
-      }
-      $('.flexslider .slides').html(slidesHtml);
+// Start fetching images immediately — don't wait for DOM ready or flex-slider
+var sliderImagesPromise = fetch('https://mfl-leagues.com/api/slider-images?league=kdl')
+  .then(function(r) { return r.json(); });
 
-      $('.flexslider').flexslider({
-        animation: "fade",
-        slideshowSpeed: 2000,
-        animationSpeed: 400,
-        smoothHeight: true,
-        pauseOnHover: true,
-        directionNav: false,
-        after: function(slider) {
-          slider.pause();
-          slider.play();
-        }
-      });
+jQuery(document).ready(function() {
+  sliderImagesPromise.then(function(images) {
+    var slidesHtml = '';
+    for (var i = 0; i < images.length; i++) {
+      slidesHtml += '<li><img class="slider" src="' + images[i] + '" /></li>';
     }
+    $('.flexslider .slides').html(slidesHtml);
+
+    $('.flexslider').flexslider({
+      animation: "fade",
+      slideshowSpeed: 2000,
+      animationSpeed: 400,
+      smoothHeight: true,
+      pauseOnHover: true,
+      directionNav: false,
+      after: function(slider) {
+        slider.pause();
+        slider.play();
+      }
+    });
   });
 });
 </script>

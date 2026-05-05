@@ -2,7 +2,8 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-export const dynamic = 'force-dynamic';
+// Cache at the edge for 5 minutes; revalidates in the background after expiry
+export const revalidate = 300;
 
 const ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
 const VALID_LEAGUES = ['kkl', 'kdl', 'mmh', 'bsb'];
