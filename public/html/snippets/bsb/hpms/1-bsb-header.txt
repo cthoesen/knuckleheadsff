@@ -153,8 +153,8 @@ document.head.appendChild(linkRelIco);
 		<a class="full_height_banner" href="//%HOST%/%YEAR%/home/%LEAGUEID%" title="Return to home page">
 
         <!-- INSERT URL PATH OF YOUR OWN CUSTOM BANNER - RECOMMENDED DIMENSIONS ARE 1148px wide and 220px tall -->
-	<img src="https://mfl-leagues.com/images/league/bsb/bsb-banner.webp" alt="Desktop Banner" class="desktop-only">
-        <img src="https://mfl-leagues.com/images/league/bsb/bsb-banner-small.webp" alt="Mobile Banner" class="mobile-only">
+	<img src="https://knuckleheadsff.com/images/league/bsb/bsb-banner.webp" alt="Desktop Banner" class="desktop-only">
+        <img src="https://knuckleheadsff.com/images/league/bsb/bsb-banner-small.webp" alt="Mobile Banner" class="mobile-only">
 
 		</a>
 	</div>
@@ -164,7 +164,7 @@ document.head.appendChild(linkRelIco);
 
 <!-- <script> -->
   <!-- const ajax = new XMLHttpRequest(); -->
-  <!-- ajax.open( "GET" , "https://mfl-leagues.com/images/shared/icons/svg-sprites.svg" , true ); -->
+  <!-- ajax.open( "GET" , "https://knuckleheadsff.com/images/shared/icons/svg-sprites.svg" , true ); -->
   <!-- ajax.send(); -->
   <!-- ajax.onload = function (e) { -->
   <!-- const div = document .createElement( "div" ); -->
@@ -317,7 +317,7 @@ document.head.appendChild(linkRelIco);
 
 
 <!-- Load popup gallery script -->
-<script src="https://mfl-leagues.com/js/common/popup-gallery.min.js?v=20260417"></script>
+<script src="https://knuckleheadsff.com/js/common/popup-gallery.min.js?v=20260417"></script>
 
 <!-- LEAGUE CHAMPIONS SVG -->
 <a class="svg-iconlink popup-gallery-trigger" href="#" onclick="return false">
@@ -341,7 +341,7 @@ document.head.appendChild(linkRelIco);
 
 
 <!-- RULES SVG -->
-<a class="svg-iconlink" href="https://mfl-leagues.com/docs/bsb/bsb-bylaws.pdf" target="_blank">
+<a class="svg-iconlink" href="https://knuckleheadsff.com/docs/bsb/bsb-bylaws.pdf" target="_blank">
 <svg class="svg-icon icon-logo-bsb" viewBox="0 0 72.05 98.54">
 <use href="#icon-logo-bsb"></use>
 </svg>
@@ -589,7 +589,7 @@ var deactivate_all_offseason = false;     //set to true to deactivate ALL eligib
 </script>
 
 <!-- <script src="https://www.mflscripts.com/mfl-apps/global/header.js?v=1.60"></script> -->
-<script src="https://mfl-leagues.com/js/common/header.min.js?v=20260420"></script>
+<script src="https://knuckleheadsff.com/js/common/header.min.js?v=20260420"></script>
 
 <link rel="stylesheet" type="text/css" href="https://www.mflscripts.com/mfl-apps/global/css/300x50-icons.css">
 

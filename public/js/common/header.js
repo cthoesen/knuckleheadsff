@@ -6463,7 +6463,7 @@ function scoreAdjustmentHtml(which) {
 // SVG SPRITE LOADER — fetches svg-sprites.svg and caches in localStorage
 (function (window, document) {
 	'use strict';
-	const file = 'https://mfl-leagues.com/images/shared/icons/svg-sprites.svg';
+	const file = 'https://knuckleheadsff.com/images/shared/icons/svg-sprites.svg';
 	const revision = 19;
 
 	if (!document.createElementNS || !document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect) {

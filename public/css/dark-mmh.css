@@ -1,6 +1,6 @@
 @import url(https://mflscripts.com/font-awesome/css/all.min.css);
 @import url(https://mflscripts.com/font-awesome/css/v4-shims.min.css);
-@import url(https://www.mfl-leagues.com/css/font-awesome-animation-min.css);
+@import url(https://knuckleheadsff.com/css/font-awesome-animation-min.css);
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
 
 /* old font awesome 4.7 file
@@ -1376,7 +1376,7 @@ caption, h1, h2, h3, h4, .b_name {
 /* Added below logo before captions for mmh */
 #body-mmh caption::before {
   padding: 1.25rem 1.75rem 1.75rem 1.25rem;
-  background: url(https://mfl-leagues.com/images/shared/icons/caption-logo.svg) no-repeat;
+  background: url(https://knuckleheadsff.com/images/shared/icons/caption-logo.svg) no-repeat;
   background-size: contain;
   background-position: 25% center;
   vertical-align: 0.5rem;
@@ -2772,7 +2772,7 @@ caption,
 /* Added below logo before captions */
 caption:before {
   padding: 1.25rem 1.75rem 1.75rem 1.25rem;
-  background: url(https://www.mfl-leagues.com/images/shared/icons/caption-logo.svg) no-repeat;
+  background: url(https://knuckleheadsff.com/images/shared/icons/caption-logo.svg) no-repeat;
   background-size: contain;
   background-position: 25% center;
   vertical-align: 0.5rem;

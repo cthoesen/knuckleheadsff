@@ -101,13 +101,13 @@ var notification_duration_seconds = 1.5;        // 2.5 seconds
 
 <!-- GLOBAL FOOTER  -->
 <!-- <script src="https://www.mflscripts.com/mfl-apps/global/footer.js?v=1.00"></script> -->
-<script src="https://mfl-leagues.com/js/common/footer.min.js"></script>
+<script src="https://knuckleheadsff.com/js/common/footer.min.js"></script>
 
 <!-- STANDINGS COLUMNS SETUP  -->
 <script src="https://mflscripts.com/mfl-apps/playoffs/standingsColumns.js"></script>
 
 <!-- Cyber FAB  -->
-<script src="https://mfl-leagues.com/js/common/cyber-fab.min.js"></script>
+<script src="https://knuckleheadsff.com/js/common/cyber-fab.min.js"></script>
 
 
 </div><!--- CLOSE CONTAINER WRAP IN HEADER -->
@@ -116,7 +116,7 @@ var notification_duration_seconds = 1.5;        // 2.5 seconds
 <div class="footercontainer-outer"><div class="footercontainer"><div class="container first-container">
 <div>
 <span class="f-title-icon">Defending League Champion</span>
-<span class="f-icon"><img alt=Wa Wa Wee Wa height=75 src="https://mfl-leagues.com/images/league/kkl/icon-kkl-wawa.png" title="2024 - Wa Wa Wee Wa"></span>
+<span class="f-icon"><img alt=Wa Wa Wee Wa height=75 src="https://knuckleheadsff.com/images/league/kkl/icon-kkl-wawa.png" title="2024 - Wa Wa Wee Wa"></span>
 <span class="f-link"><a>2024 - Wa Wa Wee Wa </a></span>
 </div></div>
 <div class="container"><div><span class="f-title">Management</span>

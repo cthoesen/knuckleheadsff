@@ -58,4 +58,4 @@ var lsm_use_probability = true;          // set to true or false to show win pro
 <!--- LINK SCRIPT --->
 <!--- <script src="https://knuckleheads.netlify.app/scripts/scoreboard-min.js"></script>  --->
 <!--- <script src="https://mflscripts.com/mfl-apps/scoreboard/moduleScoreboard/script.js?v=8.93"></script> --->
-<script src="https://mfl-leagues.com/js/common/scoreboard.min.js"></script>
+<script src="https://knuckleheadsff.com/js/common/scoreboard.min.js"></script>

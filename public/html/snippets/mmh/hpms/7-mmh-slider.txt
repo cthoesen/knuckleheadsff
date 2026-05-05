@@ -2,11 +2,11 @@
 <!----------------- Start #7 - Slider ------------------>
 <!------------------------------------------------------>
 
-<script defer src="https://mfl-leagues.com/js/common/flex-slider.min.js?v=20260417"></script>
+<script defer src="https://knuckleheadsff.com/js/common/flex-slider.min.js?v=20260417"></script>
 
 <script type="text/javascript">
 // Start fetching images immediately — don't wait for DOM ready or flex-slider
-var sliderImagesPromise = fetch('https://mfl-leagues.com/api/slider-images')
+var sliderImagesPromise = fetch('https://knuckleheadsff.com/api/slider-images')
   .then(function(r) { return r.json(); });
 
 jQuery(document).ready(function() {

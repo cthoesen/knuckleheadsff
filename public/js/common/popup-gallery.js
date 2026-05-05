@@ -2,11 +2,11 @@
  * Popup Gallery — Vanilla JS lightbox with swipe, keyboard, and click navigation.
  *
  * Usage:
- *   <script src="https://mfl-leagues.com/js/common/popup-gallery.min.js"></script>
+ *   <script src="https://knuckleheadsff.com/js/common/popup-gallery.min.js"></script>
  *   <script>
  *     initPopupGallery({
  *       triggerSelector: '.popup-gallery-trigger',
- *       imageApiUrl: 'https://mfl-leagues.com/api/slider-images?league=kdl'
+ *       imageApiUrl: 'https://knuckleheadsff.com/api/slider-images?league=kdl'
  *     });
  *   </script>
  *
@@ -24,7 +24,7 @@ function initPopupGallery(options) {
   if (!imageApiUrl) {
     var bodyId = document.querySelector('[id^="body-"]');
     var league = bodyId ? bodyId.id.replace('body-', '') : '';
-    imageApiUrl = 'https://mfl-leagues.com/api/slider-images' + (league ? '?league=' + league : '');
+    imageApiUrl = 'https://knuckleheadsff.com/api/slider-images' + (league ? '?league=' + league : '');
   }
 
   var images = null;

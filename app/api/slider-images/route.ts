@@ -22,14 +22,14 @@ export async function GET(request: Request) {
       // Use league-specific dir if it exists and has files, otherwise fall back to shared
       if (fs.existsSync(leagueDir) && fs.readdirSync(leagueDir).some(f => ALLOWED_EXTENSIONS.includes(path.extname(f).toLowerCase()))) {
         cardsDir = leagueDir;
-        urlBase = `https://mfl-leagues.com/images/league/${league}/cards`;
+        urlBase = `https://knuckleheadsff.com/images/league/${league}/cards`;
       } else {
         cardsDir = path.join(process.cwd(), 'public', 'images', 'shared', 'cards');
-        urlBase = 'https://mfl-leagues.com/images/shared/cards';
+        urlBase = 'https://knuckleheadsff.com/images/shared/cards';
       }
     } else {
       cardsDir = path.join(process.cwd(), 'public', 'images', 'shared', 'cards');
-      urlBase = 'https://mfl-leagues.com/images/shared/cards';
+      urlBase = 'https://knuckleheadsff.com/images/shared/cards';
     }
 
     const files = fs.readdirSync(cardsDir);
