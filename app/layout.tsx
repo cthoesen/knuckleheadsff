@@ -1,5 +1,6 @@
 import './globals.css';
 import { Orbitron, Rajdhani } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const orbitron = Orbitron({
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body className="bg-zinc-950 text-zinc-100">
         {children}
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   )
