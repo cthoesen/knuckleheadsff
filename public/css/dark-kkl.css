@@ -29,7 +29,7 @@ td {
   --fa-main-color: #1f4fd1;
   --primary-light: #4973e4;
   --primary-dark: #163793;
-  --triad: #8723cf; /* color for contrast elements like the "X" on the close button */
+  --triadic: #6B23CE; /* color for contrast elements like the "X" on the close button */
   --accent: #23ce6b; /* accent color for button icons */
   --accent-one: #ff073a; /* color for warnings */
   --accent-two: #2cff05; /* color for player positions, bye week font */

@@ -29,7 +29,7 @@ td {
   --fa-main-color: #38b569;
   --primary-light: #5dcd89;
   --primary-dark: #277e49;
-  --triad: #1878ed; /* color for contrast elements like the "X" on the close button */
+  --triadic: #17C8EC; /* color for contrast elements like the "X" on the close button */
   --accent: #c8ec17; /* accent color for button icons */
   --accent-one: #ff073a; /* color for warnings */
   --accent-two: #2cff05; /* color for player positions, bye week font */
@@ -182,7 +182,7 @@ html.theme-jade {
   --fa-main-color: #38b569;
   --primary-light: #5dcd89;
   --primary-dark: #277e49;
-  --triad:#7f38b5; /* color for contrast elements like the "X" on the close button */
+  --triadic:#7f38b5; /* color for contrast elements like the "X" on the close button */
   --accent: #c8ec17; /* accent color for button icons */
   --bg-opacity: rgba(39, 126, 73, 0.05);
   --bg-opacity-bright: rgba(39, 126, 73, 0.2);
