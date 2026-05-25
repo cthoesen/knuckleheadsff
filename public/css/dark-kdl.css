@@ -19,24 +19,22 @@ td {
 
 :root {
   --neutral: #181818;
-  --neutral-light: #cbcbcb;
+  --neutral-light: #cbcbcb; /* color for mfl live scoring font and scrollbar */
   --neutral-dark: #0c0c0c;
   --neutral-blur: rgba(69, 69, 69, 0.15);
   --glass-bg: rgba(20, 20, 20, 0.6);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-blur: blur(12px);
-  --primary: #9C4CE1; /* KDL violet/purple primary */
-  --fa-main-color: #9C4CE1;
-  --primary-light: #B068F5;
-  --primary-lighter: #C490FA;
-  --primary-dark: #7E22CE;
-  --primary-darker: #6B21A8;
-  --accent: #f7e534; /* accent color for button icons */
+  --primary: #7e22ce; /* KDL violet/purple primary */
+  --fa-main-color: #7e22ce;
+  --primary-light: #9c4ce1;
+  --primary-dark: #591891;
+  --triad: #0fff96; /* color for contrast elements like the "X" on the close button */
+  --accent: #ffb30f; /* accent color for button icons */
   --accent-one: #ff073a; /* color for warnings */
   --accent-two: #2cff05; /* color for player positions, bye week font */
-  --variant: #dbdbdb; /* color for mfl live scoring font */
   --bg-opacity: rgba(109, 40, 217, 0.15);
-  --bg-opacity-brighter: rgba(139, 92, 246, 0.2);  
+  --bg-opacity-bright: rgba(139, 92, 246, 0.2);  
 }
 
 .myfantasyleague_menu ul li.mfl-icon {
@@ -92,19 +90,17 @@ html.theme-dk-gold {
   --primary-darker: #6f5a18;
   --accent: #F1E5AC; /* accent color for button icons */
   --bg-opacity: rgba(161, 131, 35, 0.05);
-  --bg-opacity-brighter: rgba(161, 131, 35, 0.2);
+  --bg-opacity-bright: rgba(161, 131, 35, 0.2);
 }
 
 html.theme-dk-purple {
   --primary: #7e22ce;
   --fa-main-color: #7e22ce;
   --primary-light: #9c4ce1;
-  --primary-lighter: #be89ec; /* mfl scoreboard font */
   --primary-dark: #591891;
-  --primary-darker: #380f5c;
   --accent: #ffb30f; /* accent color for button icons */
   --bg-opacity: rgba(89, 24, 145, 0.05);
-  --bg-opacity-brighter: rgba(89, 24, 145, 0.2);
+  --bg-opacity-bright: rgba(89, 24, 145, 0.2);
 }
 
 html.theme-dk-red {
@@ -116,7 +112,7 @@ html.theme-dk-red {
   --primary-darker: #741616;
   --accent: #d9d736; /* accent color for button icons */
   --bg-opacity: rgba(168, 32, 32, 0.05);
-  --bg-opacity-brighter: rgba(168, 32, 32, 0.2);
+  --bg-opacity-bright: rgba(168, 32, 32, 0.2);
 }
 
 html.theme-dk-blue {
@@ -128,7 +124,7 @@ html.theme-dk-blue {
   --primary-darker: #07287a;
   --accent: #13dff2; /* accent color for button icons */
   --bg-opacity: rgba(10, 59, 180, 0.05);
-  --bg-opacity-brighter: rgba(10, 59, 180, 0.2);
+  --bg-opacity-bright: rgba(10, 59, 180, 0.2);
 }
 
 html.theme-dk-aqua {
@@ -140,7 +136,7 @@ html.theme-dk-aqua {
   --primary-darker: #02505a;
   --accent: #049a7f; /* accent color for button icons */
   --bg-opacity: rgba(2, 80, 90, 0.05);
-  --bg-opacity-brighter: rgba(2, 80, 90, 0.2);
+  --bg-opacity-bright: rgba(2, 80, 90, 0.2);
 }
 
 html.theme-dk-lime {
@@ -152,7 +148,7 @@ html.theme-dk-lime {
   --primary-darker: #176117;
   --accent: #b2cc31; /* accent color for button icons */
   --bg-opacity: rgba(35, 146, 35, 0.05);
-  --bg-opacity-brighter: rgba(35, 146, 35, 0.2);
+  --bg-opacity-bright: rgba(35, 146, 35, 0.2);
 }
 
 html.theme-cerulean {
@@ -166,7 +162,7 @@ html.theme-cerulean {
   --accent-one: #ff13f0; /* color for warnings */
   --accent-two: #ffac13; /* color for player positions, bye week font */
   --bg-opacity: rgba(22, 55, 147, 0.05);
-  --bg-opacity-brighter: rgba(22, 55, 147, 0.2);
+  --bg-opacity-bright: rgba(22, 55, 147, 0.2);
 }
 
 html.theme-creamsicle {
@@ -178,7 +174,7 @@ html.theme-creamsicle {
   --primary-darker: #862b03;
   --accent: #f9d715; /* accent color for button icons */
   --bg-opacity: rgba(194, 62, 5, 0.05);
-  --bg-opacity-brighter: rgba(194, 62, 5, 0.2);
+  --bg-opacity-bright: rgba(194, 62, 5, 0.2);
 }
 
 html.theme-jade {
@@ -190,7 +186,7 @@ html.theme-jade {
   --primary-darker: #19502e;
   --accent: #c8ec17; /* accent color for button icons */
   --bg-opacity: rgba(39, 126, 73, 0.05);
-  --bg-opacity-brighter: rgba(39, 126, 73, 0.2);
+  --bg-opacity-bright: rgba(39, 126, 73, 0.2);
 }
 
 html.theme-dk-gray {
@@ -202,7 +198,7 @@ html.theme-dk-gray {
   --primary-darker: #313131;
   --accent: #5da9e9; /* accent color for button icons */
   --bg-opacity: rgba(91, 44, 44, 0.05);
-  --bg-opacity-brighter: rgba(91, 44, 44, 0.2);
+  --bg-opacity-bright: rgba(91, 44, 44, 0.2);
 }
 
 html.theme-dk-orange {
@@ -214,7 +210,7 @@ html.theme-dk-orange {
   --primary-darker: #772103;
   --accent: #f9bc06; /* accent color for button icons */
   --bg-opacity: rgba(179, 50, 5, 0.05);
-  --bg-opacity-brighter: rgba(179, 50, 5, 0.2);
+  --bg-opacity-bright: rgba(179, 50, 5, 0.2);
 }
 
 html.theme-dk-rasta {
@@ -228,7 +224,7 @@ html.theme-dk-rasta {
   --accent-one: #da121a; /* color for warnings */
   --accent-two: #3CFA3C; /* color for position circles, bye week font */
   --bg-opacity: rgba(4, 87, 31, 0.05);
-  --bg-opacity-brighter: rgba(4, 87, 31, 0.2);
+  --bg-opacity-bright: rgba(4, 87, 31, 0.2);
 }
 
 /* NFL TEAM THEME COLORING */
@@ -241,7 +237,7 @@ html.theme-niners {
   --primary-darker: #5a0202;
   --accent: #b3995d; /* accent color for button icons */
   --bg-opacity: rgba(96, 2, 2, 0.05);
-  --bg-opacity-brighter: rgba(96, 2, 2, 0.2);
+  --bg-opacity-bright: rgba(96, 2, 2, 0.2);
 }
 
 html.theme-bears {
@@ -253,7 +249,7 @@ html.theme-bears {
   --primary-darker: #5a1a02;
   --accent: #132649; /* accent color for button icons */
   --bg-opacity: rgba(19, 38, 73, 0.05);
-  --bg-opacity-brighter: rgba(19, 38, 73, 0.2);
+  --bg-opacity-bright: rgba(19, 38, 73, 0.2);
 }
 
 html.theme-bengals {
@@ -265,7 +261,7 @@ html.theme-bengals {
   --primary-darker: #872503;
   --accent: #d5d5d5; /* accent color for button icons */
   --bg-opacity: rgba(195, 53, 5, 0.05);
-  --bg-opacity-brighter: rgba(195, 53, 5, 0.2);
+  --bg-opacity-bright: rgba(195, 53, 5, 0.2);
 }
 
 html.theme-bills {
@@ -277,7 +273,7 @@ html.theme-bills {
   --primary-darker: #02225a;
   --accent: #c60c30; /* accent color for button icons */
   --bg-opacity: rgba(2, 34, 90, 0.05);
-  --bg-opacity-brighter: rgba(2, 34, 90, 0.2);
+  --bg-opacity-bright: rgba(2, 34, 90, 0.2);
 }
 
 html.theme-broncos {
@@ -289,7 +285,7 @@ html.theme-broncos {
   --primary-darker: #872503;
   --accent: #031686; /* accent color for button icons */
   --bg-opacity: rgba(195, 53, 5, 0.05);
-  --bg-opacity-brighter: rgba(195, 53, 5, 0.2);
+  --bg-opacity-bright: rgba(195, 53, 5, 0.2);
 }
 
 html.theme-browns {
@@ -301,7 +297,7 @@ html.theme-browns {
   --primary-darker: #771e03;
   --accent: #5a3602; /* accent color for button icons */
   --bg-opacity: rgba(179, 46, 5, 0.05);
-  --bg-opacity-brighter: rgba(179, 46, 5, 0.2);
+  --bg-opacity-bright: rgba(179, 46, 5, 0.2);
 }
 
 html.theme-bucs {
@@ -314,7 +310,7 @@ html.theme-bucs {
   --accent: #d50a0a; /* accent color for button icons */
   --accent-two: #696158; /* color for player positions, bye week font */
   --bg-opacity: rgba(82, 62, 40, 0.05);
-  --bg-opacity-brighter: rgba(82, 62, 40, 0.2);
+  --bg-opacity-bright: rgba(82, 62, 40, 0.2);
 }
 
 html.theme-cardinals {
@@ -326,7 +322,7 @@ html.theme-cardinals {
   --primary-darker: #4b111f;
   --accent: #f9b418; /* accent color for button icons */
   --bg-opacity: rgba(93, 22, 39, 0.05);
-  --bg-opacity-brighter: rgba(93, 22, 39, 0.2);
+  --bg-opacity-bright: rgba(93, 22, 39, 0.2);
 }
 
 html.theme-chargers {
@@ -338,7 +334,7 @@ html.theme-chargers {
   --primary-darker: #023b5a;
   --accent: #ffc20e; /* accent color for button icons */
   --bg-opacity: rgba(3, 81, 123, 0.05);
-  --bg-opacity-brighter: rgba(3, 81, 123, 0.2);
+  --bg-opacity-bright: rgba(3, 81, 123, 0.2);
 }
 
 html.theme-chiefs {
@@ -350,7 +346,7 @@ html.theme-chiefs {
   --primary-darker: #6b0b1a;
   --accent: #ffb81c; /* accent color for button icons */
   --bg-opacity: rgba(162, 17, 39, 0.05);
-  --bg-opacity-brighter: rgba(162, 17, 39, 0.2);
+  --bg-opacity-bright: rgba(162, 17, 39, 0.2);
 }
 
 html.theme-colts {
@@ -362,7 +358,7 @@ html.theme-colts {
   --primary-darker: #022b5a;
   --accent: #a2aaad; /* accent color for button icons */
   --bg-opacity: rgba(2, 43, 90, 0.05);
-  --bg-opacity-brighter: rgba(2, 43, 90, 0.2);
+  --bg-opacity-bright: rgba(2, 43, 90, 0.2);
 }
 
 html.theme-commanders {
@@ -374,7 +370,7 @@ html.theme-commanders {
   --primary-darker: #411b24;
   --accent: #FFB612; /* accent color for button icons */
   --bg-opacity: rgba(68, 28, 37, 0.05);
-  --bg-opacity-brighter: rgba(68, 28, 37, 0.2);
+  --bg-opacity-bright: rgba(68, 28, 37, 0.2);
 }
 
 html.theme-cowboys {
@@ -386,7 +382,7 @@ html.theme-cowboys {
   --primary-darker: #02225a;
   --accent: #7f9695; /* accent color for button icons */
  --bg-opacity: rgba(2, 34, 90, 0.05);
-  --bg-opacity-brighter: rgba(2, 34, 90, 0.2);
+  --bg-opacity-bright: rgba(2, 34, 90, 0.2);
 }
 
 html.theme-dolphins {
@@ -398,7 +394,7 @@ html.theme-dolphins {
   --primary-darker: #02545a;
   --accent: #f58220; /* accent color for button icons */
   --bg-opacity: rgba(2, 84, 90, 0.05);
-  --bg-opacity-brighter: rgba(2, 84, 90, 0.2);
+  --bg-opacity-bright: rgba(2, 84, 90, 0.2);
 }
 
 html.theme-eagles {
@@ -411,7 +407,7 @@ html.theme-eagles {
   --accent: #a5acaf; /* accent color for button icons */
   --accent-two: #046A38; /* color for player positions, bye week font */
   --bg-opacity: rgba(2, 81, 90, 0.05);
-  --bg-opacity-brighter: rgba(2, 81, 90, 0.2);
+  --bg-opacity-bright: rgba(2, 81, 90, 0.2);
 }
 
 html.theme-falcons {
@@ -424,7 +420,7 @@ html.theme-falcons {
   --accent: #a5acaf; /* accent color for button icons */
   --accent-two: #77a719; /* color for player positions, bye week font */
   --bg-opacity: rgba(105, 16, 30, 0.05);
-  --bg-opacity-brighter: rgba(105, 16, 30, 0.2);
+  --bg-opacity-bright: rgba(105, 16, 30, 0.2);
 }
 
 html.theme-giants {
@@ -436,7 +432,7 @@ html.theme-giants {
   --primary-darker: #091c53;
   --accent: #a71930; /* accent color for button icons */
   --bg-opacity: rgba(9, 28, 83, 0.05);
-  --bg-opacity-brighter: rgba(9, 28, 83, 0.2);
+  --bg-opacity-bright: rgba(9, 28, 83, 0.2);
 }
 
 html.theme-jaguars {
@@ -448,7 +444,7 @@ html.theme-jaguars {
   --primary-darker: #024d5a;
   --accent: #d7a22a; /* accent color for button icons */
   --bg-opacity: rgba(2, 77, 90, 0.05);
-  --bg-opacity-brighter: rgba(2, 77, 90, 0.2);
+  --bg-opacity-bright: rgba(2, 77, 90, 0.2);
 }
 
 html.theme-jets {
@@ -462,7 +458,7 @@ html.theme-jets {
   --accent-one: #571229; /* color for warnings */
   --accent-two: #571d12; /* color for player positions, bye week font */
   --bg-opacity: rgba(16, 76, 56, 0.05);
-  --bg-opacity-brighter: rgba(16, 76, 56, 0.2);
+  --bg-opacity-bright: rgba(16, 76, 56, 0.2);
 }
 
 html.theme-lions {
@@ -474,7 +470,7 @@ html.theme-lions {
   --primary-darker: #023b5a;
   --accent: #b0b7bc; /* accent color for button icons */
   --bg-opacity: rgba(3, 71, 108, 0.05);
-  --bg-opacity-brighter: rgba(3, 71, 108, 0.2);
+  --bg-opacity-bright: rgba(3, 71, 108, 0.2);
 }
 
 html.theme-packers {
@@ -486,7 +482,7 @@ html.theme-packers {
   --primary-darker: #1e3e36;
   --accent: #ffb612; /* accent color for button icons */
   --bg-opacity: rgba(30, 62, 54, 0.05);
-  --bg-opacity-brighter: rgba(30, 62, 54, 0.2);
+  --bg-opacity-bright: rgba(30, 62, 54, 0.2);
 }
 
 html.theme-panthers {
@@ -498,7 +494,7 @@ html.theme-panthers {
   --primary-darker: #023c5a;
   --accent: #bfc0bf; /* accent color for button icons */
   --bg-opacity: rgba(3, 85, 127, 0.05);
-  --bg-opacity-brighter: rgba(3, 85, 127, 0.2);
+  --bg-opacity-bright: rgba(3, 85, 127, 0.2);
 }
 
 html.theme-patriots {
@@ -510,7 +506,7 @@ html.theme-patriots {
   --primary-darker: #022e5a;
   --accent: #c8102e; /* accent color for button icons */
   --bg-opacity: rgba(2, 46, 90, 0.05);
-  --bg-opacity-brighter: rgba(2, 46, 90, 0.2);
+  --bg-opacity-bright: rgba(2, 46, 90, 0.2);
 }
 
 html.theme-raiders {
@@ -522,7 +518,7 @@ html.theme-raiders {
   --primary-darker: #64696a;
   --accent: #222222; /* accent color for button icons */
   --bg-opacity: rgba(92, 151, 177, 0.05);
-  --bg-opacity-brighter: rgba(92, 151, 177, 0.2);
+  --bg-opacity-bright: rgba(92, 151, 177, 0.2);
 }
 
 html.theme-rams {
@@ -534,7 +530,7 @@ html.theme-rams {
   --primary-darker: #02225a;
   --accent: #ffa300; /* accent color for button icons */
   --bg-opacity: rgba(2, 34, 90, 0.05);
-  --bg-opacity-brighter: rgba(2, 34, 90, 0.2);
+  --bg-opacity-bright: rgba(2, 34, 90, 0.2);
 }
 
 html.theme-ravens {
@@ -548,7 +544,7 @@ html.theme-ravens {
   --accent-one: #c60c30; /* color for warnings */
   --accent-two: #0c9e33; /* color for player positions, bye week font */
   --bg-opacity: rgba(24, 15, 77, 0.05);
-  --bg-opacity-brighter: rgba(24, 15, 77, 0.2);
+  --bg-opacity-bright: rgba(24, 15, 77, 0.2);
 }
 
 html.theme-saints {
@@ -560,7 +556,7 @@ html.theme-saints {
   --primary-darker: #9e7e3d;
   --accent: #323232; /* accent color for button icons */
   --bg-opacity: rgba(191, 158, 89, 0.05);
-  --bg-opacity-brighter: rgba(191, 158, 89, 0.2);
+  --bg-opacity-bright: rgba(191, 158, 89, 0.2);
 }
 
 html.theme-seahawks {
@@ -572,7 +568,7 @@ html.theme-seahawks {
   --primary-darker: #2c5011;
   --accent: #003087; /* accent color for button icons */
   --bg-opacity: rgba(72, 131, 28, 0.05);
-  --bg-opacity-brighter: rgba(72, 131, 28, 0.2);
+  --bg-opacity-bright: rgba(72, 131, 28, 0.2);
 }
 
 html.theme-steelers {
@@ -584,7 +580,7 @@ html.theme-steelers {
   --primary-darker: #896004;
   --accent: #282828; /* accent color for button icons */
   --bg-opacity: rgba(197, 138, 5, 0.05);
-  --bg-opacity-brighter: rgba(197, 138, 5, 0.2);
+  --bg-opacity-bright: rgba(197, 138, 5, 0.2);
 }
 
 html.theme-texans {
@@ -596,7 +592,7 @@ html.theme-texans {
   --primary-darker: #500c17;
   --accent: #03202f; /* accent color for button icons */
   --bg-opacity: rgba(105, 16, 30, 0.05);
-  --bg-opacity-brighter: rgba(105, 16, 30, 0.2);
+  --bg-opacity-bright: rgba(105, 16, 30, 0.2);
 }
 
 html.theme-titans {
@@ -608,7 +604,7 @@ html.theme-titans {
   --primary-darker: #1b5086;
   --accent: #c8102e; /* accent color for button icons */
   --bg-opacity: rgba(37, 110, 185, 0.05);
-  --bg-opacity-brighter: rgba(37, 110, 185, 0.2);
+  --bg-opacity-bright: rgba(37, 110, 185, 0.2);
 }
 
 html.theme-vikings {
@@ -620,7 +616,7 @@ html.theme-vikings {
   --primary-darker: #2b1547;
   --accent: #ffc62f; /* accent color for button icons */
   --bg-opacity: rgba(46, 22, 76, 0.05);
-  --bg-opacity-brighter: rgba(46, 22, 76, 0.2);
+  --bg-opacity-bright: rgba(46, 22, 76, 0.2);
 }
 /***************************************/
 
@@ -1094,7 +1090,7 @@ body ::-webkit-scrollbar-thumb:hover {
 }
 
 .cyber-fab-item:hover {
-  background: var(--primary-darker);
+  background: var(--primary-dark);
   border-color: var(--primary);
   color: white;
   transform: translateX(-5px);
@@ -1425,7 +1421,7 @@ caption, h1, h2, h3, h4, .b_name {
 
 /* Added below for mfl live score box font settings */
 #MFLBoxContainer .MFLGameLinks .MFLLiveScore, .MFLNFLLiveScore {
-    color: var(--variant, #c3f8f8);
+    color: var(--neutral-light, #c3f8f8);
 }
 
 /* Added below for mfl live score box BYE font settings */
@@ -1828,7 +1824,7 @@ body.chat_popup .banner-container-wrap {
 
 .icon-bar a:hover i:before,
 .icon-bar-full a:hover i:before {
-  color: var(--primary-darker, #ddd); /* main color on Font Awesome icons when hovering */
+  color: var(--primary-dark, #ddd); /* main color on Font Awesome icons when hovering */
   opacity: 1;
 }
 
@@ -2774,9 +2770,9 @@ caption,
   margin-bottom: 0.33rem;
   border-image-source: linear-gradient(to right, 
       var(--neutral-dark), 
-      var(--primary-lighter), 
       var(--primary-light), 
-      var(--primary-lighter), 
+      var(--primary), 
+      var(--primary-light), 
       var(--neutral-dark));
   border-image-slice: 1;
   border-top: 0;
@@ -4613,9 +4609,9 @@ footer {
   box-shadow: 0 0 1.75rem var(--primary-dark);
   border-image-source: linear-gradient(to right, 
       #000, 
-      var(--primary-lighter), 
+      var(--primary-light), 
       var(--primary), 
-      var(--primary-lighter), 
+      var(--primary-light), 
       #000);
   border-image-slice: 1;
   border-bottom: 0;
@@ -5563,7 +5559,7 @@ html[xmlns] .flexslider .slides {
 }
 
 .MFLBoxPlayerDetailsTR:hover {
-  background-color: var(--bg-opacity-brighter, rgba(181, 47, 0, .2));
+  background-color: var(--bg-opacity-bright, rgba(181, 47, 0, .2));
 }
 
 #MFLBoxWrapper .MFLBoxPlayerDetailsClose {
@@ -6488,7 +6484,7 @@ a[id*="hideAssets"]:hover {
 .bottomteam,
 .topteam,
 .bracket {
-  border-color: var(--primary-darker, #ff4200);
+  border-color: var(--primary-dark, #ff4200);
 }
 
 #hsubmenu ul li {
@@ -9472,7 +9468,7 @@ div.ls_team_points {
 }
 
 #body_ajax_ls div.ls_other_game.current_matchup {
-  background-color: var(--bg-opacity-brighter, rgba(181, 47, 0, .2));
+  background-color: var(--bg-opacity-bright, rgba(181, 47, 0, .2));
   border-color: var(--primary);
 }
 
@@ -9776,7 +9772,7 @@ div.ls_team_points {
 }
 
 #ls-modal-content .ls-popup-player-li {
-  border-bottom: 0.125rem solid var(--bg-opacity-brighter, rgba(181, 47, 0, .2));
+  border-bottom: 0.125rem solid var(--bg-opacity-bright, rgba(181, 47, 0, .2));
 }
 
 #ls-modal-content .ls-popup-stats {
@@ -9895,12 +9891,12 @@ div.ls_team_points {
 .hs_tabs_wrap tr.myfranchise td,
 .hs_tabs_wrap tr.myfranchise th,
 .hs_tabs_wrap tr.myfranchise th.fixed-side.hz-hide-shadow {
-  box-shadow: inset 0 0 0 62.5rem var(--bg-opacity-brighter, rgba(181, 47, 0, .2));
+  box-shadow: inset 0 0 0 62.5rem var(--bg-opacity-bright, rgba(181, 47, 0, .2));
 }
 
 .lh-admin-updates {
   border-color: var(--primary, #ff4200) !important;
-  background-color: var(--bg-opacity-brighter, rgba(181, 47, 0, .2)) !important;
+  background-color: var(--bg-opacity-bright, rgba(181, 47, 0, .2)) !important;
 }
 
 #league-history-wrapper .hs_tabs_wrap .hz-main-table :is(thead th, thead th:first-of-type, th.fixed-side, .oddtablerow td, .eventablerow td, .lh_defunct_check.rowheader th, .lh_defunct_check.rowheader th:first-of-type),
@@ -13392,7 +13388,7 @@ div.banner-container a:link img.sister-league:hover {
 }
 /***** Bettis Settings - could delete *****
 .tdalert span {
-  background: var(--primary-darker, rgba(0, 0, 0, .2));
+  background: var(--primary-dark, rgba(0, 0, 0, .2));
 }
 
 @media only screen and (max-width:48em) {
@@ -13481,7 +13477,7 @@ tr.allplay-lit,
 td.allplay-lit,
 td.allplay-lit span,
 tr.allplay-lit td {
-  background: var(--bg-opacity-brighter, rgba(181, 47, 0, .2));
+  background: var(--bg-opacity-bright, rgba(181, 47, 0, .2));
   color: #fff;
   cursor: default;
 }
@@ -13780,7 +13776,7 @@ h2.lsm_error.error_box {
 }
 
 .matchup-box-scroll.active {
-  background-color: var(--bg-opacity-brighter, rgba(181, 47, 0, .2));
+  background-color: var(--bg-opacity-bright, rgba(181, 47, 0, .2));
   border-color: var(--primary, #ff4200);
 }
 
