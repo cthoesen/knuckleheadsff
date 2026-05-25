@@ -11,9 +11,12 @@ const THEMES = {
 // Monochromatic lightness steps (HSL units, 0-100)
 const LIGHT_STEPS = { light: +10, dark: -10 };
 
-// Split complementary offset from complement (degrees).
-// --split  = primary hue + (180 - SPLIT_OFFSET)  → H+150°
-// --accent = primary hue + (180 + SPLIT_OFFSET)  → H+210°
+// Hue rotation angles for the four harmony options.
+// Pick any two of the four outputs to assign to --secondary and --accent in your theme.
+// secondary  = H+150°  (split complement, complement − 30°)
+// accent     = H+210°  (split complement, complement + 30°)
+// tertiary   = H+60°   (analogous-adjacent)
+// quaternary = H+270°  (square / tetradic)
 const SPLIT_OFFSET = 30;
 
 // Background opacity alphas
@@ -94,9 +97,12 @@ function deriveTheme(primaryHex) {
   const primaryLight = hslToHex(shiftL(base, LIGHT_STEPS.light));
   const primaryDark  = hslToHex(shiftL(base, LIGHT_STEPS.dark));
 
-  // Split complementary — same S+L as primary, rotated hue
-  const split  = hslToHex(clampSL(rotateHue(base, 180 - SPLIT_OFFSET))); // H+150°
-  const accent = hslToHex(clampSL(rotateHue(base, 180 + SPLIT_OFFSET))); // H+210°
+  // Four harmony options — same S+L as primary, rotated hue.
+  // Choose any two to use as --secondary and --accent in the final theme block.
+  const secondary  = hslToHex(clampSL(rotateHue(base, 180 - SPLIT_OFFSET))); // H+150°
+  const accent     = hslToHex(clampSL(rotateHue(base, 180 + SPLIT_OFFSET))); // H+210°
+  const tertiary   = hslToHex(clampSL(rotateHue(base, 60)));                  // H+60°
+  const quaternary = hslToHex(clampSL(rotateHue(base, 270)));                 // H+270°
 
   // Background opacity — derived from primary RGB
   const { r, g, b } = hexToRgb(primaryHex);
@@ -105,8 +111,10 @@ function deriveTheme(primaryHex) {
     primary:        primaryHex.toUpperCase(),
     primaryLight,
     primaryDark,
-    split,
+    secondary,
     accent,
+    tertiary,
+    quaternary,
     bgOpacity:      `rgba(${r}, ${g}, ${b}, ${BG_ALPHA.base})`,
     bgOpacityBright:`rgba(${r}, ${g}, ${b}, ${BG_ALPHA.bright})`,
   };
@@ -121,7 +129,12 @@ function cssBlock(themeName, primaryHex) {
     `  --fa-main-color: ${v.primary};`,
     `  --primary-light: ${v.primaryLight};`,
     `  --primary-dark: ${v.primaryDark};`,
-    `  --split: ${v.split}; /* color for contrast elements like the "X" on the close button */`,
+    `  /* harmony options — pick two for --secondary and --accent */`,
+    `  /* secondary  (H+150°): ${v.secondary} */`,
+    `  /* accent     (H+210°): ${v.accent}     */`,
+    `  /* tertiary   (H+60°):  ${v.tertiary}  */`,
+    `  /* quaternary (H+270°): ${v.quaternary} */`,
+    `  --secondary: ${v.secondary}; /* color for contrast elements like the "X" on the close button */`,
     `  --accent: ${v.accent}; /* accent color for button icons */`,
     `  --bg-opacity: ${v.bgOpacity};`,
     `  --bg-opacity-bright: ${v.bgOpacityBright};`,

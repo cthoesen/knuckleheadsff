@@ -25,16 +25,16 @@ td {
   --glass-bg: rgba(20, 20, 20, 0.6);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-blur: blur(12px);
-  --primary: #7e22ce; /* KDL violet/purple primary */
-  --fa-main-color: #7e22ce;
-  --primary-light: #9640E0;
-  --primary-dark: #651BA5;
-  --split: #C8CE22; /* color for contrast elements like the "X" on the close button */
+  --primary: #7E22CE;
+  --fa-main-color: #7E22CE;
+  --primary-light: #9743E0;
+  --primary-dark: #631BA2;
+  --secondary: #22c8ce; /* color for contrast elements like the "X" on the close button */
   --accent: #22CE28; /* accent color for button icons */
-  --accent-one: #ff073a; /* color for warnings */
-  --accent-two: #2cff05; /* color for player positions, bye week font */
   --bg-opacity: rgba(126, 34, 206, 0.05);
   --bg-opacity-bright: rgba(126, 34, 206, 0.2);
+  --warning: #ff073a; /* color for warnings */
+  --positive: #2cff05; /* color for player positions, bye week font */
 }
 
 .myfantasyleague_menu ul li.mfl-icon {
@@ -92,11 +92,11 @@ html.theme-dk-gold {
 }
 
 html.theme-dk-purple {
-  --primary: #7e22ce; /* KDL violet/purple primary */
-  --fa-main-color: #7e22ce;
-  --primary-light: #9640E0;
-  --primary-dark: #651BA5;
-  --split: #C8CE22; /* color for contrast elements like the "X" on the close button */
+  --primary: #7E22CE;
+  --fa-main-color: #7E22CE;
+  --primary-light: #9743E0;
+  --primary-dark: #631BA2;
+  --secondary: #22c8ce; /* color for contrast elements like the "X" on the close button */
   --accent: #22CE28; /* accent color for button icons */
   --bg-opacity: rgba(126, 34, 206, 0.05);
   --bg-opacity-bright: rgba(126, 34, 206, 0.2);
@@ -148,8 +148,8 @@ html.theme-cerulean {
   --primary-light: #4973e4;
   --primary-dark: #163793;
   --accent: #23ce6b; /* accent color for button icons */
-  --accent-one: #ff13f0; /* color for warnings */
-  --accent-two: #ffac13; /* color for player positions, bye week font */
+  --warning: #ff13f0; /* color for warnings */
+  --positive: #ffac13; /* color for player positions, bye week font */
   --bg-opacity: rgba(22, 55, 147, 0.05);
   --bg-opacity-bright: rgba(22, 55, 147, 0.2);
 }
@@ -200,8 +200,8 @@ html.theme-dk-rasta {
   --primary-light: #0ac344;
   --primary-dark: #04571f;
   --accent: #fcdd09; /* accent color for button icons */
-  --accent-one: #da121a; /* color for warnings */
-  --accent-two: #3CFA3C; /* color for position circles, bye week font */
+  --warning: #da121a; /* color for warnings */
+  --positive: #3CFA3C; /* color for position circles, bye week font */
   --bg-opacity: rgba(4, 87, 31, 0.05);
   --bg-opacity-bright: rgba(4, 87, 31, 0.2);
 }
@@ -273,7 +273,7 @@ html.theme-bucs {
   --primary-light: #faa042;
   --primary-dark: #b35e05;
   --accent: #d50a0a; /* accent color for button icons */
-  --accent-two: #696158; /* color for player positions, bye week font */
+  --positive: #696158; /* color for player positions, bye week font */
   --bg-opacity: rgba(82, 62, 40, 0.05);
   --bg-opacity-bright: rgba(82, 62, 40, 0.2);
 }
@@ -354,7 +354,7 @@ html.theme-eagles {
   --primary-light: #048795;
   --primary-dark: #02515a;
   --accent: #a5acaf; /* accent color for button icons */
-  --accent-two: #046A38; /* color for player positions, bye week font */
+  --positive: #046A38; /* color for player positions, bye week font */
   --bg-opacity: rgba(2, 81, 90, 0.05);
   --bg-opacity-bright: rgba(2, 81, 90, 0.2);
 }
@@ -365,7 +365,7 @@ html.theme-falcons {
   --primary-light: #dc213f;
   --primary-dark: #69101e;
   --accent: #a5acaf; /* accent color for button icons */
-  --accent-two: #77a719; /* color for player positions, bye week font */
+  --positive: #77a719; /* color for player positions, bye week font */
   --bg-opacity: rgba(105, 16, 30, 0.05);
   --bg-opacity-bright: rgba(105, 16, 30, 0.2);
 }
@@ -396,8 +396,8 @@ html.theme-jets {
   --primary-light: #1c8a65;
   --primary-dark: #104c38;
   --accent: #929292; /* accent color for button icons */
-  --accent-one: #571229; /* color for warnings */
-  --accent-two: #571d12; /* color for player positions, bye week font */
+  --warning: #571229; /* color for warnings */
+  --positive: #571d12; /* color for player positions, bye week font */
   --bg-opacity: rgba(16, 76, 56, 0.05);
   --bg-opacity-bright: rgba(16, 76, 56, 0.2);
 }
@@ -468,8 +468,8 @@ html.theme-ravens {
   --primary-light: #3421a6;
   --primary-dark: #180f4d;
   --accent: #9E7C0C; /* accent color for button icons */
-  --accent-one: #c60c30; /* color for warnings */
-  --accent-two: #0c9e33; /* color for player positions, bye week font */
+  --warning: #c60c30; /* color for warnings */
+  --positive: #0c9e33; /* color for player positions, bye week font */
   --bg-opacity: rgba(24, 15, 77, 0.05);
   --bg-opacity-bright: rgba(24, 15, 77, 0.2);
 }
@@ -1341,7 +1341,7 @@ caption, h1, h2, h3, h4, .b_name {
 
 /* Added below for mfl live score box BYE font settings */
 .mflBoxBye {
-    color: var(--accent-two, #f8f7c3);
+    color: var(--positive, #f8f7c3);
 }
 
 /* ============================================= */
@@ -1745,7 +1745,7 @@ body.chat_popup .banner-container-wrap {
 
 .icon-bar a:hover i:after,
 .icon-bar-full a:hover i:after {
-  color: var(--accent-one, #ff4200); /* accent color on Font Awesome icons when hovering */
+  color: var(--warning, #ff4200); /* accent color on Font Awesome icons when hovering */
   opacity: 1;
 }
 
@@ -3138,7 +3138,7 @@ img {
 .warning a:link,
 .warning a:active,
 .warning a:visited {
-  color: var(--accent-one, #ff4200);
+  color: var(--warning, #ff4200);
   font-family: "Rajdhani", sans-serif;
 }
 
@@ -14080,7 +14080,7 @@ div.ym {
 }
 /*set bg color for team position circle - visible on mobile displays and color of text in circle*/
 .playerImgTable .teamPositionCircle {
-    background: var(--accent-two, #ffb431);
+    background: var(--positive, #ffb431);
     color: #000;
 }
 /*set bg color for team position circle - visible on mobile displays and color of text in circle in th - table headers*/
@@ -14357,11 +14357,11 @@ th a[data-pimg-processed] .playerImgTable .teamPositionCircle {
 }
 #AddDropForm .sort-btn:hover {
     color: #fff;
-    background: var(--accent-two, var(--accent, #B82601));
+    background: var(--positive, var(--accent, #B82601));
 }
 #AddDropForm .sort-btn.activated {
     color: #fff;
-    background: var(--accent-two, var(--accent, #B82601));
+    background: var(--positive, var(--accent, #B82601));
     border: 0;
 }
 #AddDropForm .player-pos {
