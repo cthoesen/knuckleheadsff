@@ -161,8 +161,6 @@ html.theme-cerulean {
   --primary-dark: #163793;
   --primary-darker: #0e235e;
   --accent: #23ce6b; /* accent color for button icons */
-  --accent-one: #ff13f0; /* color for warnings */
-  --accent-two: #ffac13; /* color for player positions, bye week font */
   --bg-opacity: rgba(22, 55, 147, 0.05);
   --bg-opacity-bright: rgba(22, 55, 147, 0.2);
 }
