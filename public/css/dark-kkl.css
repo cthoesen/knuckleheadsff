@@ -158,6 +158,7 @@ html.theme-cerulean {
   --fa-main-color: #1f4fd1;
   --primary-light: #4973e4;
   --primary-dark: #163793;
+  --triadic: #6B23CE; /* color for contrast elements like the "X" on the close button */
   --accent: #23ce6b; /* accent color for button icons */
   --bg-opacity: rgba(22, 55, 147, 0.05);
   --bg-opacity-bright: rgba(22, 55, 147, 0.2);

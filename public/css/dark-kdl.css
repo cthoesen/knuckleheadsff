@@ -98,6 +98,7 @@ html.theme-dk-purple {
   --fa-main-color: #7e22ce;
   --primary-light: #9c4ce1;
   --primary-dark: #591891;
+  --triadic: #0FFFB3; /* color for contrast elements like the "X" on the close button */
   --accent: #ffb30f; /* accent color for button icons */
   --bg-opacity: rgba(89, 24, 145, 0.05);
   --bg-opacity-bright: rgba(89, 24, 145, 0.2);

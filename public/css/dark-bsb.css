@@ -110,6 +110,7 @@ html.theme-dk-red {
   --fa-main-color: #d93636;
   --primary-light: #e36969;
   --primary-dark: #a82020;
+  --triadic: #36D9D7; /* color for contrast elements like the "X" on the close button */
   --accent: #d9d736; /* accent color for button icons */
   --bg-opacity: rgba(168, 32, 32, 0.05);
   --bg-opacity-bright: rgba(168, 32, 32, 0.2);
