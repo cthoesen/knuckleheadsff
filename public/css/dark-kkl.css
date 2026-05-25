@@ -29,12 +29,12 @@ td {
   --fa-main-color: #1f4fd1;
   --primary-light: #3E6AE2;
   --primary-dark: #193FA7;
-  --triadic: #D11F4F; /* color for contrast elements like the "X" on the close button */
-  --accent: #4FD11F; /* accent color for button icons */
+  --split: #D1481F; /* color for contrast elements like the "X" on the close button */
+  --accent: #A8D11F; /* accent color for button icons */
   --accent-one: #ff073a; /* color for warnings */
   --accent-two: #2cff05; /* color for player positions, bye week font */
-  --bg-opacity: rgba(22, 55, 147, 0.05);
-  --bg-opacity-bright: rgba(22, 55, 147, 0.2);
+  --bg-opacity: rgba(31, 79, 209, 0.05);
+  --bg-opacity-bright: rgba(31, 79, 209, 0.2);
 }
 
 .myfantasyleague_menu ul li.mfl-icon {
@@ -142,14 +142,14 @@ html.theme-dk-lime {
 }
 
 html.theme-cerulean {
-  --primary: #1f4fd1; /* kkl cerulean primary theme color */
-  --fa-main-color: #1f4fd1;
-  --primary-light: #3E6AE2;
-  --primary-dark: #193FA7;
-  --triadic: #D11F4F; /* color for contrast elements like the "X" on the close button */
-  --accent: #4FD11F; /* accent color for button icons */
-  --bg-opacity: rgba(22, 55, 147, 0.05);
-  --bg-opacity-bright: rgba(22, 55, 147, 0.2);
+ --primary: #1f4fd1; /* kkl cerulean primary theme color */
+ --fa-main-color: #1f4fd1;
+ --primary-light: #3E6AE2;
+ --primary-dark: #193FA7;
+ --split: #D1481F; /* color for contrast elements like the "X" on the close button */
+ --accent: #A8D11F; /* accent color for button icons */
+ --bg-opacity: rgba(31, 79, 209, 0.05);
+ --bg-opacity-bright: rgba(31, 79, 209, 0.2);
 }
 
 html.theme-creamsicle {

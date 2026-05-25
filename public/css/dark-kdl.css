@@ -27,14 +27,14 @@ td {
   --glass-blur: blur(12px);
   --primary: #7e22ce; /* KDL violet/purple primary */
   --fa-main-color: #7e22ce;
-  --primary-light: #9c4ce1;
-  --primary-dark: #591891;
-  --triadic: #0FFFB3; /* color for contrast elements like the "X" on the close button */
-  --accent: #ffb30f; /* accent color for button icons */
+  --primary-light: #9640E0;
+  --primary-dark: #651BA5;
+  --split: #C8CE22; /* color for contrast elements like the "X" on the close button */
+  --accent: #22CE28; /* accent color for button icons */
   --accent-one: #ff073a; /* color for warnings */
   --accent-two: #2cff05; /* color for player positions, bye week font */
-  --bg-opacity: rgba(89, 24, 145, 0.05);
-  --bg-opacity-bright: rgba(89, 24, 145, 0.2);
+  --bg-opacity: rgba(126, 34, 206, 0.05);
+  --bg-opacity-bright: rgba(126, 34, 206, 0.2);
 }
 
 .myfantasyleague_menu ul li.mfl-icon {
@@ -92,14 +92,14 @@ html.theme-dk-gold {
 }
 
 html.theme-dk-purple {
-  --primary: #7e22ce;
+  --primary: #7e22ce; /* KDL violet/purple primary */
   --fa-main-color: #7e22ce;
-  --primary-light: #9c4ce1;
-  --primary-dark: #591891;
-  --triadic: #0FFFB3; /* color for contrast elements like the "X" on the close button */
-  --accent: #ffb30f; /* accent color for button icons */
-  --bg-opacity: rgba(89, 24, 145, 0.05);
-  --bg-opacity-bright: rgba(89, 24, 145, 0.2);
+  --primary-light: #9640E0;
+  --primary-dark: #651BA5;
+  --split: #C8CE22; /* color for contrast elements like the "X" on the close button */
+  --accent: #22CE28; /* accent color for button icons */
+  --bg-opacity: rgba(126, 34, 206, 0.05);
+  --bg-opacity-bright: rgba(126, 34, 206, 0.2);
 }
 
 html.theme-dk-red {
