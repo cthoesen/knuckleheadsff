@@ -29,7 +29,7 @@ td {
   --fa-main-color: #7E22CE;
   --primary-light: #9743E0;
   --primary-dark: #631BA2;
-  --secondary: #22c8ce; /* color for contrast elements like the "X" on the close button */
+  --secondary: #ce2272; /* color for contrast elements like the "X" on the close button */
   --accent: #22CE28; /* accent color for button icons */
   --bg-opacity: rgba(126, 34, 206, 0.05);
   --bg-opacity-bright: rgba(126, 34, 206, 0.2);
@@ -96,7 +96,7 @@ html.theme-dk-purple {
   --fa-main-color: #7E22CE;
   --primary-light: #9743E0;
   --primary-dark: #631BA2;
-  --secondary: #22c8ce; /* color for contrast elements like the "X" on the close button */
+  --secondary: #ce2272; /* color for contrast elements like the "X" on the close button */
   --accent: #22CE28; /* accent color for button icons */
   --bg-opacity: rgba(126, 34, 206, 0.05);
   --bg-opacity-bright: rgba(126, 34, 206, 0.2);
