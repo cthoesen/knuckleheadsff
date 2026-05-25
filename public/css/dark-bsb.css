@@ -29,8 +29,8 @@ td {
   --fa-main-color: #d93636;
   --primary-light: #E26464;
   --primary-dark: #B62222;
-  --split: #36D988; /* color for contrast elements like the "X" on the close button */
-  --accent: #D98836; /* accent color for button icons */
+  --split: #52ABF7; /* color for contrast elements like the "X" on the close button */
+  --accent: #f7f052; /* accent color for button icons */
   --accent-one: #ff073a; /* color for warnings */
   --accent-two: #2cff05; /* color for player positions, bye week font */
   --bg-opacity: rgba(217, 54, 54, 0.05);
@@ -106,8 +106,8 @@ html.theme-dk-red {
   --fa-main-color: #d93636;
   --primary-light: #E26464;
   --primary-dark: #B62222;
-  --split: #36D988; /* color for contrast elements like the "X" on the close button */
-  --accent: #D98836; /* accent color for button icons */
+  --split: #52ABF7; /* color for contrast elements like the "X" on the close button */
+  --accent: #f7f052; /* accent color for button icons */
   --bg-opacity: rgba(217, 54, 54, 0.05);
   --bg-opacity-bright: rgba(217, 54, 54, 0.2);
 }
