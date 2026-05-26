@@ -11,9 +11,10 @@ export default function Home() {
       <main className="relative z-10 max-w-7xl mx-auto px-6 py-16">
         {/* Hero Section */}
         <div className="text-center mb-20 slide-in-up">
-          <h1 className="text-7xl md:text-8xl font-black mb-6 glitch-text">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 glitch-text leading-tight">
             <span className="bg-linear-to-r from-cyan-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
-              KNUCKLEHEADS FANTASY FOOTBALL
+              <span className="md:hidden">KNUCKLE<br/>HEADS<br/>FANTASY FOOTBALL</span>
+              <span className="hidden md:inline">KNUCKLEHEADS FANTASY FOOTBALL</span>
             </span>
           </h1>
           <div className="h-1 w-64 mx-auto bg-linear-to-r from-transparent via-cyan-400 to-transparent mb-8" />
