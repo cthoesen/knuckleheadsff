@@ -30,7 +30,7 @@ td {
   --primary-light: #55CB83;
   --primary-dark: #2C8E52;
   --secondary: #A738B5; /* color for contrast elements like the "X" on the close button */
-  --accent: #cffdd8; /* accent color for button icons */
+  --accent: #e8e843; /* accent color for button icons */
   --bg-opacity: rgba(56, 181, 105, 0.05);
   --bg-opacity-bright: rgba(56, 181, 105, 0.2);
   --warning: #ff073a; /* color for warnings */
@@ -167,7 +167,7 @@ html.theme-jade {
   --primary-light: #55CB83;
   --primary-dark: #2C8E52;
   --secondary: #A738B5; /* color for contrast elements like the "X" on the close button */
-  --accent: #cffdd8; /* accent color for button icons */
+  --accent: #e8e843; /* accent color for button icons */
   --bg-opacity: rgba(56, 181, 105, 0.05);
   --bg-opacity-bright: rgba(56, 181, 105, 0.2);
 }
