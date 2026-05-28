@@ -61,8 +61,12 @@ export async function GET() {
           const pName = clean(playerMatch[1]);
 
           // Position Extraction
+          // MFL appends injury/rookie designations like (Q), (I), (R), (O), (P), (D)
+          // after the position, so skip any trailing parenthetical before grabbing position.
           const nameParts = pName.split(' ');
-          const rawPos = nameParts.length > 1 ? nameParts[nameParts.length - 1] : 'UNK';
+          let posIdx = nameParts.length - 1;
+          if (posIdx >= 0 && nameParts[posIdx].startsWith('(')) posIdx--;
+          const rawPos = posIdx >= 0 ? nameParts[posIdx] : 'UNK';
           const position = rawPos.replace(/[^a-zA-Z]/g, '');
 
           players.push({
