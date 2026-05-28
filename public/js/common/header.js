@@ -6464,7 +6464,7 @@ function scoreAdjustmentHtml(which) {
 (function (window, document) {
 	'use strict';
 	const file = 'https://knuckleheadsff.com/images/shared/icons/svg-sprites.svg';
-	const revision = 26; // Change this value to invalidate cache
+	const revision = 27; // Change this value to invalidate cache
 
 	if (!document.createElementNS || !document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect) {
 		return true;
