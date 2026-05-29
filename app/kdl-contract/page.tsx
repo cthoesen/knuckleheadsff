@@ -8,6 +8,12 @@ import { Search, Crown, ArrowLeft, Calendar, TrendingUp } from 'lucide-react';
 // ... (getPositionGroup, calculateTagBaselines, calculatePlayerStatus) ...
 // Below is the FULL file content with the new Header Button added
 
+interface TagPlayer {
+  Player: string;
+  Position: string;
+  Salary: string;
+}
+
 interface KDLPlayer {
   Player: string;
   Position: string;
@@ -32,19 +38,14 @@ function getPositionGroup(pos: string) {
   return pos; 
 }
 
-function calculateTagBaselines(allPlayers: KDLPlayer[]): TagValues {
+function calculateTagBaselines(tagPlayers: TagPlayer[]): TagValues {
   const groups = ['QB', 'RB', 'WR', 'TE', 'PK', 'LB', 'DL', 'DB'];
   const baselines: TagValues = {};
   const salaryMap: Record<string, number[]> = {};
   groups.forEach(g => salaryMap[g] = []);
 
-  allPlayers.forEach(p => {
-    let rawPos = p.Position;
-    if (!rawPos || rawPos === 'UNK') {
-      const parts = p.Player.split(' ');
-      rawPos = parts[parts.length - 1].replace(/[^a-zA-Z]/g, '');
-    }
-    const group = getPositionGroup(rawPos);
+  tagPlayers.forEach(p => {
+    const group = getPositionGroup(p.Position || 'UNK');
     if (salaryMap[group]) {
       salaryMap[group].push(parseFloat(p.Salary) || 0);
     }
@@ -101,10 +102,16 @@ export default function KDLContractApp() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('/api/kdl-league-data');
-        if (!response.ok) throw new Error('Failed to fetch KDL data');
-        const data = await response.json();
-        const baselines = calculateTagBaselines(data);
+        const [leagueRes, tagRes] = await Promise.all([
+          fetch('/api/kdl-league-data'),
+          fetch('/api/kdl-tag-data'),
+        ]);
+        if (!leagueRes.ok) throw new Error('Failed to fetch KDL data');
+        if (!tagRes.ok) throw new Error('Failed to fetch tag baseline data');
+        const data = await leagueRes.json();
+        const tagData: TagPlayer[] = await tagRes.json();
+        // Baselines use locked Week 12 data to stay consistent with the Tag Auditor
+        const baselines = calculateTagBaselines(tagData);
         setTagBaselines(baselines);
         setPlayers(data);
       } catch (err: any) {
