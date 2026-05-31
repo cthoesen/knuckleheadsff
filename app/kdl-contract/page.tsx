@@ -86,27 +86,40 @@ function calculatePlayerStatus(player: KDLPlayer, tagBaselines: TagValues) {
 }
 
 export default function KDLContractApp() {
-  const [players,      setPlayers]      = useState<KDLPlayer[]>([]);
-  const [tagBaselines, setTagBaselines] = useState<TagValues>({});
-  const [isLoading,    setIsLoading]    = useState(true);
-  const [error,        setError]        = useState<string | null>(null);
-  const [searchTerm,   setSearchTerm]   = useState('');
-  const [selectedTeam, setSelectedTeam] = useState('all');
-  const [tagDecisions, setTagDecisions] = useState<Record<string, TagDecision>>({});
+  const [players,         setPlayers]         = useState<KDLPlayer[]>([]);
+  const [tagBaselines,    setTagBaselines]    = useState<TagValues>({});
+  const [deadMoneyByTeam, setDeadMoneyByTeam] = useState<Record<string, number>>({});
+  const [isLoading,       setIsLoading]       = useState(true);
+  const [error,           setError]           = useState<string | null>(null);
+  const [searchTerm,      setSearchTerm]      = useState('');
+  const [selectedTeam,    setSelectedTeam]    = useState('all');
+  const [tagDecisions,    setTagDecisions]    = useState<Record<string, TagDecision>>({});
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const [leagueRes, tagRes] = await Promise.all([
+        const [leagueRes, tagRes, deadMoneyRes] = await Promise.all([
           fetch('/api/kdl-league-data'),
           fetch('/api/kdl-tag-data'),
+          fetch('/api/kdl-dead-money'),
         ]);
         if (!leagueRes.ok) throw new Error('Failed to fetch KDL data');
         if (!tagRes.ok)    throw new Error('Failed to fetch tag baseline data');
+
         const data:    KDLPlayer[]  = await leagueRes.json();
         const tagData: TagPlayer[]  = await tagRes.json();
         setTagBaselines(calculateTagBaselines(tagData));
         setPlayers(data);
+
+        // Build a case-insensitive map of franchise name → total dead money
+        if (deadMoneyRes.ok) {
+          const dmData = await deadMoneyRes.json();
+          const map: Record<string, number> = {};
+          (dmData.franchises ?? []).forEach((f: any) => {
+            map[f.name.toLowerCase()] = f.totalDeadMoney;
+          });
+          setDeadMoneyByTeam(map);
+        }
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -143,12 +156,12 @@ export default function KDLContractApp() {
     return result;
   }, [teams, selectedTeam, searchTerm]);
 
-  const getTeamStats = (players: any[]) => {
+  const getTeamStats = (players: any[], deadMoney: number = 0) => {
     const SALARY_CAP = 1000;
     const YEARS_CAP  = 65;
     const active = players.filter(p => !p.status.isTaxi);
 
-    const totalSalary = active.reduce((sum, p) => sum + p.status.salary, 0);
+    const totalSalary = active.reduce((sum, p) => sum + p.status.salary, 0) + deadMoney;
     const totalYears  = active.reduce((sum, p) => sum + p.status.projectedYears, 0);
 
     // Projected salary: replace expiring players' salary with their tag cost (or 0 if dropped)
@@ -249,7 +262,8 @@ export default function KDLContractApp() {
         {/* Teams */}
         <div className="space-y-8">
           {filteredTeams.map((team: any) => {
-            const stats = getTeamStats(team.players);
+            const teamDeadMoney = deadMoneyByTeam[team.name.toLowerCase()] || 0;
+            const stats = getTeamStats(team.players, teamDeadMoney);
             return (
               <div key={team.name} className="cyber-card border-violet-500/20">
 
@@ -395,6 +409,20 @@ export default function KDLContractApp() {
                           </tr>
                         );
                       })}
+                      {/* Dead Money row */}
+                      {teamDeadMoney > 0 && (
+                        <tr className="bg-rose-500/5 border-t border-rose-500/20">
+                          <td className="px-6 py-3">
+                            <div className="font-bold text-rose-400 text-sm">Dead Money</div>
+                            <div className="text-[10px] text-rose-500/70 font-mono mt-0.5">2026 carry-over penalties</div>
+                          </td>
+                          <td className="px-6 py-3 font-mono text-rose-400">${teamDeadMoney}</td>
+                          <td className="px-6 py-3 text-center"><span className="text-zinc-700 font-mono">—</span></td>
+                          <td className="px-6 py-3 text-center"><span className="text-zinc-700 font-mono">—</span></td>
+                          <td className="px-6 py-3 text-center"><span className="text-zinc-700 font-mono">—</span></td>
+                          <td className="px-6 py-3 text-right"><span className="text-zinc-700 font-mono">—</span></td>
+                        </tr>
+                      )}
                     </tbody>
                   </table>
                 </div>

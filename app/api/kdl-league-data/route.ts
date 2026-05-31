@@ -60,8 +60,8 @@ export async function GET() {
 
           const pName = clean(playerMatch[1]);
 
-          // Skip non-player rows like "Salary Adjustments"
-          if (pName.toLowerCase() === 'salary adjustments') continue;
+          // Skip non-player rows like "Salary Adjustments" or "Salary Adjustment (3)"
+          if (pName.toLowerCase().includes('salary adjustment')) continue;
 
           // Position Extraction
           // MFL appends injury/rookie designations like (Q), (I), (R), (O), (P), (D)
