@@ -3,6 +3,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, ArrowLeft, Calendar, TrendingUp } from 'lucide-react';
+import { FRANCHISE_ALIASES } from './franchise-aliases';
 
 interface TagPlayer {
   Player: string;
@@ -111,12 +112,20 @@ export default function KDLContractApp() {
         setTagBaselines(calculateTagBaselines(tagData));
         setPlayers(data);
 
-        // Build a case-insensitive map of franchise name → total dead money
+        // Build a case-insensitive map of franchise name → total dead money.
+        // FRANCHISE_ALIASES remaps prior-season names to current-season names
+        // for teams that changed ownership or renamed between seasons.
         if (deadMoneyRes.ok) {
           const dmData = await deadMoneyRes.json();
+          const aliasMap: Record<string, string> = {};
+          Object.entries(FRANCHISE_ALIASES).forEach(([oldName, newName]) => {
+            aliasMap[oldName.toLowerCase()] = newName.toLowerCase();
+          });
+
           const map: Record<string, number> = {};
           (dmData.franchises ?? []).forEach((f: any) => {
-            map[f.name.toLowerCase()] = f.totalDeadMoney;
+            const key = aliasMap[f.name.toLowerCase()] ?? f.name.toLowerCase();
+            map[key] = f.totalDeadMoney;
           });
           setDeadMoneyByTeam(map);
         }
