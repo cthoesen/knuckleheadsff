@@ -1184,7 +1184,7 @@ caption, h1, h2, h3, h4, .b_name {
 /* BSB caption logo */
 caption::before {
   padding: 1.25rem 1.75rem 1.75rem 1.25rem;
-  background: url(https://knuckleheadsff.com/images/shared/icons/caption-logo.svg) no-repeat; 
+  background: url(https://knuckleheadsff.com/images/shared/icons/knuckleheads-bsb.svg) no-repeat; 
   background-size: contain;
   background-position: 25% center;
   vertical-align: 0.5rem;
@@ -2573,7 +2573,7 @@ caption,
 /* Added below logo before captions */
 caption:before {
   padding: 1.25rem 1.75rem 1.75rem 1.25rem;
-  background: url(https://knuckleheadsff.com/images/shared/icons/caption-logo.svg) no-repeat;
+  background: url(https://knuckleheadsff.com/images/shared/icons/knuckleheads-bsb.svg) no-repeat;
   background-size: contain;
   background-position: 25% center;
   vertical-align: 0.5rem;
