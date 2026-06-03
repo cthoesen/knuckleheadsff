@@ -9,21 +9,66 @@ export default function Home() {
       <div className="scan-line" />
       
       <main className="relative z-10 max-w-7xl mx-auto px-6 py-16">
-        {/* Hero Section */}
-        <div className="text-center mb-20 slide-in-up">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 glitch-text leading-tight">
-            <span className="bg-linear-to-r from-cyan-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
-              <span className="md:hidden">KNUCKLE<br/>HEADS<br/>FANTASY FOOTBALL</span>
-              <span className="hidden md:inline">KNUCKLEHEADS FANTASY FOOTBALL</span>
-            </span>
-          </h1>
-          <div className="h-1 w-64 mx-auto bg-linear-to-r from-transparent via-cyan-400 to-transparent mb-8" />
-          <p className="text-2xl md:text-3xl text-purple-300 font-semibold tracking-wide">
-            ASSET REPOSITORY // CYBERPUNK EDITION
-          </p>
-          <p className="text-zinc-400 mt-4 text-lg">
-            Powered by Next.js • Deployed on Vercel
-          </p>
+        {/* Hero Banner */}
+        <div className="relative mb-20 slide-in-up overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-950/60">
+
+          {/* Radial glows */}
+          <div className="absolute -top-16 left-1/4 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -top-16 right-1/4 w-72 h-72 bg-violet-500/10 rounded-full blur-3xl pointer-events-none" />
+
+          {/* Subtle cyber grid */}
+          <div
+            className="absolute inset-0 opacity-[0.035] pointer-events-none"
+            style={{ backgroundImage: 'linear-gradient(rgba(0,200,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,255,1) 1px, transparent 1px)', backgroundSize: '48px 48px' }}
+          />
+
+          {/* Corner accent brackets */}
+          <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-cyan-500/40 rounded-tl-2xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-violet-500/40 rounded-tr-2xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 border-violet-500/40 rounded-bl-2xl pointer-events-none" />
+          <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-cyan-500/40 rounded-br-2xl pointer-events-none" />
+
+          {/* Logo — desktop: anchored left, angled, overlapping the title */}
+          <div className="hidden md:block absolute left-10 lg:left-16 top-1/2 -translate-y-[55%] -rotate-[30deg] z-10 pointer-events-none">
+            <div className="relative">
+              {/* Glow behind logo */}
+              <div className="absolute inset-0 scale-110 bg-cyan-400/20 rounded-full blur-xl" />
+              <img
+                src="/images/shared/icons/icon-knuckleheads.svg"
+                alt="Knuckleheads Crown"
+                className="relative w-28 lg:w-36 h-auto drop-shadow-[0_0_20px_rgba(0,200,255,0.55)]"
+              />
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="relative z-20 px-8 py-14 md:py-20 text-center">
+
+            {/* Logo — mobile: small, above title */}
+            <div className="md:hidden flex justify-center mb-5">
+              <img
+                src="/images/shared/icons/icon-knuckleheads.svg"
+                alt="Knuckleheads Crown"
+                className="w-14 h-auto -rotate-[30deg] drop-shadow-[0_0_14px_rgba(0,200,255,0.5)]"
+              />
+            </div>
+
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-0 glitch-text leading-tight">
+              <span className="bg-linear-to-r from-cyan-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
+                <span className="md:hidden">KNUCKLE<br/>HEADS<br/>FANTASY FOOTBALL</span>
+                <span className="hidden md:inline">KNUCKLEHEADS FANTASY FOOTBALL</span>
+              </span>
+            </h1>
+
+            <div className="h-px w-64 mx-auto bg-linear-to-r from-transparent via-cyan-400 to-transparent mt-7 mb-6" />
+
+            <p className="text-2xl md:text-3xl text-purple-300 font-semibold tracking-wide">
+              ASSET REPOSITORY // CYBERPUNK EDITION
+            </p>
+            <p className="text-zinc-500 mt-3 text-sm font-mono tracking-widest uppercase">
+              Powered by Next.js • Deployed on Vercel
+            </p>
+          </div>
         </div>
 
         {/* Player Image Grid - Links to League Sites */}
