@@ -29,16 +29,16 @@ export default function Home() {
           <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-cyan-500/40 rounded-br-2xl pointer-events-none" />
 
           {/* Logo — desktop: large watermark, left side, behind text */}
-          <div className="hidden md:block absolute left-8 top-1/2 -translate-y-1/2 -rotate-[30deg] z-10 opacity-[0.22] pointer-events-none">
+          <div className="hidden md:block absolute left-8 top-1/4 -translate-y-1/2 -rotate-30 z-10 opacity-[0.22] pointer-events-none">
             <img
               src="/images/shared/icons/icon-knuckleheads.svg"
               alt=""
-              className="w-[30rem] h-auto"
+              className="w-120 h-auto"
             />
           </div>
 
           {/* Logo — mobile: large watermark, centered, fills banner behind text */}
-          <div className="md:hidden absolute inset-0 flex items-center justify-center z-10 opacity-[0.18] pointer-events-none">
+          <div className="md:hidden absolute inset-0 flex items-start justify-center pt-6 z-10 opacity-[0.18] pointer-events-none">
             <img
               src="/images/shared/icons/icon-knuckleheads.svg"
               alt=""
