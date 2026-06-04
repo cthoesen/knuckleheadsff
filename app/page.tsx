@@ -28,32 +28,28 @@ export default function Home() {
           <div className="absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 border-violet-500/40 rounded-bl-2xl pointer-events-none" />
           <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-cyan-500/40 rounded-br-2xl pointer-events-none" />
 
-          {/* Logo — desktop: anchored left, angled, overlapping the title */}
-          <div className="hidden md:block absolute left-10 lg:left-16 top-1/2 -translate-y-[55%] -rotate-[30deg] z-10 pointer-events-none">
-            <div className="relative">
-              {/* Glow behind logo */}
-              <div className="absolute inset-0 scale-110 bg-cyan-400/20 rounded-full blur-xl" />
-              <img
-                src="/images/shared/icons/icon-knuckleheads.svg"
-                alt="Knuckleheads Crown"
-                className="relative w-28 lg:w-36 h-auto drop-shadow-[0_0_20px_rgba(0,200,255,0.55)]"
-              />
-            </div>
+          {/* Logo — desktop: large watermark, left side, behind text */}
+          <div className="hidden md:block absolute -left-4 top-1/2 -translate-y-1/2 -rotate-[30deg] z-10 opacity-[0.22] pointer-events-none">
+            <img
+              src="/images/shared/icons/icon-knuckleheads.svg"
+              alt=""
+              className="w-72 h-auto"
+            />
+          </div>
+
+          {/* Logo — mobile: large watermark, centered, fills banner behind text */}
+          <div className="md:hidden absolute inset-0 flex items-center justify-center z-10 opacity-[0.18] pointer-events-none">
+            <img
+              src="/images/shared/icons/icon-knuckleheads.svg"
+              alt=""
+              className="w-[92%] h-auto"
+            />
           </div>
 
           {/* Content */}
           <div className="relative z-20 px-8 py-14 md:py-20 text-center">
 
-            {/* Logo — mobile: small, above title */}
-            <div className="md:hidden flex justify-center mb-5">
-              <img
-                src="/images/shared/icons/icon-knuckleheads.svg"
-                alt="Knuckleheads Crown"
-                className="w-14 h-auto -rotate-[30deg] drop-shadow-[0_0_14px_rgba(0,200,255,0.5)]"
-              />
-            </div>
-
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-0 glitch-text leading-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 glitch-text leading-tight">
               <span className="bg-linear-to-r from-cyan-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
                 <span className="md:hidden">KNUCKLE<br/>HEADS<br/>FANTASY FOOTBALL</span>
                 <span className="hidden md:inline">KNUCKLEHEADS FANTASY FOOTBALL</span>
