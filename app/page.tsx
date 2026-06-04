@@ -29,7 +29,7 @@ export default function Home() {
           <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-cyan-500/40 rounded-br-2xl pointer-events-none" />
 
           {/* Logo — desktop: large watermark, left side, behind text */}
-          <div className="hidden md:block absolute left-8 top-1/3 -translate-y-1/2 -rotate-30 z-10 opacity-[0.22] pointer-events-none">
+          <div className="hidden md:block absolute left-8 top-8 -rotate-30 z-10 opacity-[0.22] pointer-events-none">
             <img
               src="/images/shared/icons/icon-knuckleheads.svg"
               alt=""
