@@ -7,6 +7,7 @@ import { Search, DollarSign, XCircle } from 'lucide-react';
 interface MMHPlayer {
   Player: string;
   Team: string;
+  Position: string;
   Salary: string;
   Base: string;
   Years: string;
@@ -16,6 +17,16 @@ interface MMHPlayer {
   IsIR: boolean;
   Points: number | null;
 }
+
+// IR players are promoted to the active roster at season start, so they sort
+// alongside their position group. Taxi squad always goes to the bottom.
+const POSITION_ORDER: Record<string, number> = {
+  QB: 0, RB: 1, WR: 2, TE: 3,
+  PK: 4, K: 4,
+  DE: 5, DT: 5, NT: 5,
+  LB: 6,
+  CB: 7, S: 7, DB: 7,
+};
 
 type KeepDecision = 'keep' | 'drop';
 
@@ -258,6 +269,15 @@ export default function MMHKeeperApp() {
         {filteredTeams.map((team: any) => {
           const stats = getTeamStats(team.players, keepDecisions);
 
+          // IR players are treated as active roster — sort all non-taxi players
+          // by position, then append taxi squad at the bottom.
+          const sortedPlayers = [...team.players].sort((a: any, b: any) => {
+            if (a.IsTaxi !== b.IsTaxi) return a.IsTaxi ? 1 : -1;
+            const posA = POSITION_ORDER[a.Position] ?? 99;
+            const posB = POSITION_ORDER[b.Position] ?? 99;
+            return posA - posB;
+          });
+
           return (
             <div key={team.name} className="team-card">
               <div className="card-header">
@@ -312,7 +332,7 @@ export default function MMHKeeperApp() {
                     </tr>
                   </thead>
                   <tbody>
-                    {team.players.map((p: any, i: number) => {
+                    {sortedPlayers.map((p: any, i: number) => {
                       const decisionKey = `${p.Team}-${p.Player}`;
                       const decision = keepDecisions[decisionKey] ?? 'keep';
                       const isDropped = p.status.eligible && decision === 'drop';
@@ -332,7 +352,6 @@ export default function MMHKeeperApp() {
                             <div style={{ fontWeight: 500 }}>{p.Player}</div>
                             <div style={{ marginTop: '4px' }}>
                               {p.status.isTaxi && <span className="badge-taxi">TAXI</span>}
-                              {p.IsIR && <span className="badge-ir">IR</span>}
                               {p.status.isDraftedRookie && (
                                 <span className="badge-rookie">
                                   {getRookieLabel(p.Info, p.Acquired)}

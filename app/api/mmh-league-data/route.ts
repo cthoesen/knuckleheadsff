@@ -70,6 +70,14 @@ export async function GET() {
         // Skip non-player rows like "Salary Adjustments (3)"
         if (pName.toLowerCase().includes('salary adjustment')) continue;
 
+        // Extract position from player name.
+        // MFL format: "Mixon, Joe HOU RB (I)" — last token is status designation,
+        // second-to-last is position, third-to-last is NFL team.
+        const nameParts = pName.split(/\s+/);
+        let posIdx = nameParts.length - 1;
+        if (posIdx >= 0 && nameParts[posIdx].startsWith('(')) posIdx--;
+        const position = posIdx >= 0 ? nameParts[posIdx].replace(/[^a-zA-Z]/g, '') : 'UNK';
+
         // Parse season points from the built-in class="points" column.
         // Regular players show a linked score; IR/unavailable players show "&dash;" which
         // cleans to an empty string — those get null.
@@ -83,6 +91,7 @@ export async function GET() {
         players.push({
           Team:     teamName,
           Player:   pName,
+          Position: position,
           Salary:   salaryMatch   ? clean(salaryMatch[1]).replace(/[^0-9.]/g, '') : '0',
           Years:    yearsMatch    ? clean(yearsMatch[1]) : '',
           Base:     baseMatch     ? clean(baseMatch[1]).replace(/[^0-9.]/g, '') : '0',
