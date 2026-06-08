@@ -336,7 +336,9 @@ export default function MMHKeeperApp() {
                             </div>
                           </td>
                           <td className="font-mono text-zinc">${p.Salary}</td>
-                          <td className="font-mono" style={{ fontSize: '0.75rem', color: '#71717a' }}>${p.Base}</td>
+                          <td className="font-mono" style={{ fontSize: '0.75rem', color: '#71717a' }}>
+                            {p.Base && parseFloat(p.Base) > 0 ? `$${p.Base}` : <span style={{ color: '#52525b' }}>—</span>}
+                          </td>
                           <td>
                             {p.status.eligible ? (
                               <div className="cost-display">${p.status.cost}</div>
