@@ -13,6 +13,7 @@ interface MMHPlayer {
   Info: string;
   Acquired: string;
   IsTaxi: boolean;
+  IsIR: boolean;
   Points: number | null;
 }
 
@@ -216,6 +217,7 @@ export default function MMHKeeperApp() {
         .text-zinc { color: #a1a1aa; }
         .text-red { color: #ef4444; }
         .badge-taxi { background: rgba(234, 179, 8, 0.1); color: #eab308; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; margin-right: 8px; font-family: 'JetBrains Mono'; }
+        .badge-ir { background: rgba(239, 68, 68, 0.1); color: #f87171; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; margin-right: 8px; font-family: 'JetBrains Mono'; }
         .badge-rookie { color: #60a5fa; font-size: 0.75rem; font-family: 'JetBrains Mono'; }
 
         .cost-display { font-size: 1.125rem; font-weight: 700; font-family: 'JetBrains Mono'; color: #34d399; }
@@ -330,6 +332,7 @@ export default function MMHKeeperApp() {
                             <div style={{ fontWeight: 500 }}>{p.Player}</div>
                             <div style={{ marginTop: '4px' }}>
                               {p.status.isTaxi && <span className="badge-taxi">TAXI</span>}
+                              {p.IsIR && <span className="badge-ir">IR</span>}
                               {p.status.isDraftedRookie && (
                                 <span className="badge-rookie">
                                   {getRookieLabel(p.Info, p.Acquired)}
