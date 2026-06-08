@@ -13,6 +13,7 @@ interface MMHPlayer {
   Info: string;
   Acquired: string;
   IsTaxi: boolean;
+  Points: number | null;
 }
 
 type KeepDecision = 'keep' | 'drop';
@@ -300,6 +301,7 @@ export default function MMHKeeperApp() {
                   <thead>
                     <tr>
                       <th>Player</th>
+                      <th>2025 Pts</th>
                       <th>Current Sal</th>
                       <th>Base</th>
                       <th>2026 Cost</th>
@@ -334,6 +336,12 @@ export default function MMHKeeperApp() {
                                 </span>
                               )}
                             </div>
+                          </td>
+                          <td className="font-mono" style={{ fontWeight: 700, color: '#fbbf24' }}>
+                            {p.Points != null
+                              ? p.Points.toFixed(1)
+                              : <span style={{ color: '#52525b' }}>—</span>
+                            }
                           </td>
                           <td className="font-mono text-zinc">${p.Salary}</td>
                           <td className="font-mono" style={{ fontSize: '0.75rem', color: '#71717a' }}>
