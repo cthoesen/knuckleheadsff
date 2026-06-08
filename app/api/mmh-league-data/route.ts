@@ -36,18 +36,17 @@ function makeNameKey(namePart: string, teamCode: string): string {
 
 export async function GET() {
   const MFL_HTML_URL   = `https://${SERVER}.myfantasyleague.com/${SEASON_YEAR}/options?L=${LEAGUE_ID}&O=07&PRINTER=1`;
-  const MFL_SCORES_URL = `https://api.myfantasyleague.com/${SEASON_YEAR}/export?TYPE=playerScores&L=${LEAGUE_ID}&W=YTD&JSON=1`;
+  // playerScores must use the www host directly — api.myfantasyleague.com 302-redirects here
+  // and Vercel serverless functions do not follow that cross-host redirect.
+  // TYPE=players (below) is the opposite: it must go through api.myfantasyleague.com.
+  const MFL_SCORES_URL = `https://${SERVER}.myfantasyleague.com/${SEASON_YEAR}/export?TYPE=playerScores&L=${LEAGUE_ID}&W=YTD&JSON=1`;
 
   try {
     // Phase 1: Fetch HTML roster data and YTD scores in parallel
+    const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36';
     const [htmlResponse, scoresResponse] = await Promise.all([
-      fetch(MFL_HTML_URL, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-        },
-        next: { revalidate: 0 },
-      }),
-      fetch(MFL_SCORES_URL, { next: { revalidate: 3600 } }).catch(() => null),
+      fetch(MFL_HTML_URL,   { headers: { 'User-Agent': UA }, next: { revalidate: 0 } }),
+      fetch(MFL_SCORES_URL, { headers: { 'User-Agent': UA }, next: { revalidate: 3600 } }).catch(() => null),
     ]);
 
     if (!htmlResponse.ok) {
@@ -61,7 +60,8 @@ export async function GET() {
     if (scoresResponse?.ok) {
       try {
         const scoresJson = await scoresResponse.json();
-        const scorePlayers = scoresJson?.playerScores?.player;
+        // MFL returns this array as "playerScore" (singular), not "player"
+        const scorePlayers = scoresJson?.playerScores?.playerScore;
         if (scorePlayers) {
           const arr = Array.isArray(scorePlayers) ? scorePlayers : [scorePlayers];
           for (const sp of arr) {
