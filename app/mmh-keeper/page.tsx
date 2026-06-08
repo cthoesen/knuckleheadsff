@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, DollarSign, XCircle, CheckCircle } from 'lucide-react';
+import { Search, DollarSign, XCircle } from 'lucide-react';
 
 interface MMHPlayer {
   Player: string;
@@ -15,13 +15,15 @@ interface MMHPlayer {
   IsTaxi: boolean;
 }
 
+type KeepDecision = 'keep' | 'drop';
+
 function calculateMMHKeeperStatus(player: MMHPlayer) {
   if (!player || !player.Player) return { eligible: false, cost: 0, reason: 'Invalid Data' };
 
   // Parse Money Values
   const currentSalary = parseFloat(player.Salary) || 0;
   const keeperBase = parseFloat(player.Base) || 0;
-  
+
   // --- UPDATED YEARS LOGIC ---
   // If Years is blank/empty, they are on a fresh contract (3 years remaining)
   // Otherwise, it is Current Years - 1
@@ -35,13 +37,13 @@ function calculateMMHKeeperStatus(player: MMHPlayer) {
     currentYears = parseInt(player.Years);
     yearsRemaining = currentYears - 1;
   }
-  
+
   // Determine Position for Minimums
   const isKicker = player.Player.includes(' K') || player.Player.includes('(K)');
   const minSalary = isKicker ? 3 : 5;
 
   // Determine Max Contract Length (Rookie Rule)
-  const isDraftedRookie = /R\d{2}-\d/.test(player.Info) || /R\d{2}/.test(player.Info); 
+  const isDraftedRookie = /R\d{2}-\d/.test(player.Info) || /R\d{2}/.test(player.Info);
   const maxYears = isDraftedRookie ? 5 : 3;
 
   if (yearsRemaining <= 0 && currentYears > 0) {
@@ -62,17 +64,17 @@ function calculateMMHKeeperStatus(player: MMHPlayer) {
   }
 
   return {
-    eligible: true, 
-    cost: newCost, 
-    reason: null, 
-    yearsRemaining: Math.max(0, yearsRemaining), 
-    isDraftedRookie, 
-    isTaxi: player.IsTaxi, 
+    eligible: true,
+    cost: newCost,
+    reason: null,
+    yearsRemaining: Math.max(0, yearsRemaining),
+    isDraftedRookie,
+    isTaxi: player.IsTaxi,
     maxYears
   };
 }
 
-// --- NEW HELPER FOR ROOKIE TEXT ---
+// --- HELPER FOR ROOKIE TEXT ---
 function getRookieLabel(info: string, acquired: string) {
   if (info.includes('R25')) {
     return `2025 Rookie Draft ${acquired}`;
@@ -83,12 +85,40 @@ function getRookieLabel(info: string, acquired: string) {
   return 'Rookie Contract';
 }
 
+// --- STATS CALCULATION HELPER ---
+function getTeamStats(teamPlayers: any[], decisions: Record<string, KeepDecision>) {
+  const SALARY_CAP = 1200;
+
+  // 1. Current Payroll (Sum of Salary, excluding Taxi)
+  const currentPayroll = teamPlayers.reduce((sum: number, p: any) => {
+    return p.status.isTaxi ? sum : sum + (parseFloat(p.Salary) || 0);
+  }, 0);
+
+  // 2. 2026 Projected (Sum of 2026 Cost for eligible players marked Keep)
+  const projectedPayroll = teamPlayers.reduce((sum: number, p: any) => {
+    if (p.status.isTaxi || !p.status.eligible) return sum;
+    const key = `${p.Team}-${p.Player}`;
+    const decision = decisions[key] ?? 'keep'; // default: keep all eligible players
+    if (decision === 'drop') return sum;
+    return sum + p.status.cost;
+  }, 0);
+
+  return {
+    cap: SALARY_CAP,
+    currentPayroll,
+    currentSpace: SALARY_CAP - currentPayroll,
+    projectedPayroll,
+    projectedSpace: SALARY_CAP - projectedPayroll
+  };
+}
+
 export default function MMHKeeperApp() {
   const [players, setPlayers] = useState<MMHPlayer[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTeam, setSelectedTeam] = useState('all');
+  const [keepDecisions, setKeepDecisions] = useState<Record<string, KeepDecision>>({});
 
   useEffect(() => {
     async function fetchData() {
@@ -132,33 +162,6 @@ export default function MMHKeeperApp() {
     return result;
   }, [teams, selectedTeam, searchTerm]);
 
-  // --- STATS CALCULATION HELPER ---
-  const getTeamStats = (players: any[]) => {
-    const SALARY_CAP = 1200;
-    
-    // 1. Current Payroll (Sum of Salary, excluding Taxi)
-    const currentPayroll = players.reduce((sum, p) => {
-      return p.status.isTaxi ? sum : sum + (parseFloat(p.Salary) || 0);
-    }, 0);
-
-    // 2. 2026 Projected (Sum of 2026 Cost, excluding Taxi, only if eligible)
-    const projectedPayroll = players.reduce((sum, p) => {
-      // We only sum eligible keepers. If ineligible, cost is 0 or they drop off.
-      // If you want to sum ALL rostered players regardless of eligibility, logic changes here.
-      // Assuming we sum eligible keepers + 0 for those who leave.
-      if (p.status.isTaxi || !p.status.eligible) return sum;
-      return sum + p.status.cost;
-    }, 0);
-
-    return {
-      cap: SALARY_CAP,
-      currentPayroll,
-      currentSpace: SALARY_CAP - currentPayroll,
-      projectedPayroll,
-      projectedSpace: SALARY_CAP - projectedPayroll
-    };
-  };
-
   if (isLoading) return (
     <div style={{ minHeight: '100vh', background: '#09090b', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#34d399', fontFamily: 'monospace' }}>
       <div className="animate-pulse">Initializing MMH Salary Protocols...</div>
@@ -173,49 +176,56 @@ export default function MMHKeeperApp() {
     <div className="app-container">
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;900&display=swap');
-        
+
         body { background-color: #09090b; color: #f4f4f5; font-family: 'Inter', sans-serif; margin: 0; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
-        
+
         /* Layout */
         .app-container { min-height: 100vh; }
         .max-w-7xl { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; }
-        
+
         /* Header */
         header { border-bottom: 1px solid #27272a; background: rgba(24, 24, 27, 0.8); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 50; }
         .header-content { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 0; }
-        
+
         /* Inputs */
         .controls { display: flex; gap: 1rem; margin: 2rem 0; flex-wrap: wrap; }
         input, select { background: #18181b; border: 1px solid #27272a; color: white; padding: 0.75rem 1rem; border-radius: 0.5rem; font-family: 'JetBrains Mono', monospace; }
         input { flex: 1; min-width: 300px; }
-        
+
         /* Cards */
         .team-card { background: #18181b; border: 1px solid #27272a; border-radius: 0.75rem; overflow: hidden; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5); }
         .card-header { padding: 1.5rem; background: #09090b; border-bottom: 1px solid #27272a; }
-        
+
         /* Financial Dashboard in Header */
         .financial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-top: 1rem; }
         .stat-box { background: #18181b; border: 1px solid #27272a; padding: 0.75rem; border-radius: 0.5rem; text-align: center; }
         .stat-label { font-size: 0.7rem; color: #71717a; text-transform: uppercase; margin-bottom: 0.25rem; font-weight: 700; }
         .stat-value { font-family: 'JetBrains Mono'; font-weight: 700; font-size: 1.1rem; }
-        
+
         /* Table */
         .table-container { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; text-align: left; }
         th { padding: 0.75rem 1.5rem; font-size: 0.75rem; color: #71717a; text-transform: uppercase; background: rgba(9, 9, 11, 0.5); font-family: 'JetBrains Mono', monospace; }
         td { padding: 1rem 1.5rem; border-bottom: 1px solid #27272a; vertical-align: middle; }
         tr:last-child td { border-bottom: none; }
-        
+
         /* Colors & Status */
         .text-emerald { color: #34d399; }
         .text-zinc { color: #a1a1aa; }
         .text-red { color: #ef4444; }
         .badge-taxi { background: rgba(234, 179, 8, 0.1); color: #eab308; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; margin-right: 8px; font-family: 'JetBrains Mono'; }
         .badge-rookie { color: #60a5fa; font-size: 0.75rem; font-family: 'JetBrains Mono'; }
-        
+
         .cost-display { font-size: 1.125rem; font-weight: 700; font-family: 'JetBrains Mono'; color: #34d399; }
         .ineligible-row { opacity: 0.4; filter: grayscale(100%); }
+        .dropped-row { opacity: 0.55; }
+        .dropped-row .cost-display { color: #71717a; text-decoration: line-through; }
+
+        /* Decision dropdown */
+        .decision-select { padding: 4px 8px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: background 0.15s, color 0.15s; }
+        .decision-keep { background: rgba(52,211,153,0.1); color: #34d399; border: 1px solid rgba(52,211,153,0.25); }
+        .decision-drop { background: rgba(239,68,68,0.1); color: #ef4444; border: 1px solid rgba(239,68,68,0.25); }
       `}</style>
 
       <header>
@@ -243,8 +253,7 @@ export default function MMHKeeperApp() {
         </div>
 
         {filteredTeams.map((team: any) => {
-          // Calculate Stats for this team
-          const stats = getTeamStats(team.players);
+          const stats = getTeamStats(team.players, keepDecisions);
 
           return (
             <div key={team.name} className="team-card">
@@ -259,7 +268,7 @@ export default function MMHKeeperApp() {
                       <div className="stat-label">Salary Cap</div>
                       <div className="stat-value text-emerald">${stats.cap}</div>
                    </div>
-                   
+
                    <div className="stat-box">
                       <div className="stat-label">Current Payroll</div>
                       <div className="stat-value text-zinc">${stats.currentPayroll}</div>
@@ -273,7 +282,7 @@ export default function MMHKeeperApp() {
                    </div>
 
                    <div className="stat-box">
-                      <div className="stat-label">2026 Projected</div>
+                      <div className="stat-label">2026 Keeper Cost</div>
                       <div className="stat-value" style={{ color: '#a78bfa' }}>${stats.projectedPayroll}</div>
                    </div>
 
@@ -285,7 +294,7 @@ export default function MMHKeeperApp() {
                    </div>
                 </div>
               </div>
-              
+
               <div className="table-container">
                 <table>
                   <thead>
@@ -295,53 +304,76 @@ export default function MMHKeeperApp() {
                       <th>Base</th>
                       <th>2026 Cost</th>
                       <th>Contract</th>
-                      <th>Status</th>
+                      <th>Decision</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {team.players.map((p: any, i: number) => (
-                      <tr key={i} className={!p.status.eligible ? 'ineligible-row' : ''}>
-                        <td>
-                          <div style={{ fontWeight: 500 }}>{p.Player}</div>
-                          <div style={{ marginTop: '4px' }}>
-                            {p.status.isTaxi && <span className="badge-taxi">TAXI</span>}
-                            
-                            {/* ROOKIE LABEL LOGIC */}
-                            {p.status.isDraftedRookie && (
-                              <span className="badge-rookie">
-                                {getRookieLabel(p.Info, p.Acquired)}
-                              </span>
-                            )}
-                          </div>
-                        </td>
-                        <td className="font-mono text-zinc">${p.Salary}</td>
-                        <td className="font-mono" style={{ fontSize: '0.75rem', color: '#71717a' }}>${p.Base}</td>
-                        <td>
-                          {p.status.eligible ? (
-                            <div className="cost-display">${p.status.cost}</div>
-                          ) : (
-                            <span style={{ color: '#52525b' }}>—</span>
-                          )}
-                        </td>
-                        <td>
-                          <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <span className="font-mono" style={{ color: p.status.yearsRemaining === 1 ? '#f87171' : '#d4d4d8', fontWeight: 700 }}>
-                              {p.status.yearsRemaining} Yrs
-                            </span>
-                            <span style={{ fontSize: '0.65rem', color: '#52525b', textTransform: 'uppercase' }}>Max: {p.status.maxYears}</span>
-                          </div>
-                        </td>
-                        <td>
-                          {p.status.eligible ? (
-                            <CheckCircle size={20} color="#34d399" />
-                          ) : (
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ef4444', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase' }}>
-                              <XCircle size={16} /> {p.status.reason}
+                    {team.players.map((p: any, i: number) => {
+                      const decisionKey = `${p.Team}-${p.Player}`;
+                      const decision = keepDecisions[decisionKey] ?? 'keep';
+                      const isDropped = p.status.eligible && decision === 'drop';
+
+                      return (
+                        <tr
+                          key={i}
+                          className={
+                            !p.status.eligible
+                              ? 'ineligible-row'
+                              : isDropped
+                              ? 'dropped-row'
+                              : ''
+                          }
+                        >
+                          <td>
+                            <div style={{ fontWeight: 500 }}>{p.Player}</div>
+                            <div style={{ marginTop: '4px' }}>
+                              {p.status.isTaxi && <span className="badge-taxi">TAXI</span>}
+                              {p.status.isDraftedRookie && (
+                                <span className="badge-rookie">
+                                  {getRookieLabel(p.Info, p.Acquired)}
+                                </span>
+                              )}
                             </div>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
+                          </td>
+                          <td className="font-mono text-zinc">${p.Salary}</td>
+                          <td className="font-mono" style={{ fontSize: '0.75rem', color: '#71717a' }}>${p.Base}</td>
+                          <td>
+                            {p.status.eligible ? (
+                              <div className="cost-display">${p.status.cost}</div>
+                            ) : (
+                              <span style={{ color: '#52525b' }}>—</span>
+                            )}
+                          </td>
+                          <td>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                              <span className="font-mono" style={{ color: p.status.yearsRemaining === 1 ? '#f87171' : '#d4d4d8', fontWeight: 700 }}>
+                                {p.status.yearsRemaining} Yrs
+                              </span>
+                              <span style={{ fontSize: '0.65rem', color: '#52525b', textTransform: 'uppercase' }}>Max: {p.status.maxYears}</span>
+                            </div>
+                          </td>
+                          <td>
+                            {p.status.eligible ? (
+                              <select
+                                className={`decision-select ${decision === 'drop' ? 'decision-drop' : 'decision-keep'}`}
+                                value={decision}
+                                onChange={(e) => {
+                                  const val = e.target.value as KeepDecision;
+                                  setKeepDecisions(prev => ({ ...prev, [decisionKey]: val }));
+                                }}
+                              >
+                                <option value="keep">Keep</option>
+                                <option value="drop">Drop</option>
+                              </select>
+                            ) : (
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ef4444', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase' }}>
+                                <XCircle size={16} /> {p.status.reason}
+                              </div>
+                            )}
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
