@@ -52,7 +52,7 @@ function calculateMMHKeeperStatus(player: MMHPlayer) {
   }
 
   // Determine Position for Minimums
-  const isKicker = player.Player.includes(' K') || player.Player.includes('(K)');
+  const isKicker = player.Position === 'K' || player.Position === 'PK';
   const minSalary = isKicker ? 3 : 5;
 
   // Determine Max Contract Length (Rookie Rule)
