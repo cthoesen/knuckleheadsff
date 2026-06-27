@@ -97,43 +97,32 @@
 }
 
 @layer components {
-  /* Cyberpunk Background Effects */
+  /* Arcade After Dark — flat near-black canvas (legacy class, kept for the
+     4 KDL pages still using Tailwind+legacy classes instead of kn tokens
+     directly; redefined here so they pick up the new look automatically) */
   .cyber-bg {
-    background: linear-gradient(135deg, var(--color-cyber-dark) 0%, var(--color-cyber-mid) 50%, var(--color-cyber-deep) 100%);
+    background: var(--kn-bg);
     position: relative;
   }
-  
-  .cyber-bg::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-      radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(75, 0, 130, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 40% 20%, rgba(0, 191, 255, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-    animation: pulseGlow 8s ease-in-out infinite;
-  }
-  
+
   /* Scan Line Effect */
   .scan-line {
     @apply fixed top-0 left-0 w-full h-0.5 pointer-events-none z-50;
     background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.5), transparent);
     animation: scan 4s linear infinite;
   }
-  
+
   /* Card Styles */
   .cyber-card {
-    @apply bg-zinc-900/40 backdrop-blur-xl border-2 rounded-2xl p-8 transition-all duration-300;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    @apply rounded-2xl p-8 transition-all duration-300;
+    background: var(--kn-surface);
+    border: 1px solid var(--kn-line);
+    box-shadow: var(--shadow-md);
   }
-  
+
   .cyber-card:hover {
     @apply -translate-y-2;
-    box-shadow: 0 16px 64px rgba(0, 255, 255, 0.2);
+    box-shadow: var(--shadow-lg);
   }
   
   /* League-Specific Cards */
@@ -177,49 +166,17 @@
     box-shadow: 0 16px 64px rgba(225, 29, 72, 0.4);
   }
   
-  /* Tool Card (for league hub pages) */
-  .tool-card {
-    @apply bg-zinc-800/50 border border-zinc-700/50 rounded-xl p-6 transition-all duration-300 cursor-pointer;
-  }
-  
-  .tool-card:hover {
-    @apply bg-zinc-800 border-zinc-600 -translate-y-1;
-  }
-  
   /* Glitch Text Effect */
   .glitch-text {
     animation: glitch 3s infinite alternate;
   }
-  
-  /* Gradient Text */
-  .gradient-text-cyan {
-    background: linear-gradient(135deg, #00ffff 0%, #00d4d4 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
+
+  /* Gradient Text — KDL pages only; flat brand color instead of a gradient,
+     consistent with Arcade After Dark's "no soft gradient" rule */
   .gradient-text-violet {
-    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--kn-kdl);
   }
-  
-  .gradient-text-emerald {
-    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  .gradient-text-rose {
-    background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
+
   /* Floating Animation */
   .float {
     animation: float 3s ease-in-out infinite;
@@ -232,30 +189,13 @@
 }
 
 @layer utilities {
-  /* Custom shadows with glow */
-  .glow-cyan {
-    text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-  }
-  
+  /* Text glow — KDL pages only */
   .glow-violet {
-    text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
-  }
-  
-  .glow-emerald {
-    text-shadow: 0 0 20px rgba(52, 211, 153, 0.5);
-  }
-  
-  .glow-rose {
-    text-shadow: 0 0 20px rgba(225, 29, 72, 0.5);
+    text-shadow: 0 0 20px rgba(var(--glow-violet), 0.5);
   }
 }
 
 /* Animations */
-@keyframes pulseGlow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
 @keyframes scan {
   0% { transform: translateY(0); }
   100% { transform: translateY(100vh); }
