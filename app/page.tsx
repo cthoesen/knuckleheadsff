@@ -263,24 +263,24 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Crown mark */}
+            {/* Hero image */}
             <div className="hidden md:grid place-items-center relative">
               <div
                 className="absolute rounded-full"
                 style={{
                   width: '300px',
                   height: '300px',
-                  background: 'radial-gradient(circle, rgba(255,230,0,0.16), transparent 65%)',
+                  background: 'radial-gradient(circle, rgba(255,230,0,0.12), transparent 65%)',
                   filter: 'blur(6px)',
                 }}
               />
               <img
-                src="/images/shared/icons/icon-knuckleheads.svg"
-                alt="Knuckleheads crown"
+                src="/images/shared/hero-pixels.webp"
+                alt="Pixel-art receiver making a leaping catch"
                 className="relative"
                 style={{
-                  width: 'min(340px, 30vw)',
-                  filter: 'drop-shadow(0 0 28px rgba(255,230,0,0.4))',
+                  width: 'min(320px, 28vw)',
+                  filter: 'drop-shadow(0 0 24px rgba(255,230,0,0.25))',
                   animation: 'kn-float 5s ease-in-out infinite',
                 }}
               />
