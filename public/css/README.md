@@ -17,9 +17,9 @@ https://mfl-leagues.com/css/leagues.css
 ## CSS Structure
 
 The master stylesheet uses body IDs to target specific leagues:
-- `#body-kkl` - Keepers & Kommissioners League
-- `#body-kdl` - Keeper Dynasty League  
+- `#body-kkl` - Knuckleheads Keeper League
+- `#body-kdl` - Knuckleheads Dynasty League  
 - `#body-mmh` - Monday Morning Hangover
-- `#body-bsb` - Best Season of Baseball
+- `#body-bsb` - Blood, Sweat, and Beers
 
 Use `body:has(#body-kkl)` to modify background and other body-level properties.
