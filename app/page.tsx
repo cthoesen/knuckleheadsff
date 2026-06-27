@@ -105,20 +105,6 @@ export default function Home() {
 
           <div className="relative grid grid-cols-1 md:grid-cols-[1.35fr_1fr] gap-10 items-center px-8 py-14 md:py-20">
             <div>
-              <span
-                className="inline-flex items-center gap-2 mb-6 px-3 py-2 rounded"
-                style={{
-                  fontFamily: 'var(--font-arcade)',
-                  fontSize: '10px',
-                  color: 'var(--kn-cyan)',
-                  letterSpacing: '0.06em',
-                  border: '1.5px solid rgba(0,240,255,0.4)',
-                  background: 'rgba(0,240,255,0.08)',
-                }}
-              >
-                <span aria-hidden="true">●</span> COMMISSIONER HQ · EST. 2019
-              </span>
-
               <h1
                 className="font-black"
                 style={{
@@ -163,21 +149,6 @@ export default function Home() {
                   }}
                 >
                   <span aria-hidden="true">▸</span> Enter the Hub
-                </a>
-                <a
-                  href="#quick-links"
-                  className="inline-flex items-center justify-center gap-2 uppercase rounded-md px-8 py-4 transition"
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 700,
-                    fontSize: '16px',
-                    letterSpacing: '0.12em',
-                    background: 'transparent',
-                    color: 'var(--kn-cyan)',
-                    border: '2px solid var(--kn-line-bright)',
-                  }}
-                >
-                  View Standings
                 </a>
               </div>
             </div>
