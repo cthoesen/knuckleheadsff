@@ -1,7 +1,117 @@
 'use client';
 
 import Link from 'next/link';
-import { Trophy, Crown, DollarSign, Flame, Image as ImageIcon } from 'lucide-react';
+import { Image as ImageIcon } from 'lucide-react';
+
+interface LeagueHubCardProps {
+  href: string;
+  abbr: string;
+  name: string;
+  meta: string;
+  themeColor: string;
+  glowRgb: string;
+  toolCount: number;
+  mflHref: string;
+}
+
+// League hub card — themed crest, top neon keyline, scanlines, tool count
+// badge, and a footer with an internal hub link plus an external MFL link.
+// The MFL link uses a click-handler span (not a nested <a>) since Link
+// already renders the card as an anchor.
+function LeagueHubCard({ href, abbr, name, meta, themeColor, glowRgb, toolCount, mflHref }: LeagueHubCardProps) {
+  return (
+    <Link href={href} className="block">
+      <div
+        className="relative overflow-hidden rounded-lg p-6 transition-all duration-200"
+        style={{
+          background: 'linear-gradient(180deg, var(--kn-surface-2), var(--kn-surface))',
+          border: `1px solid rgba(${glowRgb}, 0.4)`,
+          boxShadow: 'var(--shadow-md)',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderColor = themeColor;
+          e.currentTarget.style.boxShadow = `var(--shadow-lg), 0 0 32px rgba(${glowRgb}, 0.28)`;
+          e.currentTarget.style.transform = 'translateY(-5px)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderColor = `rgba(${glowRgb}, 0.4)`;
+          e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+          e.currentTarget.style.transform = 'translateY(0)';
+        }}
+      >
+        <span
+          className="absolute top-0 left-0 right-0 pointer-events-none"
+          style={{ height: '3px', background: themeColor, boxShadow: `0 0 14px rgba(${glowRgb}, 0.85)` }}
+        />
+        <span
+          className="absolute inset-0 pointer-events-none"
+          style={{ backgroundImage: 'var(--scanlines)', opacity: 0.5 }}
+        />
+
+        <div className="relative flex items-start gap-4">
+          <div
+            className="flex-shrink-0 grid place-items-center"
+            style={{
+              width: '58px',
+              height: '58px',
+              background: `rgba(${glowRgb}, 0.12)`,
+              border: `2px solid ${themeColor}`,
+              boxShadow: `0 0 14px rgba(${glowRgb}, 0.4)`,
+              fontFamily: 'var(--font-arcade)',
+              fontSize: '14px',
+              color: themeColor,
+            }}
+          >
+            {abbr}
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '11px', letterSpacing: '0.16em', textTransform: 'uppercase', color: themeColor }}>
+                {abbr}
+              </span>
+              {toolCount > 0 && (
+                <span
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '11px',
+                    color: 'var(--kn-text-on-neon)',
+                    background: themeColor,
+                    padding: '1px 7px',
+                    borderRadius: 'var(--r-pill)',
+                  }}
+                >
+                  {toolCount} tools
+                </span>
+              )}
+            </div>
+            <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '19px', color: 'var(--kn-text)' }}>
+              {name}
+            </h3>
+            <p className="mt-1" style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--kn-text-mute)' }}>
+              {meta}
+            </p>
+          </div>
+        </div>
+
+        <div className="relative flex items-center justify-between mt-5">
+          <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase', color: themeColor }}>
+            Open Hub <span aria-hidden="true">▸</span>
+          </span>
+          <span
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              window.open(mflHref, '_blank', 'noopener,noreferrer');
+            }}
+            style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--kn-text-mute)', cursor: 'pointer', borderBottom: '1px dashed var(--kn-line-bright)' }}
+          >
+            MFL ↗
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
 
 export default function Home() {
   return (
@@ -181,50 +291,66 @@ export default function Home() {
         {/* Player Image Grid - Links to League Sites */}
         <div id="quick-links" className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
           {[
-            { 
-              id: 1, 
-              image: '/images/shared/player-1.png', 
+            {
+              id: 1,
+              image: '/images/shared/player-1.png',
               league: 'Knuckleheads Keeper League',
               code: 'KKL',
               url: 'https://www47.myfantasyleague.com/2025/home/45267#0',
-              color: 'cyan'
+              themeColor: 'var(--kn-kkl)',
+              glowRgb: 'var(--glow-cyan)',
             },
-            { 
-              id: 2, 
-              image: '/images/shared/player-2.png', 
+            {
+              id: 2,
+              image: '/images/shared/player-2.png',
               league: 'Knuckleheads Dynasty League',
               code: 'KDL',
               url: 'https://www47.myfantasyleague.com/2025/home/68756#0',
-              color: 'violet'
+              themeColor: 'var(--kn-kdl)',
+              glowRgb: 'var(--glow-violet)',
             },
-            { 
-              id: 3, 
-              image: '/images/shared/player-3.png', 
+            {
+              id: 3,
+              image: '/images/shared/player-3.png',
               league: 'Monday Morning Hangover',
               code: 'MMH',
               url: 'https://www47.myfantasyleague.com/2025/home/72966#0',
-              color: 'emerald'
+              themeColor: 'var(--kn-mmh)',
+              glowRgb: 'var(--glow-green)',
             },
-            { 
-              id: 4, 
-              image: '/images/shared/player-4.png', 
+            {
+              id: 4,
+              image: '/images/shared/player-4.png',
               league: 'Blood, Sweat, and Beers',
               code: 'BSB',
               url: 'https://www47.myfantasyleague.com/2025/home/62908#0',
-              color: 'rose'
+              themeColor: 'var(--kn-bsb)',
+              glowRgb: 'var(--glow-pink)',
             },
           ].map((slot, i) => (
-            <a 
+            <a
               key={slot.id}
               href={slot.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`cyber-card card-${slot.code.toLowerCase()} group cursor-pointer float`}
-              style={{ animationDelay: `${i * 0.2}s` }}
+              className="float rounded-lg p-4 transition-all duration-200"
+              style={{
+                animationDelay: `${i * 0.2}s`,
+                background: 'var(--kn-surface)',
+                border: `1px solid rgba(${slot.glowRgb}, 0.35)`,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = slot.themeColor;
+                e.currentTarget.style.boxShadow = `0 0 28px rgba(${slot.glowRgb}, 0.3)`;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = `rgba(${slot.glowRgb}, 0.35)`;
+                e.currentTarget.style.boxShadow = 'none';
+              }}
             >
               <div className="aspect-square bg-linear-to-br from-zinc-800/50 to-zinc-900/50 rounded-lg mb-4 flex items-center justify-center overflow-hidden border border-zinc-700/50">
-                <img 
-                  src={slot.image} 
+                <img
+                  src={slot.image}
                   alt={slot.league}
                   className="w-full h-full object-contain"
                   style={{ imageRendering: 'pixelated' }}
@@ -234,17 +360,22 @@ export default function Home() {
                     const parent = target.parentElement;
                     if (parent) {
                       const placeholder = document.createElement('span');
-                      placeholder.className = `text-${slot.color}-400 text-2xl font-bold`;
+                      placeholder.style.color = slot.themeColor;
+                      placeholder.style.fontSize = '1.5rem';
+                      placeholder.style.fontWeight = '700';
                       placeholder.textContent = slot.code;
                       parent.appendChild(placeholder);
                     }
                   }}
                 />
               </div>
-              <div className={`text-${slot.color}-400 font-bold text-lg mb-1 font-['Orbitron'] glow-${slot.color}`}>
+              <div
+                className="font-bold text-lg mb-1"
+                style={{ fontFamily: 'var(--font-display)', color: slot.themeColor, textShadow: `0 0 12px rgba(${slot.glowRgb}, 0.5)` }}
+              >
                 {slot.code}
               </div>
-              <p className="text-zinc-400 text-sm leading-tight">
+              <p className="text-sm leading-tight" style={{ color: 'var(--kn-text-mute)' }}>
                 {slot.league}
               </p>
             </a>
@@ -253,126 +384,114 @@ export default function Home() {
 
         {/* League Hub Navigation */}
         <div id="league-hub" className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-10 text-purple-300">
-            LEAGUE COMMAND CENTERS
+          <h2
+            className="text-center mb-10"
+            style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '30px', color: 'var(--kn-text)', letterSpacing: '0.01em' }}
+          >
+            League Command Centers
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
-            {/* KKL Hub */}
-            <Link href="/kkl">
-              <div className="cyber-card card-kkl group cursor-pointer">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="p-4 bg-cyan-500/10 rounded-xl group-hover:bg-cyan-500/20 transition-colors">
-                    <Trophy size={32} className="text-cyan-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-cyan-400 glow-cyan">KKL</h3>
-                    <p className="text-zinc-400 text-sm">Knuckleheads Keeper</p>
-                  </div>
-                </div>
-                <p className="text-zinc-300 mb-3">
-                  Keeper analyzer, draft tools, and league management
-                </p>
-                <div className="flex items-center gap-2 text-cyan-400 text-sm font-mono">
-                  <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
-                  3 TOOLS ACTIVE
-                </div>
-              </div>
-            </Link>
-
-            {/* KDL Hub */}
-            <Link href="/kdl">
-              <div className="cyber-card card-kdl group cursor-pointer">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="p-4 bg-violet-500/10 rounded-xl group-hover:bg-violet-500/20 transition-colors">
-                    <Crown size={32} className="text-violet-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-violet-400 glow-violet">KDL</h3>
-                    <p className="text-zinc-400 text-sm">Knuckleheads Dynasty</p>
-                  </div>
-                </div>
-                <p className="text-zinc-300 mb-3">
-                  Contract manager, salary cap tracker, and tag calculator
-                </p>
-                <div className="flex items-center gap-2 text-violet-400 text-sm font-mono">
-                  <span className="w-2 h-2 bg-violet-400 rounded-full animate-pulse" />
-                  6 TOOLS ACTIVE
-                </div>
-              </div>
-            </Link>
-
-            {/* MMH Hub */}
-            <Link href="/mmh">
-              <div className="cyber-card card-mmh group cursor-pointer">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="p-4 bg-emerald-500/10 rounded-xl group-hover:bg-emerald-500/20 transition-colors">
-                    <DollarSign size={32} className="text-emerald-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-emerald-400 glow-emerald">MMH</h3>
-                    <p className="text-zinc-400 text-sm">Monday Morning Hangover</p>
-                  </div>
-                </div>
-                <p className="text-zinc-300 mb-3">
-                  Salary cap manager, contract optimizer, and auction tools
-                </p>
-                <div className="flex items-center gap-2 text-emerald-400 text-sm font-mono">
-                  <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                  3 TOOLS ACTIVE
-                </div>
-              </div>
-            </Link>
-
-            {/* BSB Hub */}
-            <Link href="/bsb">
-              <div className="cyber-card card-bsb group cursor-pointer">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="p-4 bg-rose-500/10 rounded-xl group-hover:bg-rose-500/20 transition-colors">
-                    <Flame size={32} className="text-rose-500" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-rose-500 glow-rose">BSB</h3>
-                    <p className="text-zinc-400 text-sm">Blood, Sweat, and Beers</p>
-                  </div>
-                </div>
-                <p className="text-zinc-300 mb-3">
-                  Keeper analyzer, draft strategy, and matchup predictions
-                </p>
-                <div className="flex items-center gap-2 text-rose-500 text-sm font-mono">
-                  <span className="w-2 h-2 bg-rose-500 rounded-full animate-pulse" />
-                  3 TOOLS ACTIVE
-                </div>
-              </div>
-            </Link>
+            <LeagueHubCard
+              href="/kkl"
+              abbr="KKL"
+              name="Knuckleheads Keeper League"
+              meta="Keeper analyzer, draft tools, and league management"
+              themeColor="var(--kn-kkl)"
+              glowRgb="var(--glow-cyan)"
+              toolCount={3}
+              mflHref="https://www47.myfantasyleague.com/2025/home/45267#0"
+            />
+            <LeagueHubCard
+              href="/kdl"
+              abbr="KDL"
+              name="Knuckleheads Dynasty League"
+              meta="Contract manager, salary cap tracker, and tag calculator"
+              themeColor="var(--kn-kdl)"
+              glowRgb="var(--glow-violet)"
+              toolCount={6}
+              mflHref="https://www47.myfantasyleague.com/2025/home/68756#0"
+            />
+            <LeagueHubCard
+              href="/mmh"
+              abbr="MMH"
+              name="Monday Morning Hangover"
+              meta="Salary cap manager, contract optimizer, and auction tools"
+              themeColor="var(--kn-mmh)"
+              glowRgb="var(--glow-green)"
+              toolCount={3}
+              mflHref="https://www47.myfantasyleague.com/2025/home/72966#0"
+            />
+            <LeagueHubCard
+              href="/bsb"
+              abbr="BSB"
+              name="Blood, Sweat, and Beers"
+              meta="Keeper analyzer, draft strategy, and matchup predictions"
+              themeColor="var(--kn-bsb)"
+              glowRgb="var(--glow-pink)"
+              toolCount={3}
+              mflHref="https://www47.myfantasyleague.com/2025/home/62908#0"
+            />
           </div>
         </div>
 
         {/* Utilities */}
         <div id="tools" className="mb-12">
-          <h2 className="text-3xl font-bold text-center mb-10 text-purple-300">
-            UTILITIES
+          <h2
+            className="text-center mb-10"
+            style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '30px', color: 'var(--kn-text)', letterSpacing: '0.01em' }}
+          >
+            Utilities
           </h2>
           <div className="max-w-2xl mx-auto">
             <Link href="/gallery">
-              <div className="cyber-card border-violet-500/30 hover:border-violet-500 group cursor-pointer">
-                <div className="flex items-center gap-4">
-                  <div className="p-4 bg-violet-500/10 rounded-xl group-hover:bg-violet-500/20 transition-colors">
-                    <ImageIcon size={32} className="text-violet-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-violet-400">Image Gallery</h3>
-                    <p className="text-zinc-400">Browse league assets with lightbox viewer</p>
-                  </div>
-                </div>
+              <div
+                className="flex items-center gap-4 rounded-lg p-4 transition-all duration-200"
+                style={{ background: 'var(--kn-surface)', border: '1px solid var(--kn-line)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--kn-violet)';
+                  e.currentTarget.style.boxShadow = '0 0 24px rgba(168, 85, 247, 0.22)';
+                  e.currentTarget.style.transform = 'translateY(-3px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--kn-line)';
+                  e.currentTarget.style.boxShadow = 'none';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                <span
+                  className="flex-shrink-0 grid place-items-center"
+                  style={{ width: '46px', height: '46px', background: 'rgba(168, 85, 247, 0.12)', border: '2px solid var(--kn-violet)', borderRadius: 'var(--r-sm)', color: 'var(--kn-violet)' }}
+                >
+                  <ImageIcon size={20} />
+                </span>
+                <span className="flex-1 min-w-0">
+                  <span style={{ display: 'block', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '15px', color: 'var(--kn-text)', marginBottom: '3px' }}>
+                    Image Gallery
+                  </span>
+                  <span style={{ display: 'block', fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--kn-text-mute)' }}>
+                    Browse league assets with lightbox viewer
+                  </span>
+                </span>
+                <span
+                  className="flex-shrink-0 inline-flex items-center gap-1"
+                  style={{
+                    fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '9px', letterSpacing: '0.14em', textTransform: 'uppercase',
+                    color: 'var(--kn-success)', background: 'rgba(45, 227, 138, 0.14)', border: '1px solid rgba(45, 227, 138, 0.4)',
+                    borderRadius: 'var(--r-sm)', padding: '4px 7px',
+                  }}
+                >
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--kn-success)', boxShadow: '0 0 6px var(--kn-success)' }} />
+                  Live
+                </span>
               </div>
             </Link>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="text-center pt-12 border-t border-zinc-800">
-          <p className="text-zinc-500 text-sm font-mono tracking-wider">
-            POWERED BY NEXT.JS // DEPLOYED ON VERCEL // CYBERPUNK AESTHETICS
+        <div className="text-center pt-12" style={{ borderTop: '1px solid var(--kn-line)' }}>
+          <p style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', letterSpacing: '0.08em', color: 'var(--kn-text-mute)' }}>
+            POWERED BY NEXT.JS // DEPLOYED ON VERCEL // ARCADE AFTER DARK
           </p>
         </div>
       </main>

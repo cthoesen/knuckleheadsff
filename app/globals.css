@@ -64,6 +64,7 @@
   --glow-pink:   255, 45, 120;
   --glow-cyan:   0, 240, 255;
   --glow-violet: 168, 85, 247;
+  --glow-green:  155, 204, 31;
 
   --glow-md-yellow: 0 0 14px rgba(var(--glow-yellow), .55), 0 0 2px rgba(var(--glow-yellow), .9);
   --glow-lg-yellow: 0 0 28px rgba(var(--glow-yellow), .5), 0 0 8px rgba(var(--glow-yellow), .8);
