@@ -75,7 +75,7 @@ export async function GET() {
         // second-to-last is position, third-to-last is NFL team.
         const nameParts = pName.split(/\s+/);
         let posIdx = nameParts.length - 1;
-        if (posIdx >= 0 && nameParts[posIdx].startsWith('(')) posIdx--;
+        while (posIdx >= 0 && nameParts[posIdx].startsWith('(')) posIdx--;
         const position = posIdx >= 0 ? nameParts[posIdx].replace(/[^a-zA-Z]/g, '') : 'UNK';
 
         // Parse season points from the built-in class="points" column.

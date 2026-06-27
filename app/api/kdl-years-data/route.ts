@@ -59,10 +59,17 @@ export async function GET() {
           const pName = clean(playerMatch[1]);
           const years = yearsMatch ? clean(yearsMatch[1]) : '';
 
+          // Skip non-player rows like "Salary Adjustments (3)"
+          if (pName.toLowerCase().includes('salary adjustment')) continue;
+
           // Only include players with 0 or blank years
           if (years === '' || years === '0') {
-            const nameParts = pName.split(' ');
-            const rawPos = nameParts.length > 1 ? nameParts[nameParts.length - 1] : 'UNK';
+            // Position extraction — skip trailing status designations like
+            // (R), (Q), (I); a player can have more than one (e.g. "(R) (Q)")
+            const nameParts = pName.split(/\s+/);
+            let posIdx = nameParts.length - 1;
+            while (posIdx >= 0 && nameParts[posIdx].startsWith('(')) posIdx--;
+            const rawPos = posIdx >= 0 ? nameParts[posIdx] : 'UNK';
             const position = rawPos.replace(/[^a-zA-Z]/g, '');
 
             players.push({
