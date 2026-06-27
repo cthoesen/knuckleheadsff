@@ -7,7 +7,73 @@ export default function Home() {
   return (
     <div className="min-h-screen" style={{ background: 'var(--kn-bg)' }}>
       <div className="scan-line" />
-      
+
+      {/* Top Nav — Arcade After Dark */}
+      <header
+        className="sticky top-0 z-50"
+        style={{
+          background: 'rgba(10,10,15,0.82)',
+          backdropFilter: 'blur(12px)',
+          borderBottom: '1px solid var(--kn-line)',
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-6 flex items-center gap-8" style={{ height: '72px' }}>
+          <a href="/" className="flex items-center gap-3">
+            <img
+              src="/images/shared/icons/icon-knuckleheads.svg"
+              alt="Knuckleheads crown"
+              style={{
+                width: '44px',
+                height: '44px',
+                transform: 'rotate(-30deg)',
+                filter: 'drop-shadow(0 0 8px rgba(255,230,0,0.4))',
+              }}
+            />
+            <span className="flex flex-col leading-none">
+              <span
+                style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: '20px', color: 'var(--kn-text)', letterSpacing: '0.02em' }}
+              >
+                KNUCKLEHEADS
+              </span>
+              <span
+                style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '13px', color: 'var(--kn-yellow)', letterSpacing: '0.1em', marginTop: '2px' }}
+              >
+                FANTASY FOOTBALL
+              </span>
+            </span>
+          </a>
+
+          <nav className="hidden md:flex items-center gap-6 ml-4">
+            <a
+              href="/"
+              style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '13px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--kn-yellow)', textShadow: 'var(--text-glow-yellow)' }}
+            >
+              Hub
+            </a>
+            <a
+              href="#league-hub"
+              className="inline-flex items-center gap-1"
+              style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '13px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--kn-text-dim)' }}
+            >
+              Leagues <span style={{ fontSize: '9px', opacity: 0.7 }}>▾</span>
+            </a>
+            <a
+              href="#tools"
+              className="inline-flex items-center gap-1"
+              style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '13px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--kn-text-dim)' }}
+            >
+              Tools <span style={{ fontSize: '9px', opacity: 0.7 }}>▾</span>
+            </a>
+            <a
+              href="#"
+              style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '13px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--kn-text-dim)' }}
+            >
+              Updates
+            </a>
+          </nav>
+        </div>
+      </header>
+
       <main className="relative z-10 max-w-7xl mx-auto px-6 py-16">
         {/* Hero Banner — Arcade After Dark */}
         <div
@@ -57,15 +123,14 @@ export default function Home() {
                 className="font-black"
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(40px, 5.4vw, 72px)',
-                  lineHeight: 1.02,
+                  fontSize: 'clamp(20px, 4.2vw, 40px)',
+                  lineHeight: 1.1,
                   letterSpacing: '-0.01em',
                   color: 'var(--kn-text)',
                 }}
               >
-                Dynasties are built,<br />
-                Keepers are{' '}
-                <span style={{ color: 'var(--kn-yellow)', textShadow: 'var(--glow-lg-yellow)' }}>crowned</span>.
+                Dynasties Are Built<br />
+                <span style={{ color: 'var(--kn-yellow)', textShadow: 'var(--glow-lg-yellow)' }}>KEEPERS ARE CROWNED</span>
               </h1>
 
               <p
@@ -78,7 +143,8 @@ export default function Home() {
                   color: 'var(--kn-text-dim)',
                 }}
               >
-                Built by the commissioner. Feared by the league. Four leagues. One hub. Zero excuses.
+                Built by the commissioner. Feared by the league.<br />
+                Four leagues. One hub. Zero excuses.
               </p>
 
               <div className="flex gap-4 flex-wrap">
@@ -137,19 +203,6 @@ export default function Home() {
                   animation: 'kn-float 5s ease-in-out infinite',
                 }}
               />
-              <span
-                className="absolute"
-                style={{
-                  bottom: '8%',
-                  fontFamily: 'var(--font-arcade)',
-                  fontSize: '11px',
-                  color: 'var(--kn-pink)',
-                  textShadow: 'var(--text-glow-pink)',
-                  letterSpacing: '0.05em',
-                }}
-              >
-                KEEPERS CROWNED
-              </span>
             </div>
           </div>
         </div>
@@ -324,7 +377,7 @@ export default function Home() {
         </div>
 
         {/* Utilities */}
-        <div className="mb-12">
+        <div id="tools" className="mb-12">
           <h2 className="text-3xl font-bold text-center mb-10 text-purple-300">
             UTILITIES
           </h2>
