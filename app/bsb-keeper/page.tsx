@@ -163,9 +163,9 @@ export default function BSBKeeperApp() {
           display: flex;
           align-items: center;
           justify-content: center;
-          background-color: #09090b; /* zinc-950 */
-          color: #e11d48; /* rose-600 */
-          font-family: monospace;
+          background-color: var(--kn-bg);
+          color: var(--kn-bsb);
+          font-family: var(--font-mono);
           font-weight: bold;
         }
       `}</style>
@@ -178,9 +178,10 @@ export default function BSBKeeperApp() {
       <style jsx>{`
         .error-screen {
           min-height: 100vh;
-          background-color: #09090b;
-          color: #ef4444;
+          background-color: var(--kn-bg);
+          color: var(--kn-danger);
           padding: 2.5rem;
+          font-family: var(--font-mono);
         }
       `}</style>
     </div>
@@ -189,52 +190,50 @@ export default function BSBKeeperApp() {
   return (
     <div className="app-container">
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Roboto+Mono:wght@400;700&display=swap');
-        
-        body { background-color: #09090b; color: #f4f4f5; font-family: 'Roboto Mono', monospace; margin: 0; }
-        
+        body { background-color: var(--kn-bg); color: var(--kn-text); font-family: var(--font-body); margin: 0; }
+
         /* Layout */
         .app-container { min-height: 100vh; padding-bottom: 4rem; }
         .max-w-7xl { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; }
-        
+
         /* Header */
-        header { border-bottom: 1px solid #27272a; background: rgba(9, 9, 11, 0.9); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 50; }
+        header { border-bottom: 1px solid var(--kn-line); background: rgba(10, 10, 15, 0.82); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 50; }
         .header-content { display: flex; align-items: center; gap: 1rem; padding: 1rem 0; }
-        .league-title { font-family: 'Black Ops One', cursive; font-size: 2rem; color: #e11d48; letter-spacing: 0.05em; text-transform: uppercase; }
-        
+        .league-title { font-family: var(--font-display); font-weight: 900; font-size: 2rem; color: var(--kn-bsb); letter-spacing: 0.05em; text-transform: uppercase; text-shadow: 0 0 14px rgba(var(--glow-pink), 0.5); }
+
         /* Inputs */
         .controls { display: flex; gap: 1rem; margin: 2rem 0; flex-wrap: wrap; }
-        input, select { background: #18181b; border: 1px solid #27272a; color: white; padding: 0.75rem 1rem; border-radius: 0.25rem; font-family: 'Roboto Mono', monospace; }
-        input:focus, select:focus { border-color: #e11d48; outline: none; }
+        input, select { background: var(--kn-surface-3); border: 1px solid var(--kn-line); color: var(--kn-text); padding: 0.75rem 1rem; border-radius: var(--r-md); font-family: var(--font-mono); }
+        input:focus, select:focus { border-color: var(--kn-bsb); outline: none; }
         input { flex: 1; min-width: 300px; }
-        
+
         /* Cards */
-        .team-card { background: #18181b; border: 1px solid #27272a; border-radius: 0.5rem; overflow: hidden; margin-bottom: 2rem; }
-        .card-header { padding: 1rem 1.5rem; background: #09090b; border-bottom: 1px solid #27272a; border-left: 4px solid #e11d48; }
-        
+        .team-card { background: var(--kn-surface); border: 1px solid var(--kn-line); border-radius: var(--r-lg); overflow: hidden; margin-bottom: 2rem; box-shadow: var(--shadow-md); }
+        .card-header { padding: 1rem 1.5rem; background: var(--kn-bg); border-bottom: 1px solid var(--kn-line); border-left: 4px solid var(--kn-bsb); }
+
         /* Table */
         .table-container { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; text-align: left; }
-        th { padding: 0.75rem 1.5rem; font-size: 0.75rem; color: #71717a; text-transform: uppercase; background: rgba(9, 9, 11, 0.5); }
-        td { padding: 1rem 1.5rem; border-bottom: 1px solid #27272a; vertical-align: middle; }
+        th { padding: 0.75rem 1.5rem; font-size: 0.75rem; color: var(--kn-text-mute); text-transform: uppercase; background: rgba(6, 6, 12, 0.5); font-family: var(--font-display); letter-spacing: 0.06em; }
+        td { padding: 1rem 1.5rem; border-bottom: 1px solid var(--kn-line); vertical-align: middle; }
         tr:last-child td { border-bottom: none; }
-        
+
         /* Colors & Status */
-        .text-rose { color: #e11d48; }
-        .text-zinc { color: #a1a1aa; }
-        .text-blue { color: #0ea5e9; } /* Pacific Blueish (Sky 500) */
-        .badge-taxi { background: rgba(225, 29, 72, 0.1); color: #fb7185; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; border: 1px solid rgba(225, 29, 72, 0.3); }
-        
-        .round-display { font-size: 1.25rem; font-weight: 700; color: #0ea5e9; } /* Updated to Blue */
+        .text-rose { color: var(--kn-bsb); }
+        .text-zinc { color: var(--kn-text-mute); }
+        .text-blue { color: #0ea5e9; } /* functional accent, not brand — left as-is */
+        .badge-taxi { background: rgba(var(--glow-pink), 0.1); color: var(--kn-bsb); padding: 2px 8px; border-radius: var(--r-sm); font-size: 0.75rem; border: 1px solid rgba(var(--glow-pink), 0.3); font-family: var(--font-mono); }
+
+        .round-display { font-size: 1.25rem; font-weight: 700; color: #0ea5e9; font-family: var(--font-mono); } /* functional accent, not brand */
         .ineligible-row { opacity: 0.4; filter: grayscale(100%); }
       `}</style>
 
       <header>
         <div className="max-w-7xl">
           <div style={{ padding: '0.5rem 0' }}>
-            <Link href="/" style={{ color: '#e11d48', fontSize: '0.75rem', textDecoration: 'none', display: 'block', marginBottom: '0.5rem' }}>← RETURN TO HUB</Link>
+            <Link href="/" style={{ color: 'var(--kn-bsb)', fontSize: '0.75rem', textDecoration: 'none', display: 'block', marginBottom: '0.5rem', fontFamily: 'var(--font-mono)' }}>← RETURN TO HUB</Link>
             <div className="header-content">
-              <Flame size={32} color="#e11d48" />
+              <Flame size={32} color="var(--kn-bsb)" />
               <div className="league-title">BLOOD, SWEAT & BEERS</div>
             </div>
           </div>
@@ -269,7 +268,7 @@ export default function BSBKeeperApp() {
                     <th>Acquired</th>
                     <th>Current Years</th>
                     <th>2026 Cost</th>
-                    <th>2026 Years</th> {/* UPDATED HEADER */}
+                    <th>2026 Years</th>
                     <th>Status</th>
                   </tr>
                 </thead>
