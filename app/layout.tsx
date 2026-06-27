@@ -1,5 +1,5 @@
 import './globals.css';
-import { Orbitron, Rajdhani } from 'next/font/google';
+import { Orbitron, Rajdhani, Press_Start_2P, Share_Tech_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
@@ -17,6 +17,20 @@ const rajdhani = Rajdhani({
   display: 'swap',
 });
 
+const pressStart2P = Press_Start_2P({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-press-start-2p',
+  display: 'swap',
+});
+
+const shareTechMono = Share_Tech_Mono({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-share-tech-mono',
+  display: 'swap',
+});
+
 export const metadata = {
   title: 'Knuckleheads Fantasy Football',
   description: 'Custom CSS, JavaScript, and assets for Knuckleheads Fantasy Football leagues',
@@ -28,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${orbitron.variable} ${rajdhani.variable}`}>
+    <html lang="en" className={`${orbitron.variable} ${rajdhani.variable} ${pressStart2P.variable} ${shareTechMono.variable}`}>
       <body className="bg-zinc-950 text-zinc-100">
         {children}
         <SpeedInsights />

@@ -15,6 +15,75 @@
   --color-cyber-deep: #2d1b69;
 }
 
+/* ============================================================
+   ARCADE AFTER DARK — Knuckleheads FF design tokens
+   New site-wide design system (see design.md). Additive for now —
+   legacy .cyber-* / .card-* classes elsewhere are untouched.
+   ============================================================ */
+:root {
+  --kn-black:       #06060c;
+  --kn-bg:          #0a0a0f;
+  --kn-bg-2:        #0f0f1a;
+  --kn-surface:     #14141f;
+  --kn-surface-2:   #1a1a2e;
+  --kn-surface-3:   #22223a;
+  --kn-line:        #2c2c44;
+  --kn-line-bright: #3d3d5c;
+
+  --kn-yellow:      #ffe600;
+  --kn-yellow-deep: #d9c400;
+  --kn-pink:        #ff2d78;
+  --kn-pink-deep:   #d61f60;
+  --kn-cyan:        #00f0ff;
+  --kn-cyan-deep:   #00bfca;
+  --kn-violet:      #a855f7;
+  --kn-green:       #9bcc1f;
+
+  --kn-success: #2de38a;
+  --kn-warning: #ffb020;
+  --kn-danger:  #ff4d4d;
+
+  --kn-text:       #f1f1fb;
+  --kn-text-dim:   #b7b7d4;
+  --kn-text-mute:  #6f6f93;
+  --kn-text-faint: #44445f;
+  --kn-text-on-neon: #0a0a0f;
+
+  /* League accent themes */
+  --kn-kkl: #00f0ff;
+  --kn-kdl: #a855f7;
+  --kn-mmh: #2de38a;
+  --kn-bsb: #ff3b6b;
+
+  --font-display: var(--font-orbitron), 'Rajdhani', system-ui, sans-serif;
+  --font-arcade:  var(--font-press-start-2p), 'Orbitron', monospace;
+  --font-body:    var(--font-rajdhani), system-ui, -apple-system, sans-serif;
+  --font-mono:    var(--font-share-tech-mono), 'JetBrains Mono', ui-monospace, monospace;
+
+  --glow-yellow: 255, 230, 0;
+  --glow-pink:   255, 45, 120;
+  --glow-cyan:   0, 240, 255;
+  --glow-violet: 168, 85, 247;
+
+  --glow-md-yellow: 0 0 14px rgba(var(--glow-yellow), .55), 0 0 2px rgba(var(--glow-yellow), .9);
+  --glow-lg-yellow: 0 0 28px rgba(var(--glow-yellow), .5), 0 0 8px rgba(var(--glow-yellow), .8);
+  --glow-md-pink:   0 0 14px rgba(var(--glow-pink), .6), 0 0 2px rgba(var(--glow-pink), .9);
+  --glow-md-cyan:   0 0 14px rgba(var(--glow-cyan), .6), 0 0 2px rgba(var(--glow-cyan), .9);
+
+  --text-glow-yellow: 0 0 8px rgba(var(--glow-yellow), .6);
+  --text-glow-pink:   0 0 8px rgba(var(--glow-pink), .6);
+  --text-glow-cyan:   0 0 8px rgba(var(--glow-cyan), .6);
+
+  --scanlines: repeating-linear-gradient(to bottom, rgba(255,255,255,.035) 0px, rgba(255,255,255,.035) 1px, transparent 1px, transparent 3px);
+  --grid-overlay: linear-gradient(rgba(0,240,255,.06) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(0,240,255,.06) 1px, transparent 1px);
+}
+
+@keyframes kn-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
 @layer base {
   body {
     @apply bg-zinc-950 text-zinc-100;

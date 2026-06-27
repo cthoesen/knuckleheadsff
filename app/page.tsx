@@ -5,70 +5,157 @@ import { Trophy, Crown, DollarSign, Flame, Image as ImageIcon } from 'lucide-rea
 
 export default function Home() {
   return (
-    <div className="min-h-screen cyber-bg">
+    <div className="min-h-screen" style={{ background: 'var(--kn-bg)' }}>
       <div className="scan-line" />
       
       <main className="relative z-10 max-w-7xl mx-auto px-6 py-16">
-        {/* Hero Banner */}
-        <div className="relative mb-20 slide-in-up overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-950/60">
-
-          {/* Radial glows */}
-          <div className="absolute -top-16 left-1/4 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -top-16 right-1/4 w-72 h-72 bg-violet-500/10 rounded-full blur-3xl pointer-events-none" />
-
-          {/* Subtle cyber grid */}
+        {/* Hero Banner — Arcade After Dark */}
+        <div
+          className="relative mb-20 slide-in-up overflow-hidden rounded-2xl border"
+          style={{
+            borderColor: 'var(--kn-line)',
+            background:
+              'radial-gradient(1100px 520px at 78% -10%, rgba(0,240,255,0.10), transparent 60%),' +
+              'radial-gradient(900px 460px at 10% 120%, rgba(255,45,120,0.10), transparent 60%),' +
+              'var(--kn-bg)',
+          }}
+        >
+          {/* Arcade grid floor */}
           <div
-            className="absolute inset-0 opacity-[0.035] pointer-events-none"
-            style={{ backgroundImage: 'linear-gradient(rgba(0,200,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,255,1) 1px, transparent 1px)', backgroundSize: '48px 48px' }}
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              backgroundImage: 'var(--grid-overlay)',
+              backgroundSize: '46px 46px',
+              maskImage: 'linear-gradient(to bottom, transparent, #000 35%, #000 70%, transparent)',
+              WebkitMaskImage: 'linear-gradient(to bottom, transparent, #000 35%, #000 70%, transparent)',
+              opacity: 0.6,
+            }}
+          />
+          {/* CRT scanlines */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{ backgroundImage: 'var(--scanlines)', opacity: 0.5 }}
           />
 
-          {/* Corner accent brackets */}
-          <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-cyan-500/40 rounded-tl-2xl pointer-events-none" />
-          <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-violet-500/40 rounded-tr-2xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 border-violet-500/40 rounded-bl-2xl pointer-events-none" />
-          <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-cyan-500/40 rounded-br-2xl pointer-events-none" />
-
-          {/* Logo — desktop: large watermark, left side, behind text */}
-          <div className="hidden md:block absolute left-8 top-8 -rotate-30 z-10 opacity-[0.22] pointer-events-none">
-            <img
-              src="/images/shared/icons/icon-knuckleheads.svg"
-              alt=""
-              className="w-120 h-auto"
-            />
-          </div>
-
-          {/* Logo — mobile: large watermark, centered, fills banner behind text */}
-          <div className="md:hidden absolute inset-0 flex items-start justify-center pt-6 z-10 opacity-[0.18] pointer-events-none">
-            <img
-              src="/images/shared/icons/icon-knuckleheads.svg"
-              alt=""
-              className="w-[92%] h-auto"
-            />
-          </div>
-
-          {/* Content */}
-          <div className="relative z-20 px-8 py-14 md:py-20 text-center">
-
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 glitch-text leading-tight">
-              <span className="bg-linear-to-r from-cyan-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
-                <span className="md:hidden">KNUCKLE<br/>HEADS<br/>FANTASY FOOTBALL</span>
-                <span className="hidden md:inline">KNUCKLEHEADS FANTASY FOOTBALL</span>
+          <div className="relative grid grid-cols-1 md:grid-cols-[1.35fr_1fr] gap-10 items-center px-8 py-14 md:py-20">
+            <div>
+              <span
+                className="inline-flex items-center gap-2 mb-6 px-3 py-2 rounded"
+                style={{
+                  fontFamily: 'var(--font-arcade)',
+                  fontSize: '10px',
+                  color: 'var(--kn-cyan)',
+                  letterSpacing: '0.06em',
+                  border: '1.5px solid rgba(0,240,255,0.4)',
+                  background: 'rgba(0,240,255,0.08)',
+                }}
+              >
+                <span aria-hidden="true">●</span> COMMISSIONER HQ · EST. 2019
               </span>
-            </h1>
 
-            <div className="h-px w-64 mx-auto bg-linear-to-r from-transparent via-cyan-400 to-transparent mt-7 mb-6" />
+              <h1
+                className="font-black"
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'clamp(40px, 5.4vw, 72px)',
+                  lineHeight: 1.02,
+                  letterSpacing: '-0.01em',
+                  color: 'var(--kn-text)',
+                }}
+              >
+                Dynasties are built,<br />
+                Keepers are{' '}
+                <span style={{ color: 'var(--kn-yellow)', textShadow: 'var(--glow-lg-yellow)' }}>crowned</span>.
+              </h1>
 
-            <p className="text-2xl md:text-3xl text-purple-300 font-semibold tracking-wide">
-              ASSET REPOSITORY // CYBERPUNK EDITION
-            </p>
-            <p className="text-zinc-500 mt-3 text-sm font-mono tracking-widest uppercase">
-              Powered by Next.js • Deployed on Vercel
-            </p>
+              <p
+                className="mt-6 mb-8 max-w-[520px]"
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontWeight: 500,
+                  fontSize: '20px',
+                  lineHeight: 1.5,
+                  color: 'var(--kn-text-dim)',
+                }}
+              >
+                Built by the commissioner. Feared by the league. Four leagues. One hub. Zero excuses.
+              </p>
+
+              <div className="flex gap-4 flex-wrap">
+                <a
+                  href="#league-hub"
+                  className="inline-flex items-center justify-center gap-2 uppercase rounded-md px-8 py-4 transition"
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 700,
+                    fontSize: '16px',
+                    letterSpacing: '0.12em',
+                    background: 'var(--kn-yellow)',
+                    color: 'var(--kn-text-on-neon)',
+                    border: '2px solid var(--kn-yellow)',
+                    boxShadow: 'var(--glow-md-yellow)',
+                  }}
+                >
+                  <span aria-hidden="true">▸</span> Enter the Hub
+                </a>
+                <a
+                  href="#quick-links"
+                  className="inline-flex items-center justify-center gap-2 uppercase rounded-md px-8 py-4 transition"
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 700,
+                    fontSize: '16px',
+                    letterSpacing: '0.12em',
+                    background: 'transparent',
+                    color: 'var(--kn-cyan)',
+                    border: '2px solid var(--kn-line-bright)',
+                  }}
+                >
+                  View Standings
+                </a>
+              </div>
+            </div>
+
+            {/* Crown mark */}
+            <div className="hidden md:grid place-items-center relative">
+              <div
+                className="absolute rounded-full"
+                style={{
+                  width: '300px',
+                  height: '300px',
+                  background: 'radial-gradient(circle, rgba(255,230,0,0.16), transparent 65%)',
+                  filter: 'blur(6px)',
+                }}
+              />
+              <img
+                src="/images/shared/icons/icon-knuckleheads.svg"
+                alt="Knuckleheads crown"
+                className="relative"
+                style={{
+                  width: 'min(340px, 30vw)',
+                  filter: 'drop-shadow(0 0 28px rgba(255,230,0,0.4))',
+                  animation: 'kn-float 5s ease-in-out infinite',
+                }}
+              />
+              <span
+                className="absolute"
+                style={{
+                  bottom: '8%',
+                  fontFamily: 'var(--font-arcade)',
+                  fontSize: '11px',
+                  color: 'var(--kn-pink)',
+                  textShadow: 'var(--text-glow-pink)',
+                  letterSpacing: '0.05em',
+                }}
+              >
+                KEEPERS CROWNED
+              </span>
+            </div>
           </div>
         </div>
 
         {/* Player Image Grid - Links to League Sites */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
+        <div id="quick-links" className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
           {[
             { 
               id: 1, 
@@ -141,7 +228,7 @@ export default function Home() {
         </div>
 
         {/* League Hub Navigation */}
-        <div className="mb-20">
+        <div id="league-hub" className="mb-20">
           <h2 className="text-3xl font-bold text-center mb-10 text-purple-300">
             LEAGUE COMMAND CENTERS
           </h2>
