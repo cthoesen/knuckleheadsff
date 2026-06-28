@@ -176,79 +176,77 @@ export default function MMHKeeperApp() {
   }, [teams, selectedTeam, searchTerm]);
 
   if (isLoading) return (
-    <div style={{ minHeight: '100vh', background: '#09090b', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#34d399', fontFamily: 'monospace' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--kn-bg)', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'var(--kn-mmh)', fontFamily: 'var(--font-mono)' }}>
       <div className="animate-pulse">Initializing MMH Salary Protocols...</div>
     </div>
   );
 
   if (error) return (
-    <div style={{ minHeight: '100vh', background: '#09090b', color: '#ef4444', padding: '2rem' }}>Error: {error}</div>
+    <div style={{ minHeight: '100vh', background: 'var(--kn-bg)', color: 'var(--kn-danger)', padding: '2rem', fontFamily: 'var(--font-mono)' }}>Error: {error}</div>
   );
 
   return (
     <div className="app-container">
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;900&display=swap');
-
-        body { background-color: #09090b; color: #f4f4f5; font-family: 'Inter', sans-serif; margin: 0; }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        body { background-color: var(--kn-bg); color: var(--kn-text); font-family: var(--font-body); margin: 0; }
+        .font-mono { font-family: var(--font-mono); }
 
         /* Layout */
         .app-container { min-height: 100vh; }
         .max-w-7xl { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; }
 
         /* Header */
-        header { border-bottom: 1px solid #27272a; background: rgba(24, 24, 27, 0.8); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 50; }
+        header { border-bottom: 1px solid var(--kn-line); background: rgba(10, 10, 15, 0.82); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 50; }
         .header-content { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 0; }
 
         /* Inputs */
         .controls { display: flex; gap: 1rem; margin: 2rem 0; flex-wrap: wrap; }
-        input, select { background: #18181b; border: 1px solid #27272a; color: white; padding: 0.75rem 1rem; border-radius: 0.5rem; font-family: 'JetBrains Mono', monospace; }
+        input, select { background: var(--kn-surface-3); border: 1px solid var(--kn-line); color: var(--kn-text); padding: 0.75rem 1rem; border-radius: var(--r-md); font-family: var(--font-mono); }
+        input:focus, select:focus { border-color: var(--kn-mmh); outline: none; }
         input { flex: 1; min-width: 300px; }
 
         /* Cards */
-        .team-card { background: #18181b; border: 1px solid #27272a; border-radius: 0.75rem; overflow: hidden; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5); }
-        .card-header { padding: 1.5rem; background: #09090b; border-bottom: 1px solid #27272a; }
+        .team-card { background: var(--kn-surface); border: 1px solid var(--kn-line); border-radius: var(--r-lg); overflow: hidden; margin-bottom: 2rem; box-shadow: var(--shadow-md); }
+        .card-header { padding: 1.5rem; background: var(--kn-bg); border-bottom: 1px solid var(--kn-line); border-left: 4px solid var(--kn-mmh); }
 
         /* Financial Dashboard in Header */
         .financial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-top: 1rem; }
-        .stat-box { background: #18181b; border: 1px solid #27272a; padding: 0.75rem; border-radius: 0.5rem; text-align: center; }
-        .stat-label { font-size: 0.7rem; color: #71717a; text-transform: uppercase; margin-bottom: 0.25rem; font-weight: 700; }
-        .stat-value { font-family: 'JetBrains Mono'; font-weight: 700; font-size: 1.1rem; }
+        .stat-box { background: var(--kn-surface-3); border: 1px solid var(--kn-line); padding: 0.75rem; border-radius: var(--r-md); text-align: center; }
+        .stat-label { font-size: 0.7rem; color: var(--kn-text-mute); text-transform: uppercase; margin-bottom: 0.25rem; font-weight: 700; }
+        .stat-value { font-family: var(--font-mono); font-weight: 700; font-size: 1.1rem; }
 
         /* Table */
         .table-container { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; text-align: left; }
-        th { padding: 0.75rem 1.5rem; font-size: 0.75rem; color: #71717a; text-transform: uppercase; background: rgba(9, 9, 11, 0.5); font-family: 'JetBrains Mono', monospace; }
-        td { padding: 1rem 1.5rem; border-bottom: 1px solid #27272a; vertical-align: middle; }
+        th { padding: 0.75rem 1.5rem; font-size: 0.75rem; color: var(--kn-text-mute); text-transform: uppercase; background: rgba(6, 6, 12, 0.5); font-family: var(--font-display); letter-spacing: 0.06em; }
+        td { padding: 1rem 1.5rem; border-bottom: 1px solid var(--kn-line); vertical-align: middle; }
         tr:last-child td { border-bottom: none; }
 
         /* Colors & Status */
-        .text-emerald { color: #34d399; }
-        .text-zinc { color: #a1a1aa; }
-        .text-red { color: #ef4444; }
-        .badge-taxi { background: rgba(234, 179, 8, 0.1); color: #eab308; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; margin-right: 8px; font-family: 'JetBrains Mono'; }
-        .badge-ir { background: rgba(239, 68, 68, 0.1); color: #f87171; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; margin-right: 8px; font-family: 'JetBrains Mono'; }
-        .badge-rookie { color: #60a5fa; font-size: 0.75rem; font-family: 'JetBrains Mono'; }
+        .text-emerald { color: var(--kn-mmh); }
+        .text-zinc { color: var(--kn-text-mute); }
+        .text-red { color: var(--kn-danger); }
+        .badge-taxi { background: rgba(255, 176, 32, 0.1); color: var(--kn-warning); padding: 2px 6px; border-radius: var(--r-sm); font-size: 0.75rem; margin-right: 8px; font-family: var(--font-mono); }
+        .badge-rookie { color: var(--kn-cyan); font-size: 0.75rem; font-family: var(--font-mono); }
 
-        .cost-display { font-size: 1.125rem; font-weight: 700; font-family: 'JetBrains Mono'; color: #34d399; }
+        .cost-display { font-size: 1.125rem; font-weight: 700; font-family: var(--font-mono); color: var(--kn-mmh); }
         .ineligible-row { opacity: 0.4; filter: grayscale(100%); }
         .dropped-row { opacity: 0.55; }
-        .dropped-row .cost-display { color: #71717a; text-decoration: line-through; }
+        .dropped-row .cost-display { color: var(--kn-text-mute); text-decoration: line-through; }
 
         /* Decision dropdown */
-        .decision-select { padding: 4px 8px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: background 0.15s, color 0.15s; }
-        .decision-keep { background: rgba(52,211,153,0.1); color: #34d399; border: 1px solid rgba(52,211,153,0.25); }
-        .decision-drop { background: rgba(239,68,68,0.1); color: #ef4444; border: 1px solid rgba(239,68,68,0.25); }
+        .decision-select { padding: 4px 8px; border-radius: var(--r-sm); font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: background 0.15s, color 0.15s; }
+        .decision-keep { background: rgba(45, 227, 138, 0.1); color: var(--kn-mmh); border: 1px solid rgba(45, 227, 138, 0.25); }
+        .decision-drop { background: rgba(255, 77, 77, 0.1); color: var(--kn-danger); border: 1px solid rgba(255, 77, 77, 0.25); }
       `}</style>
 
       <header>
         <div className="max-w-7xl">
           <div style={{ padding: '1rem 0' }}>
-            <Link href="/" style={{ color: '#34d399', fontSize: '0.75rem', fontFamily: 'monospace', textDecoration: 'none', display: 'block', marginBottom: '0.5rem' }}>← RETURN TO HUB</Link>
+            <Link href="/" style={{ color: 'var(--kn-mmh)', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', textDecoration: 'none', display: 'block', marginBottom: '0.5rem' }}>← RETURN TO HUB</Link>
             <div className="header-content">
-              <DollarSign size={32} color="#34d399" />
-              <h1 style={{ fontSize: '1.875rem', fontWeight: 900, color: 'white' }}>MMH <span className="text-emerald">SALARY CAP</span></h1>
+              <DollarSign size={32} color="var(--kn-mmh)" />
+              <h1 style={{ fontSize: '1.875rem', fontWeight: 900, color: 'var(--kn-text)', fontFamily: 'var(--font-display)' }}>MMH <span className="text-emerald">SALARY CAP</span></h1>
             </div>
           </div>
         </div>
@@ -257,7 +255,7 @@ export default function MMHKeeperApp() {
       <div className="max-w-7xl" style={{ paddingBottom: '4rem' }}>
         <div className="controls">
           <div style={{ position: 'relative', flex: 1 }}>
-            <Search size={16} color="#71717a" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
+            <Search size={16} color="var(--kn-text-mute)" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
             <input type="text" placeholder="Search player database..." style={{ paddingLeft: '2.5rem', width: '100%', boxSizing: 'border-box' }} onChange={(e) => setSearchTerm(e.target.value)} />
           </div>
           <select onChange={(e) => setSelectedTeam(e.target.value)}>
@@ -306,7 +304,7 @@ export default function MMHKeeperApp() {
 
                    <div className="stat-box">
                       <div className="stat-label">2026 Keeper Cost</div>
-                      <div className="stat-value" style={{ color: '#a78bfa' }}>${stats.projectedPayroll}</div>
+                      <div className="stat-value" style={{ color: 'var(--kn-violet)' }}>${stats.projectedPayroll}</div>
                    </div>
 
                    <div className="stat-box">
@@ -359,29 +357,29 @@ export default function MMHKeeperApp() {
                               )}
                             </div>
                           </td>
-                          <td className="font-mono" style={{ fontWeight: 700, color: '#fbbf24' }}>
+                          <td className="font-mono" style={{ fontWeight: 700, color: 'var(--kn-warning)' }}>
                             {p.Points != null
                               ? p.Points.toFixed(1)
-                              : <span style={{ color: '#52525b' }}>—</span>
+                              : <span style={{ color: 'var(--kn-text-faint)' }}>—</span>
                             }
                           </td>
                           <td className="font-mono text-zinc">${p.Salary}</td>
-                          <td className="font-mono" style={{ fontSize: '0.75rem', color: '#71717a' }}>
-                            {p.Base && parseFloat(p.Base) > 0 ? `$${p.Base}` : <span style={{ color: '#52525b' }}>—</span>}
+                          <td className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--kn-text-mute)' }}>
+                            {p.Base && parseFloat(p.Base) > 0 ? `$${p.Base}` : <span style={{ color: 'var(--kn-text-faint)' }}>—</span>}
                           </td>
                           <td>
                             {p.status.eligible ? (
                               <div className="cost-display">${p.status.cost}</div>
                             ) : (
-                              <span style={{ color: '#52525b' }}>—</span>
+                              <span style={{ color: 'var(--kn-text-faint)' }}>—</span>
                             )}
                           </td>
                           <td>
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                              <span className="font-mono" style={{ color: p.status.yearsRemaining === 1 ? '#f87171' : '#d4d4d8', fontWeight: 700 }}>
+                              <span className="font-mono" style={{ color: p.status.yearsRemaining === 1 ? 'var(--kn-danger)' : 'var(--kn-text-dim)', fontWeight: 700 }}>
                                 {p.status.yearsRemaining} Yrs
                               </span>
-                              <span style={{ fontSize: '0.65rem', color: '#52525b', textTransform: 'uppercase' }}>Max: {p.status.maxYears}</span>
+                              <span style={{ fontSize: '0.65rem', color: 'var(--kn-text-faint)', textTransform: 'uppercase' }}>Max: {p.status.maxYears}</span>
                             </div>
                           </td>
                           <td>
@@ -398,7 +396,7 @@ export default function MMHKeeperApp() {
                                 <option value="drop">Drop</option>
                               </select>
                             ) : (
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ef4444', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase' }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--kn-danger)', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase' }}>
                                 <XCircle size={16} /> {p.status.reason}
                               </div>
                             )}
