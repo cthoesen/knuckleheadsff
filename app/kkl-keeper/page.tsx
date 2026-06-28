@@ -174,9 +174,9 @@ export default function KKLKeeperApp() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          fontFamily: "'Rajdhani', sans-serif",
-          background: 'linear-gradient(135deg, #0a0e27 0%, #1a1347 50%, #2d1b69 100%)',
-          color: '#b19cd9'
+          fontFamily: 'var(--font-body)',
+          background: 'var(--kn-bg)',
+          color: 'var(--kn-kkl)'
         }}>
           <div style={{ textAlign: 'center' }}>
             <Trophy className="w-12 h-12 mx-auto mb-4 animate-pulse" />
@@ -193,9 +193,9 @@ export default function KKLKeeperApp() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          fontFamily: "'Rajdhani', sans-serif",
-          background: 'linear-gradient(135deg, #0a0e27 0%, #1a1347 50%, #2d1b69 100%)',
-          color: '#ff6b6b'
+          fontFamily: 'var(--font-body)',
+          background: 'var(--kn-bg)',
+          color: 'var(--kn-danger)'
         }}>
           <div style={{ textAlign: 'center' }}>
             <AlertCircle className="w-12 h-12 mx-auto mb-4" />
@@ -208,58 +208,26 @@ export default function KKLKeeperApp() {
   return (
     <>
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap');
-        
         * {
           margin: 0;
           padding: 0;
           box-sizing: border-box;
         }
-        
+
         body {
-          background: linear-gradient(135deg, #0a0e27 0%, #1a1347 50%, #2d1b69 100%);
+          background: var(--kn-bg);
           min-height: 100vh;
           overflow-x: hidden;
         }
-        
-        body::before {
-          content: '';
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: 
-            radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(75, 0, 130, 0.15) 0%, transparent 50%);
-          pointer-events: none;
-        }
-        
-        .scan-line {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.5), transparent);
-          animation: scan 4s linear infinite;
-          pointer-events: none;
-          z-index: 1000;
-        }
-        
-        @keyframes scan {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(100vh); }
-        }
       `}</style>
-      
+
       <div className="scan-line" />
-      
-      <div style={{ position: 'relative', zIndex: 1, fontFamily: "'Rajdhani', sans-serif" }}>
+
+      <div style={{ position: 'relative', zIndex: 1, fontFamily: 'var(--font-body)' }}>
         {/* Header */}
         <header style={{
-          borderBottom: '1px solid rgba(0, 255, 255, 0.2)',
-          background: 'rgba(10, 14, 39, 0.5)',
+          borderBottom: '1px solid var(--kn-line)',
+          background: 'rgba(10, 10, 15, 0.82)',
           backdropFilter: 'blur(20px)',
         }}>
           <div style={{ maxWidth: '1600px', margin: '0 auto', padding: '2rem 1.5rem' }}>
@@ -267,7 +235,7 @@ export default function KKLKeeperApp() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.5rem',
-              color: '#00ffff',
+              color: 'var(--kn-kkl)',
               textDecoration: 'none',
               fontSize: '1rem',
               fontWeight: 600,
@@ -275,32 +243,29 @@ export default function KKLKeeperApp() {
               transition: 'all 0.3s ease',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.color = '#ff00ff';
+              e.currentTarget.style.textShadow = '0 0 12px rgba(0, 240, 255, 0.7)';
               e.currentTarget.style.transform = 'translateX(-5px)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.color = '#00ffff';
+              e.currentTarget.style.textShadow = 'none';
               e.currentTarget.style.transform = 'translateX(0)';
             }}>
               ← BACK TO HOME
             </Link>
-            
+
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-              <Trophy style={{ width: '40px', height: '40px', color: '#00ffff' }} />
+              <Trophy style={{ width: '40px', height: '40px', color: 'var(--kn-kkl)' }} />
               <h1 style={{
-                fontFamily: "'Orbitron', sans-serif",
+                fontFamily: 'var(--font-display)',
                 fontSize: 'clamp(2rem, 5vw, 3.5rem)',
                 fontWeight: 900,
-                background: 'linear-gradient(135deg, #00ffff 0%, #ff00ff 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                textShadow: '0 0 40px rgba(0, 255, 255, 0.5)',
+                color: 'var(--kn-kkl)',
+                textShadow: '0 0 40px rgba(0, 240, 255, 0.5)',
               }}>
                 KKL KEEPER ANALYZER
               </h1>
             </div>
-            <p style={{ color: '#b19cd9', fontSize: '1.1rem', fontWeight: 600 }}>
+            <p style={{ color: 'var(--kn-text)', fontSize: '1.1rem', fontWeight: 600 }}>
               Knuckleheads Keeper League • 2026 Season Analysis
             </p>
           </div>
@@ -314,51 +279,51 @@ export default function KKLKeeperApp() {
             gap: '1.5rem',
           }}>
             <div style={{
-              background: 'linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(75, 0, 130, 0.3))',
+              background: 'linear-gradient(135deg, rgba(0, 240, 255, 0.3), rgba(0, 191, 202, 0.3))',
               backdropFilter: 'blur(10px)',
               borderRadius: '16px',
               padding: '1.5rem',
-              border: '2px solid rgba(0, 255, 255, 0.3)',
+              border: '2px solid rgba(0, 240, 255, 0.3)',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                <Award style={{ width: '20px', height: '20px', color: '#b19cd9' }} />
-                <span style={{ color: 'rgba(177, 156, 217, 0.6)', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>
+                <Award style={{ width: '20px', height: '20px', color: 'var(--kn-text)' }} />
+                <span style={{ color: 'rgba(241, 241, 251, 0.6)', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>
                   Total Players
                 </span>
               </div>
-              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#b19cd9' }}>{stats.total}</div>
+              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--kn-text)' }}>{stats.total}</div>
             </div>
             
             <div style={{
-              background: 'linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 200, 100, 0.2))',
+              background: 'linear-gradient(135deg, rgba(45, 227, 138, 0.2), rgba(0, 200, 100, 0.2))',
               backdropFilter: 'blur(10px)',
               borderRadius: '16px',
               padding: '1.5rem',
-              border: '2px solid rgba(0, 255, 136, 0.3)',
+              border: '2px solid rgba(45, 227, 138, 0.3)',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                <CheckCircle style={{ width: '20px', height: '20px', color: '#00ff88' }} />
-                <span style={{ color: 'rgba(0, 255, 136, 0.6)', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>
+                <CheckCircle style={{ width: '20px', height: '20px', color: 'var(--kn-success)' }} />
+                <span style={{ color: 'rgba(45, 227, 138, 0.6)', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>
                   Eligible
                 </span>
               </div>
-              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#00ff88' }}>{stats.eligible}</div>
+              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--kn-success)' }}>{stats.eligible}</div>
             </div>
             
             <div style={{
-              background: 'linear-gradient(135deg, rgba(255, 0, 136, 0.2), rgba(200, 0, 100, 0.2))',
+              background: 'linear-gradient(135deg, rgba(255, 77, 77, 0.2), rgba(200, 0, 100, 0.2))',
               backdropFilter: 'blur(10px)',
               borderRadius: '16px',
               padding: '1.5rem',
-              border: '2px solid rgba(255, 0, 136, 0.3)',
+              border: '2px solid rgba(255, 77, 77, 0.3)',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                <XCircle style={{ width: '20px', height: '20px', color: '#ff0088' }} />
-                <span style={{ color: 'rgba(255, 0, 136, 0.6)', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>
+                <XCircle style={{ width: '20px', height: '20px', color: 'var(--kn-danger)' }} />
+                <span style={{ color: 'rgba(255, 77, 77, 0.6)', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>
                   Ineligible
                 </span>
               </div>
-              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#ff0088' }}>{stats.ineligible}</div>
+              <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--kn-danger)' }}>{stats.ineligible}</div>
             </div>
           </div>
         </div>
@@ -374,7 +339,7 @@ export default function KKLKeeperApp() {
                 transform: 'translateY(-50%)',
                 width: '20px',
                 height: '20px',
-                color: '#b19cd9',
+                color: 'var(--kn-text)',
               }} />
               <input
                 type="text"
@@ -387,15 +352,15 @@ export default function KKLKeeperApp() {
                   paddingRight: '1rem',
                   paddingTop: '0.75rem',
                   paddingBottom: '0.75rem',
-                  background: 'rgba(10, 14, 39, 0.5)',
-                  border: '2px solid rgba(0, 255, 255, 0.2)',
+                  background: 'rgba(20, 20, 31, 0.5)',
+                  border: '2px solid rgba(0, 240, 255, 0.2)',
                   borderRadius: '12px',
-                  color: '#b19cd9',
+                  color: 'var(--kn-text)',
                   fontSize: '1rem',
                   outline: 'none',
                 }}
-                onFocus={(e) => e.currentTarget.style.borderColor = 'rgba(0, 255, 255, 0.6)'}
-                onBlur={(e) => e.currentTarget.style.borderColor = 'rgba(0, 255, 255, 0.2)'}
+                onFocus={(e) => e.currentTarget.style.borderColor = 'rgba(0, 240, 255, 0.6)'}
+                onBlur={(e) => e.currentTarget.style.borderColor = 'rgba(0, 240, 255, 0.2)'}
               />
             </div>
             
@@ -404,16 +369,16 @@ export default function KKLKeeperApp() {
               onChange={(e) => setSelectedTeam(e.target.value)}
               style={{
                 padding: '0.75rem 1.5rem',
-                background: 'rgba(10, 14, 39, 0.5)',
-                border: '2px solid rgba(0, 255, 255, 0.2)',
+                background: 'rgba(20, 20, 31, 0.5)',
+                border: '2px solid rgba(0, 240, 255, 0.2)',
                 borderRadius: '12px',
-                color: '#b19cd9',
+                color: 'var(--kn-text)',
                 fontSize: '1rem',
                 outline: 'none',
                 cursor: 'pointer',
               }}
-              onFocus={(e) => e.currentTarget.style.borderColor = 'rgba(0, 255, 255, 0.6)'}
-              onBlur={(e) => e.currentTarget.style.borderColor = 'rgba(0, 255, 255, 0.2)'}
+              onFocus={(e) => e.currentTarget.style.borderColor = 'rgba(0, 240, 255, 0.6)'}
+              onBlur={(e) => e.currentTarget.style.borderColor = 'rgba(0, 240, 255, 0.2)'}
             >
               <option value="all">All Teams</option>
               {teams.map(team => (
@@ -428,22 +393,22 @@ export default function KKLKeeperApp() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {filteredTeams.map(team => (
               <div key={team.name} style={{
-                background: 'rgba(10, 14, 39, 0.4)',
+                background: 'rgba(20, 20, 31, 0.4)',
                 backdropFilter: 'blur(10px)',
                 borderRadius: '16px',
-                border: '2px solid rgba(0, 255, 255, 0.2)',
+                border: '2px solid rgba(0, 240, 255, 0.2)',
                 overflow: 'hidden',
               }}>
                 <div style={{
-                  background: 'linear-gradient(90deg, rgba(138, 43, 226, 0.6), rgba(75, 0, 130, 0.6))',
+                  background: 'linear-gradient(90deg, rgba(0, 240, 255, 0.6), rgba(0, 191, 202, 0.6))',
                   padding: '1rem 1.5rem',
-                  borderBottom: '1px solid rgba(0, 255, 255, 0.2)',
+                  borderBottom: '1px solid rgba(0, 240, 255, 0.2)',
                 }}>
                   <h2 style={{
                     fontFamily: "'Orbitron', sans-serif",
                     fontSize: '1.5rem',
                     fontWeight: 900,
-                    color: '#b19cd9',
+                    color: 'var(--kn-text)',
                   }}>
                     {team.name}
                   </h2>
@@ -453,8 +418,8 @@ export default function KKLKeeperApp() {
                   <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                     <thead>
                       <tr style={{
-                        background: 'rgba(10, 14, 39, 0.4)',
-                        color: 'rgba(177, 156, 217, 0.6)',
+                        background: 'rgba(20, 20, 31, 0.4)',
+                        color: 'rgba(241, 241, 251, 0.6)',
                         fontSize: '0.75rem',
                         textTransform: 'uppercase',
                         letterSpacing: '0.05em',
@@ -472,38 +437,38 @@ export default function KKLKeeperApp() {
                         <tr 
                           key={idx} 
                           style={{
-                            borderTop: '1px solid rgba(0, 255, 255, 0.1)',
+                            borderTop: '1px solid rgba(0, 240, 255, 0.1)',
                             opacity: player.keeperStatus.eligible ? 1 : 0.6,
                             transition: 'background-color 0.2s',
                           }}
                           onMouseEnter={(e) => {
                             e.currentTarget.style.backgroundColor = player.keeperStatus.eligible 
-                              ? 'rgba(0, 255, 136, 0.05)' 
-                              : 'rgba(255, 0, 136, 0.05)';
+                              ? 'rgba(45, 227, 138, 0.05)' 
+                              : 'rgba(255, 77, 77, 0.05)';
                           }}
                           onMouseLeave={(e) => {
                             e.currentTarget.style.backgroundColor = 'transparent';
                           }}
                         >
-                          <td style={{ padding: '1rem 1.5rem', color: '#b19cd9', fontWeight: 500 }}>
+                          <td style={{ padding: '1rem 1.5rem', color: 'var(--kn-text)', fontWeight: 500 }}>
                             {player.Player}
                           </td>
-                          <td style={{ padding: '1rem 1.5rem', color: 'rgba(177, 156, 217, 0.8)' }}>
+                          <td style={{ padding: '1rem 1.5rem', color: 'rgba(241, 241, 251, 0.8)' }}>
                             {player.Acquired || '—'}
                           </td>
-                          <td style={{ padding: '1rem 1.5rem', color: 'rgba(177, 156, 217, 0.8)' }}>
+                          <td style={{ padding: '1rem 1.5rem', color: 'rgba(241, 241, 251, 0.8)' }}>
                             {player.Years || '—'}
                           </td>
                           <td style={{ padding: '1rem 1.5rem' }}>
                             {player.keeperStatus.eligible ? (
                               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <CheckCircle style={{ width: '16px', height: '16px', color: '#00ff88' }} />
-                                <span style={{ color: '#00ff88', fontWeight: 700, fontSize: '0.875rem' }}>Eligible</span>
+                                <CheckCircle style={{ width: '16px', height: '16px', color: 'var(--kn-success)' }} />
+                                <span style={{ color: 'var(--kn-success)', fontWeight: 700, fontSize: '0.875rem' }}>Eligible</span>
                               </div>
                             ) : (
                               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <XCircle style={{ width: '16px', height: '16px', color: '#ff0088' }} />
-                                <span style={{ color: '#ff0088', fontSize: '0.875rem' }}>{player.keeperStatus.reason}</span>
+                                <XCircle style={{ width: '16px', height: '16px', color: 'var(--kn-danger)' }} />
+                                <span style={{ color: 'var(--kn-danger)', fontSize: '0.875rem' }}>{player.keeperStatus.reason}</span>
                               </div>
                             )}
                           </td>
@@ -515,27 +480,27 @@ export default function KKLKeeperApp() {
                                 gap: '0.5rem',
                                 padding: '0.25rem 0.75rem',
                                 borderRadius: '9999px',
-                                background: 'rgba(138, 43, 226, 0.2)',
-                                border: '1px solid rgba(138, 43, 226, 0.4)',
+                                background: 'rgba(0, 240, 255, 0.2)',
+                                border: '1px solid rgba(0, 240, 255, 0.4)',
                               }}>
-                                <span style={{ color: '#b19cd9', fontWeight: 900, fontSize: '1.125rem' }}>
+                                <span style={{ color: 'var(--kn-text)', fontWeight: 900, fontSize: '1.125rem' }}>
                                   {player.keeperStatus.nextRound}
                                 </span>
                                 {player.keeperStatus.isRookie && (
-                                  <span style={{ fontSize: '0.75rem', color: '#b19cd9', fontWeight: 700 }}>(R)</span>
+                                  <span style={{ fontSize: '0.75rem', color: 'var(--kn-text)', fontWeight: 700 }}>(R)</span>
                                 )}
                               </div>
                             ) : (
-                              <span style={{ color: 'rgba(138, 43, 226, 0.4)' }}>—</span>
+                              <span style={{ color: 'rgba(0, 240, 255, 0.4)' }}>—</span>
                             )}
                           </td>
                           <td style={{ padding: '1rem 1.5rem' }}>
                             {player.keeperStatus.eligible ? (
-                              <span style={{ color: '#b19cd9', fontWeight: 700 }}>
+                              <span style={{ color: 'var(--kn-text)', fontWeight: 700 }}>
                                 {player.keeperStatus.yearsRemaining} {player.keeperStatus.yearsRemaining === 1 ? 'year' : 'years'}
                               </span>
                             ) : (
-                              <span style={{ color: 'rgba(138, 43, 226, 0.4)' }}>—</span>
+                              <span style={{ color: 'rgba(0, 240, 255, 0.4)' }}>—</span>
                             )}
                           </td>
                         </tr>
@@ -551,19 +516,19 @@ export default function KKLKeeperApp() {
         {/* Rules Footer */}
         <div style={{ maxWidth: '1600px', margin: '0 auto', padding: '0 1.5rem 2rem' }}>
           <div style={{
-            background: 'rgba(10, 14, 39, 0.4)',
+            background: 'rgba(20, 20, 31, 0.4)',
             backdropFilter: 'blur(10px)',
             borderRadius: '16px',
-            border: '2px solid rgba(0, 255, 255, 0.2)',
+            border: '2px solid rgba(0, 240, 255, 0.2)',
             padding: '1.5rem',
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-              <AlertCircle style={{ width: '24px', height: '24px', color: '#b19cd9' }} />
+              <AlertCircle style={{ width: '24px', height: '24px', color: 'var(--kn-text)' }} />
               <h3 style={{
                 fontFamily: "'Orbitron', sans-serif",
                 fontSize: '1.25rem',
                 fontWeight: 900,
-                color: '#b19cd9',
+                color: 'var(--kn-text)',
               }}>
                 KKL Keeper Rules
               </h3>
@@ -572,36 +537,36 @@ export default function KKLKeeperApp() {
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
               gap: '1rem',
-              color: 'rgba(177, 156, 217, 0.8)',
+              color: 'rgba(241, 241, 251, 0.8)',
               fontSize: '0.875rem',
               lineHeight: '1.6',
             }}>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <span style={{ color: '#b19cd9', fontWeight: 700 }}>•</span>
-                  <span>Players may be kept for a maximum of <strong style={{ color: '#b19cd9' }}>3 years</strong></span>
+                  <span style={{ color: 'var(--kn-text)', fontWeight: 700 }}>•</span>
+                  <span>Players may be kept for a maximum of <strong style={{ color: 'var(--kn-text)' }}>3 years</strong></span>
                 </li>
                 <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <span style={{ color: '#b19cd9', fontWeight: 700 }}>•</span>
-                  <span>Players drafted in <strong style={{ color: '#b19cd9' }}>rounds 1-3</strong> are ineligible</span>
+                  <span style={{ color: 'var(--kn-text)', fontWeight: 700 }}>•</span>
+                  <span>Players drafted in <strong style={{ color: 'var(--kn-text)' }}>rounds 1-3</strong> are ineligible</span>
                 </li>
                 <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <span style={{ color: '#b19cd9', fontWeight: 700 }}>•</span>
-                  <span>Undrafted players count as <strong style={{ color: '#b19cd9' }}>12th round</strong> picks</span>
+                  <span style={{ color: 'var(--kn-text)', fontWeight: 700 }}>•</span>
+                  <span>Undrafted players count as <strong style={{ color: 'var(--kn-text)' }}>12th round</strong> picks</span>
                 </li>
               </ul>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <span style={{ color: '#b19cd9', fontWeight: 700 }}>•</span>
-                  <span>Regular players move up <strong style={{ color: '#b19cd9' }}>2 rounds</strong> when kept</span>
+                  <span style={{ color: 'var(--kn-text)', fontWeight: 700 }}>•</span>
+                  <span>Regular players move up <strong style={{ color: 'var(--kn-text)' }}>2 rounds</strong> when kept</span>
                 </li>
                 <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <span style={{ color: '#b19cd9', fontWeight: 700 }}>•</span>
-                  <span>Rookies (R) stay in the <strong style={{ color: '#b19cd9' }}>same round</strong> when kept</span>
+                  <span style={{ color: 'var(--kn-text)', fontWeight: 700 }}>•</span>
+                  <span>Rookies (R) stay in the <strong style={{ color: 'var(--kn-text)' }}>same round</strong> when kept</span>
                 </li>
                 <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <span style={{ color: '#b19cd9', fontWeight: 700 }}>•</span>
-                  <span>Years remaining calculated as current years <strong style={{ color: '#b19cd9' }}>minus 1</strong></span>
+                  <span style={{ color: 'var(--kn-text)', fontWeight: 700 }}>•</span>
+                  <span>Years remaining calculated as current years <strong style={{ color: 'var(--kn-text)' }}>minus 1</strong></span>
                 </li>
               </ul>
             </div>
