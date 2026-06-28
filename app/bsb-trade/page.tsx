@@ -557,14 +557,14 @@ function TeamPanel({
         padding: '1rem 1.5rem',
         borderBottom: '1px solid rgba(255, 59, 107, 0.2)',
       }}>
-        <div style={{ fontSize: '0.7rem', color: 'rgba(255, 59, 107, 0.6)', fontWeight: 700, letterSpacing: '0.1em', marginBottom: '0.25rem' }}>
+        <div style={{ fontSize: '0.7rem', color: 'rgba(241, 241, 251, 0.6)', fontWeight: 700, letterSpacing: '0.1em', marginBottom: '0.25rem' }}>
           {label}
         </div>
         <h2 style={{
           fontFamily: 'var(--font-display)',
           fontSize: '1.25rem',
           fontWeight: 900,
-          color: 'var(--kn-bsb)',
+          color: 'var(--kn-text)',
         }}>
           {team.name}
         </h2>
