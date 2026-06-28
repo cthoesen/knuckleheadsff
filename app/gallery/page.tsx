@@ -44,33 +44,18 @@ export default function Gallery() {
   return (
     <>
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap');
-        
         * {
           margin: 0;
           padding: 0;
           box-sizing: border-box;
         }
-        
+
         body {
-          background: linear-gradient(135deg, #0a0e27 0%, #1a1347 50%, #2d1b69 100%);
+          background: var(--kn-bg);
           min-height: 100vh;
           overflow-x: hidden;
         }
-        
-        body::before {
-          content: '';
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: 
-            radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(75, 0, 130, 0.15) 0%, transparent 50%);
-          pointer-events: none;
-        }
-        
+
         @keyframes slideInUp {
           from {
             opacity: 0;
@@ -105,7 +90,7 @@ export default function Gallery() {
         padding: '4rem 2rem',
         maxWidth: '1400px',
         margin: '0 auto',
-        fontFamily: "'Rajdhani', sans-serif",
+        fontFamily: 'var(--font-body)',
       }}>
         {/* Header */}
         <div style={{
@@ -116,7 +101,7 @@ export default function Gallery() {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '0.5rem',
-            color: '#00ffff',
+            color: 'var(--kn-cyan)',
             textDecoration: 'none',
             fontSize: '1.1rem',
             fontWeight: 600,
@@ -124,26 +109,26 @@ export default function Gallery() {
             transition: 'all 0.3s ease',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.color = '#ff00ff';
+            e.currentTarget.style.color = 'var(--kn-pink)';
             e.currentTarget.style.transform = 'translateX(-5px)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.color = '#00ffff';
+            e.currentTarget.style.color = 'var(--kn-cyan)';
             e.currentTarget.style.transform = 'translateX(0)';
           }}>
             ← BACK TO HOME
           </Link>
 
           <h1 style={{
-            fontFamily: "'Orbitron', sans-serif",
+            fontFamily: 'var(--font-display)',
             fontSize: 'clamp(2.5rem, 6vw, 4rem)',
             fontWeight: 900,
-            background: 'linear-gradient(135deg, #00ffff 0%, #ff00ff 100%)',
+            background: 'linear-gradient(135deg, var(--kn-cyan) 0%, var(--kn-pink) 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
             marginBottom: '1rem',
-            textShadow: '0 0 40px rgba(0, 255, 255, 0.5)',
+            textShadow: '0 0 40px rgba(0, 240, 255, 0.5)',
           }}>
             IMAGE GALLERY
           </h1>
@@ -151,8 +136,8 @@ export default function Gallery() {
           <div style={{
             height: '3px',
             width: '150px',
-            background: 'linear-gradient(90deg, #00ffff, #ff00ff)',
-            boxShadow: '0 0 20px rgba(0, 255, 255, 0.8)',
+            background: 'linear-gradient(90deg, var(--kn-cyan), var(--kn-pink))',
+            boxShadow: '0 0 20px rgba(0, 240, 255, 0.8)',
           }} />
         </div>
 
@@ -169,16 +154,16 @@ export default function Gallery() {
               key={cat}
               onClick={() => setFilter(cat)}
               style={{
-                fontFamily: "'Orbitron', sans-serif",
+                fontFamily: 'var(--font-display)',
                 padding: '0.75rem 1.5rem',
                 fontSize: '0.9rem',
                 fontWeight: 700,
                 letterSpacing: '0.1em',
                 background: filter === cat 
-                  ? 'linear-gradient(135deg, #00ffff, #ff00ff)' 
-                  : 'rgba(0, 255, 255, 0.1)',
-                color: filter === cat ? '#0a0e27' : '#00ffff',
-                border: `2px solid ${filter === cat ? '#00ffff' : 'rgba(0, 255, 255, 0.3)'}`,
+                  ? 'linear-gradient(135deg, var(--kn-cyan), var(--kn-pink))' 
+                  : 'rgba(0, 240, 255, 0.1)',
+                color: filter === cat ? 'var(--kn-text-on-neon)' : 'var(--kn-cyan)',
+                border: `2px solid ${filter === cat ? 'var(--kn-cyan)' : 'rgba(0, 240, 255, 0.3)'}`,
                 borderRadius: '8px',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
@@ -186,14 +171,14 @@ export default function Gallery() {
               }}
               onMouseEnter={(e) => {
                 if (filter !== cat) {
-                  e.currentTarget.style.background = 'rgba(0, 255, 255, 0.2)';
-                  e.currentTarget.style.borderColor = '#00ffff';
+                  e.currentTarget.style.background = 'rgba(0, 240, 255, 0.2)';
+                  e.currentTarget.style.borderColor = 'var(--kn-cyan)';
                 }
               }}
               onMouseLeave={(e) => {
                 if (filter !== cat) {
-                  e.currentTarget.style.background = 'rgba(0, 255, 255, 0.1)';
-                  e.currentTarget.style.borderColor = 'rgba(0, 255, 255, 0.3)';
+                  e.currentTarget.style.background = 'rgba(0, 240, 255, 0.1)';
+                  e.currentTarget.style.borderColor = 'rgba(0, 240, 255, 0.3)';
                 }
               }}
             >
@@ -215,8 +200,8 @@ export default function Gallery() {
               onClick={() => openLightbox(index)}
               style={{
                 aspectRatio: '1',
-                background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1))',
-                border: '2px solid rgba(0, 255, 255, 0.3)',
+                background: 'linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(255, 45, 120, 0.1))',
+                border: '2px solid rgba(0, 240, 255, 0.3)',
                 borderRadius: '12px',
                 overflow: 'hidden',
                 cursor: 'pointer',
@@ -228,18 +213,18 @@ export default function Gallery() {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'scale(1.05)';
-                e.currentTarget.style.borderColor = '#00ffff';
-                e.currentTarget.style.boxShadow = '0 12px 48px rgba(0, 255, 255, 0.3)';
+                e.currentTarget.style.borderColor = 'var(--kn-cyan)';
+                e.currentTarget.style.boxShadow = '0 12px 48px rgba(0, 240, 255, 0.3)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'scale(1)';
-                e.currentTarget.style.borderColor = 'rgba(0, 255, 255, 0.3)';
+                e.currentTarget.style.borderColor = 'rgba(0, 240, 255, 0.3)';
                 e.currentTarget.style.boxShadow = 'none';
               }}
             >
               {/* Placeholder for actual images */}
               <div style={{
-                color: 'rgba(0, 255, 255, 0.5)',
+                color: 'rgba(0, 240, 255, 0.5)',
                 fontSize: '0.9rem',
                 fontWeight: 600,
                 textAlign: 'center',
@@ -247,7 +232,7 @@ export default function Gallery() {
               }}>
                 {image.alt}
                 <br />
-                <span style={{ fontSize: '0.75rem', color: 'rgba(255, 0, 255, 0.5)' }}>
+                <span style={{ fontSize: '0.75rem', color: 'rgba(255, 45, 120, 0.5)' }}>
                   Click to view
                 </span>
               </div>
@@ -259,19 +244,19 @@ export default function Gallery() {
         <div style={{
           marginTop: '3rem',
           padding: '2rem',
-          background: 'rgba(0, 255, 255, 0.05)',
-          border: '2px dashed rgba(0, 255, 255, 0.3)',
+          background: 'rgba(0, 240, 255, 0.05)',
+          border: '2px dashed rgba(0, 240, 255, 0.3)',
           borderRadius: '12px',
           textAlign: 'center',
           animation: 'slideInUp 0.6s ease-out 0.6s backwards',
         }}>
           <p style={{
-            color: '#b19cd9',
+            color: 'var(--kn-text)',
             fontSize: '1.1rem',
             lineHeight: '1.6',
           }}>
             Add your images to <code style={{
-              color: '#00ffff',
+              color: 'var(--kn-cyan)',
               background: 'rgba(0, 0, 0, 0.3)',
               padding: '0.25rem 0.5rem',
               borderRadius: '4px',
@@ -305,25 +290,25 @@ export default function Gallery() {
               position: 'absolute',
               top: '2rem',
               right: '2rem',
-              background: 'rgba(255, 0, 255, 0.2)',
-              border: '2px solid #ff00ff',
-              color: '#ff00ff',
+              background: 'rgba(255, 45, 120, 0.2)',
+              border: '2px solid var(--kn-pink)',
+              color: 'var(--kn-pink)',
               fontSize: '2rem',
               width: '60px',
               height: '60px',
               borderRadius: '50%',
               cursor: 'pointer',
               transition: 'all 0.3s ease',
-              fontFamily: "'Orbitron', sans-serif",
+              fontFamily: 'var(--font-display)',
               fontWeight: 700,
               zIndex: 1001,
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(255, 0, 255, 0.4)';
+              e.currentTarget.style.background = 'rgba(255, 45, 120, 0.4)';
               e.currentTarget.style.transform = 'rotate(90deg)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(255, 0, 255, 0.2)';
+              e.currentTarget.style.background = 'rgba(255, 45, 120, 0.2)';
               e.currentTarget.style.transform = 'rotate(0deg)';
             }}
           >
@@ -339,25 +324,25 @@ export default function Gallery() {
             style={{
               position: 'absolute',
               left: '2rem',
-              background: 'rgba(0, 255, 255, 0.2)',
-              border: '2px solid #00ffff',
-              color: '#00ffff',
+              background: 'rgba(0, 240, 255, 0.2)',
+              border: '2px solid var(--kn-cyan)',
+              color: 'var(--kn-cyan)',
               fontSize: '2rem',
               width: '60px',
               height: '60px',
               borderRadius: '50%',
               cursor: 'pointer',
               transition: 'all 0.3s ease',
-              fontFamily: "'Orbitron', sans-serif",
+              fontFamily: 'var(--font-display)',
               fontWeight: 700,
               zIndex: 1001,
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(0, 255, 255, 0.4)';
+              e.currentTarget.style.background = 'rgba(0, 240, 255, 0.4)';
               e.currentTarget.style.transform = 'translateX(-5px)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(0, 255, 255, 0.2)';
+              e.currentTarget.style.background = 'rgba(0, 240, 255, 0.2)';
               e.currentTarget.style.transform = 'translateX(0)';
             }}
           >
@@ -370,8 +355,8 @@ export default function Gallery() {
             style={{
               maxWidth: '90vw',
               maxHeight: '90vh',
-              background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1))',
-              border: '3px solid rgba(0, 255, 255, 0.5)',
+              background: 'linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(255, 45, 120, 0.1))',
+              border: '3px solid rgba(0, 240, 255, 0.5)',
               borderRadius: '16px',
               padding: '3rem',
               display: 'flex',
@@ -380,7 +365,7 @@ export default function Gallery() {
               justifyContent: 'center',
               gap: '1.5rem',
               animation: 'scaleIn 0.3s ease-out',
-              boxShadow: '0 0 80px rgba(0, 255, 255, 0.3)',
+              boxShadow: '0 0 80px rgba(0, 240, 255, 0.3)',
             }}
           >
             {/* Placeholder for actual image */}
@@ -389,15 +374,15 @@ export default function Gallery() {
               height: '600px',
               maxWidth: '100%',
               maxHeight: '70vh',
-              background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2))',
+              background: 'linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(255, 45, 120, 0.2))',
               borderRadius: '12px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              border: '2px dashed rgba(0, 255, 255, 0.3)',
+              border: '2px dashed rgba(0, 240, 255, 0.3)',
             }}>
               <span style={{
-                color: 'rgba(0, 255, 255, 0.6)',
+                color: 'rgba(0, 240, 255, 0.6)',
                 fontSize: '1.2rem',
                 fontWeight: 600,
                 textAlign: 'center',
@@ -409,18 +394,18 @@ export default function Gallery() {
             {/* Image Info */}
             <div style={{
               textAlign: 'center',
-              color: '#b19cd9',
+              color: 'var(--kn-text)',
               fontSize: '1.1rem',
             }}>
               <p style={{
-                fontFamily: "'Orbitron', sans-serif",
-                color: '#00ffff',
+                fontFamily: 'var(--font-display)',
+                color: 'var(--kn-cyan)',
                 fontSize: '1.2rem',
                 marginBottom: '0.5rem',
               }}>
                 {filteredImages[selectedImage].alt}
               </p>
-              <p style={{ fontSize: '0.9rem', color: '#7c6fa6' }}>
+              <p style={{ fontSize: '0.9rem', color: 'var(--kn-text-mute)' }}>
                 {selectedImage + 1} / {filteredImages.length}
               </p>
             </div>
@@ -435,25 +420,25 @@ export default function Gallery() {
             style={{
               position: 'absolute',
               right: '2rem',
-              background: 'rgba(0, 255, 255, 0.2)',
-              border: '2px solid #00ffff',
-              color: '#00ffff',
+              background: 'rgba(0, 240, 255, 0.2)',
+              border: '2px solid var(--kn-cyan)',
+              color: 'var(--kn-cyan)',
               fontSize: '2rem',
               width: '60px',
               height: '60px',
               borderRadius: '50%',
               cursor: 'pointer',
               transition: 'all 0.3s ease',
-              fontFamily: "'Orbitron', sans-serif",
+              fontFamily: 'var(--font-display)',
               fontWeight: 700,
               zIndex: 1001,
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(0, 255, 255, 0.4)';
+              e.currentTarget.style.background = 'rgba(0, 240, 255, 0.4)';
               e.currentTarget.style.transform = 'translateX(5px)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(0, 255, 255, 0.2)';
+              e.currentTarget.style.background = 'rgba(0, 240, 255, 0.2)';
               e.currentTarget.style.transform = 'translateX(0)';
             }}
           >
