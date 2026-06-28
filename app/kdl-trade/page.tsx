@@ -429,7 +429,7 @@ export default function KDLTradeAnalyzer() {
                   justifyContent: 'space-between',
                   marginBottom: '0.5rem',
                   fontSize: '0.875rem',
-                  color: 'var(--kn-kdl)',
+                  color: 'var(--kn-text)',
                 }}>
                   <span>{teamA.name}</span>
                   <span style={{ color: analysis.fairnessColor, fontWeight: 700, fontFamily: 'var(--font-display)' }}>
@@ -457,7 +457,7 @@ export default function KDLTradeAnalyzer() {
                   justifyContent: 'space-between',
                   marginTop: '0.25rem',
                   fontSize: '0.75rem',
-                  color: 'rgba(168, 85, 247, 0.6)',
+                  color: 'rgba(241, 241, 251, 0.6)',
                 }}>
                   <span>{analysis.aPercent.toFixed(1)}%</span>
                   <span>{(100 - analysis.aPercent).toFixed(1)}%</span>
@@ -506,7 +506,7 @@ export default function KDLTradeAnalyzer() {
                 borderRadius: '8px',
                 border: '1px solid rgba(255, 176, 32, 0.2)',
                 fontSize: '0.8rem',
-                color: 'rgba(168, 85, 247, 0.7)',
+                color: 'rgba(241, 241, 251, 0.7)',
                 lineHeight: '1.5',
               }}>
                 <strong style={{ color: 'var(--kn-warning)' }}>Note:</strong> Draft pick values are estimates based on
@@ -554,7 +554,7 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd, tradeSa
           alignItems: 'center',
           padding: '0.5rem 0',
           borderBottom: '1px solid rgba(168, 85, 247, 0.1)',
-          color: 'var(--kn-kdl)',
+          color: 'var(--kn-text)',
           fontSize: '0.875rem',
         }}>
           <span style={{ flex: 1 }}>
@@ -562,8 +562,8 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd, tradeSa
             {p.name}
             {rosterStatusBadge(p.rosterStatus)}
           </span>
-          <span style={{ width: '60px', textAlign: 'right', fontSize: '0.8rem', color: 'rgba(168, 85, 247, 0.7)' }}>${p.salary}</span>
-          <span style={{ width: '30px', textAlign: 'center', fontSize: '0.8rem', color: 'rgba(168, 85, 247, 0.7)' }}>{p.contractYear}</span>
+          <span style={{ width: '60px', textAlign: 'right', fontSize: '0.8rem', color: 'rgba(241, 241, 251, 0.7)' }}>${p.salary}</span>
+          <span style={{ width: '30px', textAlign: 'center', fontSize: '0.8rem', color: 'rgba(241, 241, 251, 0.7)' }}>{p.contractYear}</span>
           <span style={{ width: '50px', textAlign: 'right', fontWeight: 700 }}>{p.pointsAVG.toFixed(1)}</span>
         </div>
       ))}
@@ -573,7 +573,7 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd, tradeSa
           justifyContent: 'flex-end',
           padding: '0.15rem 0',
           fontSize: '0.65rem',
-          color: 'rgba(168, 85, 247, 0.4)',
+          color: 'rgba(241, 241, 251, 0.4)',
           gap: '0.25rem',
         }}>
           <span style={{ width: '60px', textAlign: 'right' }}>Salary</span>
@@ -611,7 +611,7 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd, tradeSa
         display: 'flex',
         justifyContent: 'space-between',
         padding: '0.25rem 0',
-        color: 'rgba(168, 85, 247, 0.6)',
+        color: 'rgba(241, 241, 251, 0.6)',
         fontSize: '0.875rem',
       }}>
         <span>Season YTD</span>
@@ -621,7 +621,7 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd, tradeSa
         display: 'flex',
         justifyContent: 'space-between',
         padding: '0.25rem 0',
-        color: 'rgba(168, 85, 247, 0.6)',
+        color: 'rgba(241, 241, 251, 0.6)',
         fontSize: '0.875rem',
       }}>
         <span>Trade Salary</span>
@@ -631,7 +631,7 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd, tradeSa
         display: 'flex',
         justifyContent: 'space-between',
         padding: '0.25rem 0',
-        color: 'rgba(168, 85, 247, 0.6)',
+        color: 'rgba(241, 241, 251, 0.6)',
         fontSize: '0.875rem',
       }}>
         <span>Trade Years</span>
@@ -661,11 +661,11 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd, tradeSa
           gridTemplateColumns: '1fr auto auto',
           gap: '0.25rem 0.75rem',
           fontSize: '0.8rem',
-          color: 'rgba(168, 85, 247, 0.7)',
+          color: 'rgba(241, 241, 251, 0.7)',
         }}>
           <span></span>
-          <span style={{ fontWeight: 700, textAlign: 'right', fontSize: '0.7rem', color: 'rgba(168, 85, 247, 0.5)' }}>BEFORE</span>
-          <span style={{ fontWeight: 700, textAlign: 'right', fontSize: '0.7rem', color: 'rgba(168, 85, 247, 0.5)' }}>AFTER</span>
+          <span style={{ fontWeight: 700, textAlign: 'right', fontSize: '0.7rem', color: 'rgba(241, 241, 251, 0.5)' }}>BEFORE</span>
+          <span style={{ fontWeight: 700, textAlign: 'right', fontSize: '0.7rem', color: 'rgba(241, 241, 251, 0.5)' }}>AFTER</span>
           <span>Total Salary</span>
           <span style={{ textAlign: 'right' }}>${teamSalaryBefore}</span>
           <span style={{ textAlign: 'right', color: teamSalaryAfter > 1000 ? 'var(--kn-danger)' : 'var(--kn-success)', fontWeight: 700 }}>${teamSalaryAfter}</span>
@@ -839,7 +839,7 @@ function TeamPanel({
           <thead>
             <tr style={{
               background: 'rgba(20, 20, 31, 0.4)',
-              color: 'rgba(168, 85, 247, 0.6)',
+              color: 'rgba(241, 241, 251, 0.6)',
               fontSize: '0.7rem',
               textTransform: 'uppercase',
               letterSpacing: '0.05em',
@@ -873,7 +873,7 @@ function TeamPanel({
                 >
                   <td style={{
                     padding: '0.6rem 1rem',
-                    color: selected ? 'var(--kn-kdl)' : 'var(--kn-kdl)',
+                    color: selected ? 'var(--kn-kdl)' : 'var(--kn-text)',
                     fontWeight: selected ? 700 : 500,
                     fontSize: '0.875rem',
                   }}>
@@ -893,7 +893,7 @@ function TeamPanel({
                   <td style={{
                     padding: '0.6rem 0.5rem',
                     textAlign: 'center',
-                    color: 'rgba(168, 85, 247, 0.6)',
+                    color: 'rgba(241, 241, 251, 0.6)',
                     fontSize: '0.75rem',
                   }}>
                     {player.nflTeam}
@@ -901,7 +901,7 @@ function TeamPanel({
                   <td style={{
                     padding: '0.6rem 0.5rem',
                     textAlign: 'right',
-                    color: selected ? 'var(--kn-kdl)' : 'rgba(168, 85, 247, 0.8)',
+                    color: selected ? 'var(--kn-kdl)' : 'rgba(241, 241, 251, 0.8)',
                     fontWeight: 600,
                     fontSize: '0.8rem',
                   }}>
@@ -910,7 +910,7 @@ function TeamPanel({
                   <td style={{
                     padding: '0.6rem 0.5rem',
                     textAlign: 'center',
-                    color: selected ? 'var(--kn-kdl)' : 'rgba(168, 85, 247, 0.8)',
+                    color: selected ? 'var(--kn-kdl)' : 'rgba(241, 241, 251, 0.8)',
                     fontWeight: 600,
                     fontSize: '0.8rem',
                   }}>
@@ -919,7 +919,7 @@ function TeamPanel({
                   <td style={{
                     padding: '0.6rem 1rem',
                     textAlign: 'right',
-                    color: selected ? 'var(--kn-kdl)' : 'rgba(168, 85, 247, 0.8)',
+                    color: selected ? 'var(--kn-kdl)' : 'rgba(241, 241, 251, 0.8)',
                     fontWeight: 700,
                     fontSize: '0.875rem',
                   }}>
@@ -964,7 +964,7 @@ function TeamPanel({
         {showPicks && (
           <div style={{ padding: '0 1.5rem 1rem' }}>
             {team.futurePicks.length === 0 ? (
-              <p style={{ color: 'rgba(168, 85, 247, 0.5)', fontSize: '0.8rem', padding: '0.5rem 0' }}>
+              <p style={{ color: 'rgba(241, 241, 251, 0.5)', fontSize: '0.8rem', padding: '0.5rem 0' }}>
                 No future draft picks available
               </p>
             ) : (
@@ -981,7 +981,7 @@ function TeamPanel({
                         background: selected ? 'rgba(255, 176, 32, 0.2)' : 'rgba(20, 20, 31, 0.3)',
                         border: `1px solid ${selected ? 'rgba(255, 176, 32, 0.5)' : 'rgba(255, 176, 32, 0.15)'}`,
                         borderRadius: '6px',
-                        color: selected ? 'var(--kn-warning)' : 'rgba(168, 85, 247, 0.6)',
+                        color: selected ? 'var(--kn-warning)' : 'rgba(241, 241, 251, 0.6)',
                         cursor: 'pointer',
                         fontFamily: 'var(--font-body)',
                         fontSize: '0.75rem',
