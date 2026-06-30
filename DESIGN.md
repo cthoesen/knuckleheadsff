@@ -13,7 +13,7 @@ When in doubt, use a token, not a raw value.
 - Numbers always read like a HUD readout (W12 · 9-3 · $184 CAP).
 - No emoji. Unicode arcade glyphs OK as accents: ▸ ◂ ● ◆ ✦ ★ ▮.
 
-## Colour
+## Color
 Near-black CRT ground; saturated neon hues used as *light*, never large flat fields.
 One league hue dominates per surface; the rest are small accents.
 
