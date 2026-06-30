@@ -21,11 +21,9 @@ const QUICK_LINKS: HubQuickLink[] = [
 export default function BSBHub() {
   return (
     <LeagueHubLayout
-      abbr="BSB"
+      code="BSB"
       name="Blood, Sweat, and Beers"
       meta="League ID: 62908 • MFL 2025 • Draft-Based Keepers"
-      themeColor="var(--kn-bsb)"
-      glowRgb="var(--glow-pink)"
       tools={TOOLS}
       quickLinks={QUICK_LINKS}
     />

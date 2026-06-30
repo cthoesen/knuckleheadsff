@@ -20,11 +20,9 @@ const QUICK_LINKS: HubQuickLink[] = [
 export default function KKLHub() {
   return (
     <LeagueHubLayout
-      abbr="KKL"
+      code="KKL"
       name="Knuckleheads Keeper League"
       meta="League ID: 45267 • MFL 2025"
-      themeColor="var(--kn-kkl)"
-      glowRgb="var(--glow-cyan)"
       tools={TOOLS}
       quickLinks={QUICK_LINKS}
     />

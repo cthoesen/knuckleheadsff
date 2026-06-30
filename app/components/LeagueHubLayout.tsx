@@ -1,15 +1,15 @@
 'use client';
 
-import Link from 'next/link';
+import React, { ReactNode } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { ReactNode } from 'react';
+import { Badge } from './kff/Badge';
 
 export interface HubTool {
   name: string;
   desc: string;
   icon: ReactNode;
-  href?: string;          // internal route — renders as a Next Link
-  externalHref?: string;  // external link (e.g. a bylaws PDF) — renders as <a target="_blank">
+  href?: string;          // internal route — renders as an anchor
+  externalHref?: string;  // external link (e.g. a bylaws PDF)
   status: 'live' | 'soon';
 }
 
@@ -19,178 +19,184 @@ export interface HubQuickLink {
 }
 
 interface LeagueHubLayoutProps {
-  abbr: string;
+  code: string;     // 'KKL' | 'KDL' | 'MMH' | 'BSB' — drives the .league-* scope
   name: string;
   meta: string;
-  themeColor: string; // e.g. 'var(--kn-kdl)'
-  glowRgb: string;     // e.g. 'var(--glow-violet)' — must resolve to "r, g, b"
   tools: HubTool[];
   quickLinks: HubQuickLink[];
 }
 
-export default function LeagueHubLayout({ abbr, name, meta, themeColor, glowRgb, tools, quickLinks }: LeagueHubLayoutProps) {
-  return (
-    <div className="min-h-screen" style={{ background: 'var(--kn-bg)' }}>
-      <div className="scan-line" />
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
-        {/* Back Button */}
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 mb-8 text-sm transition-colors"
-          style={{ fontFamily: 'var(--font-mono)', color: themeColor }}
-        >
-          <ArrowLeft size={16} />
-          RETURN TO HUB
-        </Link>
+export default function LeagueHubLayout({ code, name, meta, tools, quickLinks }: LeagueHubLayoutProps) {
+  const scope = `league-${code.toLowerCase()}`;
 
-        {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-4 mb-4">
+  return (
+    <div className={scope} style={{ minHeight: '100vh', background: 'var(--bg-base)' }}>
+      {/* Header band */}
+      <header
+        className="kff-grid-bg kff-scanlines"
+        style={{ position: 'relative', borderBottom: '2px solid var(--kff-line)', overflow: 'hidden' }}
+      >
+        <div
+          style={{
+            position: 'absolute', inset: 0, pointerEvents: 'none',
+            background: 'radial-gradient(90% 100% at 12% 20%, color-mix(in srgb, var(--league-color) 16%, transparent) 0%, transparent 60%)',
+          }}
+        />
+        <div style={{ position: 'relative', zIndex: 4, maxWidth: 'var(--container-xl)', margin: '0 auto', padding: 'var(--space-6) var(--space-6) var(--space-7)' }}>
+          <a
+            href="/"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '7px', marginBottom: 'var(--space-6)',
+              fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 'var(--text-xs)',
+              letterSpacing: 'var(--tracking-wide)', textTransform: 'uppercase', textDecoration: 'none',
+              color: 'var(--league-color)', transition: 'text-shadow var(--dur-base)',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.textShadow = 'var(--glow-md)')}
+            onMouseLeave={(e) => (e.currentTarget.style.textShadow = 'none')}
+          >
+            <ArrowLeft size={14} /> Return to Hub
+          </a>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-5)', flexWrap: 'wrap' }}>
+            {/* Pixel crest */}
             <div
-              className="grid place-items-center"
               style={{
-                width: '64px',
-                height: '64px',
-                background: `rgba(${glowRgb}, 0.12)`,
-                border: `2px solid ${themeColor}`,
-                boxShadow: `0 0 18px rgba(${glowRgb}, 0.4)`,
-                fontFamily: 'var(--font-arcade)',
-                fontSize: '18px',
-                color: themeColor,
+                flexShrink: 0, width: 84, height: 84, display: 'grid', placeItems: 'center',
+                background: 'color-mix(in srgb, var(--league-color) 12%, var(--surface-inset))',
+                border: '2px solid var(--league-color)',
+                boxShadow: 'var(--glow-md)',
+                fontFamily: 'var(--font-pixel)', fontSize: 'var(--pixel-md)', color: 'var(--league-color)',
               }}
             >
-              {abbr}
+              {code}
             </div>
-            <h1
-              className="font-black"
-              style={{ fontFamily: 'var(--font-display)', fontSize: '56px', color: themeColor, textShadow: `0 0 24px rgba(${glowRgb}, 0.5)` }}
-            >
-              {abbr}
-            </h1>
+            <div>
+              <span style={{ fontFamily: 'var(--font-pixel)', fontSize: 'var(--pixel-2xs)', color: 'var(--league-color)', letterSpacing: '0.06em' }}>
+                LEAGUE COMMAND CENTER
+              </span>
+              <h1 style={{ margin: '12px 0 0', fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(28px, 4vw, 44px)', lineHeight: 1.05, letterSpacing: 'var(--tracking-tight)', textTransform: 'uppercase', color: 'var(--kff-ink)' }}>
+                {name}
+              </h1>
+              <p style={{ margin: '10px 0 0', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-sm)', color: 'var(--kff-ink-mute)', letterSpacing: '0.04em' }}>
+                {meta}
+              </p>
+            </div>
           </div>
-          <div className="h-px w-48 mx-auto mb-4" style={{ background: `linear-gradient(90deg, transparent, rgba(${glowRgb}, 0.8), transparent)` }} />
-          <p style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '22px', letterSpacing: '0.02em', color: 'var(--kn-text)' }}>
-            {name}
-          </p>
-          <p className="mt-2" style={{ fontFamily: 'var(--font-mono)', fontSize: '14px', color: 'var(--kn-text-mute)' }}>
-            {meta}
-          </p>
         </div>
+      </header>
 
-        {/* Tools Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      {/* Tools */}
+      <section style={{ maxWidth: 'var(--container-xl)', margin: '0 auto', padding: 'var(--space-8) var(--space-6) 0' }}>
+        <header style={{ marginBottom: 'var(--space-6)' }}>
+          <span style={{ fontFamily: 'var(--font-pixel)', fontSize: 'var(--pixel-2xs)', color: 'var(--league-color)', letterSpacing: '0.06em' }}>COMMISSIONER KIT</span>
+          <h2 style={{ margin: '12px 0 0', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--text-2xl)', letterSpacing: 'var(--tracking-wide)', textTransform: 'uppercase', color: 'var(--kff-ink)' }}>
+            Tools &amp; Rituals
+          </h2>
+        </header>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--space-5)' }}>
           {tools.map((tool) => {
             const isLive = tool.status === 'live';
             const content = (
               <div
-                className="flex items-start gap-4 rounded-lg p-5 h-full transition-all duration-200"
                 style={{
-                  background: 'var(--kn-surface)',
-                  border: '1px solid var(--kn-line)',
+                  display: 'flex', alignItems: 'flex-start', gap: 'var(--space-4)', height: '100%',
+                  background: 'var(--surface-card)',
+                  border: '1px solid var(--kff-line)',
+                  borderRadius: 'var(--radius-md)',
+                  padding: 'var(--space-5)',
                   opacity: isLive ? 1 : 0.55,
                   cursor: isLive ? 'pointer' : 'not-allowed',
+                  transition: 'border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out)',
                 }}
                 onMouseEnter={(e) => {
                   if (!isLive) return;
-                  e.currentTarget.style.borderColor = themeColor;
-                  e.currentTarget.style.boxShadow = `0 0 24px rgba(${glowRgb}, 0.22)`;
+                  e.currentTarget.style.borderColor = 'var(--league-color)';
+                  e.currentTarget.style.boxShadow = '0 0 0 1px var(--league-color), 0 0 22px color-mix(in srgb, var(--league-color) 30%, transparent), var(--shadow-3)';
                   e.currentTarget.style.transform = 'translateY(-3px)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--kn-line)';
+                  e.currentTarget.style.borderColor = 'var(--kff-line)';
                   e.currentTarget.style.boxShadow = 'none';
                   e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
                 <span
-                  className="flex-shrink-0 grid place-items-center"
                   style={{
-                    width: '46px',
-                    height: '46px',
-                    borderRadius: 'var(--r-sm)',
-                    background: isLive ? `rgba(${glowRgb}, 0.12)` : 'rgba(111,111,147,0.12)',
-                    border: `2px solid ${isLive ? themeColor : 'var(--kn-text-faint)'}`,
-                    color: isLive ? themeColor : 'var(--kn-text-faint)',
+                    flexShrink: 0, width: 46, height: 46, display: 'grid', placeItems: 'center',
+                    borderRadius: 'var(--radius-sm)',
+                    background: isLive ? 'color-mix(in srgb, var(--league-color) 14%, transparent)' : 'color-mix(in srgb, var(--kff-ink-mute) 12%, transparent)',
+                    border: `2px solid ${isLive ? 'var(--league-color)' : 'var(--kff-line-2)'}`,
+                    color: isLive ? 'var(--league-color)' : 'var(--kff-ink-mute)',
                   }}
                 >
                   {tool.icon}
                 </span>
-                <div className="flex-1 min-w-0">
-                  <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '15px', color: isLive ? 'var(--kn-text)' : 'var(--kn-text-mute)', marginBottom: '4px' }}>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <h3 style={{ margin: 0, fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 'var(--text-base)', letterSpacing: 'var(--tracking-wide)', textTransform: 'uppercase', color: isLive ? 'var(--kff-ink)' : 'var(--kff-ink-dim)' }}>
                     {tool.name}
                   </h3>
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--kn-text-mute)', lineHeight: 1.4, marginBottom: '10px' }}>
+                  <p style={{ margin: '6px 0 12px', fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--kff-ink-dim)', lineHeight: 1.4 }}>
                     {tool.desc}
                   </p>
-                  <span
-                    className="inline-flex items-center gap-1.5"
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      fontWeight: 700,
-                      fontSize: '9px',
-                      letterSpacing: '0.14em',
-                      textTransform: 'uppercase',
-                      color: isLive ? 'var(--kn-success)' : 'var(--kn-warning)',
-                      background: isLive ? 'rgba(45,227,138,0.14)' : 'rgba(255,176,32,0.14)',
-                      border: `1px solid ${isLive ? 'rgba(45,227,138,0.4)' : 'rgba(255,176,32,0.4)'}`,
-                      borderRadius: 'var(--r-sm)',
-                      padding: '4px 7px',
-                    }}
-                  >
-                    {isLive && (
-                      <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--kn-success)', boxShadow: '0 0 6px var(--kn-success)' }} />
-                    )}
-                    {isLive ? 'Live' : 'Soon'}
-                  </span>
+                  {isLive
+                    ? <Badge tone="green" variant="outline" dot>Live</Badge>
+                    : <Badge tone="yellow" variant="outline">Soon</Badge>}
                 </div>
               </div>
             );
 
             if (tool.href) {
-              return <Link key={tool.name} href={tool.href}>{content}</Link>;
+              return <a key={tool.name} href={tool.href} style={{ textDecoration: 'none' }}>{content}</a>;
             }
             if (tool.externalHref) {
-              return (
-                <a key={tool.name} href={tool.externalHref} target="_blank" rel="noopener noreferrer">
-                  {content}
-                </a>
-              );
+              return <a key={tool.name} href={tool.externalHref} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>{content}</a>;
             }
             return <div key={tool.name}>{content}</div>;
           })}
         </div>
+      </section>
 
-        {/* Quick Links */}
+      {/* Quick Links */}
+      <section id="quick-links" style={{ maxWidth: 'var(--container-xl)', margin: '0 auto', padding: 'var(--space-8) var(--space-6) var(--space-9)' }}>
         <div
-          className="relative overflow-hidden rounded-lg p-6"
-          style={{ background: 'var(--kn-surface)', border: `1px solid rgba(${glowRgb}, 0.35)`, boxShadow: 'var(--shadow-md)' }}
+          style={{
+            position: 'relative', overflow: 'hidden',
+            background: 'var(--surface-card)',
+            border: '1px solid color-mix(in srgb, var(--league-color) 35%, transparent)',
+            borderRadius: 'var(--radius-md)',
+            padding: 'var(--space-5)',
+            boxShadow: 'var(--shadow-2)',
+          }}
         >
-          <span
-            className="absolute top-0 left-0 right-0 pointer-events-none"
-            style={{ height: '3px', background: themeColor, boxShadow: `0 0 14px rgba(${glowRgb}, 0.85)` }}
-          />
-          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '18px', color: themeColor, marginBottom: '16px' }}>
+          <span style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: 'var(--league-color)', boxShadow: 'var(--glow-md)', pointerEvents: 'none' }} />
+          <h2 style={{ margin: '0 0 var(--space-4)', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 'var(--text-lg)', letterSpacing: 'var(--tracking-wide)', textTransform: 'uppercase', color: 'var(--league-color)' }}>
             Quick Links
           </h2>
-          <div className="grid sm:grid-cols-2 gap-3">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 'var(--space-3)' }}>
             {quickLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors text-sm"
-                style={{ background: 'var(--kn-surface-3)' }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--kn-line)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--kn-surface-3)'; }}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 'var(--space-2)',
+                  padding: '10px 14px', borderRadius: 'var(--radius-sm)',
+                  background: 'var(--surface-inset)', textDecoration: 'none',
+                  fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--kff-ink-dim)',
+                  transition: 'background var(--dur-fast), color var(--dur-fast)',
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = 'color-mix(in srgb, var(--league-color) 14%, var(--surface-inset))'; e.currentTarget.style.color = 'var(--kff-ink)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--surface-inset)'; e.currentTarget.style.color = 'var(--kff-ink-dim)'; }}
               >
-                <span style={{ color: themeColor }}>→</span>
-                <span style={{ color: 'var(--kn-text-dim)' }}>{link.label}</span>
+                <span style={{ color: 'var(--league-color)', fontFamily: 'var(--font-mono)' }}>▸</span>
+                {link.label}
               </a>
             ))}
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

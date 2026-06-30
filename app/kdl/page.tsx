@@ -22,11 +22,9 @@ const QUICK_LINKS: HubQuickLink[] = [
 export default function KDLHub() {
   return (
     <LeagueHubLayout
-      abbr="KDL"
+      code="KDL"
       name="Knuckleheads Dynasty League"
       meta="MFL League ID: 68756 • Salary Cap & Contracts"
-      themeColor="var(--kn-kdl)"
-      glowRgb="var(--glow-violet)"
       tools={TOOLS}
       quickLinks={QUICK_LINKS}
     />

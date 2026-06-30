@@ -21,11 +21,9 @@ const QUICK_LINKS: HubQuickLink[] = [
 export default function MMHHub() {
   return (
     <LeagueHubLayout
-      abbr="MMH"
+      code="MMH"
       name="Monday Morning Hangover"
       meta="League ID: 72966 • MFL 2025 • Salary Cap League"
-      themeColor="var(--kn-mmh)"
-      glowRgb="var(--glow-green)"
       tools={TOOLS}
       quickLinks={QUICK_LINKS}
     />
