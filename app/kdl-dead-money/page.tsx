@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
-import Link from 'next/link';
-import { ArrowLeft, AlertCircle, Search, Skull, ChevronDown, ChevronUp } from 'lucide-react';
+import { AlertCircle, Search, Skull, ChevronDown, ChevronUp } from 'lucide-react';
+import { ToolHeader } from '../components/kff/ToolHeader';
 
 interface CutRow {
   franchise: string;
@@ -144,8 +144,8 @@ export default function KDLDeadMoney() {
     return (
       <div className="min-h-screen cyber-bg flex items-center justify-center">
         <div className="text-center">
-          <Skull size={48} className="text-violet-400 mx-auto mb-4 animate-pulse" />
-          <div className="text-violet-400 font-mono animate-pulse text-xl">LOADING DEAD MONEY DATA...</div>
+          <Skull size={48} className="text-[#a95ef5] mx-auto mb-4 animate-pulse" />
+          <div className="text-[#a95ef5] font-mono animate-pulse text-xl">LOADING DEAD MONEY DATA...</div>
         </div>
       </div>
     );
@@ -165,51 +165,35 @@ export default function KDLDeadMoney() {
   const SortIcon = ({ field }: { field: typeof sortField }) => {
     if (sortField !== field) return <ChevronDown size={12} className="text-zinc-600 inline ml-1" />;
     return sortDir === 'desc'
-      ? <ChevronDown size={12} className="text-violet-400 inline ml-1" />
-      : <ChevronUp size={12} className="text-violet-400 inline ml-1" />;
+      ? <ChevronDown size={12} className="text-[#a95ef5] inline ml-1" />
+      : <ChevronUp size={12} className="text-[#a95ef5] inline ml-1" />;
   };
 
   return (
-    <div className="min-h-screen cyber-bg">
-      <div className="scan-line" />
+    <div className="min-h-screen league-kdl" style={{ background: 'var(--bg-base)' }}>
+      <ToolHeader code="KDL" kicker="KDL · COMMISSIONER TOOL" title={`${data.newYear} Dead Money Tracker`} backHref="/kdl" backLabel="KDL Hub" />
 
-      {/* Header */}
-      <div className="relative z-10 border-b border-violet-900/30 bg-black/40 backdrop-blur-md sticky top-0">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <Link href="/kdl" className="inline-flex items-center gap-2 text-violet-400 hover:text-violet-300 text-xs font-mono mb-2">
-            <ArrowLeft size={12} /> RETURN TO DASHBOARD
-          </Link>
-          <div className="flex items-center gap-3">
-            <Skull size={32} className="text-violet-400" />
-            <div>
-              <h1 className="text-2xl font-black gradient-text-violet glow-violet tracking-wide">
-                {data.newYear} DEAD MONEY TRACKER
-              </h1>
-              <p className="text-xs text-zinc-500 font-mono uppercase">
-                KDL · Players Cut During {data.targetYear} Season · Cap Penalties Charged in {data.newYear}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <p className="max-w-7xl mx-auto px-6 pt-6 text-xs font-mono uppercase" style={{ color: 'var(--kff-ink-mute)' }}>
+        Players cut during {data.targetYear} season · cap penalties charged in {data.newYear}
+      </p>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
 
         {/* League Summary Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <div className="cyber-card border-violet-500/20 p-4 text-center">
+          <div className="cyber-card border-[#8a2be2]/20 p-4 text-center">
             <div className="text-[10px] uppercase text-zinc-500 font-bold mb-1">Total {data.newYear} Dead Money</div>
             <div className="text-2xl font-mono font-black text-rose-400">${leagueTotals.totalDeadMoney}</div>
           </div>
-          <div className="cyber-card border-violet-500/20 p-4 text-center">
+          <div className="cyber-card border-[#8a2be2]/20 p-4 text-center">
             <div className="text-[10px] uppercase text-zinc-500 font-bold mb-1">{data.targetYear} In-Season Penalties</div>
-            <div className="text-2xl font-mono font-black text-violet-400">${leagueTotals.totalPenalty}</div>
+            <div className="text-2xl font-mono font-black text-[#a95ef5]">${leagueTotals.totalPenalty}</div>
           </div>
-          <div className="cyber-card border-violet-500/20 p-4 text-center">
+          <div className="cyber-card border-[#8a2be2]/20 p-4 text-center">
             <div className="text-[10px] uppercase text-zinc-500 font-bold mb-1">Total Players Cut</div>
             <div className="text-2xl font-mono font-black text-zinc-300">{leagueTotals.totalCuts}</div>
           </div>
-          <div className="cyber-card border-violet-500/20 p-4 text-center">
+          <div className="cyber-card border-[#8a2be2]/20 p-4 text-center">
             <div className="text-[10px] uppercase text-zinc-500 font-bold mb-1">Franchises w/ Dead Money</div>
             <div className="text-2xl font-mono font-black text-amber-400">{leagueTotals.franchisesAffected}</div>
           </div>
@@ -222,13 +206,13 @@ export default function KDLDeadMoney() {
             <input
               type="text"
               placeholder="Search player or franchise..."
-              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg py-3 pl-10 pr-4 text-zinc-100 focus:border-violet-500 outline-none font-mono text-sm"
+              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg py-3 pl-10 pr-4 text-zinc-100 focus:border-[#8a2be2] outline-none font-mono text-sm"
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
             />
           </div>
           <select
-            className="bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-3 text-zinc-100 focus:border-violet-500 outline-none font-mono text-sm"
+            className="bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-3 text-zinc-100 focus:border-[#8a2be2] outline-none font-mono text-sm"
             value={selectedFranchise}
             onChange={e => setSelectedFranchise(e.target.value)}
           >
@@ -243,7 +227,7 @@ export default function KDLDeadMoney() {
               onClick={() => toggleSort('deadMoney')}
               className={`px-3 py-2 rounded-lg text-xs font-mono font-bold border transition-colors ${
                 sortField === 'deadMoney'
-                  ? 'bg-violet-500/20 border-violet-500/50 text-violet-300'
+                  ? 'bg-[#8a2be2]/20 border-[#8a2be2]/50 text-[#a95ef5]'
                   : 'bg-zinc-900 border-zinc-800 text-zinc-500 hover:text-zinc-300'
               }`}
             >
@@ -253,7 +237,7 @@ export default function KDLDeadMoney() {
               onClick={() => toggleSort('penalty')}
               className={`px-3 py-2 rounded-lg text-xs font-mono font-bold border transition-colors ${
                 sortField === 'penalty'
-                  ? 'bg-violet-500/20 border-violet-500/50 text-violet-300'
+                  ? 'bg-[#8a2be2]/20 border-[#8a2be2]/50 text-[#a95ef5]'
                   : 'bg-zinc-900 border-zinc-800 text-zinc-500 hover:text-zinc-300'
               }`}
             >
@@ -263,7 +247,7 @@ export default function KDLDeadMoney() {
               onClick={() => toggleSort('name')}
               className={`px-3 py-2 rounded-lg text-xs font-mono font-bold border transition-colors ${
                 sortField === 'name'
-                  ? 'bg-violet-500/20 border-violet-500/50 text-violet-300'
+                  ? 'bg-[#8a2be2]/20 border-[#8a2be2]/50 text-[#a95ef5]'
                   : 'bg-zinc-900 border-zinc-800 text-zinc-500 hover:text-zinc-300'
               }`}
             >
@@ -293,16 +277,16 @@ export default function KDLDeadMoney() {
             return (
               <div
                 key={franchise.name}
-                className={`cyber-card border-violet-500/20 overflow-hidden ${!hasDeadMoney ? 'opacity-60' : ''}`}
+                className={`cyber-card border-[#8a2be2]/20 overflow-hidden ${!hasDeadMoney ? 'opacity-60' : ''}`}
               >
                 {/* Franchise header row — clickable to expand */}
                 <button
                   onClick={() => toggleExpand(franchise.name)}
-                  className="w-full text-left p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-violet-500/5 transition-colors"
+                  className="w-full text-left p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-[#8a2be2]/5 transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     {isExpanded
-                      ? <ChevronUp size={16} className="text-violet-400 shrink-0" />
+                      ? <ChevronUp size={16} className="text-[#a95ef5] shrink-0" />
                       : <ChevronDown size={16} className="text-zinc-500 shrink-0" />}
                     <div>
                       <h2 className="text-lg font-bold text-white">{franchise.name}</h2>
@@ -314,7 +298,7 @@ export default function KDLDeadMoney() {
                   <div className="flex gap-4 md:gap-6 flex-wrap">
                     <div className="text-center">
                       <div className="text-[10px] uppercase text-zinc-500 font-bold mb-0.5">{data.targetYear} Penalty</div>
-                      <div className="font-mono font-bold text-violet-400 text-lg">${filteredPenalty}</div>
+                      <div className="font-mono font-bold text-[#a95ef5] text-lg">${filteredPenalty}</div>
                     </div>
                     <div className="text-center">
                       <div className="text-[10px] uppercase text-zinc-500 font-bold mb-0.5">{data.newYear} Dead Money</div>
@@ -341,11 +325,11 @@ export default function KDLDeadMoney() {
                       </thead>
                       <tbody className="divide-y divide-zinc-800/40">
                         {franchise.cuts.map((cut, i) => (
-                          <tr key={i} className="hover:bg-violet-500/5 transition-colors">
+                          <tr key={i} className="hover:bg-[#8a2be2]/5 transition-colors">
                             <td className="px-5 py-3">
                               <div className="font-bold text-zinc-200">{cut.playerCut}</div>
                             </td>
-                            <td className="px-5 py-3 text-center font-mono text-violet-300">
+                            <td className="px-5 py-3 text-center font-mono text-[#a95ef5]">
                               ${cut.salaryWhenCut}
                             </td>
                             <td className="px-5 py-3 text-center">
@@ -358,7 +342,7 @@ export default function KDLDeadMoney() {
                                 {yearsLabel(cut.yearsWhenCut)}
                               </span>
                             </td>
-                            <td className="px-5 py-3 text-center font-mono text-violet-300">
+                            <td className="px-5 py-3 text-center font-mono text-[#a95ef5]">
                               ${cut.salarCapPenalty}
                             </td>
                             <td className="px-5 py-3 text-center">
@@ -394,7 +378,7 @@ export default function KDLDeadMoney() {
                           </td>
                           <td />
                           <td />
-                          <td className="px-5 py-3 text-center font-mono font-bold text-violet-400">
+                          <td className="px-5 py-3 text-center font-mono font-bold text-[#a95ef5]">
                             ${filteredPenalty}
                           </td>
                           <td className="px-5 py-3 text-center font-mono font-black text-rose-400 text-lg">
@@ -412,12 +396,12 @@ export default function KDLDeadMoney() {
         </div>
 
         {/* Bylaw reference card */}
-        <div className="mt-8 cyber-card border-violet-500/10 p-5">
+        <div className="mt-8 cyber-card border-[#8a2be2]/10 p-5">
           <h3 className="text-xs font-bold text-zinc-500 uppercase font-mono mb-3">Dead Money Formula (KDL Bylaws)</h3>
           <div className="grid sm:grid-cols-2 gap-4 text-sm text-zinc-400">
             <div>
               <p className="mb-2">
-                <span className="text-violet-400 font-mono font-bold">Formula: </span>
+                <span className="text-[#a95ef5] font-mono font-bold">Formula: </span>
                 ceil( (YearsWhenCut − 1) × 20% × Salary )
               </p>
               <p className="text-xs text-zinc-600">

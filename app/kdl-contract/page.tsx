@@ -2,7 +2,8 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, ArrowLeft, Calendar, TrendingUp } from 'lucide-react';
+import { Search, TrendingUp } from 'lucide-react';
+import { ToolHeader } from '../components/kff/ToolHeader';
 import { FRANCHISE_ALIASES } from './franchise-aliases';
 
 interface TagPlayer {
@@ -205,7 +206,7 @@ export default function KDLContractApp() {
 
   if (isLoading) return (
     <div className="min-h-screen cyber-bg flex items-center justify-center">
-      <div className="text-violet-400 font-mono animate-pulse text-xl">INITIALIZING 2026 PLANNER...</div>
+      <div className="text-[#a95ef5] font-mono animate-pulse text-xl">INITIALIZING 2026 PLANNER...</div>
     </div>
   );
 
@@ -214,36 +215,20 @@ export default function KDLContractApp() {
   );
 
   return (
-    <div className="min-h-screen cyber-bg">
-      <div className="scan-line" />
+    <div className="min-h-screen league-kdl" style={{ background: 'var(--bg-base)' }}>
+      <ToolHeader code="KDL" kicker="KDL · COMMISSIONER TOOL" title="2026 Season Planner" backHref="/kdl" backLabel="KDL Hub" />
 
-      {/* Page Header */}
-      <div className="relative z-10 border-b border-violet-900/30 bg-black/40 backdrop-blur-md sticky top-0">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <Link href="/kdl" className="inline-flex items-center gap-2 text-violet-400 hover:text-violet-300 text-xs font-mono mb-2">
-            <ArrowLeft size={12} /> RETURN TO DASHBOARD
-          </Link>
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div className="flex items-center gap-3">
-              <Calendar size={32} className="text-violet-400" />
-              <div>
-                <h1 className="text-2xl font-black gradient-text-violet glow-violet tracking-wide">
-                  2026 SEASON PLANNER
-                </h1>
-                <p className="text-xs text-zinc-500 font-mono uppercase">
-                  Projecting Contract Expirations &amp; Tag Values
-                </p>
-              </div>
-            </div>
-            <Link href="/kdl-tags" className="flex items-center gap-2 bg-violet-500/20 hover:bg-violet-500/30 border border-violet-500/50 px-4 py-2 rounded-lg transition-all group">
-              <TrendingUp size={16} className="text-violet-400 group-hover:text-white transition-colors" />
-              <div className="text-right">
-                <div className="text-[10px] text-zinc-400 uppercase font-bold">Need to check prices?</div>
-                <div className="text-sm text-violet-300 font-mono font-bold group-hover:text-white">VIEW OFFICIAL TAG BASELINES</div>
-              </div>
-            </Link>
+      <div className="max-w-7xl mx-auto px-6 pt-6 flex items-center justify-between flex-wrap gap-3">
+        <p className="text-xs font-mono uppercase" style={{ color: 'var(--kff-ink-mute)' }}>
+          Projecting contract expirations &amp; tag values
+        </p>
+        <Link href="/kdl-tags" className="flex items-center gap-2 bg-[#8a2be2]/20 hover:bg-[#8a2be2]/30 border border-[#8a2be2]/50 px-4 py-2 rounded-lg transition-all group">
+          <TrendingUp size={16} className="text-[#a95ef5] group-hover:text-white transition-colors" />
+          <div className="text-right">
+            <div className="text-[10px] text-zinc-400 uppercase font-bold">Need to check prices?</div>
+            <div className="text-sm text-[#a95ef5] font-mono font-bold group-hover:text-white">View Official Tag Baselines</div>
           </div>
-        </div>
+        </Link>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
@@ -255,12 +240,12 @@ export default function KDLContractApp() {
             <input
               type="text"
               placeholder="Search player, status (R25), or rookie pick (4.04)..."
-              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg py-3 pl-10 pr-4 text-zinc-100 focus:border-violet-500 outline-none font-mono"
+              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg py-3 pl-10 pr-4 text-zinc-100 focus:border-[#8a2be2] outline-none font-mono"
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
           <select
-            className="bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-3 text-zinc-100 focus:border-violet-500 outline-none font-mono"
+            className="bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-3 text-zinc-100 focus:border-[#8a2be2] outline-none font-mono"
             onChange={(e) => setSelectedTeam(e.target.value)}
           >
             <option value="all">ALL FRANCHISES</option>
@@ -274,7 +259,7 @@ export default function KDLContractApp() {
             const teamDeadMoney = deadMoneyByTeam[team.name.toLowerCase()] || 0;
             const stats = getTeamStats(team.players, teamDeadMoney);
             return (
-              <div key={team.name} className="cyber-card border-violet-500/20">
+              <div key={team.name} className="cyber-card border-[#8a2be2]/20">
 
                 {/* Team Header */}
                 <div className="p-6 border-b border-zinc-800/50 bg-zinc-900/30">
@@ -284,7 +269,7 @@ export default function KDLContractApp() {
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div className="bg-zinc-950 p-3 rounded border border-zinc-800 text-center">
                       <div className="text-[10px] uppercase text-zinc-500 font-bold mb-1">Cap Space ($1000)</div>
-                      <div className={`text-xl font-mono font-bold ${stats.salarySpace < 0 ? 'text-rose-500' : 'text-violet-400'}`}>${stats.salarySpace}</div>
+                      <div className={`text-xl font-mono font-bold ${stats.salarySpace < 0 ? 'text-rose-500' : 'text-[#a95ef5]'}`}>${stats.salarySpace}</div>
                     </div>
                     <div className="bg-zinc-900/50 p-3 rounded border border-zinc-800 text-center opacity-60">
                       <div className="text-[10px] uppercase text-zinc-500 font-bold mb-1">Active Salary</div>
@@ -292,7 +277,7 @@ export default function KDLContractApp() {
                     </div>
                     <div className="bg-zinc-950 p-3 rounded border border-zinc-800 text-center">
                       <div className="text-[10px] uppercase text-zinc-500 font-bold mb-1">Years Space (65)</div>
-                      <div className={`text-xl font-mono font-bold ${stats.yearsSpace < 0 ? 'text-rose-500' : 'text-violet-400'}`}>{stats.yearsSpace}</div>
+                      <div className={`text-xl font-mono font-bold ${stats.yearsSpace < 0 ? 'text-rose-500' : 'text-[#a95ef5]'}`}>{stats.yearsSpace}</div>
                     </div>
                     <div className="bg-zinc-900/50 p-3 rounded border border-zinc-800 text-center opacity-60">
                       <div className="text-[10px] uppercase text-zinc-500 font-bold mb-1">Active Years</div>
@@ -302,16 +287,16 @@ export default function KDLContractApp() {
 
                   {/* Projected stats — only shown once any tag decision is made for this team */}
                   {stats.hasDecisions && (
-                    <div className="mt-4 pt-4 border-t border-violet-900/30">
-                      <div className="text-[10px] uppercase text-violet-400 font-bold font-mono mb-3 tracking-wider">
+                    <div className="mt-4 pt-4 border-t border-[#4e158f]/30">
+                      <div className="text-[10px] uppercase text-[#a95ef5] font-bold font-mono mb-3 tracking-wider">
                         ↳ Projected After Tag Decisions
                       </div>
                       <div className="grid grid-cols-2 gap-4 max-w-xs">
-                        <div className="bg-zinc-950 p-3 rounded border border-violet-500/30 text-center">
-                          <div className="text-[10px] uppercase text-violet-500 font-bold mb-1">Proj. Cap Space</div>
+                        <div className="bg-zinc-950 p-3 rounded border border-[#8a2be2]/30 text-center">
+                          <div className="text-[10px] uppercase text-[#8a2be2] font-bold mb-1">Proj. Cap Space</div>
                           <div className={`text-xl font-mono font-bold ${stats.projectedSpace < 0 ? 'text-rose-500' : 'text-cyan-400'}`}>${stats.projectedSpace}</div>
                         </div>
-                        <div className="bg-zinc-900/50 p-3 rounded border border-violet-500/20 text-center opacity-80">
+                        <div className="bg-zinc-900/50 p-3 rounded border border-[#8a2be2]/20 text-center opacity-80">
                           <div className="text-[10px] uppercase text-zinc-500 font-bold mb-1">Proj. Salary</div>
                           <div className="text-lg font-mono text-zinc-300">${stats.projectedSalary}</div>
                         </div>
@@ -340,7 +325,7 @@ export default function KDLContractApp() {
                         return (
                           <tr
                             key={i}
-                            className={`hover:bg-violet-500/5 transition-colors ${p.status.isTaxi ? 'opacity-70 bg-amber-500/5' : ''}`}
+                            className={`hover:bg-[#8a2be2]/5 transition-colors ${p.status.isTaxi ? 'opacity-70 bg-amber-500/5' : ''}`}
                           >
                             {/* Player name + badges */}
                             <td className="px-6 py-3">
@@ -359,7 +344,7 @@ export default function KDLContractApp() {
                             </td>
 
                             {/* Salary */}
-                            <td className="px-6 py-3 font-mono text-violet-300">${p.status.salary}</td>
+                            <td className="px-6 py-3 font-mono text-[#a95ef5]">${p.status.salary}</td>
 
                             {/* 2026 Years */}
                             <td className="px-6 py-3 text-center">
@@ -371,9 +356,9 @@ export default function KDLContractApp() {
                             {/* Franchise Tag cost */}
                             <td className="px-6 py-3 text-center">
                               {p.status.projectedYears === 0 ? (
-                                <div className="inline-block bg-zinc-950 border border-violet-500/30 rounded px-3 py-1">
+                                <div className="inline-block bg-zinc-950 border border-[#8a2be2]/30 rounded px-3 py-1">
                                   <span className="block text-[10px] text-zinc-500 uppercase">Tag Cost</span>
-                                  <span className="font-mono text-violet-400 font-bold">${p.status.franchiseCost}</span>
+                                  <span className="font-mono text-[#a95ef5] font-bold">${p.status.franchiseCost}</span>
                                 </div>
                               ) : (
                                 <span className="text-zinc-700 font-mono">—</span>
@@ -399,7 +384,7 @@ export default function KDLContractApp() {
                                   value={decision}
                                   onChange={(e) => setDecision(playerKey, e.target.value as TagDecision)}
                                   className={`bg-zinc-900 border rounded px-2 py-1 text-xs font-mono outline-none transition-colors
-                                    ${decision === 'franchise'  ? 'border-violet-500 text-violet-300' :
+                                    ${decision === 'franchise'  ? 'border-[#8a2be2] text-[#a95ef5]' :
                                       decision === 'restricted' ? 'border-cyan-500 text-cyan-300'    :
                                       decision === 'drop'       ? 'border-rose-500 text-rose-400'    :
                                       'border-zinc-700 text-zinc-400'}`}
