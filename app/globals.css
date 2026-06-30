@@ -1,14 +1,10 @@
 @import "tailwindcss";
 
-/* You can define your theme colors here using standard CSS variables if needed,
-   but Tailwind v4 includes all standard colors (zinc, emerald, etc.) by default. */
-
 :root {
-  background-color: #09090b; /* zinc-950 */
-  color: #f4f4f5; /* zinc-100 */
+  background-color: #0d0d16;
+  color: #a8a8c2;
 }
 
-/* ... keep any other custom CSS you had below ... */
 @theme {
   --color-cyber-dark: #0a0e27;
   --color-cyber-mid: #1a1347;
@@ -16,68 +12,332 @@
 }
 
 /* ============================================================
-   ARCADE AFTER DARK — Knuckleheads FF design tokens
-   New site-wide design system (see design.md). Additive for now —
-   legacy .cyber-* / .card-* classes elsewhere are untouched.
+   KNUCKLEHEADS FF DESIGN SYSTEM — retro-arcade × cyberpunk
+   Mirrors the KnuckleheadsFF Design System token files.
+   Source of truth: tokens/{colors,typography,spacing,effects}.css
    ============================================================ */
 :root {
-  --kn-black:       #06060c;
-  --kn-bg:          #0a0a0f;
-  --kn-bg-2:        #0f0f1a;
-  --kn-surface:     #14141f;
-  --kn-surface-2:   #1a1a2e;
-  --kn-surface-3:   #22223a;
-  --kn-line:        #2c2c44;
-  --kn-line-bright: #3d3d5c;
+  /* ---- Raw brand hues (the cartridge palette) ---- */
+  --kff-yellow:        #FFE920;  /* PRIMARY — electric lemon */
+  --kff-yellow-bright: #FFF35C;
+  --kff-yellow-deep:   #C9B200;
 
-  --kn-yellow:      #ffe600;
-  --kn-yellow-deep: #d9c400;
-  --kn-pink:        #ff2d78;
-  --kn-pink-deep:   #d61f60;
-  --kn-cyan:        #00f0ff;
-  --kn-cyan-deep:   #00bfca;
-  --kn-violet:      #a855f7;
-  --kn-green:       #9bcc1f;
+  --kff-azure:         #1FB6FF;  /* SECONDARY — brilliant azure (KKL) */
+  --kff-azure-bright:  #6FD3FF;
+  --kff-azure-deep:    #0B6FA8;
 
-  --kn-success: #2de38a;
-  --kn-warning: #ffb020;
-  --kn-danger:  #ff4d4d;
+  --kff-red:           #FF3B4E;  /* TERTIARY — racing red (BSB) */
+  --kff-red-bright:    #FF6B79;
+  --kff-red-deep:      #B01524;
 
-  --kn-text:       #f1f1fb;
-  --kn-text-dim:   #b7b7d4;
-  --kn-text-mute:  #6f6f93;
-  --kn-text-faint: #44445f;
-  --kn-text-on-neon: #0a0a0f;
+  --kff-green:         #38E66B;  /* QUATERNARY — jade green (MMH) */
+  --kff-green-bright:  #74F299;
+  --kff-green-deep:    #128A38;
 
-  /* League accent themes */
-  --kn-kkl: #00f0ff;
-  --kn-kdl: #a855f7;
-  --kn-mmh: #2de38a;
-  --kn-bsb: #ff3b6b;
+  --kff-violet:        #8A2BE2;  /* ACCENT — electric violet (KDL) */
+  --kff-violet-bright: #A95EF5;
+  --kff-violet-deep:   #4E158F;
 
-  --font-display: var(--font-orbitron), 'Rajdhani', system-ui, sans-serif;
-  --font-arcade:  var(--font-press-start-2p), 'Orbitron', monospace;
-  --font-body:    var(--font-rajdhani), system-ui, -apple-system, sans-serif;
-  --font-mono:    var(--font-share-tech-mono), 'JetBrains Mono', ui-monospace, monospace;
+  /* ---- Ground & ink (near-black CRT) ---- */
+  --kff-void:    #07070C;
+  --kff-shadow:  #0D0D16;
+  --kff-panel:   #14141F;
+  --kff-panel-2: #1C1C2B;
+  --kff-line:    #2A2A3D;
+  --kff-line-2:  #3A3A52;
 
-  --glow-yellow: 255, 230, 0;
-  --glow-pink:   255, 45, 120;
-  --glow-cyan:   0, 240, 255;
-  --glow-violet: 168, 85, 247;
-  --glow-green:  155, 204, 31;
+  --kff-ink:     #F3F3FB;
+  --kff-ink-dim: #A8A8C2;
+  --kff-ink-mute:#6C6C86;
+  --kff-ink-inv: #07070C;
 
-  --glow-md-yellow: 0 0 14px rgba(var(--glow-yellow), .55), 0 0 2px rgba(var(--glow-yellow), .9);
-  --glow-lg-yellow: 0 0 28px rgba(var(--glow-yellow), .5), 0 0 8px rgba(var(--glow-yellow), .8);
-  --glow-md-pink:   0 0 14px rgba(var(--glow-pink), .6), 0 0 2px rgba(var(--glow-pink), .9);
-  --glow-md-cyan:   0 0 14px rgba(var(--glow-cyan), .6), 0 0 2px rgba(var(--glow-cyan), .9);
+  /* ---- Semantic aliases ---- */
+  --color-primary:     var(--kff-yellow);
+  --color-secondary:   var(--kff-azure);
+  --color-tertiary:    var(--kff-red);
+  --color-quaternary:  var(--kff-green);
+  --color-accent:      var(--kff-violet);
 
-  --text-glow-yellow: 0 0 8px rgba(var(--glow-yellow), .6);
-  --text-glow-pink:   0 0 8px rgba(var(--glow-pink), .6);
-  --text-glow-cyan:   0 0 8px rgba(var(--glow-cyan), .6);
+  --bg-base:           var(--kff-shadow);
+  --bg-deep:           var(--kff-void);
+  --surface-card:      var(--kff-panel);
+  --surface-inset:     var(--kff-panel-2);
+  --border-hairline:   var(--kff-line);
+  --border-strong:     var(--kff-line-2);
+
+  --text-heading:      var(--kff-ink);
+  --text-body:         var(--kff-ink-dim);
+  --text-muted:        var(--kff-ink-mute);
+  --text-on-accent:    var(--kff-ink-inv);
+
+  /* ---- Status (mapped onto the cartridge hues) ---- */
+  --color-success: var(--kff-green);
+  --color-warning: var(--kff-yellow);
+  --color-danger:  var(--kff-red);
+  --color-info:    var(--kff-azure);
+
+  /* ---- League theming (default = primary; .league-* scopes re-tint) ---- */
+  --league-color:        var(--kff-yellow);
+  --league-color-bright: var(--kff-yellow-bright);
+  --league-color-deep:   var(--kff-yellow-deep);
+
+  /* ---- Font families (next/font instances, with literal fallbacks) ---- */
+  --font-pixel:   var(--font-press-start-2p), 'Press Start 2P', monospace;
+  --font-display: var(--font-orbitron), 'Orbitron', 'Arial Narrow', sans-serif;
+  --font-body:    var(--font-rajdhani), 'Rajdhani', system-ui, sans-serif;
+  --font-mono:    var(--font-share-tech-mono), 'Share Tech Mono', ui-monospace, monospace;
+
+  /* ---- Type scale ---- */
+  --text-2xs:  0.6875rem;  /* 11px */
+  --text-xs:   0.8125rem;  /* 13px */
+  --text-sm:   0.9375rem;  /* 15px */
+  --text-base: 1.0625rem;  /* 17px */
+  --text-lg:   1.25rem;    /* 20px */
+  --text-xl:   1.5rem;     /* 24px */
+  --text-2xl:  2rem;       /* 32px */
+  --text-3xl:  2.75rem;    /* 44px */
+  --text-4xl:  3.75rem;    /* 60px */
+  --text-5xl:  5rem;       /* 80px */
+
+  --pixel-2xs: 0.5rem;     /* 8px */
+  --pixel-xs:  0.625rem;   /* 10px */
+  --pixel-sm:  0.75rem;    /* 12px */
+  --pixel-md:  1rem;       /* 16px */
+  --pixel-lg:  1.5rem;     /* 24px */
+  --pixel-xl:  2.25rem;    /* 36px */
+
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-black:    900;
+
+  --leading-tight:  1.05;
+  --leading-snug:   1.25;
+  --leading-normal: 1.5;
+  --leading-loose:  1.7;
+
+  --tracking-tight:  -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.06em;
+  --tracking-wider:  0.12em;
+  --tracking-widest: 0.22em;
+
+  --type-hero: var(--weight-black) var(--text-5xl)/var(--leading-tight) var(--font-display);
+  --type-h1:   var(--weight-bold)  var(--text-4xl)/var(--leading-tight) var(--font-display);
+  --type-h2:   var(--weight-bold)  var(--text-3xl)/var(--leading-snug)  var(--font-display);
+  --type-h3:   var(--weight-semibold) var(--text-2xl)/var(--leading-snug) var(--font-display);
+  --type-body: var(--weight-medium) var(--text-base)/var(--leading-normal) var(--font-body);
+  --type-stat: var(--weight-regular) var(--text-2xl)/var(--leading-tight) var(--font-mono);
+
+  /* ---- Spacing (8px base) ---- */
+  --space-0:  0;
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.5rem;
+  --space-6:  2rem;
+  --space-7:  3rem;
+  --space-8:  4rem;
+  --space-9:  6rem;
+  --space-10: 8rem;
+
+  --radius-none: 0;
+  --radius-xs:   2px;
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   10px;
+  --radius-pill: 999px;
+
+  --border-1: 1px;
+  --border-2: 2px;
+  --border-3: 3px;
+  --border-4: 4px;
+
+  --container-sm: 640px;
+  --container-md: 960px;
+  --container-lg: 1200px;
+  --container-xl: 1400px;
+
+  --z-base:    0;
+  --z-raised:  10;
+  --z-sticky:  100;
+  --z-nav:     200;
+  --z-overlay: 800;
+  --z-modal:   900;
+  --z-toast:   1000;
+
+  /* ---- Effects ---- */
+  --glow-sm:  0 0 4px var(--league-color);
+  --glow-md:  0 0 6px var(--league-color), 0 0 14px color-mix(in srgb, var(--league-color) 55%, transparent);
+  --glow-lg:  0 0 8px var(--league-color), 0 0 22px color-mix(in srgb, var(--league-color) 65%, transparent), 0 0 44px color-mix(in srgb, var(--league-color) 35%, transparent);
+  --glow-yellow: 0 0 8px var(--kff-yellow), 0 0 24px color-mix(in srgb, var(--kff-yellow) 45%, transparent);
+
+  --shadow-1: 0 1px 2px rgba(0,0,0,.6);
+  --shadow-2: 0 4px 14px rgba(0,0,0,.55);
+  --shadow-3: 0 12px 40px rgba(0,0,0,.6);
+
+  --crt-vignette: inset 0 0 80px rgba(0,0,0,.55), inset 0 0 8px rgba(0,0,0,.4);
+
+  --ease-snap: cubic-bezier(.2,.9,.3,1);
+  --ease-out:  cubic-bezier(.22,1,.36,1);
+  --dur-fast:  120ms;
+  --dur-base:  200ms;
+  --dur-slow:  360ms;
+
+  --scanline-gap: 3px;
+  --scanline-opacity: 0.28;
+}
+
+/* League scopes — wrap a subtree (or set on a card) to re-theme */
+.league-kkl { --league-color: var(--kff-azure);  --league-color-bright: var(--kff-azure-bright);  --league-color-deep: var(--kff-azure-deep);  }
+.league-bsb { --league-color: var(--kff-red);    --league-color-bright: var(--kff-red-bright);    --league-color-deep: var(--kff-red-deep);    }
+.league-mmh { --league-color: var(--kff-green);  --league-color-bright: var(--kff-green-bright);  --league-color-deep: var(--kff-green-deep);  }
+.league-kdl { --league-color: var(--kff-violet); --league-color-bright: var(--kff-violet-bright); --league-color-deep: var(--kff-violet-deep);  }
+
+/* ============================================================
+   KFF UTILITY CLASSES (scanlines, grid, frames, neon, motion)
+   ============================================================ */
+.kff-scanlines { position: relative; }
+.kff-scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0,
+    rgba(0,0,0,0) calc(var(--scanline-gap) - 1px),
+    rgba(0,0,0,var(--scanline-opacity)) calc(var(--scanline-gap) - 1px),
+    rgba(0,0,0,var(--scanline-opacity)) var(--scanline-gap)
+  );
+  mix-blend-mode: multiply;
+}
+
+.kff-crt-sweep { position: relative; overflow: hidden; }
+.kff-crt-sweep::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; height: 30%;
+  top: -30%;
+  pointer-events: none;
+  z-index: 3;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,.04) 50%, rgba(255,255,255,0) 100%);
+  animation: kff-sweep 6s linear infinite;
+}
+@keyframes kff-sweep { 0% { top: -30%; } 100% { top: 130%; } }
+
+.kff-grid-bg {
+  background-color: var(--bg-deep);
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--kff-line) 60%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--kff-line) 60%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.kff-pixel-frame {
+  border: var(--border-2) solid var(--league-color);
+  clip-path: polygon(
+    0 6px, 6px 6px, 6px 0,
+    calc(100% - 6px) 0, calc(100% - 6px) 6px, 100% 6px,
+    100% calc(100% - 6px), calc(100% - 6px) calc(100% - 6px), calc(100% - 6px) 100%,
+    6px 100%, 6px calc(100% - 6px), 0 calc(100% - 6px)
+  );
+}
+
+.kff-hard-frame {
+  border: var(--border-2) solid var(--league-color);
+  box-shadow: 0 0 0 2px var(--bg-deep), 0 0 0 3px color-mix(in srgb, var(--league-color) 35%, transparent);
+}
+
+.kff-neon { color: var(--league-color); text-shadow: var(--glow-md); }
+.kff-neon-strong { color: #fff; text-shadow: var(--glow-lg); }
+
+.kff-pixelated { image-rendering: pixelated; image-rendering: crisp-edges; }
+
+@keyframes kff-blink { 0%,49% { opacity: 1; } 50%,100% { opacity: .15; } }
+@keyframes kff-pulse-glow {
+  0%,100% { box-shadow: var(--glow-sm); }
+  50%     { box-shadow: var(--glow-lg); }
+}
+.kff-blink { animation: kff-blink 1.1s steps(1) infinite; }
+.kff-pulse { animation: kff-pulse-glow 2.4s ease-in-out infinite; }
+
+@keyframes kff-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kff-crt-sweep::before, .kff-blink, .kff-pulse { animation: none; }
+}
+
+/* ============================================================
+   LEGACY SHIM — maps the previous --kn-* tokens onto the new
+   palette so pages still being rebuilt keep rendering. Removed
+   once every page has migrated to the --kff-/--league-color system.
+   ============================================================ */
+:root {
+  --kn-black:       var(--kff-void);
+  --kn-bg:          var(--kff-shadow);
+  --kn-bg-2:        var(--kff-shadow);
+  --kn-surface:     var(--kff-panel);
+  --kn-surface-2:   var(--kff-panel-2);
+  --kn-surface-3:   var(--kff-panel-2);
+  --kn-line:        var(--kff-line);
+  --kn-line-bright: var(--kff-line-2);
+
+  --kn-yellow:      var(--kff-yellow);
+  --kn-yellow-deep: var(--kff-yellow-deep);
+  --kn-pink:        var(--kff-red);
+  --kn-pink-deep:   var(--kff-red-deep);
+  --kn-cyan:        var(--kff-azure);
+  --kn-cyan-deep:   var(--kff-azure-deep);
+  --kn-violet:      var(--kff-violet);
+  --kn-green:       var(--kff-green);
+
+  --kn-success: var(--kff-green);
+  --kn-warning: var(--kff-yellow);
+  --kn-danger:  var(--kff-red);
+
+  --kn-text:       var(--kff-ink);
+  --kn-text-dim:   var(--kff-ink-dim);
+  --kn-text-mute:  var(--kff-ink-mute);
+  --kn-text-faint: var(--kff-line-2);
+  --kn-text-on-neon: var(--kff-ink-inv);
+
+  --kn-kkl: var(--kff-azure);
+  --kn-kdl: var(--kff-violet);
+  --kn-mmh: var(--kff-green);
+  --kn-bsb: var(--kff-red);
+
+  --font-arcade: var(--font-pixel);
+
+  /* Glow rgb triplets (updated to new hues) for legacy rgba(var(--glow-*)) uses */
+  --glow-yellow-rgb: 255, 233, 32;
+  --glow-pink:   255, 59, 78;
+  --glow-cyan:   31, 182, 255;
+  --glow-violet: 138, 43, 226;
+  --glow-green:  56, 230, 107;
+
+  --glow-md-yellow: 0 0 14px rgba(255, 233, 32, .55), 0 0 2px rgba(255, 233, 32, .9);
+  --glow-lg-yellow: 0 0 28px rgba(255, 233, 32, .5), 0 0 8px rgba(255, 233, 32, .8);
+  --glow-md-pink:   0 0 14px rgba(255, 59, 78, .6), 0 0 2px rgba(255, 59, 78, .9);
+  --glow-md-cyan:   0 0 14px rgba(31, 182, 255, .6), 0 0 2px rgba(31, 182, 255, .9);
+
+  --text-glow-yellow: 0 0 8px rgba(255, 233, 32, .6);
+  --text-glow-pink:   0 0 8px rgba(255, 59, 78, .6);
+  --text-glow-cyan:   0 0 8px rgba(31, 182, 255, .6);
 
   --scanlines: repeating-linear-gradient(to bottom, rgba(255,255,255,.035) 0px, rgba(255,255,255,.035) 1px, transparent 1px, transparent 3px);
-  --grid-overlay: linear-gradient(rgba(0,240,255,.06) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(0,240,255,.06) 1px, transparent 1px);
+  --grid-overlay: linear-gradient(rgba(31,182,255,.06) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(31,182,255,.06) 1px, transparent 1px);
+
+  --shadow-md: var(--shadow-2);
+  --shadow-lg: var(--shadow-3);
 }
 
 @keyframes kn-float {
@@ -87,111 +347,64 @@
 
 @layer base {
   body {
-    @apply bg-zinc-950 text-zinc-100;
-    font-family: var(--font-rajdhani);
+    background: var(--bg-base);
+    color: var(--text-body);
+    font-family: var(--font-body);
+    font-weight: var(--weight-medium);
+    font-size: var(--text-base);
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-orbitron);
+    font-family: var(--font-display);
   }
 }
 
 @layer components {
-  /* Arcade After Dark — flat near-black canvas (legacy class, kept for the
-     4 KDL pages still using Tailwind+legacy classes instead of kn tokens
-     directly; redefined here so they pick up the new look automatically) */
+  /* Legacy flat canvas (still used by the 4 KDL pages until rebuilt) */
   .cyber-bg {
-    background: var(--kn-bg);
+    background: var(--bg-base);
     position: relative;
   }
 
-  /* Scan Line Effect */
   .scan-line {
     @apply fixed top-0 left-0 w-full h-0.5 pointer-events-none z-50;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.5), transparent);
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--league-color, var(--kff-azure)) 50%, transparent), transparent);
     animation: scan 4s linear infinite;
   }
 
-  /* Card Styles */
   .cyber-card {
     @apply rounded-2xl p-8 transition-all duration-300;
-    background: var(--kn-surface);
-    border: 1px solid var(--kn-line);
-    box-shadow: var(--shadow-md);
+    background: var(--surface-card);
+    border: 1px solid var(--border-hairline);
+    box-shadow: var(--shadow-2);
   }
 
   .cyber-card:hover {
     @apply -translate-y-2;
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-3);
   }
-  
-  /* League-Specific Cards */
-  .card-kkl {
-    @apply border-cyan-400/30;
-    background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 200, 200, 0.05));
-  }
-  
-  .card-kkl:hover {
-    @apply border-cyan-400;
-    box-shadow: 0 16px 64px rgba(0, 255, 255, 0.4);
-  }
-  
-  .card-kdl {
-    @apply border-violet-400/30;
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(124, 58, 237, 0.05));
-  }
-  
-  .card-kdl:hover {
-    @apply border-violet-400;
-    box-shadow: 0 16px 64px rgba(139, 92, 246, 0.4);
-  }
-  
-  .card-mmh {
-    @apply border-emerald-400/30;
-    background: linear-gradient(135deg, rgba(52, 211, 153, 0.1), rgba(16, 185, 129, 0.05));
-  }
-  
-  .card-mmh:hover {
-    @apply border-emerald-400;
-    box-shadow: 0 16px 64px rgba(52, 211, 153, 0.4);
-  }
-  
-  .card-bsb {
-    @apply border-rose-500/30;
-    background: linear-gradient(135deg, rgba(225, 29, 72, 0.1), rgba(190, 18, 60, 0.05));
-  }
-  
-  .card-bsb:hover {
-    @apply border-rose-500;
-    box-shadow: 0 16px 64px rgba(225, 29, 72, 0.4);
-  }
-  
-  /* Glitch Text Effect */
+
   .glitch-text {
     animation: glitch 3s infinite alternate;
   }
 
-  /* Gradient Text — KDL pages only; flat brand color instead of a gradient,
-     consistent with Arcade After Dark's "no soft gradient" rule */
+  /* KDL pages: flat brand color instead of a gradient */
   .gradient-text-violet {
-    color: var(--kn-kdl);
+    color: var(--kff-violet);
   }
 
-  /* Floating Animation */
   .float {
     animation: float 3s ease-in-out infinite;
   }
-  
-  /* Slide In Animations */
+
   .slide-in-up {
     animation: slideInUp 0.8s ease-out;
   }
 }
 
 @layer utilities {
-  /* Text glow — KDL pages only */
   .glow-violet {
-    text-shadow: 0 0 20px rgba(var(--glow-violet), 0.5);
+    text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
   }
 }
 
