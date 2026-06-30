@@ -1,8 +1,11 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
-import Link from 'next/link';
-import { Search, DollarSign, XCircle } from 'lucide-react';
+import { Search, XCircle } from 'lucide-react';
+import { ToolHeader } from '../components/kff/ToolHeader';
+import { Stat } from '../components/kff/Stat';
+import { Input } from '../components/kff/Input';
+import { Badge } from '../components/kff/Badge';
 
 interface MMHPlayer {
   Player: string;
@@ -33,44 +36,34 @@ type KeepDecision = 'keep' | 'drop';
 function calculateMMHKeeperStatus(player: MMHPlayer) {
   if (!player || !player.Player) return { eligible: false, cost: 0, reason: 'Invalid Data' };
 
-  // Parse Money Values
   const currentSalary = parseFloat(player.Salary) || 0;
   const keeperBase = parseFloat(player.Base) || 0;
 
-  // --- UPDATED YEARS LOGIC ---
-  // If Years is blank/empty, they are on a fresh contract (3 years remaining)
-  // Otherwise, it is Current Years - 1
   let yearsRemaining;
   let currentYears = 0;
 
   if (!player.Years || player.Years.trim() === '') {
     yearsRemaining = 3;
-    currentYears = 4; // Arbitrary number > 0 to ensure eligibility check passes
+    currentYears = 4;
   } else {
     currentYears = parseInt(player.Years);
     yearsRemaining = currentYears - 1;
   }
 
-  // Determine Position for Minimums
   const isKicker = player.Position === 'K' || player.Position === 'PK';
   const minSalary = isKicker ? 3 : 5;
 
-  // Determine Max Contract Length (Rookie Rule)
   const isDraftedRookie = /R\d{2}-\d/.test(player.Info) || /R\d{2}/.test(player.Info);
   const maxYears = isDraftedRookie ? 5 : 3;
 
   if (yearsRemaining <= 0 && currentYears > 0) {
-    return {
-      eligible: false, cost: 0, reason: 'Contract Expired', yearsRemaining: 0, isTaxi: player.IsTaxi, maxYears
-    };
+    return { eligible: false, cost: 0, reason: 'Contract Expired', yearsRemaining: 0, isTaxi: player.IsTaxi, maxYears };
   }
 
-  // Calculate New Salary
   let newCost = 0;
   if (player.IsTaxi) {
     newCost = currentSalary;
   } else {
-    // (Higher of Base vs Salary) + 25%, rounded up
     const baseCalculation = Math.max(currentSalary, keeperBase);
     newCost = Math.ceil(baseCalculation * 1.25);
     if (newCost < minSalary) newCost = minSalary;
@@ -83,35 +76,27 @@ function calculateMMHKeeperStatus(player: MMHPlayer) {
     yearsRemaining: Math.max(0, yearsRemaining),
     isDraftedRookie,
     isTaxi: player.IsTaxi,
-    maxYears
+    maxYears,
   };
 }
 
-// --- HELPER FOR ROOKIE TEXT ---
 function getRookieLabel(info: string, acquired: string) {
-  if (info.includes('R25')) {
-    return `2025 Rookie Draft ${acquired}`;
-  }
-  if (info.includes('R24')) {
-    return `2024 Rookie Draft`;
-  }
+  if (info.includes('R25')) return `2025 Rookie Draft ${acquired}`;
+  if (info.includes('R24')) return `2024 Rookie Draft`;
   return 'Rookie Contract';
 }
 
-// --- STATS CALCULATION HELPER ---
 function getTeamStats(teamPlayers: any[], decisions: Record<string, KeepDecision>) {
   const SALARY_CAP = 1200;
 
-  // 1. Current Payroll (Sum of Salary, excluding Taxi)
   const currentPayroll = teamPlayers.reduce((sum: number, p: any) => {
     return p.status.isTaxi ? sum : sum + (parseFloat(p.Salary) || 0);
   }, 0);
 
-  // 2. 2026 Projected (Sum of 2026 Cost for eligible players marked Keep)
   const projectedPayroll = teamPlayers.reduce((sum: number, p: any) => {
     if (p.status.isTaxi || !p.status.eligible) return sum;
     const key = `${p.Team}-${p.Player}`;
-    const decision = decisions[key] ?? 'keep'; // default: keep all eligible players
+    const decision = decisions[key] ?? 'keep';
     if (decision === 'drop') return sum;
     return sum + p.status.cost;
   }, 0);
@@ -121,7 +106,7 @@ function getTeamStats(teamPlayers: any[], decisions: Record<string, KeepDecision
     currentPayroll,
     currentSpace: SALARY_CAP - currentPayroll,
     projectedPayroll,
-    projectedSpace: SALARY_CAP - projectedPayroll
+    projectedSpace: SALARY_CAP - projectedPayroll,
   };
 }
 
@@ -151,124 +136,75 @@ export default function MMHKeeperApp() {
 
   const teams = useMemo(() => {
     const teamMap = new Map();
-    players.forEach(player => {
+    players.forEach((player) => {
       if (!teamMap.has(player.Team)) {
         teamMap.set(player.Team, { name: player.Team, players: [] });
       }
-      teamMap.get(player.Team).players.push({
-        ...player,
-        status: calculateMMHKeeperStatus(player)
-      });
+      teamMap.get(player.Team).players.push({ ...player, status: calculateMMHKeeperStatus(player) });
     });
     return Array.from(teamMap.values());
   }, [players]);
 
   const filteredTeams = useMemo(() => {
     let result = teams;
-    if (selectedTeam !== 'all') result = result.filter(t => t.name === selectedTeam);
+    if (selectedTeam !== 'all') result = result.filter((t) => t.name === selectedTeam);
     if (searchTerm) {
-      result = result.map(t => ({
-        ...t,
-        players: t.players.filter((p: any) => p.Player.toLowerCase().includes(searchTerm.toLowerCase()))
-      })).filter(t => t.players.length > 0);
+      result = result
+        .map((t) => ({ ...t, players: t.players.filter((p: any) => p.Player.toLowerCase().includes(searchTerm.toLowerCase())) }))
+        .filter((t) => t.players.length > 0);
     }
     return result;
   }, [teams, selectedTeam, searchTerm]);
 
   if (isLoading) return (
-    <div style={{ minHeight: '100vh', background: 'var(--kn-bg)', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'var(--kn-mmh)', fontFamily: 'var(--font-mono)' }}>
-      <div className="animate-pulse">Initializing MMH Salary Protocols...</div>
+    <div className="league-mmh" style={{ minHeight: '100vh', background: 'var(--bg-base)', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'var(--league-color)', fontFamily: 'var(--font-mono)' }}>
+      <div className="animate-pulse">Initializing MMH salary protocols...</div>
     </div>
   );
 
   if (error) return (
-    <div style={{ minHeight: '100vh', background: 'var(--kn-bg)', color: 'var(--kn-danger)', padding: '2rem', fontFamily: 'var(--font-mono)' }}>Error: {error}</div>
+    <div className="league-mmh" style={{ minHeight: '100vh', background: 'var(--bg-base)', color: 'var(--kff-red)', padding: '2rem', fontFamily: 'var(--font-mono)' }}>Error: {error}</div>
   );
 
   return (
-    <div className="app-container">
-      <style jsx global>{`
-        body { background-color: var(--kn-bg); color: var(--kn-text); font-family: var(--font-body); margin: 0; }
-        .font-mono { font-family: var(--font-mono); }
-
-        /* Layout */
-        .app-container { min-height: 100vh; }
-        .max-w-7xl { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; }
-
-        /* Header */
-        header { border-bottom: 1px solid var(--kn-line); background: rgba(10, 10, 15, 0.82); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 50; }
-        .header-content { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 0; }
-
-        /* Inputs */
-        .controls { display: flex; gap: 1rem; margin: 2rem 0; flex-wrap: wrap; }
-        input, select { background: var(--kn-surface-3); border: 1px solid var(--kn-line); color: var(--kn-text); padding: 0.75rem 1rem; border-radius: var(--r-md); font-family: var(--font-mono); }
-        input:focus, select:focus { border-color: var(--kn-mmh); outline: none; }
-        input { flex: 1; min-width: 300px; }
-
-        /* Cards */
-        .team-card { background: var(--kn-surface); border: 1px solid var(--kn-line); border-radius: var(--r-lg); overflow: hidden; margin-bottom: 2rem; box-shadow: var(--shadow-md); }
-        .card-header { padding: 1.5rem; background: var(--kn-bg); border-bottom: 1px solid var(--kn-line); border-left: 4px solid var(--kn-mmh); }
-
-        /* Financial Dashboard in Header */
-        .financial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-top: 1rem; }
-        .stat-box { background: var(--kn-surface-3); border: 1px solid var(--kn-line); padding: 0.75rem; border-radius: var(--r-md); text-align: center; }
-        .stat-label { font-size: 0.7rem; color: var(--kn-text-mute); text-transform: uppercase; margin-bottom: 0.25rem; font-weight: 700; }
-        .stat-value { font-family: var(--font-mono); font-weight: 700; font-size: 1.1rem; }
-
-        /* Table */
-        .table-container { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; text-align: left; }
-        th { padding: 0.75rem 1.5rem; font-size: 0.75rem; color: var(--kn-text-mute); text-transform: uppercase; background: rgba(6, 6, 12, 0.5); font-family: var(--font-display); letter-spacing: 0.06em; }
-        td { padding: 1rem 1.5rem; border-bottom: 1px solid var(--kn-line); vertical-align: middle; }
-        tr:last-child td { border-bottom: none; }
-
-        /* Colors & Status */
-        .text-emerald { color: var(--kn-mmh); }
-        .text-zinc { color: var(--kn-text-mute); }
-        .text-red { color: var(--kn-danger); }
-        .badge-taxi { background: rgba(255, 176, 32, 0.1); color: var(--kn-warning); padding: 2px 6px; border-radius: var(--r-sm); font-size: 0.75rem; margin-right: 8px; font-family: var(--font-mono); }
-        .badge-rookie { color: var(--kn-cyan); font-size: 0.75rem; font-family: var(--font-mono); }
-
-        .cost-display { font-size: 1.125rem; font-weight: 700; font-family: var(--font-mono); color: var(--kn-mmh); }
+    <div className="league-mmh" style={{ minHeight: '100vh', background: 'var(--bg-base)', paddingBottom: 'var(--space-9)' }}>
+      <style jsx>{`
+        .kff-table { width: 100%; border-collapse: collapse; text-align: left; }
+        .kff-table th { padding: 0.7rem 1.25rem; font-family: var(--font-pixel); font-size: var(--pixel-2xs); color: var(--kff-ink-mute); text-transform: uppercase; letter-spacing: 0.04em; background: color-mix(in srgb, var(--kff-void) 50%, transparent); white-space: nowrap; }
+        .kff-table td { padding: 0.85rem 1.25rem; border-bottom: 1px solid var(--kff-line); vertical-align: middle; font-family: var(--font-body); }
+        .kff-table tr:last-child td { border-bottom: none; }
+        .mono { font-family: var(--font-mono); }
         .ineligible-row { opacity: 0.4; filter: grayscale(100%); }
         .dropped-row { opacity: 0.55; }
-        .dropped-row .cost-display { color: var(--kn-text-mute); text-decoration: line-through; }
-
-        /* Decision dropdown */
-        .decision-select { padding: 4px 8px; border-radius: var(--r-sm); font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: background 0.15s, color 0.15s; }
-        .decision-keep { background: rgba(45, 227, 138, 0.1); color: var(--kn-mmh); border: 1px solid rgba(45, 227, 138, 0.25); }
-        .decision-drop { background: rgba(255, 77, 77, 0.1); color: var(--kn-danger); border: 1px solid rgba(255, 77, 77, 0.25); }
+        .dropped-row .cost-display { color: var(--kff-ink-mute); text-decoration: line-through; }
+        .cost-display { font-family: var(--font-mono); font-weight: 700; font-size: var(--text-lg); color: var(--league-color); }
+        .decision-select { padding: 5px 9px; border-radius: var(--radius-sm); font-family: var(--font-display); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer; }
+        .decision-keep { background: color-mix(in srgb, var(--league-color) 12%, transparent); color: var(--league-color); border: 1px solid color-mix(in srgb, var(--league-color) 40%, transparent); }
+        .decision-drop { background: color-mix(in srgb, var(--kff-red) 12%, transparent); color: var(--kff-red); border: 1px solid color-mix(in srgb, var(--kff-red) 40%, transparent); }
+        .team-select { background: var(--surface-inset); border: 1px solid var(--kff-line-2); color: var(--kff-ink); padding: 11px 13px; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: var(--text-sm); cursor: pointer; min-width: 220px; }
+        .team-select:focus { outline: none; border-color: var(--league-color); }
       `}</style>
 
-      <header>
-        <div className="max-w-7xl">
-          <div style={{ padding: '1rem 0' }}>
-            <Link href="/" style={{ color: 'var(--kn-mmh)', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', textDecoration: 'none', display: 'block', marginBottom: '0.5rem' }}>← RETURN TO HUB</Link>
-            <div className="header-content">
-              <DollarSign size={32} color="var(--kn-mmh)" />
-              <h1 style={{ fontSize: '1.875rem', fontWeight: 900, color: 'var(--kn-text)', fontFamily: 'var(--font-display)' }}>MMH <span className="text-emerald">SALARY CAP</span></h1>
-            </div>
-          </div>
-        </div>
-      </header>
+      <ToolHeader code="MMH" kicker="MMH · COMMISSIONER TOOL" title="Salary Cap Manager" backHref="/mmh" backLabel="MMH Hub" />
 
-      <div className="max-w-7xl" style={{ paddingBottom: '4rem' }}>
-        <div className="controls">
-          <div style={{ position: 'relative', flex: 1 }}>
-            <Search size={16} color="var(--kn-text-mute)" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
-            <input type="text" placeholder="Search player database..." style={{ paddingLeft: '2.5rem', width: '100%', boxSizing: 'border-box' }} onChange={(e) => setSearchTerm(e.target.value)} />
+      <div style={{ maxWidth: 'var(--container-xl)', margin: '0 auto', padding: '0 var(--space-6)' }}>
+        {/* Controls */}
+        <div style={{ display: 'flex', gap: 'var(--space-4)', flexWrap: 'wrap', margin: 'var(--space-6) 0' }}>
+          <div style={{ flex: 1, minWidth: 280 }}>
+            <Input
+              prefix={<Search size={16} />}
+              placeholder="Search player database..."
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
+            />
           </div>
-          <select onChange={(e) => setSelectedTeam(e.target.value)}>
+          <select className="team-select" onChange={(e) => setSelectedTeam(e.target.value)}>
             <option value="all">ALL FRANCHISES</option>
-            {teams.map(t => <option key={t.name} value={t.name}>{t.name}</option>)}
+            {teams.map((t) => <option key={t.name} value={t.name}>{t.name}</option>)}
           </select>
         </div>
 
         {filteredTeams.map((team: any) => {
           const stats = getTeamStats(team.players, keepDecisions);
-
-          // IR players are treated as active roster — sort all non-taxi players
-          // by position, then append taxi squad at the bottom.
           const sortedPlayers = [...team.players].sort((a: any, b: any) => {
             if (a.IsTaxi !== b.IsTaxi) return a.IsTaxi ? 1 : -1;
             const posA = POSITION_ORDER[a.Position] ?? 99;
@@ -277,47 +213,26 @@ export default function MMHKeeperApp() {
           });
 
           return (
-            <div key={team.name} className="team-card">
-              <div className="card-header">
-                <div style={{ marginBottom: '1rem' }}>
-                  <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>{team.name}</h2>
-                </div>
-
-                {/* Financial Dashboard */}
-                <div className="financial-grid">
-                   <div className="stat-box">
-                      <div className="stat-label">Salary Cap</div>
-                      <div className="stat-value text-emerald">${stats.cap}</div>
-                   </div>
-
-                   <div className="stat-box">
-                      <div className="stat-label">Current Payroll</div>
-                      <div className="stat-value text-zinc">${stats.currentPayroll}</div>
-                   </div>
-
-                   <div className="stat-box">
-                      <div className="stat-label">Current Space</div>
-                      <div className={`stat-value ${stats.currentSpace < 0 ? 'text-red' : 'text-emerald'}`}>
-                        ${stats.currentSpace}
-                      </div>
-                   </div>
-
-                   <div className="stat-box">
-                      <div className="stat-label">2026 Keeper Cost</div>
-                      <div className="stat-value" style={{ color: 'var(--kn-violet)' }}>${stats.projectedPayroll}</div>
-                   </div>
-
-                   <div className="stat-box">
-                      <div className="stat-label">2026 Space</div>
-                      <div className={`stat-value ${stats.projectedSpace < 0 ? 'text-red' : 'text-emerald'}`}>
-                        ${stats.projectedSpace}
-                      </div>
-                   </div>
+            <div
+              key={team.name}
+              style={{ background: 'var(--surface-card)', border: '1px solid var(--kff-line)', borderRadius: 'var(--radius-md)', overflow: 'hidden', marginBottom: 'var(--space-6)', boxShadow: 'var(--shadow-2)' }}
+            >
+              {/* Team header + financial dashboard */}
+              <div style={{ padding: 'var(--space-5)', background: 'var(--surface-inset)', borderBottom: '1px solid var(--kff-line)', borderLeft: '4px solid var(--league-color)' }}>
+                <h2 style={{ margin: '0 0 var(--space-4)', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 'var(--text-xl)', letterSpacing: 'var(--tracking-wide)', textTransform: 'uppercase', color: 'var(--kff-ink)' }}>
+                  {team.name}
+                </h2>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 'var(--space-5)' }}>
+                  <Stat label="Salary Cap" value={`$${stats.cap}`} tone="league" />
+                  <Stat label="Current Payroll" value={`$${stats.currentPayroll}`} tone="ink" />
+                  <Stat label="Current Space" value={`$${stats.currentSpace}`} tone={stats.currentSpace < 0 ? 'red' : 'green'} />
+                  <Stat label="2026 Keeper Cost" value={`$${stats.projectedPayroll}`} tone="violet" />
+                  <Stat label="2026 Space" value={`$${stats.projectedSpace}`} tone={stats.projectedSpace < 0 ? 'red' : 'green'} />
                 </div>
               </div>
 
-              <div className="table-container">
-                <table>
+              <div style={{ overflowX: 'auto' }}>
+                <table className="kff-table">
                   <thead>
                     <tr>
                       <th>Player</th>
@@ -336,50 +251,34 @@ export default function MMHKeeperApp() {
                       const isDropped = p.status.eligible && decision === 'drop';
 
                       return (
-                        <tr
-                          key={i}
-                          className={
-                            !p.status.eligible
-                              ? 'ineligible-row'
-                              : isDropped
-                              ? 'dropped-row'
-                              : ''
-                          }
-                        >
+                        <tr key={i} className={!p.status.eligible ? 'ineligible-row' : isDropped ? 'dropped-row' : ''}>
                           <td>
-                            <div style={{ fontWeight: 500 }}>{p.Player}</div>
-                            <div style={{ marginTop: '4px' }}>
-                              {p.status.isTaxi && <span className="badge-taxi">TAXI</span>}
+                            <div style={{ fontWeight: 600, color: 'var(--kff-ink)' }}>{p.Player}</div>
+                            <div style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                              {p.status.isTaxi && <Badge tone="yellow" variant="outline">Taxi</Badge>}
                               {p.status.isDraftedRookie && (
-                                <span className="badge-rookie">
+                                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--kff-azure)' }}>
                                   {getRookieLabel(p.Info, p.Acquired)}
                                 </span>
                               )}
                             </div>
                           </td>
-                          <td className="font-mono" style={{ fontWeight: 700, color: 'var(--kn-warning)' }}>
-                            {p.Points != null
-                              ? p.Points.toFixed(1)
-                              : <span style={{ color: 'var(--kn-text-faint)' }}>—</span>
-                            }
+                          <td className="mono" style={{ fontWeight: 700, color: 'var(--kff-yellow)' }}>
+                            {p.Points != null ? p.Points.toFixed(1) : <span style={{ color: 'var(--kff-ink-mute)' }}>—</span>}
                           </td>
-                          <td className="font-mono text-zinc">${p.Salary}</td>
-                          <td className="font-mono" style={{ fontSize: '0.75rem', color: 'var(--kn-text-mute)' }}>
-                            {p.Base && parseFloat(p.Base) > 0 ? `$${p.Base}` : <span style={{ color: 'var(--kn-text-faint)' }}>—</span>}
+                          <td className="mono" style={{ color: 'var(--kff-ink-dim)' }}>${p.Salary}</td>
+                          <td className="mono" style={{ fontSize: 'var(--text-xs)', color: 'var(--kff-ink-mute)' }}>
+                            {p.Base && parseFloat(p.Base) > 0 ? `$${p.Base}` : <span style={{ color: 'var(--kff-ink-mute)' }}>—</span>}
                           </td>
                           <td>
-                            {p.status.eligible ? (
-                              <div className="cost-display">${p.status.cost}</div>
-                            ) : (
-                              <span style={{ color: 'var(--kn-text-faint)' }}>—</span>
-                            )}
+                            {p.status.eligible ? <div className="cost-display">${p.status.cost}</div> : <span style={{ color: 'var(--kff-ink-mute)' }}>—</span>}
                           </td>
                           <td>
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                              <span className="font-mono" style={{ color: p.status.yearsRemaining === 1 ? 'var(--kn-danger)' : 'var(--kn-text-dim)', fontWeight: 700 }}>
+                              <span className="mono" style={{ color: p.status.yearsRemaining === 1 ? 'var(--kff-red)' : 'var(--kff-ink-dim)', fontWeight: 700 }}>
                                 {p.status.yearsRemaining} Yrs
                               </span>
-                              <span style={{ fontSize: '0.65rem', color: 'var(--kn-text-faint)', textTransform: 'uppercase' }}>Max: {p.status.maxYears}</span>
+                              <span style={{ fontFamily: 'var(--font-pixel)', fontSize: 'var(--pixel-2xs)', color: 'var(--kff-ink-mute)' }}>Max {p.status.maxYears}</span>
                             </div>
                           </td>
                           <td>
@@ -389,14 +288,14 @@ export default function MMHKeeperApp() {
                                 value={decision}
                                 onChange={(e) => {
                                   const val = e.target.value as KeepDecision;
-                                  setKeepDecisions(prev => ({ ...prev, [decisionKey]: val }));
+                                  setKeepDecisions((prev) => ({ ...prev, [decisionKey]: val }));
                                 }}
                               >
                                 <option value="keep">Keep</option>
                                 <option value="drop">Drop</option>
                               </select>
                             ) : (
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--kn-danger)', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase' }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--kff-red)', fontSize: 'var(--text-xs)', fontWeight: 700, textTransform: 'uppercase' }}>
                                 <XCircle size={16} /> {p.status.reason}
                               </div>
                             )}
