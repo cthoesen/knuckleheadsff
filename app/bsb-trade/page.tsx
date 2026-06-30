@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
-import Link from 'next/link';
 import { ArrowLeftRight, AlertCircle, TrendingUp, ChevronDown, X, Plus, Trophy } from 'lucide-react';
+import { ToolHeader } from '../components/kff/ToolHeader';
 
 interface Player {
   id: string;
@@ -164,13 +164,13 @@ export default function BSBTradeAnalyzer() {
     let fairnessColor: string;
     if (aPercent >= 40 && aPercent <= 60) {
       fairnessLabel = 'BALANCED';
-      fairnessColor = 'var(--kn-bsb)';
+      fairnessColor = 'var(--league-color)';
     } else if (aPercent >= 30 && aPercent <= 70) {
       fairnessLabel = 'SLIGHT EDGE';
-      fairnessColor = 'var(--kn-warning)';
+      fairnessColor = 'var(--kff-yellow)';
     } else {
       fairnessLabel = 'LOPSIDED';
-      fairnessColor = 'var(--kn-danger)';
+      fairnessColor = 'var(--kff-red)';
     }
 
     return {
@@ -190,8 +190,8 @@ export default function BSBTradeAnalyzer() {
         alignItems: 'center',
         justifyContent: 'center',
         fontFamily: 'var(--font-body)',
-        background: 'var(--kn-bg)',
-        color: 'var(--kn-bsb)'
+        background: 'var(--bg-base)',
+        color: 'var(--league-color)'
       }}>
         <div style={{ textAlign: 'center' }}>
           <ArrowLeftRight className="w-12 h-12 mx-auto mb-4 animate-pulse" />
@@ -209,8 +209,8 @@ export default function BSBTradeAnalyzer() {
         alignItems: 'center',
         justifyContent: 'center',
         fontFamily: 'var(--font-body)',
-        background: 'var(--kn-bg)',
-        color: 'var(--kn-danger)'
+        background: 'var(--bg-base)',
+        color: 'var(--kff-red)'
       }}>
         <div style={{ textAlign: 'center' }}>
           <AlertCircle className="w-12 h-12 mx-auto mb-4" />
@@ -225,7 +225,7 @@ export default function BSBTradeAnalyzer() {
       <style jsx global>{`
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-          background: var(--kn-bg);
+          background: var(--bg-base);
           min-height: 100vh;
           overflow-x: hidden;
         }
@@ -233,52 +233,8 @@ export default function BSBTradeAnalyzer() {
 
       <div className="scan-line" />
 
-      <div style={{ position: 'relative', zIndex: 1, fontFamily: 'var(--font-body)' }}>
-        <header style={{
-          borderBottom: '1px solid var(--kn-line)',
-          background: 'rgba(10, 10, 15, 0.82)',
-          backdropFilter: 'blur(20px)',
-        }}>
-          <div style={{ maxWidth: '1600px', margin: '0 auto', padding: '2rem 1.5rem' }}>
-            <Link href="/bsb" style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              color: 'var(--kn-bsb)',
-              textDecoration: 'none',
-              fontSize: '1rem',
-              fontWeight: 600,
-              marginBottom: '1.5rem',
-              transition: 'all 0.3s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.textShadow = '0 0 12px rgba(255, 59, 107, 0.7)';
-              e.currentTarget.style.transform = 'translateX(-5px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.textShadow = 'none';
-              e.currentTarget.style.transform = 'translateX(0)';
-            }}>
-              ← BACK TO BSB HUB
-            </Link>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-              <ArrowLeftRight style={{ width: '40px', height: '40px', color: 'var(--kn-bsb)' }} />
-              <h1 style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                fontWeight: 900,
-                color: 'var(--kn-bsb)',
-                textShadow: '0 0 40px rgba(255, 59, 107, 0.5)',
-              }}>
-                BSB TRADE ANALYZER
-              </h1>
-            </div>
-            <p style={{ color: 'var(--kn-text)', fontSize: '1.1rem', fontWeight: 600 }}>
-              Blood, Sweat, and Beers • 2025 Season Scoring
-            </p>
-          </div>
-        </header>
+      <div className="league-bsb" style={{ position: 'relative', zIndex: 1, fontFamily: 'var(--font-body)' }}>
+        <ToolHeader code="BSB" kicker="BSB · COMMISSIONER TOOL" title="Trade Analyzer" backHref="/bsb" backLabel="BSB Hub" />
 
         <div style={{ maxWidth: '1600px', margin: '0 auto', padding: '2rem 1.5rem' }}>
 
@@ -295,9 +251,9 @@ export default function BSBTradeAnalyzer() {
               style={{
                 padding: '0.75rem 1.5rem',
                 background: 'rgba(20, 20, 31, 0.5)',
-                border: '2px solid rgba(255, 59, 107, 0.3)',
+                border: '2px solid rgba(255, 59, 78, 0.3)',
                 borderRadius: '12px',
-                color: 'var(--kn-bsb)',
+                color: 'var(--league-color)',
                 fontSize: '1rem',
                 outline: 'none',
                 cursor: 'pointer',
@@ -310,7 +266,7 @@ export default function BSBTradeAnalyzer() {
               ))}
             </select>
 
-            <ArrowLeftRight style={{ width: '24px', height: '24px', color: 'var(--kn-bsb)' }} />
+            <ArrowLeftRight style={{ width: '24px', height: '24px', color: 'var(--league-color)' }} />
 
             <select
               value={teamBId}
@@ -318,9 +274,9 @@ export default function BSBTradeAnalyzer() {
               style={{
                 padding: '0.75rem 1.5rem',
                 background: 'rgba(20, 20, 31, 0.5)',
-                border: '2px solid rgba(255, 59, 107, 0.3)',
+                border: '2px solid rgba(255, 59, 78, 0.3)',
                 borderRadius: '12px',
-                color: 'var(--kn-bsb)',
+                color: 'var(--league-color)',
                 fontSize: '1rem',
                 outline: 'none',
                 cursor: 'pointer',
@@ -351,17 +307,17 @@ export default function BSBTradeAnalyzer() {
               background: 'rgba(20, 20, 31, 0.4)',
               backdropFilter: 'blur(10px)',
               borderRadius: '16px',
-              border: '2px solid rgba(255, 59, 107, 0.2)',
+              border: '2px solid rgba(255, 59, 78, 0.2)',
               padding: '2rem',
               marginBottom: '2rem',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-                <TrendingUp style={{ width: '24px', height: '24px', color: 'var(--kn-bsb)' }} />
+                <TrendingUp style={{ width: '24px', height: '24px', color: 'var(--league-color)' }} />
                 <h2 style={{
                   fontFamily: 'var(--font-display)',
                   fontSize: '1.5rem',
                   fontWeight: 900,
-                  color: 'var(--kn-bsb)',
+                  color: 'var(--league-color)',
                 }}>
                   TRADE ANALYSIS
                 </h2>
@@ -373,7 +329,7 @@ export default function BSBTradeAnalyzer() {
                   justifyContent: 'space-between',
                   marginBottom: '0.5rem',
                   fontSize: '0.875rem',
-                  color: 'var(--kn-text)',
+                  color: 'var(--kff-ink)',
                 }}>
                   <span>{teamA.name}</span>
                   <span style={{ color: analysis.fairnessColor, fontWeight: 700, fontFamily: 'var(--font-display)' }}>
@@ -384,14 +340,14 @@ export default function BSBTradeAnalyzer() {
                 <div style={{
                   height: '12px',
                   borderRadius: '6px',
-                  background: 'rgba(255, 59, 107, 0.3)',
+                  background: 'rgba(255, 59, 78, 0.3)',
                   overflow: 'hidden',
-                  border: '1px solid rgba(255, 59, 107, 0.2)',
+                  border: '1px solid rgba(255, 59, 78, 0.2)',
                 }}>
                   <div style={{
                     height: '100%',
                     width: `${analysis.aPercent}%`,
-                    background: `linear-gradient(90deg, var(--kn-bsb), ${analysis.fairnessColor})`,
+                    background: `linear-gradient(90deg, var(--league-color), ${analysis.fairnessColor})`,
                     borderRadius: '6px',
                     transition: 'width 0.5s ease',
                   }} />
@@ -423,7 +379,7 @@ export default function BSBTradeAnalyzer() {
                 color: 'rgba(241, 241, 251, 0.7)',
                 lineHeight: '1.5',
               }}>
-                <strong style={{ color: 'var(--kn-warning)' }}>Note:</strong> Draft pick values are estimates based on
+                <strong style={{ color: 'var(--kff-yellow)' }}>Note:</strong> Draft pick values are estimates based on
                 historical averages. Player values use 2025 season weekly scoring averages. This tool is for
                 reference only — actual trade value depends on many factors including keeper pick implications,
                 roster needs, and league context.
@@ -449,7 +405,7 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd }: {
         fontFamily: 'var(--font-display)',
         fontSize: '1rem',
         fontWeight: 700,
-        color: 'var(--kn-bsb)',
+        color: 'var(--league-color)',
         marginBottom: '1rem',
         textAlign: 'center',
       }}>
@@ -460,8 +416,8 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd }: {
           display: 'flex',
           justifyContent: 'space-between',
           padding: '0.5rem 0',
-          borderBottom: '1px solid rgba(255, 59, 107, 0.1)',
-          color: 'var(--kn-text)',
+          borderBottom: '1px solid rgba(255, 59, 78, 0.1)',
+          color: 'var(--kff-ink)',
           fontSize: '0.875rem',
         }}>
           <span>
@@ -476,8 +432,8 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd }: {
           display: 'flex',
           justifyContent: 'space-between',
           padding: '0.5rem 0',
-          borderBottom: '1px solid rgba(255, 59, 107, 0.1)',
-          color: 'var(--kn-warning)',
+          borderBottom: '1px solid rgba(255, 59, 78, 0.1)',
+          color: 'var(--kff-yellow)',
           fontSize: '0.875rem',
         }}>
           <span>{pickLabel(p)}</span>
@@ -488,10 +444,10 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd }: {
         display: 'flex',
         justifyContent: 'space-between',
         padding: '0.75rem 0',
-        color: 'var(--kn-bsb)',
+        color: 'var(--league-color)',
         fontWeight: 900,
         fontSize: '1rem',
-        borderTop: '2px solid rgba(255, 59, 107, 0.3)',
+        borderTop: '2px solid rgba(255, 59, 78, 0.3)',
         marginTop: '0.5rem',
       }}>
         <span>TOTAL AVG/WK</span>
@@ -513,12 +469,12 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd }: {
 
 function posColor(pos: string) {
   switch (pos) {
-    case 'QB': return 'var(--kn-danger)';
-    case 'RB': return 'var(--kn-bsb)';
-    case 'WR': return 'var(--kn-success)';
-    case 'TE': return 'var(--kn-warning)';
-    case 'PK': return 'var(--kn-bsb)';
-    case 'Def': return 'var(--kn-cyan)';
+    case 'QB': return 'var(--kff-red)';
+    case 'RB': return 'var(--league-color)';
+    case 'WR': return 'var(--kff-green)';
+    case 'TE': return 'var(--kff-yellow)';
+    case 'PK': return 'var(--league-color)';
+    case 'Def': return 'var(--kff-azure)';
     default: return '#888';
   }
 }
@@ -549,13 +505,13 @@ function TeamPanel({
       background: 'rgba(20, 20, 31, 0.4)',
       backdropFilter: 'blur(10px)',
       borderRadius: '16px',
-      border: '2px solid rgba(255, 59, 107, 0.2)',
+      border: '2px solid rgba(255, 59, 78, 0.2)',
       overflow: 'hidden',
     }}>
       <div style={{
-        background: 'linear-gradient(90deg, rgba(255, 59, 107, 0.6), rgba(255, 59, 107, 0.6))',
+        background: 'linear-gradient(90deg, rgba(255, 59, 78, 0.6), rgba(255, 59, 78, 0.6))',
         padding: '1rem 1.5rem',
-        borderBottom: '1px solid rgba(255, 59, 107, 0.2)',
+        borderBottom: '1px solid rgba(255, 59, 78, 0.2)',
       }}>
         <div style={{ fontSize: '0.7rem', color: 'rgba(241, 241, 251, 0.6)', fontWeight: 700, letterSpacing: '0.1em', marginBottom: '0.25rem' }}>
           {label}
@@ -564,7 +520,7 @@ function TeamPanel({
           fontFamily: 'var(--font-display)',
           fontSize: '1.25rem',
           fontWeight: 900,
-          color: 'var(--kn-text)',
+          color: 'var(--kff-ink)',
         }}>
           {team.name}
         </h2>
@@ -573,18 +529,18 @@ function TeamPanel({
       {hasSelections && (
         <div style={{
           padding: '1rem 1.5rem',
-          background: 'rgba(255, 59, 107, 0.05)',
-          borderBottom: '1px solid rgba(255, 59, 107, 0.2)',
+          background: 'rgba(255, 59, 78, 0.05)',
+          borderBottom: '1px solid rgba(255, 59, 78, 0.2)',
         }}>
-          <div style={{ fontSize: '0.75rem', color: 'var(--kn-bsb)', fontWeight: 700, letterSpacing: '0.1em', marginBottom: '0.75rem' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--league-color)', fontWeight: 700, letterSpacing: '0.1em', marginBottom: '0.75rem' }}>
             TRADING AWAY
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
             {selectedPlayers.map(p => (
               <button key={p.id} onClick={() => onTogglePlayer(p.id)} style={{
                 display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.3rem 0.7rem',
-                background: 'rgba(255, 59, 107, 0.15)', border: '1px solid rgba(255, 59, 107, 0.4)',
-                borderRadius: '9999px', color: 'var(--kn-bsb)', fontSize: '0.8rem', cursor: 'pointer',
+                background: 'rgba(255, 59, 78, 0.15)', border: '1px solid rgba(255, 59, 78, 0.4)',
+                borderRadius: '9999px', color: 'var(--league-color)', fontSize: '0.8rem', cursor: 'pointer',
                 fontFamily: 'var(--font-body)', fontWeight: 600,
               }}>
                 <span style={{ color: posColor(p.position), fontSize: '0.7rem', fontWeight: 700 }}>{p.position}</span>
@@ -596,7 +552,7 @@ function TeamPanel({
               <button key={pickKey(p)} onClick={() => onTogglePick(pickKey(p))} style={{
                 display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.3rem 0.7rem',
                 background: 'rgba(255, 176, 32, 0.15)', border: '1px solid rgba(255, 176, 32, 0.4)',
-                borderRadius: '9999px', color: 'var(--kn-warning)', fontSize: '0.8rem', cursor: 'pointer',
+                borderRadius: '9999px', color: 'var(--kff-yellow)', fontSize: '0.8rem', cursor: 'pointer',
                 fontFamily: 'var(--font-body)', fontWeight: 600,
               }}>
                 {pickLabel(p)}
@@ -626,14 +582,14 @@ function TeamPanel({
               const selected = selectedPlayerIds.has(player.id);
               return (
                 <tr key={player.id} onClick={() => onTogglePlayer(player.id)} style={{
-                  borderTop: '1px solid rgba(255, 59, 107, 0.08)', cursor: 'pointer',
-                  background: selected ? 'rgba(255, 59, 107, 0.1)' : 'transparent',
+                  borderTop: '1px solid rgba(255, 59, 78, 0.08)', cursor: 'pointer',
+                  background: selected ? 'rgba(255, 59, 78, 0.1)' : 'transparent',
                   transition: 'background-color 0.15s',
                 }}
-                onMouseEnter={e => { if (!selected) e.currentTarget.style.background = 'rgba(255, 59, 107, 0.1)'; }}
-                onMouseLeave={e => { e.currentTarget.style.background = selected ? 'rgba(255, 59, 107, 0.1)' : 'transparent'; }}
+                onMouseEnter={e => { if (!selected) e.currentTarget.style.background = 'rgba(255, 59, 78, 0.1)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = selected ? 'rgba(255, 59, 78, 0.1)' : 'transparent'; }}
                 >
-                  <td style={{ padding: '0.6rem 1rem', color: selected ? 'var(--kn-bsb)' : 'var(--kn-text)', fontWeight: selected ? 700 : 500, fontSize: '0.875rem' }}>
+                  <td style={{ padding: '0.6rem 1rem', color: selected ? 'var(--league-color)' : 'var(--kff-ink)', fontWeight: selected ? 700 : 500, fontSize: '0.875rem' }}>
                     {selected && <span style={{ marginRight: '0.4rem' }}>✓</span>}
                     {player.name}
                   </td>
@@ -643,7 +599,7 @@ function TeamPanel({
                   <td style={{ padding: '0.6rem 0.5rem', textAlign: 'center', color: 'rgba(241, 241, 251, 0.6)', fontSize: '0.75rem' }}>
                     {player.nflTeam}
                   </td>
-                  <td style={{ padding: '0.6rem 1rem', textAlign: 'right', color: selected ? 'var(--kn-bsb)' : 'rgba(241, 241, 251, 0.8)', fontWeight: 700, fontSize: '0.875rem' }}>
+                  <td style={{ padding: '0.6rem 1rem', textAlign: 'right', color: selected ? 'var(--league-color)' : 'rgba(241, 241, 251, 0.8)', fontWeight: 700, fontSize: '0.875rem' }}>
                     {player.pointsAVG.toFixed(1)}
                   </td>
                 </tr>
@@ -653,11 +609,11 @@ function TeamPanel({
         </table>
       </div>
 
-      <div style={{ borderTop: '1px solid rgba(255, 59, 107, 0.2)' }}>
+      <div style={{ borderTop: '1px solid rgba(255, 59, 78, 0.2)' }}>
         <button onClick={() => setShowPicks(!showPicks)} style={{
           width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: '0.75rem 1.5rem', background: 'rgba(255, 176, 32, 0.05)', border: 'none',
-          color: 'var(--kn-warning)', cursor: 'pointer', fontFamily: 'var(--font-body)',
+          color: 'var(--kff-yellow)', cursor: 'pointer', fontFamily: 'var(--font-body)',
           fontSize: '0.875rem', fontWeight: 700,
         }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -680,7 +636,7 @@ function TeamPanel({
                       padding: '0.3rem 0.7rem',
                       background: selected ? 'rgba(255, 176, 32, 0.2)' : 'rgba(20, 20, 31, 0.3)',
                       border: `1px solid ${selected ? 'rgba(255, 176, 32, 0.5)' : 'rgba(255, 176, 32, 0.15)'}`,
-                      borderRadius: '6px', color: selected ? 'var(--kn-warning)' : 'rgba(241, 241, 251, 0.6)',
+                      borderRadius: '6px', color: selected ? 'var(--kff-yellow)' : 'rgba(241, 241, 251, 0.6)',
                       cursor: 'pointer', fontFamily: 'var(--font-body)', fontSize: '0.75rem', fontWeight: 600,
                     }}>
                       {selected && '✓ '}{pickLabel(pick)}

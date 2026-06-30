@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
-import Link from 'next/link';
 import { ArrowLeftRight, AlertCircle, TrendingUp, ChevronDown, X, Plus, Trophy } from 'lucide-react';
+import { ToolHeader } from '../components/kff/ToolHeader';
 
 interface Player {
   id: string;
@@ -198,13 +198,13 @@ export default function KDLTradeAnalyzer() {
     let fairnessColor: string;
     if (aPercent >= 40 && aPercent <= 60) {
       fairnessLabel = 'BALANCED';
-      fairnessColor = 'var(--kn-kdl)';
+      fairnessColor = 'var(--league-color)';
     } else if (aPercent >= 30 && aPercent <= 70) {
       fairnessLabel = 'SLIGHT EDGE';
-      fairnessColor = 'var(--kn-warning)';
+      fairnessColor = 'var(--kff-yellow)';
     } else {
       fairnessLabel = 'LOPSIDED';
-      fairnessColor = 'var(--kn-danger)';
+      fairnessColor = 'var(--kff-red)';
     }
 
     return {
@@ -227,8 +227,8 @@ export default function KDLTradeAnalyzer() {
         alignItems: 'center',
         justifyContent: 'center',
         fontFamily: 'var(--font-body)',
-        background: 'var(--kn-bg)',
-        color: 'var(--kn-kdl)'
+        background: 'var(--bg-base)',
+        color: 'var(--league-color)'
       }}>
         <div style={{ textAlign: 'center' }}>
           <ArrowLeftRight className="w-12 h-12 mx-auto mb-4 animate-pulse" />
@@ -246,8 +246,8 @@ export default function KDLTradeAnalyzer() {
         alignItems: 'center',
         justifyContent: 'center',
         fontFamily: 'var(--font-body)',
-        background: 'var(--kn-bg)',
-        color: 'var(--kn-danger)'
+        background: 'var(--bg-base)',
+        color: 'var(--kff-red)'
       }}>
         <div style={{ textAlign: 'center' }}>
           <AlertCircle className="w-12 h-12 mx-auto mb-4" />
@@ -262,7 +262,7 @@ export default function KDLTradeAnalyzer() {
       <style jsx global>{`
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-          background: var(--kn-bg);
+          background: var(--bg-base);
           min-height: 100vh;
           overflow-x: hidden;
         }
@@ -270,53 +270,8 @@ export default function KDLTradeAnalyzer() {
 
       <div className="scan-line" />
 
-      <div style={{ position: 'relative', zIndex: 1, fontFamily: 'var(--font-body)' }}>
-        {/* Header */}
-        <header style={{
-          borderBottom: '1px solid var(--kn-line)',
-          background: 'rgba(10, 10, 15, 0.82)',
-          backdropFilter: 'blur(20px)',
-        }}>
-          <div style={{ maxWidth: '1600px', margin: '0 auto', padding: '2rem 1.5rem' }}>
-            <Link href="/kdl" style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              color: 'var(--kn-kdl)',
-              textDecoration: 'none',
-              fontSize: '1rem',
-              fontWeight: 600,
-              marginBottom: '1.5rem',
-              transition: 'all 0.3s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.textShadow = '0 0 12px rgba(168, 85, 247, 0.7)';
-              e.currentTarget.style.transform = 'translateX(-5px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.textShadow = 'none';
-              e.currentTarget.style.transform = 'translateX(0)';
-            }}>
-              ← BACK TO KDL HUB
-            </Link>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-              <ArrowLeftRight style={{ width: '40px', height: '40px', color: 'var(--kn-kdl)' }} />
-              <h1 style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                fontWeight: 900,
-                color: 'var(--kn-kdl)',
-                textShadow: '0 0 40px rgba(168, 85, 247, 0.5)',
-              }}>
-                KDL TRADE ANALYZER
-              </h1>
-            </div>
-            <p style={{ color: 'var(--kn-text)', fontSize: '1.1rem', fontWeight: 600 }}>
-              Knuckleheads Dynasty League • 2025 Season Scoring
-            </p>
-          </div>
-        </header>
+      <div className="league-kdl" style={{ position: 'relative', zIndex: 1, fontFamily: 'var(--font-body)' }}>
+        <ToolHeader code="KDL" kicker="KDL · COMMISSIONER TOOL" title="Trade Analyzer" backHref="/kdl" backLabel="KDL Hub" />
 
         <div style={{ maxWidth: '1600px', margin: '0 auto', padding: '2rem 1.5rem' }}>
 
@@ -334,9 +289,9 @@ export default function KDLTradeAnalyzer() {
               style={{
                 padding: '0.75rem 1.5rem',
                 background: 'rgba(20, 20, 31, 0.5)',
-                border: '2px solid rgba(168, 85, 247, 0.3)',
+                border: '2px solid rgba(138, 43, 226, 0.3)',
                 borderRadius: '12px',
-                color: 'var(--kn-kdl)',
+                color: 'var(--league-color)',
                 fontSize: '1rem',
                 outline: 'none',
                 cursor: 'pointer',
@@ -349,7 +304,7 @@ export default function KDLTradeAnalyzer() {
               ))}
             </select>
 
-            <ArrowLeftRight style={{ width: '24px', height: '24px', color: 'var(--kn-kdl)' }} />
+            <ArrowLeftRight style={{ width: '24px', height: '24px', color: 'var(--league-color)' }} />
 
             <select
               value={teamBId}
@@ -357,9 +312,9 @@ export default function KDLTradeAnalyzer() {
               style={{
                 padding: '0.75rem 1.5rem',
                 background: 'rgba(20, 20, 31, 0.5)',
-                border: '2px solid rgba(168, 85, 247, 0.3)',
+                border: '2px solid rgba(138, 43, 226, 0.3)',
                 borderRadius: '12px',
-                color: 'var(--kn-kdl)',
+                color: 'var(--league-color)',
                 fontSize: '1rem',
                 outline: 'none',
                 cursor: 'pointer',
@@ -406,17 +361,17 @@ export default function KDLTradeAnalyzer() {
               background: 'rgba(20, 20, 31, 0.4)',
               backdropFilter: 'blur(10px)',
               borderRadius: '16px',
-              border: '2px solid rgba(168, 85, 247, 0.2)',
+              border: '2px solid rgba(138, 43, 226, 0.2)',
               padding: '2rem',
               marginBottom: '2rem',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-                <TrendingUp style={{ width: '24px', height: '24px', color: 'var(--kn-kdl)' }} />
+                <TrendingUp style={{ width: '24px', height: '24px', color: 'var(--league-color)' }} />
                 <h2 style={{
                   fontFamily: 'var(--font-display)',
                   fontSize: '1.5rem',
                   fontWeight: 900,
-                  color: 'var(--kn-kdl)',
+                  color: 'var(--league-color)',
                 }}>
                   TRADE ANALYSIS
                 </h2>
@@ -429,7 +384,7 @@ export default function KDLTradeAnalyzer() {
                   justifyContent: 'space-between',
                   marginBottom: '0.5rem',
                   fontSize: '0.875rem',
-                  color: 'var(--kn-text)',
+                  color: 'var(--kff-ink)',
                 }}>
                   <span>{teamA.name}</span>
                   <span style={{ color: analysis.fairnessColor, fontWeight: 700, fontFamily: 'var(--font-display)' }}>
@@ -440,14 +395,14 @@ export default function KDLTradeAnalyzer() {
                 <div style={{
                   height: '12px',
                   borderRadius: '6px',
-                  background: 'rgba(168, 85, 247, 0.3)',
+                  background: 'rgba(138, 43, 226, 0.3)',
                   overflow: 'hidden',
-                  border: '1px solid rgba(168, 85, 247, 0.2)',
+                  border: '1px solid rgba(138, 43, 226, 0.2)',
                 }}>
                   <div style={{
                     height: '100%',
                     width: `${analysis.aPercent}%`,
-                    background: `linear-gradient(90deg, var(--kn-kdl), ${analysis.fairnessColor})`,
+                    background: `linear-gradient(90deg, var(--league-color), ${analysis.fairnessColor})`,
                     borderRadius: '6px',
                     transition: 'width 0.5s ease',
                   }} />
@@ -509,7 +464,7 @@ export default function KDLTradeAnalyzer() {
                 color: 'rgba(241, 241, 251, 0.7)',
                 lineHeight: '1.5',
               }}>
-                <strong style={{ color: 'var(--kn-warning)' }}>Note:</strong> Draft pick values are estimates based on
+                <strong style={{ color: 'var(--kff-yellow)' }}>Note:</strong> Draft pick values are estimates based on
                 historical averages. Player values use 2025 season weekly scoring averages. This tool is for
                 reference only — actual trade value depends on many factors including contract status,
                 salary cap, roster needs, and league context.
@@ -541,7 +496,7 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd, tradeSa
         fontFamily: 'var(--font-display)',
         fontSize: '1rem',
         fontWeight: 700,
-        color: 'var(--kn-kdl)',
+        color: 'var(--league-color)',
         marginBottom: '1rem',
         textAlign: 'center',
       }}>
@@ -553,8 +508,8 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd, tradeSa
           justifyContent: 'space-between',
           alignItems: 'center',
           padding: '0.5rem 0',
-          borderBottom: '1px solid rgba(168, 85, 247, 0.1)',
-          color: 'var(--kn-text)',
+          borderBottom: '1px solid rgba(138, 43, 226, 0.1)',
+          color: 'var(--kff-ink)',
           fontSize: '0.875rem',
         }}>
           <span style={{ flex: 1 }}>
@@ -586,8 +541,8 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd, tradeSa
           display: 'flex',
           justifyContent: 'space-between',
           padding: '0.5rem 0',
-          borderBottom: '1px solid rgba(168, 85, 247, 0.1)',
-          color: 'var(--kn-warning)',
+          borderBottom: '1px solid rgba(138, 43, 226, 0.1)',
+          color: 'var(--kff-yellow)',
           fontSize: '0.875rem',
         }}>
           <span>{pickLabel(p)}</span>
@@ -598,10 +553,10 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd, tradeSa
         display: 'flex',
         justifyContent: 'space-between',
         padding: '0.75rem 0',
-        color: 'var(--kn-kdl)',
+        color: 'var(--league-color)',
         fontWeight: 900,
         fontSize: '1rem',
-        borderTop: '2px solid rgba(168, 85, 247, 0.3)',
+        borderTop: '2px solid rgba(138, 43, 226, 0.3)',
         marginTop: '0.5rem',
       }}>
         <span>TOTAL AVG/WK</span>
@@ -642,14 +597,14 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd, tradeSa
       <div style={{
         marginTop: '1rem',
         padding: '0.75rem',
-        background: 'rgba(168, 85, 247, 0.1)',
+        background: 'rgba(138, 43, 226, 0.1)',
         borderRadius: '8px',
-        border: '1px solid rgba(168, 85, 247, 0.15)',
+        border: '1px solid rgba(138, 43, 226, 0.15)',
       }}>
         <div style={{
           fontSize: '0.7rem',
           fontWeight: 700,
-          color: 'var(--kn-kdl)',
+          color: 'var(--league-color)',
           letterSpacing: '0.05em',
           marginBottom: '0.5rem',
           textTransform: 'uppercase',
@@ -668,10 +623,10 @@ function TradeSummaryColumn({ teamName, players, picks, totalValue, ytd, tradeSa
           <span style={{ fontWeight: 700, textAlign: 'right', fontSize: '0.7rem', color: 'rgba(241, 241, 251, 0.5)' }}>AFTER</span>
           <span>Total Salary</span>
           <span style={{ textAlign: 'right' }}>${teamSalaryBefore}</span>
-          <span style={{ textAlign: 'right', color: teamSalaryAfter > 1000 ? 'var(--kn-danger)' : 'var(--kn-success)', fontWeight: 700 }}>${teamSalaryAfter}</span>
+          <span style={{ textAlign: 'right', color: teamSalaryAfter > 1000 ? 'var(--kff-red)' : 'var(--kff-green)', fontWeight: 700 }}>${teamSalaryAfter}</span>
           <span>Total Years</span>
           <span style={{ textAlign: 'right' }}>{teamYearsBefore}</span>
-          <span style={{ textAlign: 'right', color: teamYearsAfter > 65 ? 'var(--kn-danger)' : 'var(--kn-success)', fontWeight: 700 }}>{teamYearsAfter}</span>
+          <span style={{ textAlign: 'right', color: teamYearsAfter > 65 ? 'var(--kff-red)' : 'var(--kff-green)', fontWeight: 700 }}>{teamYearsAfter}</span>
         </div>
       </div>
     </div>
@@ -682,7 +637,7 @@ function rosterStatusBadge(status: Player['rosterStatus'], size: 'sm' | 'md' = '
   if (status === 'ACTIVE') return null;
   const isTaxi = status === 'TAXI_SQUAD';
   const label = isTaxi ? 'TAXI' : 'IR';
-  const color = isTaxi ? 'var(--kn-warning)' : 'var(--kn-danger)';
+  const color = isTaxi ? 'var(--kff-yellow)' : 'var(--kff-red)';
   const bg = isTaxi ? 'rgba(255, 176, 32, 0.2)' : 'rgba(255, 77, 77, 0.2)';
   const border = isTaxi ? 'rgba(255, 176, 32, 0.4)' : 'rgba(255, 77, 77, 0.4)';
   const fontSize = size === 'sm' ? '0.55rem' : '0.6rem';
@@ -709,12 +664,12 @@ function rosterStatusBadge(status: Player['rosterStatus'], size: 'sm' | 'md' = '
 
 function posColor(pos: string) {
   switch (pos) {
-    case 'QB': return 'var(--kn-danger)';
-    case 'RB': return 'var(--kn-kdl)';
-    case 'WR': return 'var(--kn-success)';
-    case 'TE': return 'var(--kn-warning)';
-    case 'PK': return 'var(--kn-kdl)';
-    case 'Def': return 'var(--kn-violet)';
+    case 'QB': return 'var(--kff-red)';
+    case 'RB': return 'var(--league-color)';
+    case 'WR': return 'var(--kff-green)';
+    case 'TE': return 'var(--kff-yellow)';
+    case 'PK': return 'var(--league-color)';
+    case 'Def': return 'var(--kff-violet)';
     default: return '#888';
   }
 }
@@ -745,13 +700,13 @@ function TeamPanel({
       background: 'rgba(20, 20, 31, 0.4)',
       backdropFilter: 'blur(10px)',
       borderRadius: '16px',
-      border: '2px solid rgba(168, 85, 247, 0.2)',
+      border: '2px solid rgba(138, 43, 226, 0.2)',
       overflow: 'hidden',
     }}>
       <div style={{
-        background: 'linear-gradient(90deg, rgba(168, 85, 247, 0.6), rgba(168, 85, 247, 0.6))',
+        background: 'linear-gradient(90deg, rgba(138, 43, 226, 0.6), rgba(138, 43, 226, 0.6))',
         padding: '1rem 1.5rem',
-        borderBottom: '1px solid rgba(168, 85, 247, 0.2)',
+        borderBottom: '1px solid rgba(138, 43, 226, 0.2)',
       }}>
         <div style={{ fontSize: '0.7rem', color: 'rgba(241, 241, 251, 0.6)', fontWeight: 700, letterSpacing: '0.1em', marginBottom: '0.25rem' }}>
           {label}
@@ -760,7 +715,7 @@ function TeamPanel({
           fontFamily: 'var(--font-display)',
           fontSize: '1.25rem',
           fontWeight: 900,
-          color: 'var(--kn-text)',
+          color: 'var(--kff-ink)',
         }}>
           {team.name}
         </h2>
@@ -769,12 +724,12 @@ function TeamPanel({
       {hasSelections && (
         <div style={{
           padding: '1rem 1.5rem',
-          background: 'rgba(168, 85, 247, 0.05)',
-          borderBottom: '1px solid rgba(168, 85, 247, 0.2)',
+          background: 'rgba(138, 43, 226, 0.05)',
+          borderBottom: '1px solid rgba(138, 43, 226, 0.2)',
         }}>
           <div style={{
             fontSize: '0.75rem',
-            color: 'var(--kn-kdl)',
+            color: 'var(--league-color)',
             fontWeight: 700,
             letterSpacing: '0.1em',
             marginBottom: '0.75rem',
@@ -791,10 +746,10 @@ function TeamPanel({
                   alignItems: 'center',
                   gap: '0.4rem',
                   padding: '0.3rem 0.7rem',
-                  background: 'rgba(168, 85, 247, 0.15)',
-                  border: '1px solid rgba(168, 85, 247, 0.4)',
+                  background: 'rgba(138, 43, 226, 0.15)',
+                  border: '1px solid rgba(138, 43, 226, 0.4)',
                   borderRadius: '9999px',
-                  color: 'var(--kn-kdl)',
+                  color: 'var(--league-color)',
                   fontSize: '0.8rem',
                   cursor: 'pointer',
                   fontFamily: 'var(--font-body)',
@@ -819,7 +774,7 @@ function TeamPanel({
                   background: 'rgba(255, 176, 32, 0.15)',
                   border: '1px solid rgba(255, 176, 32, 0.4)',
                   borderRadius: '9999px',
-                  color: 'var(--kn-warning)',
+                  color: 'var(--kff-yellow)',
                   fontSize: '0.8rem',
                   cursor: 'pointer',
                   fontFamily: 'var(--font-body)',
@@ -863,17 +818,17 @@ function TeamPanel({
                   key={player.id}
                   onClick={() => onTogglePlayer(player.id)}
                   style={{
-                    borderTop: '1px solid rgba(168, 85, 247, 0.08)',
+                    borderTop: '1px solid rgba(138, 43, 226, 0.08)',
                     cursor: 'pointer',
-                    background: selected ? 'rgba(168, 85, 247, 0.1)' : 'transparent',
+                    background: selected ? 'rgba(138, 43, 226, 0.1)' : 'transparent',
                     transition: 'background-color 0.15s',
                   }}
-                  onMouseEnter={e => { if (!selected) e.currentTarget.style.background = 'rgba(168, 85, 247, 0.1)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = selected ? 'rgba(168, 85, 247, 0.1)' : 'transparent'; }}
+                  onMouseEnter={e => { if (!selected) e.currentTarget.style.background = 'rgba(138, 43, 226, 0.1)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = selected ? 'rgba(138, 43, 226, 0.1)' : 'transparent'; }}
                 >
                   <td style={{
                     padding: '0.6rem 1rem',
-                    color: selected ? 'var(--kn-kdl)' : 'var(--kn-text)',
+                    color: selected ? 'var(--league-color)' : 'var(--kff-ink)',
                     fontWeight: selected ? 700 : 500,
                     fontSize: '0.875rem',
                   }}>
@@ -901,7 +856,7 @@ function TeamPanel({
                   <td style={{
                     padding: '0.6rem 0.5rem',
                     textAlign: 'right',
-                    color: selected ? 'var(--kn-kdl)' : 'rgba(241, 241, 251, 0.8)',
+                    color: selected ? 'var(--league-color)' : 'rgba(241, 241, 251, 0.8)',
                     fontWeight: 600,
                     fontSize: '0.8rem',
                   }}>
@@ -910,7 +865,7 @@ function TeamPanel({
                   <td style={{
                     padding: '0.6rem 0.5rem',
                     textAlign: 'center',
-                    color: selected ? 'var(--kn-kdl)' : 'rgba(241, 241, 251, 0.8)',
+                    color: selected ? 'var(--league-color)' : 'rgba(241, 241, 251, 0.8)',
                     fontWeight: 600,
                     fontSize: '0.8rem',
                   }}>
@@ -919,7 +874,7 @@ function TeamPanel({
                   <td style={{
                     padding: '0.6rem 1rem',
                     textAlign: 'right',
-                    color: selected ? 'var(--kn-kdl)' : 'rgba(241, 241, 251, 0.8)',
+                    color: selected ? 'var(--league-color)' : 'rgba(241, 241, 251, 0.8)',
                     fontWeight: 700,
                     fontSize: '0.875rem',
                   }}>
@@ -932,7 +887,7 @@ function TeamPanel({
         </table>
       </div>
 
-      <div style={{ borderTop: '1px solid rgba(168, 85, 247, 0.2)' }}>
+      <div style={{ borderTop: '1px solid rgba(138, 43, 226, 0.2)' }}>
         <button
           onClick={() => setShowPicks(!showPicks)}
           style={{
@@ -943,7 +898,7 @@ function TeamPanel({
             padding: '0.75rem 1.5rem',
             background: 'rgba(255, 176, 32, 0.05)',
             border: 'none',
-            color: 'var(--kn-warning)',
+            color: 'var(--kff-yellow)',
             cursor: 'pointer',
             fontFamily: 'var(--font-body)',
             fontSize: '0.875rem',
@@ -981,7 +936,7 @@ function TeamPanel({
                         background: selected ? 'rgba(255, 176, 32, 0.2)' : 'rgba(20, 20, 31, 0.3)',
                         border: `1px solid ${selected ? 'rgba(255, 176, 32, 0.5)' : 'rgba(255, 176, 32, 0.15)'}`,
                         borderRadius: '6px',
-                        color: selected ? 'var(--kn-warning)' : 'rgba(241, 241, 251, 0.6)',
+                        color: selected ? 'var(--kff-yellow)' : 'rgba(241, 241, 251, 0.6)',
                         cursor: 'pointer',
                         fontFamily: 'var(--font-body)',
                         fontSize: '0.75rem',
