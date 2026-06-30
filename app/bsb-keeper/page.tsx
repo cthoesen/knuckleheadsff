@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
-import Link from 'next/link';
-import { Search, Flame, XCircle, CheckCircle } from 'lucide-react';
+import { Search, XCircle, CheckCircle } from 'lucide-react';
+import { ToolHeader } from '../components/kff/ToolHeader';
 
 interface BSBPlayer {
   Player: string;
@@ -163,8 +163,8 @@ export default function BSBKeeperApp() {
           display: flex;
           align-items: center;
           justify-content: center;
-          background-color: var(--kn-bg);
-          color: var(--kn-bsb);
+          background-color: var(--bg-base);
+          color: var(--league-color);
           font-family: var(--font-mono);
           font-weight: bold;
         }
@@ -178,8 +178,8 @@ export default function BSBKeeperApp() {
       <style jsx>{`
         .error-screen {
           min-height: 100vh;
-          background-color: var(--kn-bg);
-          color: var(--kn-danger);
+          background-color: var(--bg-base);
+          color: var(--kff-red);
           padding: 2.5rem;
           font-family: var(--font-mono);
         }
@@ -188,57 +188,42 @@ export default function BSBKeeperApp() {
   );
 
   return (
-    <div className="app-container">
+    <div className="app-container league-bsb">
       <style jsx global>{`
-        body { background-color: var(--kn-bg); color: var(--kn-text); font-family: var(--font-body); margin: 0; }
+        body { background-color: var(--bg-base); color: var(--kff-ink); font-family: var(--font-body); margin: 0; }
 
         /* Layout */
         .app-container { min-height: 100vh; padding-bottom: 4rem; }
         .max-w-7xl { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; }
 
-        /* Header */
-        header { border-bottom: 1px solid var(--kn-line); background: rgba(10, 10, 15, 0.82); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 50; }
-        .header-content { display: flex; align-items: center; gap: 1rem; padding: 1rem 0; }
-        .league-title { font-family: var(--font-display); font-weight: 900; font-size: 2rem; color: var(--kn-bsb); letter-spacing: 0.05em; text-transform: uppercase; text-shadow: 0 0 14px rgba(var(--glow-pink), 0.5); }
-
         /* Inputs */
         .controls { display: flex; gap: 1rem; margin: 2rem 0; flex-wrap: wrap; }
-        input, select { background: var(--kn-surface-3); border: 1px solid var(--kn-line); color: var(--kn-text); padding: 0.75rem 1rem; border-radius: var(--r-md); font-family: var(--font-mono); }
-        input:focus, select:focus { border-color: var(--kn-bsb); outline: none; }
+        input, select { background: var(--surface-inset); border: 1px solid var(--kff-line); color: var(--kff-ink); padding: 0.75rem 1rem; border-radius: var(--radius-md); font-family: var(--font-mono); }
+        input:focus, select:focus { border-color: var(--league-color); outline: none; }
         input { flex: 1; min-width: 300px; }
 
         /* Cards */
-        .team-card { background: var(--kn-surface); border: 1px solid var(--kn-line); border-radius: var(--r-lg); overflow: hidden; margin-bottom: 2rem; box-shadow: var(--shadow-md); }
-        .card-header { padding: 1rem 1.5rem; background: var(--kn-bg); border-bottom: 1px solid var(--kn-line); border-left: 4px solid var(--kn-bsb); }
+        .team-card { background: var(--surface-card); border: 1px solid var(--kff-line); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 2rem; box-shadow: var(--shadow-md); }
+        .card-header { padding: 1rem 1.5rem; background: var(--bg-base); border-bottom: 1px solid var(--kff-line); border-left: 4px solid var(--league-color); }
 
         /* Table */
         .table-container { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; text-align: left; }
-        th { padding: 0.75rem 1.5rem; font-size: 0.75rem; color: var(--kn-text-mute); text-transform: uppercase; background: rgba(6, 6, 12, 0.5); font-family: var(--font-display); letter-spacing: 0.06em; }
-        td { padding: 1rem 1.5rem; border-bottom: 1px solid var(--kn-line); vertical-align: middle; }
+        th { padding: 0.75rem 1.5rem; font-size: 0.75rem; color: var(--kff-ink-mute); text-transform: uppercase; background: rgba(6, 6, 12, 0.5); font-family: var(--font-display); letter-spacing: 0.06em; }
+        td { padding: 1rem 1.5rem; border-bottom: 1px solid var(--kff-line); vertical-align: middle; }
         tr:last-child td { border-bottom: none; }
 
         /* Colors & Status */
-        .text-rose { color: var(--kn-bsb); }
-        .text-zinc { color: var(--kn-text-mute); }
+        .text-rose { color: var(--league-color); }
+        .text-zinc { color: var(--kff-ink-mute); }
         .text-blue { color: #0ea5e9; } /* functional accent, not brand — left as-is */
-        .badge-taxi { background: rgba(var(--glow-pink), 0.1); color: var(--kn-bsb); padding: 2px 8px; border-radius: var(--r-sm); font-size: 0.75rem; border: 1px solid rgba(var(--glow-pink), 0.3); font-family: var(--font-mono); }
+        .badge-taxi { background: rgba(var(--glow-pink), 0.1); color: var(--league-color); padding: 2px 8px; border-radius: var(--radius-sm); font-size: 0.75rem; border: 1px solid rgba(var(--glow-pink), 0.3); font-family: var(--font-mono); }
 
         .round-display { font-size: 1.25rem; font-weight: 700; color: #0ea5e9; font-family: var(--font-mono); } /* functional accent, not brand */
         .ineligible-row { opacity: 0.4; filter: grayscale(100%); }
       `}</style>
 
-      <header>
-        <div className="max-w-7xl">
-          <div style={{ padding: '0.5rem 0' }}>
-            <Link href="/" style={{ color: 'var(--kn-bsb)', fontSize: '0.75rem', textDecoration: 'none', display: 'block', marginBottom: '0.5rem', fontFamily: 'var(--font-mono)' }}>← RETURN TO HUB</Link>
-            <div className="header-content">
-              <Flame size={32} color="var(--kn-bsb)" />
-              <div className="league-title">BLOOD, SWEAT & BEERS</div>
-            </div>
-          </div>
-        </div>
-      </header>
+      <ToolHeader code="BSB" kicker="BSB · COMMISSIONER TOOL" title="Keeper Analyzer" backHref="/bsb" backLabel="BSB Hub" />
 
       <div className="max-w-7xl">
         <div className="controls">
