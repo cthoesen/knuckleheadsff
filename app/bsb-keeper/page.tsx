@@ -203,7 +203,7 @@ export default function BSBKeeperApp() {
         input { flex: 1; min-width: 300px; }
 
         /* Cards */
-        .team-card { background: var(--surface-card); border: 1px solid var(--kff-line); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 2rem; box-shadow: var(--shadow-md); }
+        .team-card { background: var(--surface-card); border: 1px solid var(--kff-line); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 2rem; box-shadow: var(--shadow-2); }
         .card-header { padding: 1rem 1.5rem; background: var(--bg-base); border-bottom: 1px solid var(--kff-line); border-left: 4px solid var(--league-color); }
 
         /* Table */
@@ -217,7 +217,7 @@ export default function BSBKeeperApp() {
         .text-rose { color: var(--league-color); }
         .text-zinc { color: var(--kff-ink-mute); }
         .text-blue { color: #0ea5e9; } /* functional accent, not brand — left as-is */
-        .badge-taxi { background: rgba(var(--glow-pink), 0.1); color: var(--league-color); padding: 2px 8px; border-radius: var(--radius-sm); font-size: 0.75rem; border: 1px solid rgba(var(--glow-pink), 0.3); font-family: var(--font-mono); }
+        .badge-taxi { background: color-mix(in srgb, var(--kff-yellow) 12%, transparent); color: var(--kff-yellow); padding: 2px 8px; border-radius: var(--radius-sm); font-size: 0.75rem; border: 1px solid color-mix(in srgb, var(--kff-yellow) 40%, transparent); font-family: var(--font-mono); }
 
         .round-display { font-size: 1.25rem; font-weight: 700; color: #0ea5e9; font-family: var(--font-mono); } /* functional accent, not brand */
         .ineligible-row { opacity: 0.4; filter: grayscale(100%); }

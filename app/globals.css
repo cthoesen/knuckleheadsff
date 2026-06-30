@@ -275,76 +275,6 @@
   .kff-crt-sweep::before, .kff-blink, .kff-pulse { animation: none; }
 }
 
-/* ============================================================
-   LEGACY SHIM — maps the previous --kn-* tokens onto the new
-   palette so pages still being rebuilt keep rendering. Removed
-   once every page has migrated to the --kff-/--league-color system.
-   ============================================================ */
-:root {
-  --kn-black:       var(--kff-void);
-  --kn-bg:          var(--kff-shadow);
-  --kn-bg-2:        var(--kff-shadow);
-  --kn-surface:     var(--kff-panel);
-  --kn-surface-2:   var(--kff-panel-2);
-  --kn-surface-3:   var(--kff-panel-2);
-  --kn-line:        var(--kff-line);
-  --kn-line-bright: var(--kff-line-2);
-
-  --kn-yellow:      var(--kff-yellow);
-  --kn-yellow-deep: var(--kff-yellow-deep);
-  --kn-pink:        var(--kff-red);
-  --kn-pink-deep:   var(--kff-red-deep);
-  --kn-cyan:        var(--kff-azure);
-  --kn-cyan-deep:   var(--kff-azure-deep);
-  --kn-violet:      var(--kff-violet);
-  --kn-green:       var(--kff-green);
-
-  --kn-success: var(--kff-green);
-  --kn-warning: var(--kff-yellow);
-  --kn-danger:  var(--kff-red);
-
-  --kn-text:       var(--kff-ink);
-  --kn-text-dim:   var(--kff-ink-dim);
-  --kn-text-mute:  var(--kff-ink-mute);
-  --kn-text-faint: var(--kff-line-2);
-  --kn-text-on-neon: var(--kff-ink-inv);
-
-  --kn-kkl: var(--kff-azure);
-  --kn-kdl: var(--kff-violet);
-  --kn-mmh: var(--kff-green);
-  --kn-bsb: var(--kff-red);
-
-  --font-arcade: var(--font-pixel);
-
-  /* Glow rgb triplets (updated to new hues) for legacy rgba(var(--glow-*)) uses */
-  --glow-yellow-rgb: 255, 233, 32;
-  --glow-pink:   255, 59, 78;
-  --glow-cyan:   31, 182, 255;
-  --glow-violet: 138, 43, 226;
-  --glow-green:  56, 230, 107;
-
-  --glow-md-yellow: 0 0 14px rgba(255, 233, 32, .55), 0 0 2px rgba(255, 233, 32, .9);
-  --glow-lg-yellow: 0 0 28px rgba(255, 233, 32, .5), 0 0 8px rgba(255, 233, 32, .8);
-  --glow-md-pink:   0 0 14px rgba(255, 59, 78, .6), 0 0 2px rgba(255, 59, 78, .9);
-  --glow-md-cyan:   0 0 14px rgba(31, 182, 255, .6), 0 0 2px rgba(31, 182, 255, .9);
-
-  --text-glow-yellow: 0 0 8px rgba(255, 233, 32, .6);
-  --text-glow-pink:   0 0 8px rgba(255, 59, 78, .6);
-  --text-glow-cyan:   0 0 8px rgba(31, 182, 255, .6);
-
-  --scanlines: repeating-linear-gradient(to bottom, rgba(255,255,255,.035) 0px, rgba(255,255,255,.035) 1px, transparent 1px, transparent 3px);
-  --grid-overlay: linear-gradient(rgba(31,182,255,.06) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(31,182,255,.06) 1px, transparent 1px);
-
-  --shadow-md: var(--shadow-2);
-  --shadow-lg: var(--shadow-3);
-}
-
-@keyframes kn-float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-10px); }
-}
-
 @layer base {
   body {
     background: var(--bg-base);
@@ -360,7 +290,8 @@
 }
 
 @layer components {
-  /* Legacy flat canvas (still used by the 4 KDL pages until rebuilt) */
+  /* Legacy classes still referenced by the KDL tool pages (loading/
+     error canvas + team cards) and the trade pages (top scan-line). */
   .cyber-bg {
     background: var(--bg-base);
     position: relative;
@@ -383,58 +314,9 @@
     @apply -translate-y-2;
     box-shadow: var(--shadow-3);
   }
-
-  .glitch-text {
-    animation: glitch 3s infinite alternate;
-  }
-
-  /* KDL pages: flat brand color instead of a gradient */
-  .gradient-text-violet {
-    color: var(--kff-violet);
-  }
-
-  .float {
-    animation: float 3s ease-in-out infinite;
-  }
-
-  .slide-in-up {
-    animation: slideInUp 0.8s ease-out;
-  }
 }
 
-@layer utilities {
-  .glow-violet {
-    text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
-  }
-}
-
-/* Animations */
 @keyframes scan {
   0% { transform: translateY(0); }
   100% { transform: translateY(100vh); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes glitch {
-  0% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(-2px, -2px); }
-  60% { transform: translate(2px, 2px); }
-  80% { transform: translate(2px, -2px); }
-  100% { transform: translate(0); }
 }
