@@ -58,7 +58,7 @@ export function NavBar({
             alt="Knuckleheads crown"
             className="kff-pixelated"
             style={{
-              width: 42, height: 42, transform: 'rotate(-30deg)',
+              width: 65, height: 65,
               filter: 'drop-shadow(0 0 6px color-mix(in srgb, var(--kff-yellow) 60%, transparent))',
             }}
           />
