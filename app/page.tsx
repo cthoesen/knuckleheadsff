@@ -56,7 +56,7 @@ export default function Home() {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg-base)' }}>
       <NavBar
-        logoSrc="/images/shared/icons/icon-knuckleheads-pixel.svg"
+        logoSrc="/images/shared/icons/knuckleheads-logo.svg"
         links={[{ label: 'Gallery', href: '/gallery' }]}
         leagues={[
           { code: 'KKL', name: 'Keeper League', href: '/kkl' },
