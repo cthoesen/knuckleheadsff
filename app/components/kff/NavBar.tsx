@@ -55,19 +55,19 @@ export function NavBar({
         {logoSrc && (
           <img
             src={logoSrc}
-            alt="Knuckleheads crown"
+            alt="Knuckleheads logo"
             className="kff-pixelated"
             style={{
-              width: 65, height: 65,
+              width: 'clamp(42px, 12vw, 65px)', height: 'clamp(42px, 12vw, 65px)',
               filter: 'drop-shadow(0 0 6px color-mix(in srgb, var(--kff-yellow) 60%, transparent))',
             }}
           />
         )}
         <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
-          <span style={{ fontFamily: 'var(--font-pixel)', fontSize: 'var(--pixel-sm)', color: 'var(--kff-yellow)', letterSpacing: '0.02em' }}>
+          <span style={{ fontFamily: 'var(--font-pixel)', fontSize: 'clamp(var(--pixel-sm), 3.4vw, var(--pixel-md))', color: 'var(--kff-yellow)', letterSpacing: '0.02em', whiteSpace: 'nowrap' }}>
             {brandTop}
           </span>
-          <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 'var(--text-xs)', letterSpacing: 'var(--tracking-widest)', textTransform: 'uppercase', color: 'var(--kff-ink-dim)', marginTop: 6 }}>
+          <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 'clamp(var(--text-2xs), 2.8vw, var(--text-sm))', letterSpacing: 'var(--tracking-widest)', textTransform: 'uppercase', color: 'var(--kff-ink-dim)', marginTop: 7, whiteSpace: 'nowrap' }}>
             {brandBottom}
           </span>
         </span>
@@ -139,9 +139,11 @@ export function NavBar({
         ))}
 
         {cta && (
-          <Button as="a" href={cta.href} variant="primary" size="sm">
-            {cta.label}
-          </Button>
+          <span className="hidden md:inline-flex">
+            <Button as="a" href={cta.href} variant="primary" size="sm">
+              {cta.label}
+            </Button>
+          </span>
         )}
       </nav>
     </header>
