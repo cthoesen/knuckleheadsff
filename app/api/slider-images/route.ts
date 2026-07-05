@@ -34,19 +34,29 @@ export async function GET(request: Request) {
 
     const files = fs.readdirSync(cardsDir);
 
+    // Serve resized/re-encoded variants via Vercel's image optimizer instead
+    // of the raw source files — the originals are ~1300px wide and ~215 KB
+    // each, but the MFL slider module renders them at a fraction of that.
+    // w=750 keeps them crisp at 2x DPR; browsers get webp automatically.
+    // The optimizer path needs the site-relative source path, not a full URL.
+    const urlPrefix = urlBase.replace('https://knuckleheadsff.com', '');
+
     const images = files
       .filter(file => {
         const ext = path.extname(file).toLowerCase();
         return ALLOWED_EXTENSIONS.includes(ext) && !file.startsWith('.');
       })
       .sort()
-      .map(file => `${urlBase}/${file}`);
+      .map(file => `https://knuckleheadsff.com/_next/image?url=${encodeURIComponent(`${urlPrefix}/${file}`)}&w=750&q=75`);
 
     return NextResponse.json(images, {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET',
-        'Cache-Control': 'public, max-age=300',
+        // s-maxage lets Vercel's edge cache serve this without invoking the
+        // function (the old max-age-only header was browser-cache only, so
+        // every visitor paid a serverless invocation — 1.2s TTFB when cold).
+        'Cache-Control': 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400',
       },
     });
   } catch (error: any) {
