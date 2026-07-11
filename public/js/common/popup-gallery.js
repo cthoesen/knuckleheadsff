@@ -115,12 +115,21 @@ function initPopupGallery(options) {
     document.body.appendChild(overlay);
   }
 
+  // The slider API returns image-optimizer URLs sized for the homepage
+  // module (w=750). For the full-screen lightbox, swap in a larger allowed
+  // width — the optimizer caps at the source image's real width, so this
+  // serves full resolution without ever upscaling. Non-optimizer URLs
+  // (no w= param) pass through untouched.
+  function lightboxUrl(url) {
+    return url.replace(/([?&])w=\d+/, '$1w=1920');
+  }
+
   function showImage(index) {
     if (!images || images.length === 0) return;
     currentIndex = ((index % images.length) + images.length) % images.length;
     imgEl.classList.add('pg-loading');
     imgEl.onload = function() { imgEl.classList.remove('pg-loading'); };
-    imgEl.src = images[currentIndex];
+    imgEl.src = lightboxUrl(images[currentIndex]);
     counterEl.textContent = (currentIndex + 1) + ' / ' + images.length;
   }
 
