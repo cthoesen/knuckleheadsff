@@ -14785,7 +14785,7 @@ if ("add_drop" === thisProgram) {
                     requestAnimationFrame(() => {
                         document.body.appendChild(F);
                     }),
-                    console.warn("ðŸš« Add/Drop disabled by League Calendar.");
+                    console.warn("🚫 Add/Drop disabled by League Calendar.");
             } else {
                 const isEmptyRank = (e) => null == e || ("string" == typeof e && "" === e.trim());
                 ["add", "drop"].forEach((e) => {
@@ -14999,7 +14999,7 @@ if ("add_drop" === thisProgram) {
                     Re = document.getElementById("position-filter");
                 function renderPlayerList(e, t, a) {
                     const r = document.getElementById(t);
-                    if (!r) return void console.warn(`â— Container ${t} not found.`);
+                    if (!r) return void console.warn(`❗ Container ${t} not found.`);
                     r.textContent = "";
                     const s = document.getElementById("add_pid_field_id") || { value: "" },
                         o = document.getElementById("drop_pid_field_id") || { value: "" },
@@ -15187,11 +15187,11 @@ if ("add_drop" === thisProgram) {
                         f =
                             "drop" === a
                                 ? e.sal
-                                    ? `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.opp ? ` â€¢ Opp: ${e.opp}` : ""}</small><br><small class="hide-col-pts">${isNaN(parseFloat(e.pwpts)) ? "Proj Pts: 0" : `Proj Pts: ${parseFloat(e.pwpts)}`}</small><small class="hide-col-proj">${isNaN(parseFloat(e.pts)) ? "YTD Pts: 0" : `YTD Pts: ${parseFloat(e.pts)}`}</small><small>${isNaN(parseFloat(e.sort_sal)) ? " â€¢ Salary: $0" : ` â€¢ Salary: $${parseFloat(e.sort_sal)}`}</small>`
-                                    : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.opp ? ` â€¢ Opp: ${e.opp}` : ""}</small><br><small class="hide-col-pts">${isNaN(parseFloat(e.pwpts)) ? "Proj Pts: 0" : `Proj Pts: ${parseFloat(e.pwpts)}`}</small><small class="hide-col-proj">${isNaN(parseFloat(e.pts)) ? "YTD Pts: 0" : `YTD Pts: ${parseFloat(e.pts)}`}</small><small>${e.roster ? ` â€¢ Roster: ${e.roster}` : ""}</small>`
+                                    ? `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.opp ? ` • Opp: ${e.opp}` : ""}</small><br><small class="hide-col-pts">${isNaN(parseFloat(e.pwpts)) ? "Proj Pts: 0" : `Proj Pts: ${parseFloat(e.pwpts)}`}</small><small class="hide-col-proj">${isNaN(parseFloat(e.pts)) ? "YTD Pts: 0" : `YTD Pts: ${parseFloat(e.pts)}`}</small><small>${isNaN(parseFloat(e.sort_sal)) ? " • Salary: $0" : ` • Salary: $${parseFloat(e.sort_sal)}`}</small>`
+                                    : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.opp ? ` • Opp: ${e.opp}` : ""}</small><br><small class="hide-col-pts">${isNaN(parseFloat(e.pwpts)) ? "Proj Pts: 0" : `Proj Pts: ${parseFloat(e.pwpts)}`}</small><small class="hide-col-proj">${isNaN(parseFloat(e.pts)) ? "YTD Pts: 0" : `YTD Pts: ${parseFloat(e.pts)}`}</small><small>${e.roster ? ` • Roster: ${e.roster}` : ""}</small>`
                                 : e.sal
-                                  ? `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.opp ? ` â€¢ Opp: ${e.opp}` : ""}</small><br><small class="hide-col-pts">${isNaN(parseFloat(e.pwpts)) ? "Proj Pts: 0" : `Proj Pts: ${parseFloat(e.pwpts)}`}</small><small class="hide-col-proj">${isNaN(parseFloat(e.pts)) ? "YTD Pts: 0" : `YTD Pts: ${parseFloat(e.pts)}`}</small><small>${isNaN(parseFloat(e.sort_sal)) ? " â€¢ Salary: $0" : ` â€¢ Salary: $${parseFloat(e.sort_sal)}`}</small>`
-                                  : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.opp ? ` â€¢ Opp: ${e.opp}` : ""}</small><br><small class="hide-col-pts">${isNaN(parseFloat(e.pwpts)) ? "Proj Pts: 0" : `Proj Pts: ${parseFloat(e.pwpts)}`}</small><small class="hide-col-proj">${isNaN(parseFloat(e.pts)) ? "YTD Pts: 0" : `YTD Pts: ${parseFloat(e.pts)}`}</small><small> â€¢ Status: FA </small>`;
+                                  ? `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.opp ? ` • Opp: ${e.opp}` : ""}</small><br><small class="hide-col-pts">${isNaN(parseFloat(e.pwpts)) ? "Proj Pts: 0" : `Proj Pts: ${parseFloat(e.pwpts)}`}</small><small class="hide-col-proj">${isNaN(parseFloat(e.pts)) ? "YTD Pts: 0" : `YTD Pts: ${parseFloat(e.pts)}`}</small><small>${isNaN(parseFloat(e.sort_sal)) ? " • Salary: $0" : ` • Salary: $${parseFloat(e.sort_sal)}`}</small>`
+                                  : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.opp ? ` • Opp: ${e.opp}` : ""}</small><br><small class="hide-col-pts">${isNaN(parseFloat(e.pwpts)) ? "Proj Pts: 0" : `Proj Pts: ${parseFloat(e.pwpts)}`}</small><small class="hide-col-proj">${isNaN(parseFloat(e.pts)) ? "YTD Pts: 0" : `YTD Pts: ${parseFloat(e.pts)}`}</small><small> • Status: FA </small>`;
                         const b = document.createElement("div");
                         d && "undefined" != typeof franchise_id && "0000" != franchise_id
                             ? (b.className =
@@ -15232,7 +15232,7 @@ if ("add_drop" === thisProgram) {
                               const a = !!t.closest("#add-player-list");
                               handlePlayerRowClick(t, a ? "add" : "drop");
                           })
-                        : console.warn("â— Could not find #add-drop-enhanced-ui for delegation."),
+                        : console.warn("❗ Could not find #add-drop-enhanced-ui for delegation."),
                         (se = "pwpts"),
                         (le = -1),
                         (oe = "pos"),
@@ -15402,7 +15402,7 @@ if ("add_drop" === thisProgram) {
                             a && a.remove(), (o = e.textContent.replace(/\(R\)/g, "").trim());
                         }
                         const l = e.querySelector(".player-pos")?.textContent || "",
-                            m = e.querySelector(".player-info small")?.textContent?.split("â€¢")[0]?.trim() || "";
+                            m = e.querySelector(".player-info small")?.textContent?.split("•")[0]?.trim() || "";
                         p && (p.textContent = `${l} ${o} (${m})`);
                         const y = e.classList.contains("player_locked"),
                             u = !!d && d.classList.contains("player_locked");
@@ -15436,7 +15436,7 @@ if ("add_drop" === thisProgram) {
                                     t &&
                                     "" === t.value.trim() &&
                                     (e.preventDefault(),
-                                    alert("ðŸš« Please enter a BBID Amount for your waiver claim."));
+                                    alert("🚫 Please enter a BBID Amount for your waiver claim."));
                             });
                         };
                     if (e < 700) {
@@ -15649,7 +15649,7 @@ if ("options_257" === thisProgram) {
                     requestAnimationFrame(() => {
                         document.body.appendChild(at);
                     }),
-                    console.warn("ðŸš« Add/Drop disabled by League Calendar.");
+                    console.warn("🚫 Add/Drop disabled by League Calendar.");
             } else {
                 const isEmptyRank = (e) => null == e || ("string" == typeof e && "" === e.trim());
                 ["picker"].forEach((e) => {
@@ -15671,7 +15671,7 @@ if ("options_257" === thisProgram) {
                     bt = "";
                 function renderPlayerList(e, t, a) {
                     const r = document.getElementById(t);
-                    if (!r) return void console.warn(`â— Container ${t} not found.`);
+                    if (!r) return void console.warn(`❗ Container ${t} not found.`);
                     r.textContent = "";
                     let s = Array.isArray(e) ? e.slice() : [];
                     if ("add" === a) {
@@ -15815,8 +15815,8 @@ if ("options_257" === thisProgram) {
                             u = "https://mflscripts.com/playerImages_80x107/free_agent.png";
                         let f = "";
                         f = e.sal
-                            ? `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.opp ? ` â€¢ Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.sort_sal)) ? " â€¢ Sal: $0" : ` â€¢ Sal: $${parseFloat(e.sort_sal)}`}</small>`
-                            : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.roster ? ` â€¢ Ros: ${e.roster}` : ""}</small>`;
+                            ? `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.opp ? ` • Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.sort_sal)) ? " • Sal: $0" : ` • Sal: $${parseFloat(e.sort_sal)}`}</small>`
+                            : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.roster ? ` • Ros: ${e.roster}` : ""}</small>`;
                         const b = document.createElement("div");
                         c && "undefined" != typeof franchise_id && "0000" != franchise_id
                             ? (b.className =
@@ -15884,7 +15884,7 @@ if ("options_257" === thisProgram) {
                               const a = !!t.closest("#add-player-list");
                               handlePlayerRowClick(t, a ? "add" : "drop");
                           })
-                        : console.warn("â— Could not find #add-drop-enhanced-ui for delegation."),
+                        : console.warn("❗ Could not find #add-drop-enhanced-ui for delegation."),
                         (mt = "pos"),
                         (ut = 1),
                         (yt = "pos"),
@@ -16108,7 +16108,7 @@ if ("csetup_cantadd" === thisProgram) {
                 Mt = document.getElementById("position-filter");
             function renderPlayerList(e, t, a) {
                 const r = document.getElementById(t);
-                if (!r) return void console.warn(`â— Container ${t} not found.`);
+                if (!r) return void console.warn(`❗ Container ${t} not found.`);
                 r.textContent = "";
                 let s = e;
                 if ("add" === a) {
@@ -16199,7 +16199,7 @@ if ("csetup_cantadd" === thisProgram) {
                     u =
                         "drop" === a
                             ? `<small>${e.nfl_team ?? "FA"}</small>`
-                            : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.opp ? ` â€¢ Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.adp)) ? " â€¢ ADP: 9999" : ` â€¢ ADP: ${parseFloat(e.adp)}`}</small>`;
+                            : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.opp ? ` • Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.adp)) ? " • ADP: 9999" : ` • ADP: ${parseFloat(e.adp)}`}</small>`;
                     const f = document.createElement("div");
                     (f.className = c
                         ? "add-drop-player-row disabled-locked " + (t % 2 == 0 ? "oddtablerow" : "eventablerow")
@@ -16222,7 +16222,7 @@ if ("csetup_cantadd" === thisProgram) {
                       const a = !!t.closest("#add-player-list");
                       handlePlayerRowClick(t, a ? "add" : "drop");
                   })
-                : console.warn("â— Could not find #add-drop-enhanced-ui for delegation."),
+                : console.warn("❗ Could not find #add-drop-enhanced-ui for delegation."),
                 (At = "fsrank"),
                 (Et = 1),
                 (Ct = "pos"),
@@ -16459,7 +16459,7 @@ if ("csetup_cantcut" === thisProgram) {
                 ca = document.getElementById("position-filter");
             function renderPlayerList(e, t, a) {
                 const r = document.getElementById(t);
-                if (!r) return void console.warn(`â— Container ${t} not found.`);
+                if (!r) return void console.warn(`❗ Container ${t} not found.`);
                 r.textContent = "";
                 let s = e;
                 if ("add" === a) {
@@ -16550,7 +16550,7 @@ if ("csetup_cantcut" === thisProgram) {
                     u =
                         "drop" === a
                             ? `<small>${e.nfl_team ?? "FA"}</small>`
-                            : `<small>${e.nfl_team ?? "FA"}${isNaN(parseFloat(e.adp)) ? " â€¢ ADP: 9999" : ` â€¢ ADP: ${parseFloat(e.adp)}`}</small>`;
+                            : `<small>${e.nfl_team ?? "FA"}${isNaN(parseFloat(e.adp)) ? " • ADP: 9999" : ` • ADP: ${parseFloat(e.adp)}`}</small>`;
                     const f = document.createElement("div");
                     (f.className = c
                         ? "add-drop-player-row disabled-locked " + (t % 2 == 0 ? "oddtablerow" : "eventablerow")
@@ -16573,7 +16573,7 @@ if ("csetup_cantcut" === thisProgram) {
                       const a = !!t.closest("#add-player-list");
                       handlePlayerRowClick(t, a ? "add" : "drop");
                   })
-                : console.warn("â— Could not find #add-drop-enhanced-ui for delegation."),
+                : console.warn("❗ Could not find #add-drop-enhanced-ui for delegation."),
                 (ta = "fsrank"),
                 (ra = 1),
                 (aa = "pos"),
@@ -16837,7 +16837,7 @@ if ("options_178" === thisProgram) {
                 Ma = document.getElementById("position-filter");
             function renderPlayerList(e, t, a) {
                 const r = document.getElementById(t);
-                if (!r) return void console.warn(`â— Container ${t} not found.`);
+                if (!r) return void console.warn(`❗ Container ${t} not found.`);
                 r.textContent = "";
                 let s = e;
                 if ("add" === a) {
@@ -16926,8 +16926,8 @@ if ("options_178" === thisProgram) {
                         y = "https://mflscripts.com/playerImages_80x107/free_agent.png";
                     let u = "";
                     u = e.sal
-                        ? `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.opp ? ` â€¢ Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.fsrank)) ? " â€¢ Rank: N/A" : ` â€¢ Rank: ${parseFloat(e.fsrank)}`}${isNaN(parseFloat(e.sort_sal)) ? " â€¢ Sal: $0" : ` â€¢ Sal: $${parseFloat(e.sort_sal)}`}</small>`
-                        : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.opp ? ` â€¢ Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.fsrank)) ? " â€¢ Rank: N/A" : ` â€¢ Rank: ${parseFloat(e.fsrank)}`}</small>`;
+                        ? `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.opp ? ` • Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.fsrank)) ? " • Rank: N/A" : ` • Rank: ${parseFloat(e.fsrank)}`}${isNaN(parseFloat(e.sort_sal)) ? " • Sal: $0" : ` • Sal: $${parseFloat(e.sort_sal)}`}</small>`
+                        : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.opp ? ` • Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.fsrank)) ? " • Rank: N/A" : ` • Rank: ${parseFloat(e.fsrank)}`}</small>`;
                     const f = document.createElement("div");
                     (f.className = c
                         ? "add-drop-player-row disabled-locked " + (t % 2 == 0 ? "oddtablerow" : "eventablerow")
@@ -16951,7 +16951,7 @@ if ("options_178" === thisProgram) {
                       const a = !!t.closest("#add-player-list");
                       handlePlayerRowClick(t, a ? "add" : "drop");
                   })
-                : console.warn("â— Could not find #add-drop-enhanced-ui for delegation."),
+                : console.warn("❗ Could not find #add-drop-enhanced-ui for delegation."),
                 (Aa = "projpts"),
                 (Ea = -1),
                 (Ca = "pos"),
@@ -17201,7 +17201,7 @@ if (
                 pr = document.getElementById("position-filter");
             function renderPlayerList(e, t, a) {
                 const r = document.getElementById(t);
-                if (!r) return void console.warn(`â— Container ${t} not found.`);
+                if (!r) return void console.warn(`❗ Container ${t} not found.`);
                 r.textContent = "";
                 let s = e;
                 if ("add" === a) {
@@ -17292,7 +17292,7 @@ if (
                     u =
                         "drop" === a
                             ? `<small>${e.nfl_team ?? "FA"}</small>`
-                            : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.opp ? ` â€¢ Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.adp)) ? " â€¢ ADP: 9999" : ` â€¢ ADP: ${parseFloat(e.adp)}`}</small>`;
+                            : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.opp ? ` • Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.adp)) ? " • ADP: 9999" : ` • ADP: ${parseFloat(e.adp)}`}</small>`;
                     const f = document.createElement("div");
                     (f.className = c
                         ? "add-drop-player-row disabled-locked " + (t % 2 == 0 ? "oddtablerow" : "eventablerow")
@@ -17315,7 +17315,7 @@ if (
                       const a = !!t.closest("#add-player-list");
                       handlePlayerRowClick(t, a ? "add" : "drop");
                   })
-                : console.warn("â— Could not find #add-drop-enhanced-ui for delegation."),
+                : console.warn("❗ Could not find #add-drop-enhanced-ui for delegation."),
                 (ar = "fsrank"),
                 (sr = 1),
                 (rr = "pos"),
@@ -17552,7 +17552,7 @@ if ("options_129" === thisProgram) {
                 Hr = document.getElementById("position-filter");
             function renderPlayerList(e, t, a) {
                 const r = document.getElementById(t);
-                if (!r) return void console.warn(`â— Container ${t} not found.`);
+                if (!r) return void console.warn(`❗ Container ${t} not found.`);
                 r.textContent = "";
                 let s = e;
                 if ("add" === a) {
@@ -17617,11 +17617,11 @@ if ("options_129" === thisProgram) {
                         y = "https://mflscripts.com/playerImages_80x107/free_agent.png";
                     "drop" === a
                         ? e.sal
-                            ? (infoLine = `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${isNaN(parseFloat(e.adp)) ? " â€¢ ADP: 9999" : ` â€¢ ADP: ${parseFloat(e.adp)}`}${isNaN(parseFloat(e.sort_sal)) ? " â€¢ Sal: $0" : ` â€¢ Sal: $${parseFloat(e.sort_sal)}`}</small><input type="hidden" name="PLAYERS" value="${e.id}"><div class="moveBtns"><button type="button" class="move-up-btn" title="Move Player Up 1 Spot">â†‘</button><button type="button" class="move-up-btn-twenty" title="Move Player Up 20 Spots">â†‘ 20</button><button type="button" class="move-down-btn" title="Move Player Down 1 Spot">â†“</button><button type="button" class="move-down-btn-twenty" title="Move Player Down 20 Spots">â†“ 20</button><button type="button" class="move-Up-down-btn-twenty" title="Move Player 20 Spots">â†‘ 20 â†“</button></div>`)
-                            : (infoLine = `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${isNaN(parseFloat(e.adp)) ? " â€¢ ADP: 9999" : ` â€¢ ADP: ${parseFloat(e.adp)}`}</small><input type="hidden" name="PLAYERS" value="${e.id}"><div class="moveBtns"><button type="button" class="move-up-btn" title="Move Player Up 1 Spot">â†‘</button><button type="button" class="move-up-btn-twenty" title="Move Player Up 20 Spots">â†‘ 20</button><button type="button" class="move-down-btn" title="Move Player Down 1 Spot">â†“</button><button type="button" class="move-down-btn-twenty" title="Move Player Down 20 Spots">â†“ 20</button><button type="button" class="move-Up-down-btn-twenty" title="Move Player 20 Spots">â†‘ 20 â†“</button></div>`)
+                            ? (infoLine = `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${isNaN(parseFloat(e.adp)) ? " • ADP: 9999" : ` • ADP: ${parseFloat(e.adp)}`}${isNaN(parseFloat(e.sort_sal)) ? " • Sal: $0" : ` • Sal: $${parseFloat(e.sort_sal)}`}</small><input type="hidden" name="PLAYERS" value="${e.id}"><div class="moveBtns"><button type="button" class="move-up-btn" title="Move Player Up 1 Spot">↑</button><button type="button" class="move-up-btn-twenty" title="Move Player Up 20 Spots">↑ 20</button><button type="button" class="move-down-btn" title="Move Player Down 1 Spot">↓</button><button type="button" class="move-down-btn-twenty" title="Move Player Down 20 Spots">↓ 20</button><button type="button" class="move-Up-down-btn-twenty" title="Move Player 20 Spots">↑ 20 ↓</button></div>`)
+                            : (infoLine = `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${isNaN(parseFloat(e.adp)) ? " • ADP: 9999" : ` • ADP: ${parseFloat(e.adp)}`}</small><input type="hidden" name="PLAYERS" value="${e.id}"><div class="moveBtns"><button type="button" class="move-up-btn" title="Move Player Up 1 Spot">↑</button><button type="button" class="move-up-btn-twenty" title="Move Player Up 20 Spots">↑ 20</button><button type="button" class="move-down-btn" title="Move Player Down 1 Spot">↓</button><button type="button" class="move-down-btn-twenty" title="Move Player Down 20 Spots">↓ 20</button><button type="button" class="move-Up-down-btn-twenty" title="Move Player 20 Spots">↑ 20 ↓</button></div>`)
                         : e.sal
-                          ? (infoLine = `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${isNaN(parseFloat(e.adp)) ? " â€¢ ADP: 9999" : ` â€¢ ADP: ${parseFloat(e.adp)}`}${isNaN(parseFloat(e.sort_sal)) ? " â€¢ Sal: $0" : ` â€¢ Sal: $${parseFloat(e.sort_sal)}`}</small>`)
-                          : (infoLine = `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${isNaN(parseFloat(e.adp)) ? " â€¢ ADP: 9999" : ` â€¢ ADP: ${parseFloat(e.adp)}`}</small>`);
+                          ? (infoLine = `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${isNaN(parseFloat(e.adp)) ? " • ADP: 9999" : ` • ADP: ${parseFloat(e.adp)}`}${isNaN(parseFloat(e.sort_sal)) ? " • Sal: $0" : ` • Sal: $${parseFloat(e.sort_sal)}`}</small>`)
+                          : (infoLine = `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${isNaN(parseFloat(e.adp)) ? " • ADP: 9999" : ` • ADP: ${parseFloat(e.adp)}`}</small>`);
                     const u = document.createElement("div");
                     (u.className = c
                         ? "add-drop-player-row disabled-locked " + (t % 2 == 0 ? "oddtablerow" : "eventablerow")
@@ -17649,7 +17649,7 @@ if ("options_129" === thisProgram) {
                       const a = !!t.closest("#add-player-list") ? "add" : "drop";
                       ("drop" !== a || e.target.classList.contains("select-btn")) && handlePlayerRowClick(t, a);
                   })
-                : console.warn("â— Could not find #add-drop-enhanced-ui for delegation."),
+                : console.warn("❗ Could not find #add-drop-enhanced-ui for delegation."),
                 (xr = "projpts"),
                 (Sr = -1),
                 renderPlayerList(vr, "add-player-list", "add"),
@@ -17783,7 +17783,7 @@ if ("options_129" === thisProgram) {
                             (t.style.cssText =
                                 "padding:.25rem;display:flex;align-items:center;gap:.25rem;margin:.25rem 0"),
                             (t.innerHTML =
-                                '<strong style="white-space:nowrap;font-size:1rem;font-weight:40">Move Player:</strong><select id="move-20-select" style="width:100%!important;padding:0!important;height:2rem;"><option value="">Direction</option><option value="up">â†‘ Up 20</option><option value="down">â†“ Down 20</option></select><button style="padding:.1875rem;height:2rem;" type="button" id="confirm-move-20">Confirm</button><button type="button" id="cancel-move-20" style="padding:.1875rem;height:2rem;">Cancel</button>'),
+                                '<strong style="white-space:nowrap;font-size:1rem;font-weight:40">Move Player:</strong><select id="move-20-select" style="width:100%!important;padding:0!important;height:2rem;"><option value="">Direction</option><option value="up">↑ Up 20</option><option value="down">↓ Down 20</option></select><button style="padding:.1875rem;height:2rem;" type="button" id="confirm-move-20">Confirm</button><button type="button" id="cancel-move-20" style="padding:.1875rem;height:2rem;">Cancel</button>'),
                             a.insertAdjacentElement("afterend", t),
                             t.querySelector("#confirm-move-20").addEventListener("click", () => {
                                 const e = t.querySelector("#move-20-select").value;
@@ -18098,7 +18098,7 @@ if ("options_52" === thisProgram || "new_predraft" === thisProgram) {
             new Set(["name", "pos", "nfl_team"]);
             function renderPlayerList(e, t, a) {
                 const r = document.getElementById(t);
-                if (!r) return void console.warn(`â— Container ${t} not found.`);
+                if (!r) return void console.warn(`❗ Container ${t} not found.`);
                 r.textContent = "";
                 let s = e;
                 if ("add" === a) {
@@ -18164,17 +18164,17 @@ if ("options_52" === thisProgram || "new_predraft" === thisProgram) {
                     let u = "";
                     "drop" === a
                         ? e.sal
-                            ? ((u += `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${isNaN(parseFloat(e.adp)) ? " â€¢ ADP: 9999" : ` â€¢ ADP: ${parseFloat(e.adp)}`}${isNaN(parseFloat(e.sort_sal)) ? " â€¢ Sal: $0" : ` â€¢ Sal: $${parseFloat(e.sort_sal)}`}</small>`),
+                            ? ((u += `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${isNaN(parseFloat(e.adp)) ? " • ADP: 9999" : ` • ADP: ${parseFloat(e.adp)}`}${isNaN(parseFloat(e.sort_sal)) ? " • Sal: $0" : ` • Sal: $${parseFloat(e.sort_sal)}`}</small>`),
                               (u += Nr
                                   ? `<input type="hidden" name="PLAYER_PICK" value="${e.id}">`
-                                  : `<input type="hidden" name="PICKS" value="${e.id}"><div class="moveBtns"><button type="button" class="move-up-btn" title="Move Player Up 1 Spot">â†‘</button><button type="button" class="move-up-btn-twenty" title="Move Player Up 20 Spots">â†‘ 20</button><button type="button" class="move-down-btn" title="Move Player Down 1 Spot">â†“</button><button type="button" class="move-down-btn-twenty" title="Move Player Down 20 Spots">â†“ 20</button><button type="button" class="move-Up-down-btn-twenty" title="Move Player 20 Spots">â†‘ 20 â†“</button></div>`))
-                            : ((u += `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${isNaN(parseFloat(e.adp)) ? " â€¢ ADP: 9999" : ` â€¢ ADP: ${parseFloat(e.adp)}`}</small>`),
+                                  : `<input type="hidden" name="PICKS" value="${e.id}"><div class="moveBtns"><button type="button" class="move-up-btn" title="Move Player Up 1 Spot">↑</button><button type="button" class="move-up-btn-twenty" title="Move Player Up 20 Spots">↑ 20</button><button type="button" class="move-down-btn" title="Move Player Down 1 Spot">↓</button><button type="button" class="move-down-btn-twenty" title="Move Player Down 20 Spots">↓ 20</button><button type="button" class="move-Up-down-btn-twenty" title="Move Player 20 Spots">↑ 20 ↓</button></div>`))
+                            : ((u += `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${isNaN(parseFloat(e.adp)) ? " • ADP: 9999" : ` • ADP: ${parseFloat(e.adp)}`}</small>`),
                               (u += Nr
                                   ? `<input type="hidden" name="PLAYER_PICK" value="${e.id}">`
-                                  : `<input type="hidden" name="PICKS" value="${e.id}"><div class="moveBtns"><button type="button" class="move-up-btn" title="Move Player Up 1 Spot">â†‘</button><button type="button" class="move-up-btn-twenty" title="Move Player Up 20 Spots">â†‘ 20</button><button type="button" class="move-down-btn" title="Move Player Down 1 Spot">â†“</button><button type="button" class="move-down-btn-twenty" title="Move Player Down 20 Spots">â†“ 20</button><button type="button" class="move-Up-down-btn-twenty" title="Move Player 20 Spots">â†‘ 20 â†“</button></div>`))
+                                  : `<input type="hidden" name="PICKS" value="${e.id}"><div class="moveBtns"><button type="button" class="move-up-btn" title="Move Player Up 1 Spot">↑</button><button type="button" class="move-up-btn-twenty" title="Move Player Up 20 Spots">↑ 20</button><button type="button" class="move-down-btn" title="Move Player Down 1 Spot">↓</button><button type="button" class="move-down-btn-twenty" title="Move Player Down 20 Spots">↓ 20</button><button type="button" class="move-Up-down-btn-twenty" title="Move Player 20 Spots">↑ 20 ↓</button></div>`))
                         : e.sal
-                          ? (u += `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${isNaN(parseFloat(e.adp)) ? " â€¢ ADP: 9999" : ` â€¢ ADP: ${parseFloat(e.adp)}`}${isNaN(parseFloat(e.sort_sal)) ? " â€¢ Sal: $0" : ` â€¢ Sal: $${parseFloat(e.sort_sal)}`}</small>`)
-                          : (u += `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${isNaN(parseFloat(e.adp)) ? " â€¢ ADP: 9999" : ` â€¢ ADP: ${parseFloat(e.adp)}`}</small>`);
+                          ? (u += `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${isNaN(parseFloat(e.adp)) ? " • ADP: 9999" : ` • ADP: ${parseFloat(e.adp)}`}${isNaN(parseFloat(e.sort_sal)) ? " • Sal: $0" : ` • Sal: $${parseFloat(e.sort_sal)}`}</small>`)
+                          : (u += `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${isNaN(parseFloat(e.adp)) ? " • ADP: 9999" : ` • ADP: ${parseFloat(e.adp)}`}</small>`);
                     let f = "";
                     f = as
                         ? `${isNaN(parseFloat(e.myrank)) ? "9999" : e.myrank}`
@@ -18209,7 +18209,7 @@ if ("options_52" === thisProgram || "new_predraft" === thisProgram) {
                       const a = !!t.closest("#add-player-list") ? "add" : "drop";
                       ("drop" !== a || Nr || e.target.classList.contains("select-btn")) && handlePlayerRowClick(t, a);
                   })
-                : console.warn("â— Could not find #add-drop-enhanced-ui for delegation."),
+                : console.warn("❗ Could not find #add-drop-enhanced-ui for delegation."),
                 (Zr = as ? "myrank" : "fsrank"),
                 (es = 1),
                 renderPlayerList(Vr, "add-player-list", "add"),
@@ -18379,7 +18379,7 @@ if ("options_52" === thisProgram || "new_predraft" === thisProgram) {
                             (t.style.cssText =
                                 "padding:.25rem;display:flex;align-items:center;gap:.25rem;margin:.25rem 0"),
                             (t.innerHTML =
-                                '<strong style="white-space:nowrap;font-size:1rem;font-weight:40">Move Player:</strong><select id="move-20-select" style="width:100%!important;padding:0!important;height:2rem;"><option value="">Direction</option><option value="up">â†‘ Up 20</option><option value="down">â†“ Down 20</option></select><button style="padding:.1875rem;height:2rem;" type="button" id="confirm-move-20">Confirm</button><button type="button" id="cancel-move-20" style="padding:.1875rem;height:2rem;">Cancel</button>'),
+                                '<strong style="white-space:nowrap;font-size:1rem;font-weight:40">Move Player:</strong><select id="move-20-select" style="width:100%!important;padding:0!important;height:2rem;"><option value="">Direction</option><option value="up">↑ Up 20</option><option value="down">↓ Down 20</option></select><button style="padding:.1875rem;height:2rem;" type="button" id="confirm-move-20">Confirm</button><button type="button" id="cancel-move-20" style="padding:.1875rem;height:2rem;">Cancel</button>'),
                             a.insertAdjacentElement("afterend", t),
                             t.querySelector("#confirm-move-20").addEventListener("click", () => {
                                 const e = t.querySelector("#move-20-select").value;
@@ -18592,7 +18592,7 @@ if ("contest_lineup" === thisProgram) {
                 eo = document.getElementById("position-filter");
             function renderPlayerList(e, t, a) {
                 const r = document.getElementById(t);
-                if (!r) return void console.warn(`â— Container ${t} not found.`);
+                if (!r) return void console.warn(`❗ Container ${t} not found.`);
                 r.textContent = "";
                 let s = e;
                 if ("add" === a) {
@@ -18681,8 +18681,8 @@ if ("contest_lineup" === thisProgram) {
                         y = "https://mflscripts.com/playerImages_80x107/free_agent.png";
                     let u = "";
                     u = e.sal
-                        ? `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.opp ? ` â€¢ Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.sort_sal)) ? " â€¢ Sal: $0" : ` â€¢ Sal: $${parseFloat(e.sort_sal)}`}</small>`
-                        : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.opp ? ` â€¢ Opp: ${e.opp}` : ""}</small>`;
+                        ? `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.opp ? ` • Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.sort_sal)) ? " • Sal: $0" : ` • Sal: $${parseFloat(e.sort_sal)}`}</small>`
+                        : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.opp ? ` • Opp: ${e.opp}` : ""}</small>`;
                     const f = document.createElement("div");
                     (f.className = c
                         ? "add-drop-player-row disabled-locked " + (t % 2 == 0 ? "oddtablerow" : "eventablerow")
@@ -18706,7 +18706,7 @@ if ("contest_lineup" === thisProgram) {
                       const a = !!t.closest("#add-player-list");
                       handlePlayerRowClick(t, a ? "add" : "drop");
                   })
-                : console.warn("â— Could not find #add-drop-enhanced-ui for delegation."),
+                : console.warn("❗ Could not find #add-drop-enhanced-ui for delegation."),
                 (zs = "pwpts"),
                 (Ws = -1),
                 (Ys = "pos"),
@@ -19014,7 +19014,7 @@ if ("options_256" === thisProgram) {
                 To = document.getElementById("position-filter");
             function renderPlayerList(e, t, a) {
                 const r = document.getElementById(t);
-                if (!r) return void console.warn(`â— Container ${t} not found.`);
+                if (!r) return void console.warn(`❗ Container ${t} not found.`);
                 r.textContent = "";
                 let s = e;
                 if ("add" === a) {
@@ -19105,11 +19105,11 @@ if ("options_256" === thisProgram) {
                     u =
                         "drop" === a
                             ? e.sal
-                                ? `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.opp ? ` â€¢ Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.sort_sal)) ? " â€¢ Sal: $0" : ` â€¢ Sal: $${parseFloat(e.sort_sal)}`}</small><input type="hidden" name="ROSTER" value="${e.id}">`
-                                : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.opp ? ` â€¢ Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.adp)) ? " â€¢ ADP: 9999" : ` â€¢ ADP: ${parseFloat(e.adp)}`}</small><input type="hidden" name="ROSTER" value="${e.id}">`
+                                ? `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.opp ? ` • Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.sort_sal)) ? " • Sal: $0" : ` • Sal: $${parseFloat(e.sort_sal)}`}</small><input type="hidden" name="ROSTER" value="${e.id}">`
+                                : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.opp ? ` • Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.adp)) ? " • ADP: 9999" : ` • ADP: ${parseFloat(e.adp)}`}</small><input type="hidden" name="ROSTER" value="${e.id}">`
                             : e.sal
-                              ? `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.opp ? ` â€¢ Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.sort_sal)) ? " â€¢ Sal: $0" : ` â€¢ Sal: $${parseFloat(e.sort_sal)}`}</small>`
-                              : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.opp ? ` â€¢ Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.adp)) ? " â€¢ ADP: 9999" : ` â€¢ ADP: ${parseFloat(e.adp)}`}</small>`;
+                              ? `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.opp ? ` • Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.sort_sal)) ? " • Sal: $0" : ` • Sal: $${parseFloat(e.sort_sal)}`}</small>`
+                              : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.opp ? ` • Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.adp)) ? " • ADP: 9999" : ` • ADP: ${parseFloat(e.adp)}`}</small>`;
                     const f = document.createElement("div");
                     (f.className = c
                         ? "add-drop-player-row disabled-locked " + (t % 2 == 0 ? "oddtablerow" : "eventablerow")
@@ -19133,7 +19133,7 @@ if ("options_256" === thisProgram) {
                       const a = !!t.closest("#add-player-list");
                       handlePlayerRowClick(t, a ? "add" : "drop");
                   })
-                : console.warn("â— Could not find #add-drop-enhanced-ui for delegation."),
+                : console.warn("❗ Could not find #add-drop-enhanced-ui for delegation."),
                 (bo = "projpts"),
                 (vo = -1),
                 (go = "pos"),
@@ -19512,7 +19512,7 @@ if ("options_43" === thisProgram) {
                     hl = document.getElementById("position-filter");
                 function renderPlayerList(e, t, a) {
                     const r = document.getElementById(t);
-                    if (!r) return void console.warn(`â— Container ${t} not found.`);
+                    if (!r) return void console.warn(`❗ Container ${t} not found.`);
                     r.textContent = "";
                     let s = e;
                     const o = document.getElementById("add_pid_field_id") || { value: "" },
@@ -19581,8 +19581,8 @@ if ("options_43" === thisProgram) {
                             y = "https://mflscripts.com/playerImages_80x107/free_agent.png";
                         let u = "";
                         u = e.sal
-                            ? `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.opp ? ` â€¢ Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.sort_sal)) ? " â€¢ Sal: $0" : ` â€¢ Sal: $${parseFloat(e.sort_sal)}`}</small>`
-                            : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` â€¢ Bye: ${e.bye_week}` : " â€¢ Bye: N/A"}${e.opp ? ` â€¢ Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.fsrank)) ? " â€¢ Rank: N/A" : ` â€¢ Rank: ${parseFloat(e.fsrank)}`}</small>`;
+                            ? `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.opp ? ` • Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.sort_sal)) ? " • Sal: $0" : ` • Sal: $${parseFloat(e.sort_sal)}`}</small>`
+                            : `<small>${e.nfl_team ?? "FA"}${e.bye_week ? ` • Bye: ${e.bye_week}` : " • Bye: N/A"}${e.opp ? ` • Opp: ${e.opp}` : ""}${isNaN(parseFloat(e.fsrank)) ? " • Rank: N/A" : ` • Rank: ${parseFloat(e.fsrank)}`}</small>`;
                         const f = document.createElement("div");
                         (f.className = c
                             ? "add-drop-player-row disabled-locked " + (t % 2 == 0 ? "oddtablerow" : "eventablerow")
@@ -19603,7 +19603,7 @@ if ("options_43" === thisProgram) {
                           const a = !!t.closest("#add-player-list");
                           handlePlayerRowClick(t, a ? "add" : "drop");
                       })
-                    : console.warn("â— Could not find #add-drop-enhanced-ui for delegation."),
+                    : console.warn("❗ Could not find #add-drop-enhanced-ui for delegation."),
                     (al = "projpts"),
                     (sl = -1),
                     (rl = "pos"),
@@ -19679,7 +19679,7 @@ if ("options_43" === thisProgram) {
                             a && a.remove(), (o = e.textContent.replace(/\(R\)/g, "").trim());
                         }
                         const c = e.querySelector(".player-pos")?.textContent || "",
-                            p = e.querySelector(".player-info small")?.textContent?.split("â€¢")[0]?.trim() || "";
+                            p = e.querySelector(".player-info small")?.textContent?.split("•")[0]?.trim() || "";
                         d.textContent = `${c} ${o} (${p})`;
                     }
                     const c = document.getElementById("add_drop_submit");
@@ -19698,7 +19698,7 @@ if ("options_43" === thisProgram) {
                                 const t = document.querySelector('input[name="OPENING_BID"]');
                                 t &&
                                     "" === t.value.trim() &&
-                                    (e.preventDefault(), alert("ðŸš« Please enter a Amount for your auction."));
+                                    (e.preventDefault(), alert("🚫 Please enter a Amount for your auction."));
                             });
                         };
                     if (e < 700) {

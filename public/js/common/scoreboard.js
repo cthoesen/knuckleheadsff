@@ -163,7 +163,7 @@ function update_player_points(pid, playerObject) {
 		points = score_player(key, pos);
 
 	} else {
-		// No stats found yet (or mismatch) â†’ keep LSMLiveScoring score as fallback
+		// No stats found yet (or mismatch) → keep LSMLiveScoring score as fallback
 		const n = Number(playerObject?.score);
 		return Number.isFinite(n) ? format_points(n) : format_points(0);
 	}
@@ -417,7 +417,7 @@ async function downloadAndExtractScoringFunctions(url) {
 		scriptTags.forEach(tag => {
 			const text = tag.textContent || "";
 
-			// Full block containing "var ls_nfl_games = []" â€” this is your big script
+			// Full block containing "var ls_nfl_games = []" — this is your big script
 			if (text.includes('var ls_nfl_games = []')) {
 				lsNflGamesScript = text;
 			}
@@ -461,7 +461,7 @@ function hasAnyHiddenStarters() {
 	return false;
 }
 
-// Public entry point â€“ replace your existing fetchScoringFunctions with this.
+// Public entry point – replace your existing fetchScoringFunctions with this.
 async function fetchScoringFunctions() {
 	//if (real_ls_week > endWeek || startWeek > real_ls_week) return;
 	const url = `${baseURLDynamic}/${year}/ajax_ls?L=${league_id}&PRINTER=1`;
@@ -1144,7 +1144,7 @@ function LSMparseArrays() {
 				const bIsHalf = (bSecs === 1800);
 
 				if (aIsHalf !== bIsHalf) return aIsHalf ? 1 : -1;
-				return aSecs - bSecs; // least â†’ most time left
+				return aSecs - bSecs; // least → most time left
 			}
 
 			return Number.parseInt(a.kickoff, 10) - Number.parseInt(b.kickoff, 10);
@@ -1170,7 +1170,7 @@ function LSMparseArrays() {
 			for (const team of matchup.team) {
 				const id = team.id;
 				teamStatusById[id] = status;
-				teamSecondsById[id] = matchupSecs; // âœ… team clock comes from the matchup/game clock
+				teamSecondsById[id] = matchupSecs; // ✅ team clock comes from the matchup/game clock
 			}
 		}
 	}
@@ -1202,7 +1202,7 @@ function LSMparseArrays() {
 					playerScoresMap[playerID] = playerScore;
 				}
 			}
-			// if object but empty, that's fine â€“ just leaves map empty
+			// if object but empty, that's fine – just leaves map empty
 		}
 
 		// cache even if it's empty, so we don't keep re-checking
@@ -1267,7 +1267,7 @@ function LSMparseArrays() {
 					const teamId = playerObject.team;
 					const teamStatus = teamStatusById[teamId];
 
-					// âœ… TEAM-ONLY seconds remaining (never use player feed)
+					// ✅ TEAM-ONLY seconds remaining (never use player feed)
 					let gsr = teamSecondsById[teamId];
 
 					// If team not found (BYE / FA / bad team code), treat as 0
@@ -1459,7 +1459,7 @@ function LSMparseArrays() {
 					awayProb = parseFloat(winProbabilities.teamAway);
 				}
 
-				// Fallback if anything blew up â†’ 50/50
+				// Fallback if anything blew up → 50/50
 				if (!Number.isFinite(homeProb) || !Number.isFinite(awayProb)) {
 					homeFr.winProb = "50%";
 					awayFr.winProb = "50%";
@@ -1589,7 +1589,7 @@ function LSMparseArrays() {
 				const teamId = playerObject.team;
 				const teamStatus = teamStatusById[teamId];
 
-				// âœ… TEAM-ONLY seconds remaining (never use player feed)
+				// ✅ TEAM-ONLY seconds remaining (never use player feed)
 				let gsr = teamSecondsById[teamId];
 
 				// If team not found (BYE / FA / bad team code), treat as 0
@@ -1736,7 +1736,7 @@ function lsmRandom() {
 	return LSM_RAND_SEED / 4294967296;
 }
 
-// Gaussian using that RNG (Boxâ€“Muller)
+// Gaussian using that RNG (Box–Muller)
 function lsmGaussianRandom(mean = 0, stdev = 1) {
 	let spare = lsmGaussianRandom._spare;
 	if (spare !== undefined) {
@@ -1783,7 +1783,7 @@ function calculateWinProbability(
 	let winProbabilityAway;
 	let winProbabilityHome;
 
-	// 1) Both sides out of time â†’ final result
+	// 1) Both sides out of time → final result
 	if (TimeRemAway === 0 && TimeRemHome === 0) {
 		if (CurPtsAway > CurPtsHome) {
 			winProbabilityAway = 1;
@@ -2252,7 +2252,7 @@ async function getLSMLiveScoring() {
 			// Start from schedule matchups
 			let weeklyMatchups = asArray(weekly.matchup);
 
-			// âœ… If BYEs are disabled, remove ALL schedule-defined BYE matchups right here
+			// ✅ If BYEs are disabled, remove ALL schedule-defined BYE matchups right here
 			if (!lsm_byeMatchups) {
 				weeklyMatchups = weeklyMatchups.filter(mu => {
 					const frArr = asArray(mu?.franchise);
@@ -2277,7 +2277,7 @@ async function getLSMLiveScoring() {
 			}
 
 			// Capture BYE matchups currently in live (these may be forced from applyByeLogicToLSM)
-			// âœ… If BYEs are disabled, don't capture/append any
+			// ✅ If BYEs are disabled, don't capture/append any
 			let byeMatchupsFromLive = lsm_byeMatchups ? captureByeMatchupsFrom(lsObj) : [];
 
 			// Keep only BYE matchups for franchises that DO NOT already have a schedule-defined BYE
@@ -2441,7 +2441,7 @@ async function getLSMLiveScoring() {
 					const fid = String(fr?.id ?? "");
 					if (!fid || fid === "BYE" || fid === "AVG") return;
 
-					// store even if it's "0" / "0.00" â€” that's still a real value
+					// store even if it's "0" / "0.00" — that's still a real value
 					if (fr && fr.adj_score != null && fr.adj_score !== "") {
 						adjByFid[fid] = fr.adj_score;
 					}
@@ -2601,10 +2601,10 @@ async function getLSMLiveScoring() {
 			// IMPORTANT: previous week should not recompute from ls_stats
 			if (usedFallbackCache) {
 				if (canUseCache && !allFinalForRealWeek) {
-					// Games not final yet â€” use stats-based scoring
+					// Games not final yet — use stats-based scoring
 					scoreAllFranchisesCurrentWeek(LSMLiveScoring);
 				} else {
-					// Games final OR not cache week â€” just normalize API scores
+					// Games final OR not cache week — just normalize API scores
 					normalizeNonCurrentWeekScores(LSMLiveScoring, real_ls_week);
 				}
 			}
@@ -3866,7 +3866,7 @@ document.addEventListener("click", function (e) {
 		const pos = liveScoreEl.dataset.pos || null;
 		const team = liveScoreEl.dataset.team || null;
 
-		// âœ… Get breakdown rows from ls_explain
+		// ✅ Get breakdown rows from ls_explain
 		const {
 			rows
 		} = ls_explain_points_rows(playerID, {
@@ -3918,7 +3918,7 @@ document.addEventListener("click", function (e) {
 			if (appendStats) {
 				const nameDiv = document.createElement("div");
 				nameDiv.className = "teamBox-caption-player";
-				nameDiv.textContent = `${playerName}${pos ? " Â· " + pos : ""}${team ? " Â· " + team : ""}`;
+				nameDiv.textContent = `${playerName}${pos ? " · " + pos : ""}${team ? " · " + team : ""}`;
 				appendStats.parentNode.insertBefore(nameDiv, appendStats);
 			}
 		}
@@ -3946,7 +3946,7 @@ document.addEventListener("click", function (e) {
 			ptsDiv.appendChild(pointsElement);
 		}
 
-		// âœ… keep your subtotal in explain mode (unchanged)
+		// ✅ keep your subtotal in explain mode (unchanged)
 		if (rows.length) {
 			if (Number.isFinite(pointsNum) && Math.abs(totalPoints - pointsNum) > EPS) {
 				const adjustment = pointsNum - totalPoints;
@@ -4057,7 +4057,7 @@ document.addEventListener("click", function (e) {
 			alert("No stats");
 		}
 
-		return; // âœ… IMPORTANT: don't run fetch code too
+		return; // ✅ IMPORTANT: don't run fetch code too
 	}
 
 	const url = `${baseURLDynamic}/${year}/detailed?L=${league_id}&W=${real_ls_week}&P=${playerID}&PRINTER=1`;
@@ -4121,7 +4121,7 @@ document.addEventListener("click", function (e) {
 				if (appendStats) {
 					const nameDiv = document.createElement("div");
 					nameDiv.className = "teamBox-caption-player";
-					nameDiv.textContent = nameDiv.textContent = `${playerName}${pos ? " Â· " + pos : ""}${team ? " Â· " + team : ""}`;
+					nameDiv.textContent = nameDiv.textContent = `${playerName}${pos ? " · " + pos : ""}${team ? " · " + team : ""}`;
 					appendStats.parentNode.insertBefore(nameDiv, appendStats);
 				}
 			}
@@ -4676,7 +4676,7 @@ function buildFranchiseRowDom({
 		scoreEl.textContent = franchise.score ?? "";
 		frag.appendChild(scoreEl);
 
-		// âœ… add winner mark for AVG (requested)
+		// ✅ add winner mark for AVG (requested)
 		if (LSMpreviousWeek || LSMcurrentWeek) {
 			winnerEl = document.createElement("div");
 			winnerEl.className = "winnerMark";
@@ -5224,7 +5224,7 @@ async function LSMbuildMatchupsPlayers(LSMmatchupIndex) {
 	}
 	const nflByeWeekByTeam = Object.create(null);
 
-	// âœ… correct path
+	// ✅ correct path
 	const byeTeams = reportNflByeWeeks_ar?.nflByeWeeks?.team;
 
 	if (Array.isArray(byeTeams)) {

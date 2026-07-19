@@ -218,10 +218,10 @@ function getCacheFiveMinutes() {
 	const stored = Number.isFinite(storedRaw) ? computeFiveMinBucketMs(storedRaw) : NaN;
 	const nowBucket = computeFiveMinBucketMs(Date.now());
 
-	// âœ… if stored is valid and is the same or newer, keep it
+	// ✅ if stored is valid and is the same or newer, keep it
 	if (Number.isFinite(stored) && stored > 0 && stored >= nowBucket) return stored;
 
-	// âœ… otherwise write the current one
+	// ✅ otherwise write the current one
 	try {
 		localStorage.setItem(FIVE_MIN_KEY, String(nowBucket));
 	} catch {}
@@ -241,7 +241,7 @@ function resolveFiveMinBucket(bucketArg) {
 	const b = Number(bucketArg);
 	if (Number.isFinite(b) && b > 0) return b;
 
-	// âœ… use the already-synced global (set by getCacheFiveMinutes + storage listener)
+	// ✅ use the already-synced global (set by getCacheFiveMinutes + storage listener)
 	const g = Number(cacheFiveMinutes);
 	if (Number.isFinite(g) && g > 0) return g;
 
@@ -371,7 +371,7 @@ function tryAcquireLock(lockKey, ttlMs) {
 		return false;
 	}
 
-	// âœ… Re-entrant: if we already hold a valid lock, keep it
+	// ✅ Re-entrant: if we already hold a valid lock, keep it
 	if (curObj && typeof curObj.exp === "number" && curObj.exp > now && curObj.tab === tabId) {
 		return true;
 	}
@@ -575,7 +575,7 @@ function fetchOnceCrossTab(opts) {
 			});
 		}
 
-		// âœ… We think we have the lock. Now we must "settle + confirm"
+		// ✅ We think we have the lock. Now we must "settle + confirm"
 		logApi("LOCK ACQUIRED (pre-confirm)", {
 			cacheKey,
 			lockKey,
@@ -616,7 +616,7 @@ function fetchOnceCrossTab(opts) {
 				});
 			}
 
-			// âœ… Confirmed winner
+			// ✅ Confirmed winner
 			logApi("LOCK CONFIRMED (this tab will fetch)", {
 				cacheKey,
 				lockKey,
@@ -725,7 +725,7 @@ window.addEventListener("storage", (e) => {
 		return;
 	}
 
-	// MyLeagues (shared) - âœ… ONLY accept the CURRENT 6-hour bucket
+	// MyLeagues (shared) - ✅ ONLY accept the CURRENT 6-hour bucket
 	const mlKey = "cache_myLeagues_" + cacheSixHours;
 	if (e.key === mlKey) {
 		const parsed = safeJSONParse(e.newValue);
@@ -743,7 +743,7 @@ window.addEventListener("storage", (e) => {
 		return;
 	}
 
-	// Rosters (league-specific) âœ… PATCH: pass bucket from key suffix
+	// Rosters (league-specific) ✅ PATCH: pass bucket from key suffix
 	const rPrefix = "cache_roster_" + year + "_" + league_id + "_";
 	if (e.key.startsWith(rPrefix)) {
 		const parsed = safeJSONParse(e.newValue, () => {
@@ -792,7 +792,7 @@ window.addEventListener("storage", (e) => {
 		return;
 	}
 
-	// Player DB text (shared per-year) âœ… PATCH: load on direct write too
+	// Player DB text (shared per-year) ✅ PATCH: load on direct write too
 	const pdbKey = `playerDB_${year}`;
 	if (e.key === pdbKey) {
 		try {
@@ -806,7 +806,7 @@ window.addEventListener("storage", (e) => {
 		return;
 	}
 
-	// Player DB refresh signal (shared per-year) âœ… PATCH: always reload from storage
+	// Player DB refresh signal (shared per-year) ✅ PATCH: always reload from storage
 	const pdbUpdatedKey = `playerDB_${year}_updatedAt`;
 	if (e.key === pdbUpdatedKey) {
 		try {
@@ -992,7 +992,7 @@ function allGamesFinalFromLiveFeed(weekNum) {
 	});
 })();
 
-// âœ… No week: current-week liveScoring only
+// ✅ No week: current-week liveScoring only
 function bcNameLive(year, leagueId) {
 	return `MFL_LIVESCORING_${year}_${leagueId}`;
 }
@@ -1016,7 +1016,7 @@ function ensureLiveScoringChannel(year, leagueId) {
 		const msg = ev.data;
 		if (!msg || msg.type !== "liveScoring") return;
 
-		// âœ… sanity: match league + year only
+		// ✅ sanity: match league + year only
 		if (String(msg.league_id) !== String(leagueId)) return;
 		if (String(msg.year) !== String(year)) return;
 
@@ -1029,7 +1029,7 @@ function ensureLiveScoringChannel(year, leagueId) {
 async function getLiveScoringAPI() {
 	if (!liveScoringWeek || !league_id) return null;
 
-	// âœ… No week in lock: current-week only
+	// ✅ No week in lock: current-week only
 	const lockKey = `lock_liveScoring_${year}_${league_id}`;
 	const bc = ensureLiveScoringChannel(year, league_id);
 
@@ -1241,7 +1241,7 @@ async function lsm_get_stats(scheduleNext = true) {
 				console.error("Delayed update chain failed:", err);
 			}
 
-			// âœ… stop AFTER final UI update, regardless of UI errors
+			// ✅ stop AFTER final UI update, regardless of UI errors
 			if (isAllFinal) {
 				lsmStopLiveStatsPolling();
 				return; // prevents scheduling next timeout
@@ -1428,7 +1428,7 @@ function preloadPlayerDB(year) {
 
 		window.eval(text);
 
-		// âœ… PATCH: assign if not populated (not just undefined)
+		// ✅ PATCH: assign if not populated (not just undefined)
 		if (!dbLooksPopulated(window.playerDatabase) && typeof playerDatabase !== "undefined") {
 			window.playerDatabase = playerDatabase;
 		}
@@ -1458,7 +1458,7 @@ async function downloadAndCachePlayerDB(year) {
 
 	window.eval(text);
 
-	// âœ… PATCH: assign if not populated (not just undefined)
+	// ✅ PATCH: assign if not populated (not just undefined)
 	if (!dbLooksPopulated(window.playerDatabase) && typeof playerDatabase !== "undefined") {
 		window.playerDatabase = playerDatabase;
 	}
@@ -1568,7 +1568,7 @@ function maybeRefreshPlayerDBInBackground(year) {
 
 			downloadAndCachePlayerDB(year)
 				.then(() => {
-					// âœ… PATCH: bump updatedAt to trigger other tabs reliably
+					// ✅ PATCH: bump updatedAt to trigger other tabs reliably
 					try {
 						localStorage.setItem(`playerDB_${year}_updatedAt`, String(Date.now()));
 					} catch {}
@@ -1727,7 +1727,7 @@ function reportRosterResponse(response, bucketArg) {
 			playerDatabase["pid_" + mpid].status = "na";
 		}
 
-		// âœ… use bucket (not cacheFiveMinutes)
+		// ✅ use bucket (not cacheFiveMinutes)
 		const cacheKey = "cache_customPlayer_" + year + "_" + league_id + "_" + bucket;
 		const cached = cacheResponse(cacheKey);
 
@@ -1748,7 +1748,7 @@ function reportRosterResponse(response, bucketArg) {
 				reportCustomPlayer_ar = data;
 				clearCacheKey("cache_customPlayer_" + year + "_" + league_id);
 
-				// âœ… use bucket (not cacheFiveMinutes)
+				// ✅ use bucket (not cacheFiveMinutes)
 				localStorage.setItem(
 					"cache_customPlayer_" + year + "_" + league_id + "_" + bucket,
 					JSON.stringify(reportCustomPlayer_ar)
@@ -1866,7 +1866,7 @@ async function reportInjuriesAPI(bucketArg) {
 		fetcher: () => {
 			logApi("API FETCH injuries", {
 				endpoint: "injuries",
-				bucket, // âœ… use the computed bucket
+				bucket, // ✅ use the computed bucket
 				tab: window.MFL_TAB_ID
 			});
 
@@ -2134,7 +2134,7 @@ function applyMyLeaguesFromJSON(obj) {
 			return true;
 		}
 
-		// âœ… Donâ€™t wipe good state on malformed/empty responses
+		// ✅ Don’t wipe good state on malformed/empty responses
 		return false;
 	} catch (e) {
 		return false;
@@ -2145,7 +2145,7 @@ function applyMyLeaguesFromJSON(obj) {
 async function loadMyLeaguesJSON() {
 	// bucketArg intentionally ignored (5-min bucket); myLeagues is 6-hour TTL
 
-	// âœ… recompute each run
+	// ✅ recompute each run
 	const sixBucket = getCacheSixHours(currentServerTime);
 
 	const basePrefix = "cache_myLeagues_";
@@ -3340,12 +3340,12 @@ async function reportTopStartersAPI(weekArg, dailyBucketArg) {
 	const week = Number(weekArg);
 	if (!Number.isFinite(week) || week <= 0) return null;
 
-	// âœ… daily bucket snapshot (passed from doDailyCache)
+	// ✅ daily bucket snapshot (passed from doDailyCache)
 	const dailyBucket = Number.isFinite(Number(dailyBucketArg)) ?
 		Number(dailyBucketArg) :
 		getCacheDaily(currentServerTime);
 
-	// âœ… SHARED across ALL leagues
+	// ✅ SHARED across ALL leagues
 	const cacheKey = `cache_topStarters_${year}_w${week}_${dailyBucket}`;
 	const lockKey = `lock_topStarters_${year}_w${week}`;
 
@@ -3756,7 +3756,7 @@ async function reportWeeklyResultsAPI(weekAPI, bypassCache) {
 						);
 					} else {
 						clearCacheKey(`cache_weeklyResults-${week}_${year}_${league_id}`);
-						// ðŸ”¹ IMPORTANT: always write this fresh live week to LS,
+						// 🔹 IMPORTANT: always write this fresh live week to LS,
 						// even when bypass === true (forced refresh).
 						localStorage.setItem(
 							`cache_weeklyResults-${week}_${year}_${league_id}_${cacheDaily}`,
@@ -4524,7 +4524,7 @@ async function reportNflScheduleAPI(weekAPI) {
 						reportNflSchedule_ar[`w_${i}`] = parsed;
 						reportNflScheduleResponse(parsed, i);
 					}
-					// If parsed = null â†’ fall through (same as original)
+					// If parsed = null → fall through (same as original)
 				}
 			}
 			return true;
@@ -4542,7 +4542,7 @@ async function reportNflScheduleAPI(weekAPI) {
 					reportNflSchedule_ar["w_" + week] = parsed;
 					return reportNflScheduleResponse(parsed, week);
 				}
-				// If parsed is null â†’ fall through to fetch() just like original
+				// If parsed is null → fall through to fetch() just like original
 			}
 		}
 		// If isLiveAhead === true, or cache was missing/invalid, we fall through to fetch() below
@@ -4661,7 +4661,7 @@ function buildRunningRecordsForAllTeams(data, maxWeek) {
 				t += rec.tie ? 1 : 0;
 			}
 
-			// âœ… Always set runRec for every existing week object
+			// ✅ Always set runRec for every existing week object
 			rec.runW = w;
 			rec.runL = l;
 			rec.runT = t;
@@ -4739,7 +4739,7 @@ function reportNflScheduleResponse_matchup(week, matchup) {
 		const rec0 = reportNflScheduleFid_ar[team0.id][week];
 		const rec1 = reportNflScheduleFid_ar[team1.id][week];
 
-		// âœ… Make this idempotent: always *set* to the current game values,
+		// ✅ Make this idempotent: always *set* to the current game values,
 		// not += (we only have one game per week per team)
 		rec0.pf = score0;
 		rec0.pa = score1;
@@ -9458,9 +9458,9 @@ span.plus-toggle-stats + a {
 			// 1) numeric items (rare in your case, but keep it)
 			for (const r of DB) addFromRecord(null, r);
 
-			// 2) string-key items sitting *on* the array (the â€œarray-as-mapâ€ case)
+			// 2) string-key items sitting *on* the array (the “array-as-map” case)
 			for (const [k, v] of Object.entries(DB)) {
-				// skip numeric index keys like "0", "1", â€¦
+				// skip numeric index keys like "0", "1", …
 				if (/^\d+$/.test(k)) continue;
 				addFromRecord(k, v);
 			}
@@ -9586,7 +9586,7 @@ span.plus-toggle-stats + a {
 				pos
 			} = parseNameTeamPosFromAnchorText(nameRaw));
 		} else if (nameRaw) {
-			// No comma â†’ try DB first
+			// No comma → try DB first
 			const recForName = getDbPlayerById(playerID);
 			if (recForName?.name) {
 				const nm = String(recForName.name);
@@ -9773,7 +9773,7 @@ span.plus-toggle-stats + a {
 				}
 			}
 
-			// stray ")" leftover â†’ remove
+			// stray ")" leftover → remove
 			if (isClose(cur)) {
 				const next = cur.nextSibling;
 				kill(cur);
@@ -9781,7 +9781,7 @@ span.plus-toggle-stats + a {
 				continue;
 			}
 
-			// first real content after anchor â€” stop scanning
+			// first real content after anchor — stop scanning
 			break;
 		}
 
@@ -9846,19 +9846,19 @@ span.plus-toggle-stats + a {
 					node.remove();
 					removed = true;
 				} else {
-					// even pure whitespace â€” normalize away to avoid growing nodes
+					// even pure whitespace — normalize away to avoid growing nodes
 					node.remove();
 					removed = true;
 				}
 			} else if (node.nodeType === 1 && !allowElement(node)) {
-				// Any unexpected element directly under <a> â€” remove it
+				// Any unexpected element directly under <a> — remove it
 				node.remove();
 				removed = true;
 			}
 		}
 
 		// As a belt-and-suspenders: if the (only) child is our table, make sure
-		// thereâ€™s no stray text wrapped *inside* it right after or before.
+		// there’s no stray text wrapped *inside* it right after or before.
 		const tbl = anchor.querySelector('.playerImgTable');
 		if (!tbl) return;
 
@@ -10099,7 +10099,7 @@ span.plus-toggle-stats + a {
 
 		const frag = document.createDocumentFragment();
 		frag.appendChild(innerTable)
-		link.textContent = ""; // <â€” add this line
+		link.textContent = ""; // <— add this line
 		link.replaceChildren(frag);
 		purgeAnchorTextCrumbs(link);
 
@@ -10494,7 +10494,7 @@ span.plus-toggle-stats + a {
 				first = kept.join(" ").trim();
 			}
 		} else {
-			// No comma â†’ fallback heuristics
+			// No comma → fallback heuristics
 			const parts = clean.split(/\s+/);
 			if (parts.length === 1) {
 				last = parts[0];
@@ -10883,7 +10883,7 @@ span.plus-toggle-stats + a {
 							buildInnerTableForAnchor(a);
 						} catch (_) {}
 					}
-					// NEW: text changed under a processed anchor â†’ purge crumbs
+					// NEW: text changed under a processed anchor → purge crumbs
 					if (a.getAttribute(PROCESSED_ATTR) === "1") purgeAnchorTextCrumbs(a);
 				}
 				if (MFLPopupEnableArticle) {
@@ -10954,7 +10954,7 @@ span.plus-toggle-stats + a {
 			if (__rehydrates.pending.size > 0) {
 				setTimeout(() => {
 					buildDbIndex(false);
-					// â¬‡ï¸ Only flush if DB is actually ready
+					// ⬇ï¸ Only flush if DB is actually ready
 					if (__playerReadys) rehydrateNow();
 				}, 400);
 			}
@@ -12140,7 +12140,7 @@ span.plus-toggle-stats + a {
 					const trHead = document.createElement('tr');
 					trHead.className = 'oddtablerow headline';
 					const th = document.createElement('th');
-					// headline came from your linkâ€™s innerHTML on purpose
+					// headline came from your link’s innerHTML on purpose
 					th.innerHTML = headline;
 					trHead.appendChild(th);
 
@@ -13765,7 +13765,7 @@ if (load_mini_boxscore) { // for template users ONLY
 
 				var kickoff = parseInt(game.kickoff, 10) || 0;
 
-				// Scores are strings in the JSON â€“ convert to numbers if present
+				// Scores are strings in the JSON – convert to numbers if present
 				var roadScore = (typeof road.score !== 'undefined') ? parseInt(road.score, 10) : null;
 				var homeScore = (typeof home.score !== 'undefined') ? parseInt(home.score, 10) : null;
 
@@ -13914,9 +13914,9 @@ if (load_mini_boxscore) { // for template users ONLY
 				}
 			}
 
-			// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+			// ─────────────────────────────────────────────────────
 			// SAFETY: Normalize/guard mflBoxJSON_matchups
-			// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+			// ─────────────────────────────────────────────────────
 			var hasMatchupBlob =
 				mflBoxJSON_matchups &&
 				typeof mflBoxJSON_matchups === "object" &&
