@@ -3,6 +3,7 @@
 import { NavBar } from './components/kff/NavBar';
 import { Button } from './components/kff/Button';
 import { LeagueCard } from './components/kff/LeagueCard';
+import { HexScrollHero } from './components/kff/HexScrollHero';
 
 const LEAGUES = [
   {
@@ -69,9 +70,11 @@ export default function Home() {
 
       <main>
         {/* Hero */}
+        <div className="hex-pin">
         <section
-          className="kff-grid-bg kff-scanlines"
-          style={{ position: 'relative', borderBottom: '2px solid var(--kff-line)', overflow: 'hidden' }}
+          className="kff-grid-bg kff-scanlines hex-pin-sticky"
+          data-hex-sticky
+          style={{ borderBottom: '2px solid var(--kff-line)', overflow: 'hidden' }}
         >
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(90% 80% at 78% 30%, color-mix(in srgb, var(--kff-yellow) 12%, transparent) 0%, transparent 55%)', pointerEvents: 'none' }} />
           <div
@@ -106,15 +109,19 @@ export default function Home() {
 
             <div className="hidden md:flex" style={{ position: 'relative', justifyContent: 'center' }}>
               <div style={{ position: 'absolute', width: 460, height: 460, borderRadius: '50%', background: 'radial-gradient(circle, color-mix(in srgb, var(--kff-yellow) 22%, transparent) 0%, transparent 70%)', filter: 'blur(8px)' }} />
-              <img
+              <HexScrollHero
                 src="/images/shared/hero-pixels.webp"
                 alt="Pixel-art receiver making a high-point catch over a defender"
+                maxHeight={560}
+                pinSelector=".hex-pin"
+                pinPeak={0.6}
                 className="kff-pixelated"
-                style={{ position: 'relative', zIndex: 2, maxHeight: 560, maxWidth: '100%', width: 'auto', height: 'auto', filter: 'drop-shadow(0 0 26px color-mix(in srgb, var(--kff-yellow) 32%, transparent))' }}
+                style={{ position: 'relative', zIndex: 2, filter: 'drop-shadow(0 0 26px color-mix(in srgb, var(--kff-yellow) 32%, transparent))' }}
               />
             </div>
           </div>
         </section>
+        </div>
 
         {/* League Command Centers */}
         <section id="leagues" style={{ maxWidth: 'var(--container-xl)', margin: '0 auto', padding: 'var(--space-9) var(--space-6)' }}>

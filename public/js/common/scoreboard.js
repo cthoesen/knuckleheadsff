@@ -5392,7 +5392,7 @@ async function LSMbuildMatchupsPlayers(LSMmatchupIndex) {
 										if (injuryStatus !== "none" && showInjury) {
 											parts.push(`<span title="Injury Status" class="inj_status">${injuryStatus}</span>`);
 										}
-										parts.push(`<img src="https://www.mflscripts.com/playerImages_96x96/mfl_${playerScore.id}.png" onerror="this.src='https://www.mflscripts.com/playerImages_96x96/free_agent.png'" /></div>`);
+										parts.push(`<img src="https://www.mflscripts.com/playerImages_96x96/mfl_${playerScore.id}.png" onerror="this.src='https://www.mflscripts.com/playerImages_96x96/free_agent.png'" loading="lazy" decoding="async" width="96" height="96" /></div>`);
 									}
 									if (playerInfo.team === 'FA' && scoreVal === 0) {
 										parts.push(`<div class="player-details-box free-agent"><div class="player-name"><h3><a href="player?L=${league_id}&P=${playerScore.id}" class="position_${playerInfo.position}" target="new" data-player-id="${playerScore.id}"${titleAttr}${dataNewsAttr}>${formatPlayerNameLSModule(playerInfo.name)}</a></h3><div class="player-team"><img alt="${playerInfo.team}" src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/${playerInfo.team}.svg"></div></div><div class="game-info">Free Agent</div></div>`);
@@ -5549,7 +5549,7 @@ async function LSMbuildMatchupsPlayers(LSMmatchupIndex) {
 										if (injuryStatus !== "none" && showInjury) {
 											parts.push(`<span title="Injury Status" class="inj_status">${injuryStatus}</span>`);
 										}
-										parts.push(`<img src="https://www.mflscripts.com/playerImages_96x96/mfl_${playerScore.id}.png" onerror="this.src='https://www.mflscripts.com/playerImages_96x96/free_agent.png'" /></div>`);
+										parts.push(`<img src="https://www.mflscripts.com/playerImages_96x96/mfl_${playerScore.id}.png" onerror="this.src='https://www.mflscripts.com/playerImages_96x96/free_agent.png'" loading="lazy" decoding="async" width="96" height="96" /></div>`);
 									}
 									if (playerInfo.team === 'FA' && scoreVal === 0) {
 										parts.push(`<div class="player-details-box free-agent"><div class="player-name"><h3><a href="player?L=${league_id}&P=${playerScore.id}" class="position_${playerInfo.position}" target="new" data-player-id="${playerScore.id}"${titleAttr}${dataNewsAttr}>${formatPlayerNameLSModule(playerInfo.name)}</a></h3><div class="player-team"><img alt="${playerInfo.team}" src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/${playerInfo.team}.svg"></div></div><div class="game-info">Free Agent</div></div>`);
@@ -5752,7 +5752,7 @@ async function LSMbuildMatchupsPlayers(LSMmatchupIndex) {
 									if (injuryStatus !== "none" && showInjury) {
 										parts.push(`<span title="Injury Status" class="inj_status">${injuryStatus}</span>`);
 									}
-									parts.push(`<img src="https://www.mflscripts.com/playerImages_96x96/mfl_${playerScore.id}.png" onerror="this.src='https://www.mflscripts.com/playerImages_96x96/free_agent.png'" /></div>`);
+									parts.push(`<img src="https://www.mflscripts.com/playerImages_96x96/mfl_${playerScore.id}.png" onerror="this.src='https://www.mflscripts.com/playerImages_96x96/free_agent.png'" loading="lazy" decoding="async" width="96" height="96" /></div>`);
 								}
 								if (playerInfo.team === 'FA' && scoreVal === 0) {
 									parts.push(`<div class="player-details-box free-agent"><div class="player-name"><h3><a href="player?L=${league_id}&P=${playerScore.id}" class="position_${playerInfo.position}" target="new" data-player-id="${playerScore.id}"${titleAttr}${dataNewsAttr}>${formatPlayerNameLSModule(playerInfo.name)}</a></h3><div class="player-team"><img alt="${playerInfo.team}" src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/${playerInfo.team}.svg"></div></div><div class="game-info">Free Agent</div></div>`);
@@ -5916,7 +5916,7 @@ async function LSMbuildMatchupsPlayers(LSMmatchupIndex) {
 									if (injuryStatus !== "none" && showInjury) {
 										parts.push(`<span title="Injury Status" class="inj_status">${injuryStatus}</span>`);
 									}
-									parts.push(`<img src="https://www.mflscripts.com/playerImages_96x96/mfl_${playerScore.id}.png" onerror="this.src='https://www.mflscripts.com/playerImages_96x96/free_agent.png'" /></div>`);
+									parts.push(`<img src="https://www.mflscripts.com/playerImages_96x96/mfl_${playerScore.id}.png" onerror="this.src='https://www.mflscripts.com/playerImages_96x96/free_agent.png'" loading="lazy" decoding="async" width="96" height="96" /></div>`);
 								}
 								if (playerInfo.team === 'FA' && scoreVal === 0) {
 									parts.push(`<div class="player-details-box free-agent"><div class="player-name"><h3><a href="player?L=${league_id}&P=${playerScore.id}" class="position_${playerInfo.position}" target="new" data-player-id="${playerScore.id}"${titleAttr}${dataNewsAttr}>${formatPlayerNameLSModule(playerInfo.name)}</a></h3><div class="player-team"><img alt="${playerInfo.team}" src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/${playerInfo.team}.svg"></div></div><div class="game-info">Free Agent</div></div>`);
