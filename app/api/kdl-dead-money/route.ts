@@ -5,8 +5,8 @@ export const dynamic = 'force-dynamic';
 // --- LEAGUE SETTINGS ---
 // TargetYear: the season in which players were cut (current season)
 // NewYear:    the season in which dead money will be charged
-const TARGET_YEAR = '2025';
-const NEW_YEAR = '2026';
+const TARGET_YEAR = '2026';
+const NEW_YEAR = '2027';
 const SERVER = 'www47';
 const LEAGUE_ID = '68756';
 

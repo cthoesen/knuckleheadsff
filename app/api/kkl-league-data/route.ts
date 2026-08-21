@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic';
 
 // --- LEAGUE SETTINGS ---
 // Update this year when ready to roll to new season
-const SEASON_YEAR = '2025';
+const SEASON_YEAR = '2026';
 const SERVER = 'www47';
 const LEAGUE_ID = '45267';
 
