@@ -66,7 +66,7 @@ export function HexScrollHero({
   hexRadius = 22,
   spread = 0.5,
   pinSelector,
-  pinPeak = 0.5,
+  pinPeak = 0.65,
   releaseAt = 0.5,
   scrollRange,
   className = '',
