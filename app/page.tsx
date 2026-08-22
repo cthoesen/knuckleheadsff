@@ -114,8 +114,8 @@ export default function Home() {
                 alt="Pixel-art receiver making a high-point catch over a defender"
                 maxHeight={560}
                 pinSelector=".hex-pin"
-                pinPeak={0.6}
-                releaseAt={0.75}
+                pinPeak={0.5}
+                releaseAt={0.5}
                 className="kff-pixelated"
                 style={{ position: 'relative', zIndex: 2, filter: 'drop-shadow(0 0 26px color-mix(in srgb, var(--kff-yellow) 32%, transparent))' }}
               />
