@@ -261,7 +261,7 @@
 .hex-pin { position: relative; }
 .hex-pin-sticky { position: relative; }
 @media (min-width: 48rem) {
-  .hex-pin { height: calc(100vh + var(--hex-pin-distance, 60vh)); }
+  .hex-pin { height: calc(100vh + var(--hex-pin-distance, 40vh)); }
   .hex-pin-sticky {
     position: sticky;
     top: 72px;

@@ -17,7 +17,7 @@ interface HexScrollHeroProps {
    * in place while the shatter plays, then releases. Falls back to plain window
    * scroll when absent (or on mobile, where the pin container isn't tall).
    */
-  pinSelector?: number;
+  pinSelector?: string;
   /** Max progress the pin drives to (0–1). 1 = fully shatter in place; lower leaves the image partly intact as it scrolls away. */
   pinPeak?: number;
   /**
@@ -65,7 +65,7 @@ export function HexScrollHero({
   maxHeight = 560,
   hexRadius = 22,
   spread = 0.5,
-  pinSelector = 0.75,
+  pinSelector,
   pinPeak = 0.5,
   releaseAt = 0.5,
   scrollRange,
