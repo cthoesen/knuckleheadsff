@@ -20,6 +20,14 @@ interface HexScrollHeroProps {
   pinSelector?: string;
   /** Max progress the pin drives to (0–1). 1 = fully shatter in place; lower leaves the image partly intact as it scrolls away. */
   pinPeak?: number;
+  /**
+   * Fraction of the dispersion arc completed at the moment the pin releases
+   * and the page resumes scrolling (0–1, pin mode only). 1 (default) keeps the
+   * old behaviour: dispersion finishes exactly as the pin lets go. 0.75 starts
+   * the page scrolling once the shatter is three-quarters done, and the
+   * remaining quarter plays out as the hero scrolls away.
+   */
+  releaseAt?: number;
   /** Px of page scroll needed to reach full dispersion, in fallback (non-pin) mode. Defaults to 80% of viewport height. */
   scrollRange?: number;
   className?: string;
@@ -59,6 +67,7 @@ export function HexScrollHero({
   spread = 0.5,
   pinSelector,
   pinPeak = 1,
+  releaseAt = 1,
   scrollRange,
   className = '',
   style = {},
@@ -208,7 +217,12 @@ export function HexScrollHero({
           const stickyTop = parseFloat(getComputedStyle(sticky).top) || 0;
           const absTop = pin.getBoundingClientRect().top + y; // document-absolute top of pin
           const start = absTop - stickyTop;
-          progressRef.current = clamp01((y - start) / travel) * pinPeak;
+          // Stretch the arc over more scroll than the pin lasts, so only
+          // `releaseAt` of it has played when the pin lets go — the rest
+          // finishes as the hero scrolls out of view. releaseAt=1 maps the
+          // arc exactly onto the pin (dispersion ends as it releases).
+          const arc = travel / Math.min(1, Math.max(0.05, releaseAt));
+          progressRef.current = clamp01((y - start) / arc) * pinPeak;
           schedule();
           return;
         }
@@ -242,7 +256,7 @@ export function HexScrollHero({
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
     };
-  }, [reduced, src, maxHeight, hexRadius, spread, pinSelector, pinPeak, scrollRange]);
+  }, [reduced, src, maxHeight, hexRadius, spread, pinSelector, pinPeak, releaseAt, scrollRange]);
 
   if (reduced) {
     return (

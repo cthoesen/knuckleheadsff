@@ -94,7 +94,7 @@ export default function Home() {
                 <span style={{ color: 'var(--kff-yellow)', textShadow: 'var(--glow-yellow)' }}>Keepers are Crowned.</span>
               </h1>
               <p style={{ margin: 'var(--space-5) 0 0', maxWidth: 560, fontFamily: 'var(--font-body)', fontWeight: 500, fontSize: 'var(--text-lg)', lineHeight: 1.5, color: 'var(--kff-ink-dim)' }}>
-                Built by the commissioner. Feared by the league. Four leagues. One hub. Zero excuses.
+                Built by the commissioner. Feared by the league.
               </p>
               <div style={{ display: 'flex', gap: 'var(--space-3)', marginTop: 'var(--space-6)', flexWrap: 'wrap' }}>
                 <Button as="a" href="#leagues" variant="primary" size="lg">Select Your League ▸</Button>
@@ -115,6 +115,7 @@ export default function Home() {
                 maxHeight={560}
                 pinSelector=".hex-pin"
                 pinPeak={0.6}
+                releaseAt={0.75}
                 className="kff-pixelated"
                 style={{ position: 'relative', zIndex: 2, filter: 'drop-shadow(0 0 26px color-mix(in srgb, var(--kff-yellow) 32%, transparent))' }}
               />
