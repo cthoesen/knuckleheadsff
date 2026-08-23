@@ -5382,13 +5382,13 @@ async function LSMbuildMatchupsPlayers(LSMmatchupIndex) {
 										parts.push(`<div id="player_row_${playerScore.id}" data-team="${playerInfo.team}" class="player-row position-order-${playerInfo.position} ${playerInfo.team} ${playerScore.playerStatus} ${rowCounterStarters % 2 === 0 ? 'even' : 'odd'}">`);
 									}
 									if (playerInfo && hasOwn(LSpos_team_imgs, playerInfo.position)) {
-										parts.push(`<div class="player-image" id="image_${playerScore.id}"><div class="player-position">${playerInfo.position}</div>`);
+										parts.push(`<div class="player-image" id="image_${playerScore.id}"><div class="player-position ${String(playerInfo.position || '').toLowerCase()}">${playerInfo.position}</div>`);
 										if (injuryStatus !== "none" && showInjury) {
 											parts.push(`<span title="Injury Status" class="inj_status">${injuryStatus}</span>`);
 										}
 										parts.push(`<img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/${playerInfo.team}.svg" /></div>`);
 									} else {
-										parts.push(`<div class="player-image" id="image_${playerScore.id}"><div class="player-position">${playerInfo.position}</div>`);
+										parts.push(`<div class="player-image" id="image_${playerScore.id}"><div class="player-position ${String(playerInfo.position || '').toLowerCase()}">${playerInfo.position}</div>`);
 										if (injuryStatus !== "none" && showInjury) {
 											parts.push(`<span title="Injury Status" class="inj_status">${injuryStatus}</span>`);
 										}
@@ -5539,13 +5539,13 @@ async function LSMbuildMatchupsPlayers(LSMmatchupIndex) {
 										}
 									}
 									if (playerInfo && hasOwn(LSpos_team_imgs, playerInfo.position)) {
-										parts.push(`<div class="player-image" id="image_${playerScore.id}"><div class="player-position">${playerInfo.position}</div>`);
+										parts.push(`<div class="player-image" id="image_${playerScore.id}"><div class="player-position ${String(playerInfo.position || '').toLowerCase()}">${playerInfo.position}</div>`);
 										if (injuryStatus !== "none" && showInjury) {
 											parts.push(`<span title="Injury Status" class="inj_status">${injuryStatus}</span>`);
 										}
 										parts.push(`<img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/${playerInfo.team}.svg" /></div>`);
 									} else {
-										parts.push(`<div class="player-image" id="image_${playerScore.id}"><div class="player-position">${playerInfo.position}</div>`);
+										parts.push(`<div class="player-image" id="image_${playerScore.id}"><div class="player-position ${String(playerInfo.position || '').toLowerCase()}">${playerInfo.position}</div>`);
 										if (injuryStatus !== "none" && showInjury) {
 											parts.push(`<span title="Injury Status" class="inj_status">${injuryStatus}</span>`);
 										}
@@ -5742,13 +5742,13 @@ async function LSMbuildMatchupsPlayers(LSMmatchupIndex) {
 									parts.push(`<div id="player_row_${playerScore.id}" data-team="${playerInfo.team}" class="player-row position-order-${playerInfo.position} ${playerInfo.team} ${playerScore.playerStatus} ${rowCounterStarters % 2 === 0 ? 'even' : 'odd'}">`);
 								}
 								if (playerInfo && hasOwn(LSpos_team_imgs, playerInfo.position)) {
-									parts.push(`<div class="player-image" id="image_${playerScore.id}"><div class="player-position">${playerInfo.position}</div>`);
+									parts.push(`<div class="player-image" id="image_${playerScore.id}"><div class="player-position ${String(playerInfo.position || '').toLowerCase()}">${playerInfo.position}</div>`);
 									if (injuryStatus !== "none" && showInjury) {
 										parts.push(`<span title="Injury Status" class="inj_status">${injuryStatus}</span>`);
 									}
 									parts.push(`<img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/${playerInfo.team}.svg" /></div>`);
 								} else {
-									parts.push(`<div class="player-image" id="image_${playerScore.id}"><div class="player-position">${playerInfo.position}</div>`);
+									parts.push(`<div class="player-image" id="image_${playerScore.id}"><div class="player-position ${String(playerInfo.position || '').toLowerCase()}">${playerInfo.position}</div>`);
 									if (injuryStatus !== "none" && showInjury) {
 										parts.push(`<span title="Injury Status" class="inj_status">${injuryStatus}</span>`);
 									}
@@ -5906,13 +5906,13 @@ async function LSMbuildMatchupsPlayers(LSMmatchupIndex) {
 									}
 								}
 								if (playerInfo && hasOwn(LSpos_team_imgs, playerInfo.position)) {
-									parts.push(`<div class="player-image" id="image_${playerScore.id}"><div class="player-position">${playerInfo.position}</div>`);
+									parts.push(`<div class="player-image" id="image_${playerScore.id}"><div class="player-position ${String(playerInfo.position || '').toLowerCase()}">${playerInfo.position}</div>`);
 									if (injuryStatus !== "none" && showInjury) {
 										parts.push(`<span title="Injury Status" class="inj_status">${injuryStatus}</span>`);
 									}
 									parts.push(`<img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/${playerInfo.team}.svg" /></div>`);
 								} else {
-									parts.push(`<div class="player-image" id="image_${playerScore.id}"><div class="player-position">${playerInfo.position}</div>`);
+									parts.push(`<div class="player-image" id="image_${playerScore.id}"><div class="player-position ${String(playerInfo.position || '').toLowerCase()}">${playerInfo.position}</div>`);
 									if (injuryStatus !== "none" && showInjury) {
 										parts.push(`<span title="Injury Status" class="inj_status">${injuryStatus}</span>`);
 									}

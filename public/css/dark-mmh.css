@@ -13603,6 +13603,30 @@ h2.lsm_error.error_box {
   background: var(--primary, #ff4200);
 }
 
+/* Live scoring (#LSscoringBox): the position badge on each player. Unlike the
+   roster module this is a filled badge, and the base rule sets white text —
+   the palette is light, so these set black text to stay readable. */
+#LSscoringBox .player-position.qb,
+#LSscoringBox .player-position.tmqb { background: var(--pos-qb); color: #000; }
+#LSscoringBox .player-position.rb,
+#LSscoringBox .player-position.tmrb { background: var(--pos-rb); color: #000; }
+#LSscoringBox .player-position.wr,
+#LSscoringBox .player-position.tmwr { background: var(--pos-wr); color: #000; }
+#LSscoringBox .player-position.te,
+#LSscoringBox .player-position.tmte { background: var(--pos-te); color: #000; }
+#LSscoringBox .player-position.pk,
+#LSscoringBox .player-position.tmpk { background: var(--pos-k); color: #000; }
+#LSscoringBox .player-position.def { background: var(--pos-def); color: #000; }
+#LSscoringBox .player-position.dt,
+#LSscoringBox .player-position.de,
+#LSscoringBox .player-position.tmdl { background: var(--pos-dl); color: #000; }
+#LSscoringBox .player-position.lb,
+#LSscoringBox .player-position.tmlb { background: var(--pos-lb); color: #000; }
+#LSscoringBox .player-position.cb,
+#LSscoringBox .player-position.s,
+#LSscoringBox .player-position.tmdb { background: var(--pos-db); color: #000; }
+
+
 #LSscoringBox .player-image img {
   background: #111;
 }
@@ -14120,6 +14144,31 @@ th a[data-pimg-processed] .playerImgTable .teamPositionCircle {
 .playerImgTable .playerPosition {
     color: var(--accent, #000);
 }
+
+/* Roster quick-links module (#tab_rosterquicklinks): the position label beside
+   the player photo. The wrapping anchor carries data-pos with the raw MFL code
+   (header.js sets it), so no :has() is needed here. Same palette as the
+   position circles — these are light on a dark card, so they set colour. */
+a[data-pos="QB"] .playerImgTable .playerPosition,
+a[data-pos="TMQB"] .playerImgTable .playerPosition { color: var(--pos-qb); }
+a[data-pos="RB"] .playerImgTable .playerPosition,
+a[data-pos="TMRB"] .playerImgTable .playerPosition { color: var(--pos-rb); }
+a[data-pos="WR"] .playerImgTable .playerPosition,
+a[data-pos="TMWR"] .playerImgTable .playerPosition { color: var(--pos-wr); }
+a[data-pos="TE"] .playerImgTable .playerPosition,
+a[data-pos="TMTE"] .playerImgTable .playerPosition { color: var(--pos-te); }
+a[data-pos="PK"] .playerImgTable .playerPosition,
+a[data-pos="TMPK"] .playerImgTable .playerPosition { color: var(--pos-k); }
+a[data-pos="DEF"] .playerImgTable .playerPosition { color: var(--pos-def); }
+a[data-pos="DT"] .playerImgTable .playerPosition,
+a[data-pos="DE"] .playerImgTable .playerPosition,
+a[data-pos="TMDL"] .playerImgTable .playerPosition { color: var(--pos-dl); }
+a[data-pos="LB"] .playerImgTable .playerPosition,
+a[data-pos="TMLB"] .playerImgTable .playerPosition { color: var(--pos-lb); }
+a[data-pos="CB"] .playerImgTable .playerPosition,
+a[data-pos="S"] .playerImgTable .playerPosition,
+a[data-pos="TMDB"] .playerImgTable .playerPosition { color: var(--pos-db); }
+
 
 /* mobile adjustment */
 @media only screen and (max-width: 28.125rem) {
