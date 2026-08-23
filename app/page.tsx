@@ -13,7 +13,7 @@ const LEAGUES = [
     playerSrc: '/images/shared/player-1.png',
     tools: ['Keeper Analyzer', 'Trade Analyzer', 'Constitution'],
     hubHref: '/kkl',
-    mflHref: 'https://www47.myfantasyleague.com/2025/home/45267#0',
+    mflHref: 'https://www47.myfantasyleague.com/2026/home/45267#0',
   },
   {
     code: 'KDL',
@@ -22,7 +22,7 @@ const LEAGUES = [
     playerSrc: '/images/shared/player-4.png',
     tools: ['Contract Manager', 'Unassigned Years', 'Tag Calculator', 'Trade Analyzer', 'Dead Money Tracker', 'Constitution'],
     hubHref: '/kdl',
-    mflHref: 'https://www47.myfantasyleague.com/2025/home/68756#0',
+    mflHref: 'https://www47.myfantasyleague.com/2026/home/68756#0',
   },
   {
     code: 'MMH',
@@ -31,7 +31,7 @@ const LEAGUES = [
     playerSrc: '/images/shared/player-3.png',
     tools: ['Salary Cap Manager', 'Trade Analyzer', 'Constitution'],
     hubHref: '/mmh',
-    mflHref: 'https://www47.myfantasyleague.com/2025/home/72966#0',
+    mflHref: 'https://www47.myfantasyleague.com/2026/home/72966#0',
   },
   {
     code: 'BSB',
@@ -40,7 +40,7 @@ const LEAGUES = [
     playerSrc: '/images/shared/player-2.png',
     tools: ['Keeper Analyzer', 'Trade Analyzer', 'Constitution'],
     hubHref: '/bsb',
-    mflHref: 'https://www47.myfantasyleague.com/2025/home/62908#0',
+    mflHref: 'https://www47.myfantasyleague.com/2026/home/62908#0',
   },
 ];
 

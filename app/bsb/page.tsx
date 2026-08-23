@@ -12,10 +12,10 @@ const TOOLS: HubTool[] = [
 ];
 
 const QUICK_LINKS: HubQuickLink[] = [
-  { label: 'League Homepage', href: 'https://www47.myfantasyleague.com/2025/home/62908#0' },
-  { label: 'Rosters', href: 'https://www47.myfantasyleague.com/2025/options?L=62908&O=17' },
-  { label: 'Draft Picks', href: 'https://www47.myfantasyleague.com/2025/options?L=62908&O=07' },
-  { label: 'Standings', href: 'https://www47.myfantasyleague.com/2025/options?L=62908&O=26' },
+  { label: 'League Homepage', href: 'https://www47.myfantasyleague.com/2026/home/62908#0' },
+  { label: 'Rosters', href: 'https://www47.myfantasyleague.com/2026/options?L=62908&O=17' },
+  { label: 'Draft Picks', href: 'https://www47.myfantasyleague.com/2026/options?L=62908&O=07' },
+  { label: 'Standings', href: 'https://www47.myfantasyleague.com/2026/options?L=62908&O=26' },
 ];
 
 export default function BSBHub() {

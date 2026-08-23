@@ -13,10 +13,10 @@ const TOOLS: HubTool[] = [
 ];
 
 const QUICK_LINKS: HubQuickLink[] = [
-  { label: 'League Homepage', href: 'https://www47.myfantasyleague.com/2025/home/68756#0' },
-  { label: 'Rosters', href: 'https://www47.myfantasyleague.com/2025/options?L=68756&O=07' },
-  { label: 'Rookie Draft Results', href: 'https://www47.myfantasyleague.com/2025/options?L=68756&O=17' },
-  { label: 'Standings', href: 'https://www47.myfantasyleague.com/2025/standings?L=68756' },
+  { label: 'League Homepage', href: 'https://www47.myfantasyleague.com/2026/home/68756#0' },
+  { label: 'Rosters', href: 'https://www47.myfantasyleague.com/2026/options?L=68756&O=07' },
+  { label: 'Rookie Draft Results', href: 'https://www47.myfantasyleague.com/2026/options?L=68756&O=17' },
+  { label: 'Standings', href: 'https://www47.myfantasyleague.com/2026/standings?L=68756' },
 ];
 
 export default function KDLHub() {

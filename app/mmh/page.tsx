@@ -12,10 +12,10 @@ const TOOLS: HubTool[] = [
 ];
 
 const QUICK_LINKS: HubQuickLink[] = [
-  { label: 'League Homepage', href: 'https://www47.myfantasyleague.com/2025/home/72966#0' },
-  { label: 'Rosters', href: 'https://www47.myfantasyleague.com/2025/options?L=72966&O=17' },
-  { label: 'Salaries', href: 'https://www47.myfantasyleague.com/2025/options?L=72966&O=07' },
-  { label: 'Standings', href: 'https://www47.myfantasyleague.com/2025/options?L=72966&O=26' },
+  { label: 'League Homepage', href: 'https://www47.myfantasyleague.com/2026/home/72966#0' },
+  { label: 'Rosters', href: 'https://www47.myfantasyleague.com/2026/options?L=72966&O=17' },
+  { label: 'Salaries', href: 'https://www47.myfantasyleague.com/2026/options?L=72966&O=07' },
+  { label: 'Standings', href: 'https://www47.myfantasyleague.com/2026/options?L=72966&O=26' },
 ];
 
 export default function MMHHub() {
