@@ -14107,6 +14107,16 @@ div.ym {
 .playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.te)   { background: var(--pos-te); }
 .playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.pk),
 .playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.tmpk) { background: var(--pos-k); }
+/* MFL's team-based variants (TMQB, TMDL, …) are the same role as their base
+   position and display as the base label, so they share its colour. None are
+   rostered today; this keeps the palette correct if a league adds them. */
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.tmqb)  { background: var(--pos-qb); }
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.tmrb)  { background: var(--pos-rb); }
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.tmwr)  { background: var(--pos-wr); }
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.tmte)  { background: var(--pos-te); }
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.tmdl)  { background: var(--pos-dl); }
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.tmlb)  { background: var(--pos-lb); }
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.tmdb)  { background: var(--pos-db); }
 .playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.def)  { background: var(--pos-def); }
 .playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.dt),
 .playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.de)   { background: var(--pos-dl); }
