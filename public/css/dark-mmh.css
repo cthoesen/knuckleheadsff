@@ -18,6 +18,21 @@ td {
 }
 
 :root {
+  /* Position colors for .teamPositionCircle — shared across all four leagues
+     so a position reads the same everywhere. All are light enough for the
+     circle's black text (min contrast 9.2:1) and >=23 deltaE apart.
+     DT+DE share --pos-dl and CB+S share --pos-db, matching how they are
+     grouped when setting lineups. */
+  --pos-qb:  #FF8A7A; /* QB */
+  --pos-rb:  #5FE08C; /* RB */
+  --pos-wr:  #5CC8FF; /* WR */
+  --pos-te:  #FFC94D; /* TE */
+  --pos-k:   #C9B8FF; /* PK, TMPK */
+  --pos-def: #B6C2D1; /* Def (team defense) */
+  --pos-dl:  #FF8FC4; /* DT + DE */
+  --pos-lb:  #FFAA5C; /* LB */
+  --pos-db:  #54DED0; /* CB + S */
+
   --neutral: #181818;
   --neutral-light: #cbcbcb;  /* color for mfl live scoring font and scrollbar */
   --neutral-dark: #0c0c0c;
@@ -14065,6 +14080,21 @@ div.ym {
     background: var(--positive, #ffb431);
     color: #000;
 }
+/* Per-position circle colors. Any position code not listed falls back to the
+   single colour in the rule above. Codes verified against live 2026 rosters:
+   KKL uses Def, BSB uses TMPK rather than PK. */
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.qb)   { background: var(--pos-qb); }
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.rb)   { background: var(--pos-rb); }
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.wr)   { background: var(--pos-wr); }
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.te)   { background: var(--pos-te); }
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.pk),
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.tmpk) { background: var(--pos-k); }
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.def)  { background: var(--pos-def); }
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.dt),
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.de)   { background: var(--pos-dl); }
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.lb)   { background: var(--pos-lb); }
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.cb),
+.playerImgTable .teamPositionCircle:has(.teamPositionCircleTxt.s)    { background: var(--pos-db); }
 /*set bg color for team position circle - visible on mobile displays and color of text in circle in th - table headers*/
 th a[data-pimg-processed] .playerImgTable .teamPositionCircle {
     color: #fff;
