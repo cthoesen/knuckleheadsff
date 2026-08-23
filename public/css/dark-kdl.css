@@ -4065,6 +4065,84 @@ div.mobile-wrap .reportform {
   color: #fff;
 }
 
+/* Set-lineup position rank (td.pos-rank). Two hooks, because the two lineup
+   screens expose the position differently and either may be present:
+   header.js adds tr.position_<pos> on .target_report rows, while the wrapping
+   player anchor carries the raw code in data-pos. Whichever exists wins and
+   both agree. The base rules use !important at ID-level specificity, so these
+   have to match it; they also flip the white text to black for the light
+   palette. */
+.target_report tr.position_qb td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row.position_qb td.pos-rank,
+.target_report tr:has(td.player a[data-pos="QB"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="QB"]) td.pos-rank,
+.target_report tr.position_tmqb td.pos-rank,
+.target_report tr:has(td.player a[data-pos="TMQB"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="TMQB"]) td.pos-rank { background: var(--pos-qb) !important; color: #000 !important; }
+.target_report tr.position_rb td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row.position_rb td.pos-rank,
+.target_report tr:has(td.player a[data-pos="RB"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="RB"]) td.pos-rank,
+.target_report tr.position_tmrb td.pos-rank,
+.target_report tr:has(td.player a[data-pos="TMRB"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="TMRB"]) td.pos-rank { background: var(--pos-rb) !important; color: #000 !important; }
+.target_report tr.position_wr td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row.position_wr td.pos-rank,
+.target_report tr:has(td.player a[data-pos="WR"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="WR"]) td.pos-rank,
+.target_report tr.position_tmwr td.pos-rank,
+.target_report tr:has(td.player a[data-pos="TMWR"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="TMWR"]) td.pos-rank { background: var(--pos-wr) !important; color: #000 !important; }
+.target_report tr.position_te td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row.position_te td.pos-rank,
+.target_report tr:has(td.player a[data-pos="TE"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="TE"]) td.pos-rank,
+.target_report tr.position_tmte td.pos-rank,
+.target_report tr:has(td.player a[data-pos="TMTE"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="TMTE"]) td.pos-rank { background: var(--pos-te) !important; color: #000 !important; }
+.target_report tr.position_k td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row.position_k td.pos-rank,
+.target_report tr.position_pk td.pos-rank,
+.target_report tr:has(td.player a[data-pos="PK"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="PK"]) td.pos-rank,
+.target_report tr.position_tmpk td.pos-rank,
+.target_report tr:has(td.player a[data-pos="TMPK"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="TMPK"]) td.pos-rank { background: var(--pos-k) !important; color: #000 !important; }
+.target_report tr.position_def td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row.position_def td.pos-rank,
+.target_report tr:has(td.player a[data-pos="DEF"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="DEF"]) td.pos-rank { background: var(--pos-def) !important; color: #000 !important; }
+.target_report tr.position_dl td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row.position_dl td.pos-rank,
+.target_report tr.position_dt td.pos-rank,
+.target_report tr:has(td.player a[data-pos="DT"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="DT"]) td.pos-rank,
+.target_report tr.position_de td.pos-rank,
+.target_report tr:has(td.player a[data-pos="DE"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="DE"]) td.pos-rank,
+.target_report tr.position_tmdl td.pos-rank,
+.target_report tr:has(td.player a[data-pos="TMDL"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="TMDL"]) td.pos-rank { background: var(--pos-dl) !important; color: #000 !important; }
+.target_report tr.position_lb td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row.position_lb td.pos-rank,
+.target_report tr:has(td.player a[data-pos="LB"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="LB"]) td.pos-rank,
+.target_report tr.position_tmlb td.pos-rank,
+.target_report tr:has(td.player a[data-pos="TMLB"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="TMLB"]) td.pos-rank { background: var(--pos-lb) !important; color: #000 !important; }
+.target_report tr.position_db td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row.position_db td.pos-rank,
+.target_report tr.position_cb td.pos-rank,
+.target_report tr:has(td.player a[data-pos="CB"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="CB"]) td.pos-rank,
+.target_report tr.position_s td.pos-rank,
+.target_report tr:has(td.player a[data-pos="S"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="S"]) td.pos-rank,
+.target_report tr.position_tmdb td.pos-rank,
+.target_report tr:has(td.player a[data-pos="TMDB"]) td.pos-rank,
+#body_lineup.custom_lineup_body #lineup form tr.player_row:has(td.player a[data-pos="TMDB"]) td.pos-rank { background: var(--pos-db) !important; color: #000 !important; }
+
+
 .target_report tr.lineup_player_row td.weekly-opp {
   color: var(--primary, #ff4200);
 }
