@@ -5,18 +5,20 @@ import { Search, XCircle, CheckCircle } from 'lucide-react';
 import { ToolHeader } from '../components/kff/ToolHeader';
 
 interface BSBPlayer {
-  Player: string;
-  Team: string;
-  Years: string;
-  Acquired: string; // e.g. "21.15"
-  IsTaxi: boolean;
+  name: string;
+  nflTeam: string;
+  position: string;
+  franchise: string;
+  contractYear: number;
+  acquired: string; // e.g. "21.15"
+  isTaxi: boolean;
 }
 
 function calculateBSBKeeperStatus(player: BSBPlayer) {
-  if (!player || !player.Player) return { eligible: false, cost: '', reason: 'Invalid Data' };
+  if (!player || !player.name) return { eligible: false, cost: '', reason: 'Invalid Data' };
 
   // 1. Parse Acquired Round
-  if (!player.Acquired || player.Acquired.trim() === '') {
+  if (!player.acquired || player.acquired.trim() === '') {
     return {
       eligible: false,
       cost: '—',
@@ -27,7 +29,7 @@ function calculateBSBKeeperStatus(player: BSBPlayer) {
   }
 
   let acquiredRound = 0;
-  const roundMatch = player.Acquired.match(/^(\d+)\./);
+  const roundMatch = player.acquired.match(/^(\d+)\./);
   if (roundMatch) {
     acquiredRound = parseInt(roundMatch[1]);
   } else {
@@ -55,11 +57,11 @@ function calculateBSBKeeperStatus(player: BSBPlayer) {
   let yearsRemaining;
   let currentYearsDisplay; // 'Fresh', '3', '2', or '1'
 
-  if (!player.Years || player.Years.trim() === '') {
+  if (!player.contractYear) {
     yearsRemaining = 3;
     currentYearsDisplay = 'Fresh';
   } else {
-    const y = parseInt(player.Years);
+    const y = player.contractYear;
     yearsRemaining = y - 1;
     currentYearsDisplay = y.toString();
   }
@@ -78,7 +80,7 @@ function calculateBSBKeeperStatus(player: BSBPlayer) {
   // 4. Calculate Next Round Cost (The Accelerator)
   let nextRound = acquiredRound;
 
-  if (player.IsTaxi) {
+  if (player.isTaxi) {
     // Taxi Rule: Retain draft slot (No penalty)
     nextRound = acquiredRound;
   } else {
@@ -101,7 +103,7 @@ function calculateBSBKeeperStatus(player: BSBPlayer) {
     nextRound: nextRound,
     reason: null,
     yearsRemaining,
-    isTaxi: player.IsTaxi
+    isTaxi: player.isTaxi
   };
 }
 
@@ -118,7 +120,8 @@ export default function BSBKeeperApp() {
         const response = await fetch('/api/bsb-league-data');
         if (!response.ok) throw new Error('Failed to fetch BSB data');
         const data = await response.json();
-        setPlayers(data);
+        if (data.error) throw new Error(data.error);
+        setPlayers(data.players ?? []);
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -131,10 +134,10 @@ export default function BSBKeeperApp() {
   const teams = useMemo(() => {
     const teamMap = new Map();
     players.forEach(player => {
-      if (!teamMap.has(player.Team)) {
-        teamMap.set(player.Team, { name: player.Team, players: [] });
+      if (!teamMap.has(player.franchise)) {
+        teamMap.set(player.franchise, { name: player.franchise, players: [] });
       }
-      teamMap.get(player.Team).players.push({
+      teamMap.get(player.franchise).players.push({
         ...player,
         status: calculateBSBKeeperStatus(player)
       });
@@ -148,7 +151,7 @@ export default function BSBKeeperApp() {
     if (searchTerm) {
       result = result.map(t => ({
         ...t,
-        players: t.players.filter((p: any) => p.Player.toLowerCase().includes(searchTerm.toLowerCase()))
+        players: t.players.filter((p: any) => p.name.toLowerCase().includes(searchTerm.toLowerCase()))
       })).filter(t => t.players.length > 0);
     }
     return result;
@@ -261,12 +264,12 @@ export default function BSBKeeperApp() {
                   {team.players.map((p: any, i: number) => (
                     <tr key={i} className={!p.status.eligible ? 'ineligible-row' : ''}>
                       <td>
-                        <div style={{ fontWeight: 700, fontSize: '0.95rem' }}>{p.Player}</div>
+                        <div style={{ fontWeight: 700, fontSize: '0.95rem' }}>{p.name} <span style={{ color: 'var(--kff-ink-mute)', fontFamily: 'var(--font-mono)', fontSize: '0.72rem' }}>{p.position} {p.nflTeam}</span></div>
                         {p.status.isTaxi && <div style={{ marginTop: '4px' }}><span className="badge-taxi">TAXI SQUAD</span></div>}
                       </td>
-                      <td className="text-zinc">{p.Acquired || 'Free Agent'}</td>
+                      <td className="text-zinc">{p.acquired || 'Free Agent'}</td>
                       {/* UPDATED: Shows '-' instead of Blank */}
-                      <td className="text-zinc">{p.Years || '-'}</td> 
+                      <td className="text-zinc">{p.contractYear || '-'}</td> 
                       <td>
                         {p.status.eligible ? (
                           <div className="round-display">{p.status.cost}</div>

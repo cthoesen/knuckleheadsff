@@ -9,10 +9,12 @@ interface CutRow {
   playerCut: string;
   salaryWhenCut: number;
   yearsWhenCut: number;
-  salarCapPenalty: number;
+  salaryCapPenalty: number;
   deadMoney: number;
-  dateCut: string;
-  timeCut: string;
+  /** Unix seconds of the cut, straight from MFL. */
+  timestamp: number;
+  /** ISO 8601 instant of the cut. */
+  cutAt: string;
 }
 
 interface FranchiseData {
@@ -35,6 +37,24 @@ const DEAD_MONEY_MINIMUMS: Record<number, number> = { 2: 2, 3: 5, 4: 10, 5: 20 }
 function yearsLabel(y: number) {
   if (y <= 1) return '1 yr';
   return `${y} yrs`;
+}
+
+/** Penalties are fractional, so summing them accumulates float noise
+ *  (0.2 + 1.2 → 1.4000000000000001). Round for display only. */
+function money(n: number): string {
+  return String(Math.round(n * 100) / 100);
+}
+
+function formatCutDate(iso: string) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  return isNaN(d.getTime()) ? '—' : d.toLocaleDateString(undefined, { month: 'numeric', day: 'numeric', year: 'numeric' });
+}
+
+function formatCutTime(iso: string) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return isNaN(d.getTime()) ? '' : d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
 }
 
 function deadMoneyColor(amount: number) {
@@ -187,7 +207,7 @@ export default function KDLDeadMoney() {
           </div>
           <div className="cyber-card border-[#8a2be2]/20 p-4 text-center">
             <div className="text-[10px] uppercase text-zinc-500 font-bold mb-1">{data.targetYear} In-Season Penalties</div>
-            <div className="text-2xl font-mono font-black text-[#a95ef5]">${leagueTotals.totalPenalty}</div>
+            <div className="text-2xl font-mono font-black text-[#a95ef5]">${money(leagueTotals.totalPenalty)}</div>
           </div>
           <div className="cyber-card border-[#8a2be2]/20 p-4 text-center">
             <div className="text-[10px] uppercase text-zinc-500 font-bold mb-1">Total Players Cut</div>
@@ -272,7 +292,7 @@ export default function KDLDeadMoney() {
             const hasDeadMoney = franchise.totalDeadMoney > 0;
             // Recalculate totals from filtered cuts if search is active
             const filteredDeadMoney = franchise.cuts.reduce((s, c) => s + c.deadMoney, 0);
-            const filteredPenalty = franchise.cuts.reduce((s, c) => s + c.salarCapPenalty, 0);
+            const filteredPenalty = franchise.cuts.reduce((s, c) => s + c.salaryCapPenalty, 0);
 
             return (
               <div
@@ -298,7 +318,7 @@ export default function KDLDeadMoney() {
                   <div className="flex gap-4 md:gap-6 flex-wrap">
                     <div className="text-center">
                       <div className="text-[10px] uppercase text-zinc-500 font-bold mb-0.5">{data.targetYear} Penalty</div>
-                      <div className="font-mono font-bold text-[#a95ef5] text-lg">${filteredPenalty}</div>
+                      <div className="font-mono font-bold text-[#a95ef5] text-lg">${money(filteredPenalty)}</div>
                     </div>
                     <div className="text-center">
                       <div className="text-[10px] uppercase text-zinc-500 font-bold mb-0.5">{data.newYear} Dead Money</div>
@@ -343,7 +363,7 @@ export default function KDLDeadMoney() {
                               </span>
                             </td>
                             <td className="px-5 py-3 text-center font-mono text-[#a95ef5]">
-                              ${cut.salarCapPenalty}
+                              ${cut.salaryCapPenalty}
                             </td>
                             <td className="px-5 py-3 text-center">
                               {cut.deadMoney > 0 ? (
@@ -364,8 +384,8 @@ export default function KDLDeadMoney() {
                               )}
                             </td>
                             <td className="px-5 py-3 text-right text-zinc-500 font-mono text-xs">
-                              <div>{cut.dateCut}</div>
-                              <div className="text-zinc-600">{cut.timeCut}</div>
+                              <div>{formatCutDate(cut.cutAt)}</div>
+                              <div className="text-zinc-600">{formatCutTime(cut.cutAt)}</div>
                             </td>
                           </tr>
                         ))}
@@ -379,7 +399,7 @@ export default function KDLDeadMoney() {
                           <td />
                           <td />
                           <td className="px-5 py-3 text-center font-mono font-bold text-[#a95ef5]">
-                            ${filteredPenalty}
+                            ${money(filteredPenalty)}
                           </td>
                           <td className="px-5 py-3 text-center font-mono font-black text-rose-400 text-lg">
                             ${filteredDeadMoney}

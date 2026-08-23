@@ -13,14 +13,15 @@ interface TagPlayer {
 }
 
 interface KDLPlayer {
-  Player: string;
-  Position: string;
-  Team: string;
-  Salary: string;
-  Years: string;
-  Status: string;
-  Info: string;
-  IsTaxi: boolean;
+  name: string;
+  nflTeam: string;
+  position: string;
+  franchise: string;
+  salary: number;
+  contractYear: number;
+  contractStatus: string;
+  contractInfo: string;
+  isTaxi: boolean;
 }
 
 interface TagValues {
@@ -63,16 +64,11 @@ function calculateTagBaselines(tagPlayers: TagPlayer[]): TagValues {
 }
 
 function calculatePlayerStatus(player: KDLPlayer, tagBaselines: TagValues) {
-  const salary        = parseFloat(player.Salary) || 0;
-  const currentYears  = parseInt(player.Years) || 0;
+  const salary        = player.salary || 0;
+  const currentYears  = player.contractYear || 0;
   const projectedYears = Math.max(0, currentYears - 1);
 
-  let rawPos = player.Position;
-  if (!rawPos || rawPos === 'UNK') {
-    const parts = player.Player.split(' ');
-    rawPos = parts[parts.length - 1].replace(/[^a-zA-Z]/g, '');
-  }
-  const group    = getPositionGroup(rawPos);
+  const group    = getPositionGroup(player.position || 'UNK');
   const baseline = tagBaselines[group] || { franchise: 0, restricted: 0 };
 
   return {
@@ -83,7 +79,7 @@ function calculatePlayerStatus(player: KDLPlayer, tagBaselines: TagValues) {
     franchiseCost:   Math.round(Math.max(baseline.franchise,  salary * 1.2)),
     restrictedCost:  Math.round(Math.max(baseline.restricted, salary * 1.1)),
     isExpiring:      projectedYears === 0,
-    isTaxi:          player.IsTaxi,
+    isTaxi:          player.isTaxi,
   };
 }
 
@@ -108,7 +104,9 @@ export default function KDLContractApp() {
         if (!leagueRes.ok) throw new Error('Failed to fetch KDL data');
         if (!tagRes.ok)    throw new Error('Failed to fetch tag baseline data');
 
-        const data:    KDLPlayer[]  = await leagueRes.json();
+        const leagueJson            = await leagueRes.json();
+        if (leagueJson.error) throw new Error(leagueJson.error);
+        const data:    KDLPlayer[]  = leagueJson.players ?? [];
         const tagData: TagPlayer[]  = await tagRes.json();
         setTagBaselines(calculateTagBaselines(tagData));
         setPlayers(data);
@@ -145,9 +143,9 @@ export default function KDLContractApp() {
   const teams = useMemo(() => {
     const teamMap = new Map();
     players.forEach(player => {
-      if (!teamMap.has(player.Team))
-        teamMap.set(player.Team, { name: player.Team, players: [] });
-      teamMap.get(player.Team).players.push({
+      if (!teamMap.has(player.franchise))
+        teamMap.set(player.franchise, { name: player.franchise, players: [] });
+      teamMap.get(player.franchise).players.push({
         ...player,
         status: calculatePlayerStatus(player, tagBaselines),
       });
@@ -160,7 +158,7 @@ export default function KDLContractApp() {
     if (selectedTeam !== 'all') result = result.filter(t => t.name === selectedTeam);
     if (searchTerm) {
       result = result
-        .map(t => ({ ...t, players: t.players.filter((p: any) => p.Player.toLowerCase().includes(searchTerm.toLowerCase())) }))
+        .map(t => ({ ...t, players: t.players.filter((p: any) => p.name.toLowerCase().includes(searchTerm.toLowerCase())) }))
         .filter(t => t.players.length > 0);
     }
     return result;
@@ -179,7 +177,7 @@ export default function KDLContractApp() {
     let hasDecisions    = false;
     active.forEach(p => {
       if (p.status.projectedYears === 0) {
-        const key      = `${p.Team}-${p.Player}`;
+        const key      = `${p.franchise}-${p.name}`;
         const decision = tagDecisions[key];
         if (decision) {
           hasDecisions     = true;
@@ -320,7 +318,7 @@ export default function KDLContractApp() {
                     </thead>
                     <tbody className="divide-y divide-zinc-800/50">
                       {team.players.map((p: any, i: number) => {
-                        const playerKey = `${p.Team}-${p.Player}`;
+                        const playerKey = `${p.franchise}-${p.name}`;
                         const decision  = tagDecisions[playerKey] || '';
                         return (
                           <tr
@@ -329,13 +327,13 @@ export default function KDLContractApp() {
                           >
                             {/* Player name + badges */}
                             <td className="px-6 py-3">
-                              <div className="font-bold text-zinc-200">{p.Player}</div>
+                              <div className="font-bold text-zinc-200">{p.name} <span className="text-zinc-500 font-mono text-xs">{p.position} {p.nflTeam}</span></div>
                               <div className="flex gap-2 mt-1">
                                 {p.status.isTaxi && (
                                   <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/30 font-mono">TAXI</span>
                                 )}
-                                {p.Status && (
-                                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700 font-mono">{p.Status}</span>
+                                {p.contractStatus && (
+                                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700 font-mono">{p.contractStatus}</span>
                                 )}
                                 {p.status.isExpiring && !p.status.isTaxi && (
                                   <span className="text-[10px] px-1.5 py-0.5 rounded bg-rose-500/10 text-rose-500 border border-rose-500/30 font-mono animate-pulse">EXPIRING</span>

@@ -5,12 +5,13 @@ import { AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { ToolHeader } from '../components/kff/ToolHeader';
 
 interface UnassignedPlayer {
-  Player: string;
-  Team: string;
-  Position: string;
-  Salary: string;
-  Years: string;
-  IsTaxi: boolean;
+  name: string;
+  nflTeam: string;
+  franchise: string;
+  position: string;
+  salary: number;
+  contractYear: number;
+  isTaxi: boolean;
 }
 
 export default function KDLYearsApp() {
@@ -24,7 +25,8 @@ export default function KDLYearsApp() {
         const response = await fetch('/api/kdl-years-data');
         if (!response.ok) throw new Error('Failed to fetch KDL data');
         const data = await response.json();
-        setPlayers(data);
+        if (data.error) throw new Error(data.error);
+        setPlayers(data.players ?? []);
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -37,10 +39,10 @@ export default function KDLYearsApp() {
   const teams = useMemo(() => {
     const teamMap = new Map();
     players.forEach(player => {
-      if (!teamMap.has(player.Team)) {
-        teamMap.set(player.Team, { name: player.Team, players: [] });
+      if (!teamMap.has(player.franchise)) {
+        teamMap.set(player.franchise, { name: player.franchise, players: [] });
       }
-      teamMap.get(player.Team).players.push(player);
+      teamMap.get(player.franchise).players.push(player);
     });
     return Array.from(teamMap.values());
   }, [players]);
@@ -114,18 +116,20 @@ export default function KDLYearsApp() {
                   </thead>
                   <tbody className="divide-y divide-zinc-800/50">
                     {team.players.map((p: UnassignedPlayer, i: number) => (
-                      <tr key={i} className={`hover:bg-[#8a2be2]/5 transition-colors ${p.IsTaxi ? 'opacity-70 bg-amber-500/5' : ''}`}>
+                      <tr key={i} className={`hover:bg-[#8a2be2]/5 transition-colors ${p.isTaxi ? 'opacity-70 bg-amber-500/5' : ''}`}>
                         <td className="px-6 py-3">
-                          <div className="font-bold text-zinc-200">{p.Player}</div>
-                          {p.IsTaxi && (
+                          <div className="font-bold text-zinc-200">
+                            {p.name} <span className="text-zinc-500 font-mono text-xs">{p.nflTeam}</span>
+                          </div>
+                          {p.isTaxi && (
                             <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/30 font-mono mt-1 inline-block">TAXI</span>
                           )}
                         </td>
-                        <td className="px-6 py-3 font-mono text-zinc-400">{p.Position}</td>
-                        <td className="px-6 py-3 font-mono text-[#a95ef5]">${p.Salary}</td>
+                        <td className="px-6 py-3 font-mono text-zinc-400">{p.position}</td>
+                        <td className="px-6 py-3 font-mono text-[#a95ef5]">${p.salary}</td>
                         <td className="px-6 py-3 text-center">
                           <span className="text-rose-500 font-mono font-bold animate-pulse">
-                            {p.Years === '' ? '—' : p.Years}
+                            {p.contractYear === 0 ? '—' : p.contractYear}
                           </span>
                         </td>
                       </tr>

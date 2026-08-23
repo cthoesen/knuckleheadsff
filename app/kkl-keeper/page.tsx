@@ -5,15 +5,19 @@ import { Search, Award, XCircle, CheckCircle, AlertCircle, Trophy } from 'lucide
 import { ToolHeader } from '../components/kff/ToolHeader';
 
 interface PlayerData {
-  Player?: string;
-  Acquired?: string;
-  Years?: string | number;
-  Team?: string;
-  Keeper?: string;
+  name?: string;
+  nflTeam?: string;
+  position?: string;
+  acquired?: string;
+  contractYear?: number;
+  franchise?: string;
+  contractInfo?: string;
+  isRookie?: boolean;
+  injuryStatus?: string;
 }
 
 function calculateKeeperStatus(player: PlayerData) {
-  if (!player || !player.Player) {
+  if (!player || !player.name) {
     return {
       eligible: false,
       reason: 'Invalid player data',
@@ -23,9 +27,9 @@ function calculateKeeperStatus(player: PlayerData) {
     };
   }
 
-  const isRookie = player.Player.includes('(R)');
-  const acquired = player.Acquired?.trim();
-  const currentYears = player.Years ? parseInt(String(player.Years)) : null;
+  const isRookie = !!player.isRookie;
+  const acquired = player.acquired?.trim();
+  const currentYears = player.contractYear || null;
   
   // Parse acquired round (format is like "17.06" where 17 is the round)
   let acquiredRound = null;
@@ -113,9 +117,9 @@ export default function KKLKeeperApp() {
            throw new Error(`Server Error ${response.status}: ${errText}`);
         }
         
-        const parsedPlayers = await response.json();
-        console.log("Fetched KKL Data:", parsedPlayers.slice(0, 5));
-        setPlayers(parsedPlayers);
+        const payload = await response.json();
+        if (payload.error) throw new Error(payload.error);
+        setPlayers(payload.players ?? []);
       } catch (err: any) {
         setError(`Error loading KKL league data: ${err.message}`);
         console.error(err);
@@ -129,14 +133,14 @@ export default function KKLKeeperApp() {
   const teams = useMemo(() => {
     const teamMap = new Map();
     players.forEach(player => {
-      if (!player.Player) return;
-      if (!teamMap.has(player.Team)) {
-        teamMap.set(player.Team, {
-          name: player.Team,
+      if (!player.name) return;
+      if (!teamMap.has(player.franchise)) {
+        teamMap.set(player.franchise, {
+          name: player.franchise,
           players: []
         });
       }
-      teamMap.get(player.Team).players.push({ 
+      teamMap.get(player.franchise).players.push({ 
         ...player, 
         keeperStatus: calculateKeeperStatus(player) 
       });
@@ -153,7 +157,7 @@ export default function KKLKeeperApp() {
       result = result.map(t => ({
         ...t,
         players: t.players.filter((p: PlayerData & { keeperStatus: ReturnType<typeof calculateKeeperStatus> }) => 
-          p.Player ? p.Player.toLowerCase().includes(searchTerm.toLowerCase()) : false
+          p.name ? p.name.toLowerCase().includes(searchTerm.toLowerCase()) : false
         )
       })).filter(t => t.players.length > 0);
     }
@@ -404,13 +408,13 @@ export default function KKLKeeperApp() {
                           }}
                         >
                           <td style={{ padding: '1rem 1.5rem', color: 'var(--kff-ink)', fontWeight: 500 }}>
-                            {player.Player}
+                            {player.name} <span style={{ color: 'var(--kff-ink-mute)', fontFamily: 'var(--font-mono)', fontSize: '0.72rem' }}>{player.position} {player.nflTeam}</span>
                           </td>
                           <td style={{ padding: '1rem 1.5rem', color: 'rgba(241, 241, 251, 0.8)' }}>
-                            {player.Acquired || '—'}
+                            {player.acquired || '—'}
                           </td>
                           <td style={{ padding: '1rem 1.5rem', color: 'rgba(241, 241, 251, 0.8)' }}>
-                            {player.Years || '—'}
+                            {player.contractYear || '—'}
                           </td>
                           <td style={{ padding: '1rem 1.5rem' }}>
                             {player.keeperStatus.eligible ? (

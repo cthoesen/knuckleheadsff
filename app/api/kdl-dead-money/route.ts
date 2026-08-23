@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { mflExport } from '@/lib/mfl';
 
 export const dynamic = 'force-dynamic';
 
@@ -7,7 +8,6 @@ export const dynamic = 'force-dynamic';
 // NewYear:    the season in which dead money will be charged
 const TARGET_YEAR = '2026';
 const NEW_YEAR = '2027';
-const SERVER = 'www47';
 const LEAGUE_ID = '68756';
 
 // Dead money minimums by years-remaining-when-cut (bylaws)
@@ -26,124 +26,83 @@ function calcDeadMoney(salary: number, yearsWhenCut: number): number {
 }
 
 export interface CutRow {
+  franchiseId: string;
   franchise: string;
   playerCut: string;
   salaryWhenCut: number;
   yearsWhenCut: number;
-  salarCapPenalty: number; // in-season penalty (already applied by MFL)
-  deadMoney: number;       // next-season dead money charge
-  dateCut: string;
-  timeCut: string;
+  salaryCapPenalty: number; // in-season penalty (already applied by MFL)
+  deadMoney: number;        // next-season dead money charge
+  /** Unix seconds, straight from MFL. */
+  timestamp: number;
+  /** ISO 8601 instant of the cut. */
+  cutAt: string;
 }
 
 export async function GET() {
-  const MFL_URL = `https://${SERVER}.myfantasyleague.com/${TARGET_YEAR}/options?L=${LEAGUE_ID}&O=142&PRINTER=1`;
-
   try {
-    const response = await fetch(MFL_URL, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-      },
-      next: { revalidate: 300 },
-    });
+    const [adjustments, leagueData] = await Promise.all([
+      mflExport(TARGET_YEAR, 'salaryAdjustments', { leagueId: LEAGUE_ID, code: 'kdl' }),
+      mflExport(TARGET_YEAR, 'league', { leagueId: LEAGUE_ID, code: 'kdl' }),
+    ]);
 
-    if (!response.ok) {
-      return NextResponse.json({ error: 'Failed to fetch MFL salary adjustments' }, { status: 500 });
+    const franchiseNames = new Map<string, string>();
+    const rawFranchises = leagueData?.league?.franchises?.franchise;
+    for (const f of Array.isArray(rawFranchises) ? rawFranchises : [rawFranchises].filter(Boolean)) {
+      franchiseNames.set(f.id, f.name);
     }
 
-    const html = await response.text();
-
-    // The O=142 page renders a table with columns: Franchise | Amount | Explanation | Date
-    // Each data row is a <tr> with <td> cells.
-    // We'll extract rows by splitting on <tr and parsing each one.
+    const rawAdjustments = adjustments?.salaryAdjustments?.salaryAdjustment;
+    const list = Array.isArray(rawAdjustments) ? rawAdjustments : [rawAdjustments].filter(Boolean);
 
     const rows: CutRow[] = [];
+    for (const adj of list) {
+      const description: string = adj?.description ?? '';
 
-    // Split into rows
-    const rawRows = html.split(/<tr[\s>]/i);
+      // "PY Dead Money" rows are next-season penalties MFL has already applied;
+      // only actual cuts ("Dropped …") generate a new charge.
+      if (description.includes('PY Dead Money')) continue;
+      if (!description.includes('Dropped')) continue;
 
-    for (const rawRow of rawRows) {
-      // Each cell is wrapped in <td ... >content</td>
-      const cells = [...rawRow.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map(m =>
-        m[1].replace(/<[^>]*>/g, '').trim()
-      );
+      // e.g. "Dropped Penix Jr., Michael ATL QB (Salary: $5, Years: 2)"
+      const playerMatch = description.match(/Dropped\s+(.+?)\s+\(/);
+      const playerCut = playerMatch ? playerMatch[1].trim() : description;
 
-      if (cells.length < 4) continue;
-
-      const [franchise, amountStr, explanation, dateRaw] = cells;
-
-      // Skip header-like rows and PY Dead Money entries (already-applied next-season penalties)
-      if (!franchise || franchise.toLowerCase() === 'franchise') continue;
-      if (explanation.includes('PY Dead Money')) continue;
-
-      // Only process rows that represent a player cut (explanation contains "Dropped")
-      if (!explanation.includes('Dropped')) continue;
-
-      // Parse amount (in-season penalty, stored as a negative number by MFL)
-      const salarCapPenalty = Math.abs(parseFloat(amountStr.replace(/[^0-9.-]/g, '')) || 0);
-
-      // Extract player name: "Dropped PlayerName (Salary: $N, Years:N)"
-      const playerMatch = explanation.match(/Dropped\s+(.+?)\s+\(/);
-      const playerCut = playerMatch ? playerMatch[1].trim() : explanation;
-
-      // Extract salary
-      const salaryMatch = explanation.match(/Salary:\s*\$?([\d.]+)/i);
+      const salaryMatch = description.match(/Salary:\s*\$?([\d.]+)/i);
       const salaryWhenCut = salaryMatch ? parseFloat(salaryMatch[1]) : 0;
 
-      // Extract years — may or may not have a Status field after Years
-      const yearsMatch = explanation.match(/Years:\s*(\d+)/i);
-      const yearsWhenCut = yearsMatch ? parseInt(yearsMatch[1]) : 1;
+      const yearsMatch = description.match(/Years:\s*(\d+)/i);
+      const yearsWhenCut = yearsMatch ? parseInt(yearsMatch[1], 10) : 1;
 
-      // Parse date — MFL format varies: "Fri Aug 1 10:30:00 a.m. MT 2025"
-      let dateCut = '';
-      let timeCut = '';
-      try {
-        // Strip leading day-of-week word if present
-        const cleanDate = dateRaw.replace(/^[A-Za-z]+\s+/, '');
-        // cleanDate is now like: "Aug 1 10:30:00 a.m. MT 2025"
-        const parts = cleanDate.split(/\s+/);
-        // parts: [Month, Day, Time, AMPM, TZ, Year]
-        if (parts.length >= 6) {
-          const monthNames: Record<string, number> = {
-            Jan: 1, Feb: 2, Mar: 3, Apr: 4, May: 5, Jun: 6,
-            Jul: 7, Aug: 8, Sep: 9, Oct: 10, Nov: 11, Dec: 12,
-          };
-          const month = monthNames[parts[0]] ?? 1;
-          const day = parseInt(parts[1]);
-          const year = parseInt(parts[5]);
-          dateCut = `${month}/${day}/${year}`;
-          const ampmNorm = parts[3].toLowerCase().includes('p') ? 'PM' : 'AM';
-          timeCut = `${parts[2]} ${ampmNorm}`;
-        } else {
-          dateCut = cleanDate;
-        }
-      } catch {
-        dateCut = dateRaw;
-      }
+      // MFL stores the in-season penalty as the adjustment amount.
+      const salaryCapPenalty = Math.abs(parseFloat(adj?.amount) || 0);
 
-      const deadMoney = calcDeadMoney(salaryWhenCut, yearsWhenCut);
+      const timestamp = parseInt(adj?.timestamp, 10) || 0;
 
       rows.push({
-        franchise,
+        franchiseId: adj?.franchise_id ?? '',
+        franchise: franchiseNames.get(adj?.franchise_id) ?? adj?.franchise_id ?? '',
         playerCut,
         salaryWhenCut,
         yearsWhenCut,
-        salarCapPenalty,
-        deadMoney,
-        dateCut,
-        timeCut,
+        salaryCapPenalty,
+        deadMoney: calcDeadMoney(salaryWhenCut, yearsWhenCut),
+        timestamp,
+        cutAt: timestamp ? new Date(timestamp * 1000).toISOString() : '',
       });
     }
 
-    // Sort by franchise name then by cut date descending
+    // Franchise name, then most-recent cut first.
     rows.sort((a, b) => {
       const fc = a.franchise.localeCompare(b.franchise);
-      if (fc !== 0) return fc;
-      return b.dateCut.localeCompare(a.dateCut);
+      return fc !== 0 ? fc : b.timestamp - a.timestamp;
     });
 
-    // Build per-franchise summary
-    const franchiseMap = new Map<string, { cuts: CutRow[]; totalDeadMoney: number; totalInSeasonPenalty: number }>();
+    // Per-franchise summary
+    const franchiseMap = new Map<
+      string,
+      { cuts: CutRow[]; totalDeadMoney: number; totalInSeasonPenalty: number }
+    >();
     for (const row of rows) {
       if (!franchiseMap.has(row.franchise)) {
         franchiseMap.set(row.franchise, { cuts: [], totalDeadMoney: 0, totalInSeasonPenalty: 0 });
@@ -151,7 +110,7 @@ export async function GET() {
       const entry = franchiseMap.get(row.franchise)!;
       entry.cuts.push(row);
       entry.totalDeadMoney += row.deadMoney;
-      entry.totalInSeasonPenalty += row.salarCapPenalty;
+      entry.totalInSeasonPenalty += row.salaryCapPenalty;
     }
 
     const franchises = Array.from(franchiseMap.entries()).map(([name, data]) => ({
@@ -167,9 +126,8 @@ export async function GET() {
       franchises,
       allCuts: rows,
     });
-
   } catch (error: any) {
-    console.error('Dead Money API Error:', error);
+    console.error('KDL Dead Money API Error:', error);
     return NextResponse.json({ error: error.message || 'Internal Server Error' }, { status: 500 });
   }
 }

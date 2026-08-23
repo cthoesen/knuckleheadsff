@@ -1,94 +1,28 @@
 import { NextResponse } from 'next/server';
+import { getLeagueRoster } from '@/lib/mfl';
 
 export const dynamic = 'force-dynamic';
 
 // --- LEAGUE SETTINGS ---
-// Update this year to match the current season
+// Update this year when ready to roll to new season
 const SEASON_YEAR = '2026';
-const SERVER = 'www47';
 const LEAGUE_ID = '68756';
 
 export async function GET() {
-  const MFL_URL = `https://${SERVER}.myfantasyleague.com/${SEASON_YEAR}/options?L=${LEAGUE_ID}&O=07&PRINTER=1`;
-
   try {
-    const response = await fetch(MFL_URL, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-      },
-      next: { revalidate: 0 }
+    const { players, pointsSeason } = await getLeagueRoster({
+      code: 'kdl',
+      leagueId: LEAGUE_ID,
+      season: SEASON_YEAR,
     });
 
-    if (!response.ok) {
-      return NextResponse.json({ error: "Failed to fetch MFL data" }, { status: 500 });
-    }
+    // This tool only reports players still missing a contract length —
+    // MFL leaves those as a blank/zero contractYear.
+    const unassigned = players.filter((p) => p.contractYear === 0);
 
-    const htmlText = await response.text();
-    const players = [];
-
-    const sections = htmlText.split('<caption');
-
-    for (let i = 1; i < sections.length; i++) {
-      const section = sections[i];
-
-      // Extract Team Name directly from the caption's <a> tag
-      const teamMatch = section.match(/<a[^>]*>([\s\S]*?)<\/a>/);
-      const teamName = teamMatch ? teamMatch[1].replace(/<[^>]*>/g, '').trim() : "Unknown Team";
-
-      // Process Rows
-      const rows = section.split('<tr');
-      let isTaxiSquad = false;
-
-      for (const rowFragment of rows) {
-        const row = '<tr' + rowFragment;
-
-        if (row.includes('Taxi Squad') && row.includes('<th')) {
-          isTaxiSquad = true;
-          continue;
-        }
-
-        if (!row.includes('class="player"')) continue;
-
-        const playerMatch = row.match(/class="player">([\s\S]*?)<\/td>/);
-        const salaryMatch = row.match(/class="salary">([\s\S]*?)<\/td>/);
-        const yearsMatch = row.match(/class="contractyear">([\s\S]*?)<\/td>/);
-
-        if (playerMatch) {
-          const clean = (text: string) => text.replace(/<[^>]*>/g, '').trim();
-
-          const pName = clean(playerMatch[1]);
-          const years = yearsMatch ? clean(yearsMatch[1]) : '';
-
-          // Skip non-player rows like "Salary Adjustments (3)"
-          if (pName.toLowerCase().includes('salary adjustment')) continue;
-
-          // Only include players with 0 or blank years
-          if (years === '' || years === '0') {
-            // Position extraction — skip trailing status designations like
-            // (R), (Q), (I); a player can have more than one (e.g. "(R) (Q)")
-            const nameParts = pName.split(/\s+/);
-            let posIdx = nameParts.length - 1;
-            while (posIdx >= 0 && nameParts[posIdx].startsWith('(')) posIdx--;
-            const rawPos = posIdx >= 0 ? nameParts[posIdx] : 'UNK';
-            const position = rawPos.replace(/[^a-zA-Z]/g, '');
-
-            players.push({
-              Team: teamName,
-              Player: pName,
-              Position: position,
-              Salary: salaryMatch ? clean(salaryMatch[1]).replace(/[^0-9.]/g, '') : '0',
-              Years: years,
-              IsTaxi: isTaxiSquad
-            });
-          }
-        }
-      }
-    }
-
-    return NextResponse.json(players);
-
+    return NextResponse.json({ players: unassigned, pointsSeason, season: SEASON_YEAR });
   } catch (error: any) {
-    console.error("KDL Years API Route Error:", error);
-    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
+    console.error('KDL Years Data API Error:', error);
+    return NextResponse.json({ error: error.message || 'Internal Server Error' }, { status: 500 });
   }
 }

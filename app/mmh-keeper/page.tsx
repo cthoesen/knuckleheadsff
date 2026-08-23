@@ -8,17 +8,24 @@ import { Input } from '../components/kff/Input';
 import { Badge } from '../components/kff/Badge';
 
 interface MMHPlayer {
-  Player: string;
-  Team: string;
-  Position: string;
-  Salary: string;
-  Base: string;
-  Years: string;
-  Info: string;
-  Acquired: string;
-  IsTaxi: boolean;
-  IsIR: boolean;
-  Points: number | null;
+  name: string;
+  nflTeam: string;
+  franchise: string;
+  position: string;
+  salary: number;
+  /** MFL contractStatus, e.g. "$24" — the league's "Base" column. */
+  contractStatus: string;
+  contractYear: number;
+  contractInfo: string;
+  acquired: string;
+  isTaxi: boolean;
+  isIR: boolean;
+  points: number | null;
+}
+
+/** MFL returns contractStatus as a display string ("$24"); pull the number out. */
+function baseOf(player: { contractStatus?: string }): number {
+  return parseFloat(String(player.contractStatus ?? '').replace(/[^0-9.]/g, '')) || 0;
 }
 
 // IR players are promoted to the active roster at season start, so they sort
@@ -34,34 +41,34 @@ const POSITION_ORDER: Record<string, number> = {
 type KeepDecision = 'keep' | 'drop';
 
 function calculateMMHKeeperStatus(player: MMHPlayer) {
-  if (!player || !player.Player) return { eligible: false, cost: 0, reason: 'Invalid Data' };
+  if (!player || !player.name) return { eligible: false, cost: 0, reason: 'Invalid Data' };
 
-  const currentSalary = parseFloat(player.Salary) || 0;
-  const keeperBase = parseFloat(player.Base) || 0;
+  const currentSalary = player.salary || 0;
+  const keeperBase = baseOf(player);
 
   let yearsRemaining;
   let currentYears = 0;
 
-  if (!player.Years || player.Years.trim() === '') {
+  if (!player.contractYear) {
     yearsRemaining = 3;
     currentYears = 4;
   } else {
-    currentYears = parseInt(player.Years);
+    currentYears = player.contractYear;
     yearsRemaining = currentYears - 1;
   }
 
-  const isKicker = player.Position === 'K' || player.Position === 'PK';
+  const isKicker = player.position === 'K' || player.position === 'PK';
   const minSalary = isKicker ? 3 : 5;
 
-  const isDraftedRookie = /R\d{2}-\d/.test(player.Info) || /R\d{2}/.test(player.Info);
+  const isDraftedRookie = /R\d{2}-\d/.test(player.contractInfo) || /R\d{2}/.test(player.contractInfo);
   const maxYears = isDraftedRookie ? 5 : 3;
 
   if (yearsRemaining <= 0 && currentYears > 0) {
-    return { eligible: false, cost: 0, reason: 'Contract Expired', yearsRemaining: 0, isTaxi: player.IsTaxi, maxYears };
+    return { eligible: false, cost: 0, reason: 'Contract Expired', yearsRemaining: 0, isTaxi: player.isTaxi, maxYears };
   }
 
   let newCost = 0;
-  if (player.IsTaxi) {
+  if (player.isTaxi) {
     newCost = currentSalary;
   } else {
     const baseCalculation = Math.max(currentSalary, keeperBase);
@@ -75,7 +82,7 @@ function calculateMMHKeeperStatus(player: MMHPlayer) {
     reason: null,
     yearsRemaining: Math.max(0, yearsRemaining),
     isDraftedRookie,
-    isTaxi: player.IsTaxi,
+    isTaxi: player.isTaxi,
     maxYears,
   };
 }
@@ -90,12 +97,12 @@ function getTeamStats(teamPlayers: any[], decisions: Record<string, KeepDecision
   const SALARY_CAP = 1200;
 
   const currentPayroll = teamPlayers.reduce((sum: number, p: any) => {
-    return p.status.isTaxi ? sum : sum + (parseFloat(p.Salary) || 0);
+    return p.status.isTaxi ? sum : sum + (p.salary || 0);
   }, 0);
 
   const projectedPayroll = teamPlayers.reduce((sum: number, p: any) => {
     if (p.status.isTaxi || !p.status.eligible) return sum;
-    const key = `${p.Team}-${p.Player}`;
+    const key = `${p.franchise}-${p.name}`;
     const decision = decisions[key] ?? 'keep';
     if (decision === 'drop') return sum;
     return sum + p.status.cost;
@@ -124,7 +131,8 @@ export default function MMHKeeperApp() {
         const response = await fetch('/api/mmh-league-data');
         if (!response.ok) throw new Error('Failed to fetch MMH data');
         const data = await response.json();
-        setPlayers(data);
+        if (data.error) throw new Error(data.error);
+        setPlayers(data.players ?? []);
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -137,10 +145,10 @@ export default function MMHKeeperApp() {
   const teams = useMemo(() => {
     const teamMap = new Map();
     players.forEach((player) => {
-      if (!teamMap.has(player.Team)) {
-        teamMap.set(player.Team, { name: player.Team, players: [] });
+      if (!teamMap.has(player.franchise)) {
+        teamMap.set(player.franchise, { name: player.franchise, players: [] });
       }
-      teamMap.get(player.Team).players.push({ ...player, status: calculateMMHKeeperStatus(player) });
+      teamMap.get(player.franchise).players.push({ ...player, status: calculateMMHKeeperStatus(player) });
     });
     return Array.from(teamMap.values());
   }, [players]);
@@ -150,7 +158,7 @@ export default function MMHKeeperApp() {
     if (selectedTeam !== 'all') result = result.filter((t) => t.name === selectedTeam);
     if (searchTerm) {
       result = result
-        .map((t) => ({ ...t, players: t.players.filter((p: any) => p.Player.toLowerCase().includes(searchTerm.toLowerCase())) }))
+        .map((t) => ({ ...t, players: t.players.filter((p: any) => p.name.toLowerCase().includes(searchTerm.toLowerCase())) }))
         .filter((t) => t.players.length > 0);
     }
     return result;
@@ -206,9 +214,9 @@ export default function MMHKeeperApp() {
         {filteredTeams.map((team: any) => {
           const stats = getTeamStats(team.players, keepDecisions);
           const sortedPlayers = [...team.players].sort((a: any, b: any) => {
-            if (a.IsTaxi !== b.IsTaxi) return a.IsTaxi ? 1 : -1;
-            const posA = POSITION_ORDER[a.Position] ?? 99;
-            const posB = POSITION_ORDER[b.Position] ?? 99;
+            if (a.isTaxi !== b.isTaxi) return a.isTaxi ? 1 : -1;
+            const posA = POSITION_ORDER[a.position] ?? 99;
+            const posB = POSITION_ORDER[b.position] ?? 99;
             return posA - posB;
           });
 
@@ -246,29 +254,29 @@ export default function MMHKeeperApp() {
                   </thead>
                   <tbody>
                     {sortedPlayers.map((p: any, i: number) => {
-                      const decisionKey = `${p.Team}-${p.Player}`;
+                      const decisionKey = `${p.franchise}-${p.name}`;
                       const decision = keepDecisions[decisionKey] ?? 'keep';
                       const isDropped = p.status.eligible && decision === 'drop';
 
                       return (
                         <tr key={i} className={!p.status.eligible ? 'ineligible-row' : isDropped ? 'dropped-row' : ''}>
                           <td>
-                            <div style={{ fontWeight: 600, color: 'var(--kff-ink)' }}>{p.Player}</div>
+                            <div style={{ fontWeight: 600, color: 'var(--kff-ink)' }}>{p.name} <span style={{ color: 'var(--kff-ink-mute)', fontFamily: 'var(--font-mono)', fontSize: '0.72rem' }}>{p.position} {p.nflTeam}</span></div>
                             <div style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
                               {p.status.isTaxi && <Badge tone="yellow" variant="outline">Taxi</Badge>}
                               {p.status.isDraftedRookie && (
                                 <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--kff-azure)' }}>
-                                  {getRookieLabel(p.Info, p.Acquired)}
+                                  {getRookieLabel(p.contractInfo, p.acquired)}
                                 </span>
                               )}
                             </div>
                           </td>
                           <td className="mono" style={{ fontWeight: 700, color: 'var(--kff-yellow)' }}>
-                            {p.Points != null ? p.Points.toFixed(1) : <span style={{ color: 'var(--kff-ink-mute)' }}>—</span>}
+                            {p.points != null ? p.points.toFixed(1) : <span style={{ color: 'var(--kff-ink-mute)' }}>—</span>}
                           </td>
-                          <td className="mono" style={{ color: 'var(--kff-ink-dim)' }}>${p.Salary}</td>
+                          <td className="mono" style={{ color: 'var(--kff-ink-dim)' }}>${p.salary}</td>
                           <td className="mono" style={{ fontSize: 'var(--text-xs)', color: 'var(--kff-ink-mute)' }}>
-                            {p.Base && parseFloat(p.Base) > 0 ? `$${p.Base}` : <span style={{ color: 'var(--kff-ink-mute)' }}>—</span>}
+                            {baseOf(p) > 0 ? `$${baseOf(p)}` : <span style={{ color: 'var(--kff-ink-mute)' }}>—</span>}
                           </td>
                           <td>
                             {p.status.eligible ? <div className="cost-display">${p.status.cost}</div> : <span style={{ color: 'var(--kff-ink-mute)' }}>—</span>}
