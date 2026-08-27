@@ -1,10 +1,11 @@
 'use client';
 
-import { Calculator, TrendingUp, ArrowLeftRight, FileText } from 'lucide-react';
+import { ArrowLeftRight, Calculator, ClipboardList, FileText, TrendingUp } from 'lucide-react';
 import LeagueHubLayout, { HubTool, HubQuickLink } from '../components/LeagueHubLayout';
 
 const TOOLS: HubTool[] = [
   { name: 'Keeper Analyzer', desc: 'Calculate keeper eligibility and draft costs for the 2026 season', icon: <Calculator size={22} />, href: '/kkl-keeper', status: 'live' },
+  { name: 'Keeper Board', desc: 'Every team\u2019s declared keepers and the picks they consume', icon: <ClipboardList size={22} />, href: '/kkl-keepers', status: 'live' },
   { name: 'Draft Assistant', desc: 'Live draft helper with player rankings and ADP tracking', icon: <TrendingUp size={22} />, status: 'soon' },
   { name: 'Trade Analyzer', desc: 'Evaluate trade proposals with keeper implications', icon: <ArrowLeftRight size={22} />, href: '/kkl-trade', status: 'live' },
   { name: 'League Constitution', desc: 'Official rules, scoring, and keeper regulations', icon: <FileText size={22} />, externalHref: '/docs/kkl/kkl-bylaws.pdf', status: 'live' },
