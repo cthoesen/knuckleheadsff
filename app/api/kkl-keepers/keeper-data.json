@@ -1,9 +1,9 @@
 {
   "league": "kkl",
   "season": "2026",
-  "generatedAt": "2026-08-27T12:41:29.597Z",
+  "generatedAt": "2026-08-27T13:01:26.644Z",
   "source": "kkl-keeper-info-2026-distro.xlsx",
-  "teamsReported": 6,
+  "teamsReported": 12,
   "teamsInLeague": 12,
   "teams": [
     {
@@ -231,7 +231,220 @@
       "franchiseId": "0001"
     },
     {
-      "team": "Wa Wa Wee Wa",
+      "team": "Midnight Marauders",
+      "players": [
+        {
+          "player": "Pickens, George",
+          "pyPoints": 307,
+          "pyRoundDrafted": 4,
+          "yearsRemaining": 3,
+          "keeperRound": "K2",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "2.08",
+          "playerId": "15762"
+        },
+        {
+          "player": "Montgomery, David",
+          "pyPoints": 163.45,
+          "pyRoundDrafted": 5,
+          "yearsRemaining": 3,
+          "keeperRound": "K3",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "14071"
+        },
+        {
+          "player": "Croskey-Merritt, Jacory",
+          "pyPoints": 147.5,
+          "pyRoundDrafted": 6,
+          "yearsRemaining": 3,
+          "keeperRound": "K6",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "17256"
+        },
+        {
+          "player": "Mayfield, Baker",
+          "pyPoints": 331.6,
+          "pyRoundDrafted": 9,
+          "yearsRemaining": 1,
+          "keeperRound": "K7",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "13590"
+        },
+        {
+          "player": "Shaheed, Rashid",
+          "pyPoints": 198.8,
+          "pyRoundDrafted": 10,
+          "yearsRemaining": 1,
+          "keeperRound": "K8",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "8.08",
+          "playerId": "16080"
+        },
+        {
+          "player": "Mason, Jordan",
+          "pyPoints": 122.5,
+          "pyRoundDrafted": 12,
+          "yearsRemaining": 2,
+          "keeperRound": "K10",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15972"
+        },
+        {
+          "player": "Pitts, Kyle",
+          "pyPoints": 202,
+          "pyRoundDrafted": 13,
+          "yearsRemaining": 3,
+          "keeperRound": "K11",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "11.05",
+          "playerId": "15329"
+        },
+        {
+          "player": "Ward, Cam",
+          "pyPoints": 237.25,
+          "pyRoundDrafted": 11,
+          "yearsRemaining": 3,
+          "keeperRound": "K11",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "17030"
+        },
+        {
+          "player": "Panthers, Carolina",
+          "pyPoints": 120,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "0777"
+        },
+        {
+          "player": "Rodgers, Aaron",
+          "pyPoints": 273.6,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "7836"
+        },
+        {
+          "player": "Barner, AJ",
+          "pyPoints": 143.9,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16723"
+        },
+        {
+          "player": "Watson, Christian",
+          "pyPoints": 141.4,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "12.08",
+          "playerId": "15789"
+        },
+        {
+          "player": "Mims, Marvin",
+          "pyPoints": 143.9,
+          "pyRoundDrafted": 16,
+          "yearsRemaining": 3,
+          "keeperRound": "K14",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16189"
+        },
+        {
+          "player": "McPherson, Evan",
+          "pyPoints": 133,
+          "pyRoundDrafted": 16,
+          "yearsRemaining": 3,
+          "keeperRound": "K14",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15368"
+        },
+        {
+          "player": "Chargers, Los Angeles",
+          "pyPoints": 144,
+          "pyRoundDrafted": 18,
+          "yearsRemaining": 3,
+          "keeperRound": "K16",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "0764"
+        },
+        {
+          "player": "Robinson, Bijan",
+          "pyPoints": 396.5,
+          "pyRoundDrafted": 1,
+          "yearsRemaining": null,
+          "keeperRound": null,
+          "eligible": false,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16161"
+        },
+        {
+          "player": "Harrison Jr., Marvin",
+          "pyPoints": 127.8,
+          "pyRoundDrafted": 3,
+          "yearsRemaining": null,
+          "keeperRound": null,
+          "eligible": false,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16614"
+        }
+      ],
+      "draftPicks": [
+        "1.05",
+        "2.08",
+        "3.05",
+        "4.03",
+        "4.08",
+        "5.05",
+        "6.08",
+        "7.05",
+        "8.08",
+        "9.05",
+        "10.08",
+        "11.05",
+        "12.08",
+        "13.05",
+        "14.08",
+        "15.05",
+        "17.05",
+        "18.08"
+      ],
+      "franchiseId": "0002"
+    },
+    {
+      "team": "Dirty Mike and the Boys",
       "players": [
         {
           "player": "Pollard, Tony",
@@ -451,7 +664,232 @@
         "17.10",
         "18.03"
       ],
-      "franchiseId": null
+      "priorYearTeam": "Wa Wa Wee Wa",
+      "franchiseId": "0003"
+    },
+    {
+      "team": "Over the Hill and Tua the Waddle we go!",
+      "players": [
+        {
+          "player": "Etienne, Travis",
+          "pyPoints": 259.1,
+          "pyRoundDrafted": 6,
+          "yearsRemaining": 3,
+          "keeperRound": "K4",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15253"
+        },
+        {
+          "player": "Kelce, Travis",
+          "pyPoints": 189,
+          "pyRoundDrafted": 8,
+          "yearsRemaining": 3,
+          "keeperRound": "K6",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "11244"
+        },
+        {
+          "player": "Addison, Jordan",
+          "pyPoints": 143.3,
+          "pyRoundDrafted": 9,
+          "yearsRemaining": 3,
+          "keeperRound": "K7",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16186"
+        },
+        {
+          "player": "Tagovailoa, Tua",
+          "pyPoints": 215.4,
+          "pyRoundDrafted": 10,
+          "yearsRemaining": 3,
+          "keeperRound": "K8",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "14778"
+        },
+        {
+          "player": "Tucker, Tre",
+          "pyPoints": 166.9,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16287"
+        },
+        {
+          "player": "Franklin, Troy",
+          "pyPoints": 177.5,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16619"
+        },
+        {
+          "player": "Gainwell, Kenneth",
+          "pyPoints": 232.05,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15255"
+        },
+        {
+          "player": "Johnson, Juwan",
+          "pyPoints": 172.8,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "14861"
+        },
+        {
+          "player": "Rams, Los Angeles",
+          "pyPoints": 143,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "0778"
+        },
+        {
+          "player": "Washington, Malik",
+          "pyPoints": 163.35,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16684"
+        },
+        {
+          "player": "Neal, Devin",
+          "pyPoints": 67.6,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "17046"
+        },
+        {
+          "player": "Steelers, Pittsburgh",
+          "pyPoints": 125,
+          "pyRoundDrafted": 15,
+          "yearsRemaining": 2,
+          "keeperRound": "K13",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "0760"
+        },
+        {
+          "player": "Young, Bryce",
+          "pyPoints": 257.05,
+          "pyRoundDrafted": 16,
+          "yearsRemaining": 3,
+          "keeperRound": "K14",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16148"
+        },
+        {
+          "player": "Johnston, Quentin",
+          "pyPoints": 178.4,
+          "pyRoundDrafted": 17,
+          "yearsRemaining": 3,
+          "keeperRound": "K15",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "15.12",
+          "playerId": "16188"
+        },
+        {
+          "player": "Bates, Jake",
+          "pyPoints": 130,
+          "pyRoundDrafted": 17,
+          "yearsRemaining": 3,
+          "keeperRound": "K15",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16846"
+        },
+        {
+          "player": "Robinson, Wan'Dale",
+          "pyPoints": 228.95,
+          "pyRoundDrafted": 18,
+          "yearsRemaining": 3,
+          "keeperRound": "K16",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "16.01",
+          "playerId": "15757"
+        },
+        {
+          "player": "Walker III, Kenneth",
+          "pyPoints": 184.7,
+          "pyRoundDrafted": 3,
+          "yearsRemaining": null,
+          "keeperRound": null,
+          "eligible": false,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15711"
+        },
+        {
+          "player": "Henry, Derrick",
+          "pyPoints": 289.9,
+          "pyRoundDrafted": 1,
+          "yearsRemaining": null,
+          "keeperRound": null,
+          "eligible": false,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "12626"
+        }
+      ],
+      "draftPicks": [
+        "1.12",
+        "2.01",
+        "3.12",
+        "4.01",
+        "5.12",
+        "6.01",
+        "7.12",
+        "8.01",
+        "9.12",
+        "10.01",
+        "11.12",
+        "12.01",
+        "13.12",
+        "14.01",
+        "15.12",
+        "16.01",
+        "17.12",
+        "18.01"
+      ],
+      "franchiseId": "0004"
     },
     {
       "team": "Phoenix Force",
@@ -678,6 +1116,231 @@
       "franchiseId": "0005"
     },
     {
+      "team": "Hey Donkeys",
+      "players": [
+        {
+          "player": "Purdy, Brock",
+          "pyPoints": 213.3,
+          "pyRoundDrafted": 4,
+          "yearsRemaining": 3,
+          "keeperRound": "K2",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15698"
+        },
+        {
+          "player": "Olave, Chris",
+          "pyPoints": 281.3,
+          "pyRoundDrafted": 5,
+          "yearsRemaining": 3,
+          "keeperRound": "K3",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15754"
+        },
+        {
+          "player": "Warren, Jaylen",
+          "pyPoints": 219.7,
+          "pyRoundDrafted": 6,
+          "yearsRemaining": 3,
+          "keeperRound": "K4",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15742"
+        },
+        {
+          "player": "Sutton, Courtland",
+          "pyPoints": 228.2,
+          "pyRoundDrafted": 7,
+          "yearsRemaining": 2,
+          "keeperRound": "K5",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "13630"
+        },
+        {
+          "player": "Spears, Tyjae",
+          "pyPoints": 102.2,
+          "pyRoundDrafted": 8,
+          "yearsRemaining": 1,
+          "keeperRound": "K6",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16165"
+        },
+        {
+          "player": "Meyers, Jakobi",
+          "pyPoints": 166.4,
+          "pyRoundDrafted": 9,
+          "yearsRemaining": 2,
+          "keeperRound": "K7",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "14127"
+        },
+        {
+          "player": "Love, Jordan",
+          "pyPoints": 303.15,
+          "pyRoundDrafted": 10,
+          "yearsRemaining": 1,
+          "keeperRound": "K8",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "14782"
+        },
+        {
+          "player": "White, Rachaad",
+          "pyPoints": 136.9,
+          "pyRoundDrafted": 11,
+          "yearsRemaining": 3,
+          "keeperRound": "K9",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15721"
+        },
+        {
+          "player": "Ford, Jerome",
+          "pyPoints": 59.1,
+          "pyRoundDrafted": 13,
+          "yearsRemaining": 3,
+          "keeperRound": "K11",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15713"
+        },
+        {
+          "player": "Darnold, Sam",
+          "pyPoints": 308.4,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "12.12",
+          "playerId": "13592"
+        },
+        {
+          "player": "Folk, Nick",
+          "pyPoints": 126,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "8851"
+        },
+        {
+          "player": "Robinson, Brian",
+          "pyPoints": 78.8,
+          "pyRoundDrafted": 14,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15716"
+        },
+        {
+          "player": "Jaguars, Jacksonville",
+          "pyPoints": 158,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "0759"
+        },
+        {
+          "player": "Downs, Josh",
+          "pyPoints": 129.55,
+          "pyRoundDrafted": 16,
+          "yearsRemaining": 2,
+          "keeperRound": "K14",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "14.12",
+          "playerId": "16187"
+        },
+        {
+          "player": "Dicker, Cameron",
+          "pyPoints": 163,
+          "pyRoundDrafted": 17,
+          "yearsRemaining": 3,
+          "keeperRound": "K15",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15979"
+        },
+        {
+          "player": "Jefferson, Justin",
+          "pyPoints": 189.1,
+          "pyRoundDrafted": 1,
+          "yearsRemaining": null,
+          "keeperRound": null,
+          "eligible": false,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "17634"
+        },
+        {
+          "player": "McLaurin, Terry",
+          "pyPoints": 108.5,
+          "pyRoundDrafted": 2,
+          "yearsRemaining": null,
+          "keeperRound": null,
+          "eligible": false,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "14109"
+        },
+        {
+          "player": "Kittle, George",
+          "pyPoints": 156.9,
+          "pyRoundDrafted": 3,
+          "yearsRemaining": null,
+          "keeperRound": null,
+          "eligible": false,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "13299"
+        }
+      ],
+      "draftPicks": [
+        "1.01",
+        "2.12",
+        "3.01",
+        "4.12",
+        "5.01",
+        "6.12",
+        "7.01",
+        "8.12",
+        "9.01",
+        "10.12",
+        "11.01",
+        "12.12",
+        "13.01",
+        "14.12",
+        "15.01",
+        "16.12",
+        "17.01",
+        "18.12"
+      ],
+      "priorYearTeam": "Guinness All Blacks",
+      "franchiseId": "0006"
+    },
+    {
       "team": "Karaoke Craig",
       "players": [
         {
@@ -900,6 +1563,230 @@
         "18.06"
       ],
       "franchiseId": "0007"
+    },
+    {
+      "team": "Foladelphia Iggles",
+      "players": [
+        {
+          "player": "Jones, Aaron",
+          "pyPoints": 118.7,
+          "pyRoundDrafted": 4,
+          "yearsRemaining": 3,
+          "keeperRound": "K2",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "13319"
+        },
+        {
+          "player": "Goedert, Dallas",
+          "pyPoints": 188.1,
+          "pyRoundDrafted": 6,
+          "yearsRemaining": 2,
+          "keeperRound": "K4",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "4.11",
+          "playerId": "13674"
+        },
+        {
+          "player": "Coleman, Keon",
+          "pyPoints": 96.8,
+          "pyRoundDrafted": 7,
+          "yearsRemaining": 2,
+          "keeperRound": "K5",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16617"
+        },
+        {
+          "player": "Jennings, Jauan",
+          "pyPoints": 167.8,
+          "pyRoundDrafted": 8,
+          "yearsRemaining": 3,
+          "keeperRound": "K6",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "14860"
+        },
+        {
+          "player": "Stafford, Matthew",
+          "pyPoints": 418.8,
+          "pyRoundDrafted": 10,
+          "yearsRemaining": 1,
+          "keeperRound": "K8",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "8.11",
+          "playerId": "9431"
+        },
+        {
+          "player": "Stevenson, Rhamondre",
+          "pyPoints": 145.5,
+          "pyRoundDrafted": 11,
+          "yearsRemaining": 3,
+          "keeperRound": "K9",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "9.02",
+          "playerId": "15259"
+        },
+        {
+          "player": "Henry, Hunter",
+          "pyPoints": 171.2,
+          "pyRoundDrafted": 14,
+          "yearsRemaining": 2,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "12676"
+        },
+        {
+          "player": "Turpin, KaVontae",
+          "pyPoints": 170.7,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15981"
+        },
+        {
+          "player": "Flacco, Joe",
+          "pyPoints": 202.55,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "9064"
+        },
+        {
+          "player": "Washington, Parker",
+          "pyPoints": 192.55,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "12.11",
+          "playerId": "16192"
+        },
+        {
+          "player": "Ryland, Chad",
+          "pyPoints": 111,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16292"
+        },
+        {
+          "player": "Hill, Justice",
+          "pyPoints": 80,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "14086"
+        },
+        {
+          "player": "Bills, Buffalo",
+          "pyPoints": 139,
+          "pyRoundDrafted": 16,
+          "yearsRemaining": 2,
+          "keeperRound": "K14",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "14.11",
+          "playerId": "0751"
+        },
+        {
+          "player": "Legette, Xavier",
+          "pyPoints": 84.3,
+          "pyRoundDrafted": 18,
+          "yearsRemaining": 3,
+          "keeperRound": "K16",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "16.11",
+          "playerId": "16639"
+        },
+        {
+          "player": "Barkley, Saquon",
+          "pyPoints": 251.5,
+          "pyRoundDrafted": 1,
+          "yearsRemaining": null,
+          "keeperRound": null,
+          "eligible": false,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "13604"
+        },
+        {
+          "player": "Collins, Nico",
+          "pyPoints": 243.2,
+          "pyRoundDrafted": 9,
+          "yearsRemaining": null,
+          "keeperRound": null,
+          "eligible": false,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15290"
+        },
+        {
+          "player": "Adams, Davante",
+          "pyPoints": 227.9,
+          "pyRoundDrafted": 2,
+          "yearsRemaining": null,
+          "keeperRound": null,
+          "eligible": false,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "11675"
+        },
+        {
+          "player": "Jackson, Lamar",
+          "pyPoints": 228.55,
+          "pyRoundDrafted": 3,
+          "yearsRemaining": null,
+          "keeperRound": null,
+          "eligible": false,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "13593"
+        }
+      ],
+      "draftPicks": [
+        "1.02",
+        "2.11",
+        "3.02",
+        "4.11",
+        "5.02",
+        "6.11",
+        "7.02",
+        "8.11",
+        "9.02",
+        "10.11",
+        "11.02",
+        "12.11",
+        "13.02",
+        "14.11",
+        "15.02",
+        "16.11",
+        "17.02",
+        "18.11"
+      ],
+      "franchiseId": "0008"
     },
     {
       "team": "Sleepy Hollow Stranglers",
@@ -1126,6 +2013,231 @@
       "franchiseId": "0009"
     },
     {
+      "team": "Hail Marys",
+      "players": [
+        {
+          "player": "Nabers, Malik",
+          "pyPoints": 62.1,
+          "pyRoundDrafted": 4,
+          "yearsRemaining": 2,
+          "keeperRound": "K2",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "2.04",
+          "playerId": "16615"
+        },
+        {
+          "player": "Smith-Njigba, Jaxon",
+          "pyPoints": 382.6,
+          "pyRoundDrafted": 5,
+          "yearsRemaining": 2,
+          "keeperRound": "K3",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "3.09",
+          "playerId": "16185"
+        },
+        {
+          "player": "Pearsall, Ricky",
+          "pyPoints": 95,
+          "pyRoundDrafted": 6,
+          "yearsRemaining": 3,
+          "keeperRound": "K4",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16622"
+        },
+        {
+          "player": "Worthy, Xavier",
+          "pyPoints": 109.9,
+          "pyRoundDrafted": 7,
+          "yearsRemaining": 2,
+          "keeperRound": "K5",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16620"
+        },
+        {
+          "player": "Prescott, Dak",
+          "pyPoints": 421.6,
+          "pyRoundDrafted": 9,
+          "yearsRemaining": 3,
+          "keeperRound": "K7",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "12620"
+        },
+        {
+          "player": "Warren, Tyler",
+          "pyPoints": 180.9,
+          "pyRoundDrafted": 8,
+          "yearsRemaining": 3,
+          "keeperRound": "K8",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "8.04",
+          "playerId": "17102"
+        },
+        {
+          "player": "Dowdle, Rico",
+          "pyPoints": 232.35,
+          "pyRoundDrafted": 12,
+          "yearsRemaining": 3,
+          "keeperRound": "K10",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "14823"
+        },
+        {
+          "player": "Fairbairn, Ka'imi",
+          "pyPoints": 164,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "12860"
+        },
+        {
+          "player": "Ferguson, Jake",
+          "pyPoints": 186.6,
+          "pyRoundDrafted": 14,
+          "yearsRemaining": 1,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "12.04",
+          "playerId": "15799"
+        },
+        {
+          "player": "Saints, New Orleans",
+          "pyPoints": 145,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "0779"
+        },
+        {
+          "player": "Chiefs, Kansas City",
+          "pyPoints": 112,
+          "pyRoundDrafted": 15,
+          "yearsRemaining": 3,
+          "keeperRound": "K13",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "0762"
+        },
+        {
+          "player": "Nix, Bo",
+          "pyPoints": 376.5,
+          "pyRoundDrafted": 16,
+          "yearsRemaining": 2,
+          "keeperRound": "K14",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "13.09",
+          "playerId": "16582"
+        },
+        {
+          "player": "Maye, Drake",
+          "pyPoints": 415.25,
+          "pyRoundDrafted": 16,
+          "yearsRemaining": 2,
+          "keeperRound": "K14",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "14.04",
+          "playerId": "16580"
+        },
+        {
+          "player": "49ers, San Francisco",
+          "pyPoints": 77,
+          "pyRoundDrafted": 17,
+          "yearsRemaining": 3,
+          "keeperRound": "K15",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "0780"
+        },
+        {
+          "player": "Allgeier, Tyler",
+          "pyPoints": 120.7,
+          "pyRoundDrafted": 18,
+          "yearsRemaining": 3,
+          "keeperRound": "K16",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15712"
+        },
+        {
+          "player": "McCaffrey, Christian",
+          "pyPoints": 416.9,
+          "pyRoundDrafted": 1,
+          "yearsRemaining": null,
+          "keeperRound": null,
+          "eligible": false,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "13130"
+        },
+        {
+          "player": "Hampton, Omarion",
+          "pyPoints": 144.2,
+          "pyRoundDrafted": 2,
+          "yearsRemaining": null,
+          "keeperRound": null,
+          "eligible": false,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "17044"
+        },
+        {
+          "player": "Smith, DeVonta",
+          "pyPoints": 203.6,
+          "pyRoundDrafted": 3,
+          "yearsRemaining": null,
+          "keeperRound": null,
+          "eligible": false,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15282"
+        }
+      ],
+      "draftPicks": [
+        "1.09",
+        "2.04",
+        "3.09",
+        "4.04",
+        "5.09",
+        "6.04",
+        "7.09",
+        "8.04",
+        "9.09",
+        "10.04",
+        "11.09",
+        "12.04",
+        "13.09",
+        "14.04",
+        "15.09",
+        "16.04",
+        "16.08",
+        "17.09",
+        "18.04"
+      ],
+      "franchiseId": "0010"
+    },
+    {
       "team": "Fightin Irish Mist",
       "players": [
         {
@@ -1348,6 +2460,230 @@
         "18.10"
       ],
       "franchiseId": "0011"
+    },
+    {
+      "team": "BoRaDLeSHoW",
+      "players": [
+        {
+          "player": "Achane, De'Von",
+          "pyPoints": 342.8,
+          "pyRoundDrafted": 5,
+          "yearsRemaining": 1,
+          "keeperRound": "K3",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "3.11",
+          "playerId": "16167"
+        },
+        {
+          "player": "Daniels, Jayden",
+          "pyPoints": 133.9,
+          "pyRoundDrafted": 6,
+          "yearsRemaining": 2,
+          "keeperRound": "K4",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "4.02",
+          "playerId": "16581"
+        },
+        {
+          "player": "Rice, Rashee",
+          "pyPoints": 153.1,
+          "pyRoundDrafted": 8,
+          "yearsRemaining": 1,
+          "keeperRound": "K6",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "6.02",
+          "playerId": "16194"
+        },
+        {
+          "player": "Skattebo, Cam",
+          "pyPoints": 128,
+          "pyRoundDrafted": 7,
+          "yearsRemaining": 3,
+          "keeperRound": "K7",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "7.11",
+          "playerId": "17045"
+        },
+        {
+          "player": "Williams, Javonte",
+          "pyPoints": 248.8,
+          "pyRoundDrafted": 9,
+          "yearsRemaining": 3,
+          "keeperRound": "K7",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "5.11",
+          "playerId": "15256"
+        },
+        {
+          "player": "Broncos, Denver",
+          "pyPoints": 171,
+          "pyRoundDrafted": 12,
+          "yearsRemaining": 3,
+          "keeperRound": "K10",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "0761"
+        },
+        {
+          "player": "Waller, Darren",
+          "pyPoints": 88.7,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "12263"
+        },
+        {
+          "player": "Vidal, Kimani",
+          "pyPoints": 137.85,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16757"
+        },
+        {
+          "player": "Dike, Chimere",
+          "pyPoints": 219.65,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": true,
+          "keeperDraftPick": "12.02",
+          "playerId": "17171"
+        },
+        {
+          "player": "Strange, Brenton",
+          "pyPoints": 100.8,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16269"
+        },
+        {
+          "player": "Borregales, Andres",
+          "pyPoints": 133,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "17220"
+        },
+        {
+          "player": "Corum, Blake",
+          "pyPoints": 136.6,
+          "pyRoundDrafted": 0,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16593"
+        },
+        {
+          "player": "Wright, Jaylen",
+          "pyPoints": 47.2,
+          "pyRoundDrafted": 14,
+          "yearsRemaining": 3,
+          "keeperRound": "K12",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16610"
+        },
+        {
+          "player": "Lawrence, Trevor",
+          "pyPoints": 382.4,
+          "pyRoundDrafted": 16,
+          "yearsRemaining": 3,
+          "keeperRound": "K14",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15237"
+        },
+        {
+          "player": "McCarthy, J.J.",
+          "pyPoints": 140.9,
+          "pyRoundDrafted": 16,
+          "yearsRemaining": 2,
+          "keeperRound": "K14",
+          "eligible": true,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "16584"
+        },
+        {
+          "player": "Cook, James",
+          "pyPoints": 337.7,
+          "pyRoundDrafted": 2,
+          "yearsRemaining": null,
+          "keeperRound": null,
+          "eligible": false,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15715"
+        },
+        {
+          "player": "St. Brown, Amon-Ra",
+          "pyPoints": 311.1,
+          "pyRoundDrafted": 1,
+          "yearsRemaining": null,
+          "keeperRound": null,
+          "eligible": false,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "15287"
+        },
+        {
+          "player": "Moore, D.J.",
+          "pyPoints": 170.5,
+          "pyRoundDrafted": 3,
+          "yearsRemaining": null,
+          "keeperRound": null,
+          "eligible": false,
+          "selected": false,
+          "keeperDraftPick": null,
+          "playerId": "13635"
+        }
+      ],
+      "draftPicks": [
+        "1.11",
+        "2.02",
+        "3.11",
+        "4.02",
+        "5.11",
+        "6.02",
+        "7.11",
+        "8.02",
+        "9.11",
+        "10.02",
+        "11.11",
+        "12.02",
+        "13.11",
+        "14.02",
+        "15.11",
+        "16.02",
+        "17.11",
+        "18.02"
+      ],
+      "franchiseId": "0012"
     }
   ]
 }

@@ -9,15 +9,13 @@
  * so it reads back without needing Excel to recalculate the formulas and Power
  * Query in the master.
  *
- * Sheet layout (as of the 2026 file): one block per team on "Keeper Info",
- * blocks 26 rows apart. A block is a team name alone in column B, a header row,
- * then player rows:
+ * Teams sit in side-by-side column groups on "Keeper Info" — six down B..L and
+ * six more down R..Z. Blocks are located by their shape (a team name with
+ * "Player" directly beneath) rather than by fixed columns, so re-arranging or
+ * adding a group needs no change here. See parseBlocks for the column offsets.
  *
- *   B Player   C PY Points   D PY Round Drafted   E Years   F Keeper (K-round)
- *   H Keeper Selection ("x")  I Keeper Selection Draft Pick   J Draft Picks
- *
- * Column J is NOT row-aligned with the players — it is that team's own list of
- * draft picks running down the block, so it is collected separately.
+ * The draft-pick column is NOT row-aligned with the players — it is that team's
+ * own list of picks running down the block, so it is collected separately.
  *
  * Player names are resolved to MFL player ids against the live players export;
  * ids are what the app joins on, so a rename in either system cannot silently
@@ -100,48 +98,96 @@ async function readSheet(file) {
     const v = ws.getCell(r, c).value;
     return v && typeof v === 'object' && 'result' in v ? v.result : v;
   };
-  return { rowCount: ws.rowCount, cell };
+  return { rowCount: ws.rowCount, columnCount: ws.columnCount, cell, wb };
 }
 
-function parseBlocks({ rowCount, cell }) {
+/**
+ * The teams are laid out in side-by-side column groups — six down columns B..L
+ * and six more down R..Z — so blocks are found by their signature rather than
+ * by hard-coded columns: a team name in some column with "Player" directly
+ * beneath it. Adding another group to the workbook needs no change here.
+ *
+ * Column offsets within a block, relative to the name column:
+ *   +0 Player  +1 PY Points  +2 PY Round Drafted  +3 Years  +4 Keeper
+ *   +6 Keeper Selection  +7 Selection Draft Pick  +8 Draft Picks
+ */
+const COL = { points: 1, pyRound: 2, years: 3, keeper: 4, selected: 6, keeperPick: 7, picks: 8 };
+
+function parseBlocks({ rowCount, columnCount, cell }) {
   const teams = [];
   for (let r = 1; r <= rowCount; r++) {
-    const name = cell(r, 2);
-    // A team block opens with the name alone in column B (column C empty).
-    if (!name || cell(r, 3) != null) continue;
-    const team = { team: clean(name), headerRow: r + 1, players: [], draftPicks: [] };
+    for (let c = 1; c <= columnCount; c++) {
+      const name = cell(r, c);
+      if (!name || clean(cell(r + 1, c)) !== 'Player') continue;
 
-    for (let pr = r + 2; pr <= rowCount; pr++) {
-      const playerName = cell(pr, 2);
-      const nextIsTeam = playerName && cell(pr, 3) == null;
-      if (nextIsTeam) break; // next block started
+      const team = { team: clean(name), players: [], draftPicks: [] };
+      for (let pr = r + 2; pr <= rowCount; pr++) {
+        // Stop at the next block in this same column group.
+        if (cell(pr, c) && clean(cell(pr + 1, c)) === 'Player') break;
 
-      // Column J runs independently of the player rows.
-      const pick = formatPick(cell(pr, 10));
-      if (pick) team.draftPicks.push(pick);
+        // The draft-pick column runs independently of the player rows.
+        const pick = formatPick(cell(pr, c + COL.picks));
+        if (pick) team.draftPicks.push(pick);
 
-      if (!playerName) continue;
-      const label = clean(playerName);
-      if (!label || label === 'Player') continue;
+        const label = clean(cell(pr, c));
+        if (!label || label === 'Player') continue;
 
-      const years = clean(cell(pr, 5));
-      const keeper = clean(cell(pr, 6));
-      const eligible = years.toUpperCase() !== 'NA' && keeper.toUpperCase() !== 'NA';
+        const years = clean(cell(pr, c + COL.years));
+        const keeper = clean(cell(pr, c + COL.keeper));
+        const eligible = years.toUpperCase() !== 'NA' && keeper.toUpperCase() !== 'NA';
 
-      team.players.push({
-        player: label,
-        pyPoints: numOrNull(cell(pr, 3)),
-        pyRoundDrafted: numOrNull(cell(pr, 4)),
-        yearsRemaining: eligible ? numOrNull(cell(pr, 5)) : null,
-        keeperRound: eligible ? keeper : null,
-        eligible,
-        selected: clean(cell(pr, 8)).toLowerCase() === 'x',
-        keeperDraftPick: formatPick(cell(pr, 9)),
-      });
+        team.players.push({
+          player: label,
+          pyPoints: numOrNull(cell(pr, c + COL.points)),
+          pyRoundDrafted: numOrNull(cell(pr, c + COL.pyRound)),
+          yearsRemaining: eligible ? numOrNull(cell(pr, c + COL.years)) : null,
+          keeperRound: eligible ? keeper : null,
+          eligible,
+          selected: clean(cell(pr, c + COL.selected)).toLowerCase() === 'x',
+          keeperDraftPick: formatPick(cell(pr, c + COL.keeperPick)),
+        });
+      }
+      teams.push(team);
     }
-    teams.push(team);
   }
   return teams;
+}
+
+/**
+ * Optional "TeamAliases" sheet mapping a prior-year team name to its current
+ * name. The roster data is built from last season, so a team that renamed (or
+ * changed owner) still carries its old label; without this it cannot be matched
+ * to a current MFL franchise. Two columns, header row then pairs:
+ *
+ *   PriorYearTeam            CurrentYearTeam
+ *   Wa Wa Wee Wa             Dirty Mike and the Boys
+ *   Guinness All Blacks      Hey Donkeys
+ */
+function readAliases(wb) {
+  const map = new Map();
+
+  // Repo-side file first, so aliases survive the workbook being regenerated
+  // (the distro copy carries only Keeper Info and Keeper Rules).
+  const local = path.join(ROOT, 'scripts/kkl-team-aliases.json');
+  let source = null;
+  if (fs.existsSync(local)) {
+    const json = JSON.parse(fs.readFileSync(local, 'utf8'));
+    for (const [from, to] of Object.entries(json.aliases ?? {})) map.set(from, to);
+    if (map.size) source = 'kkl-team-aliases.json';
+  }
+
+  const ws =
+    wb.getWorksheet('TeamAliases') ||
+    wb.worksheets.find((s) => /alias/i.test(s.name));
+  if (!ws) return { map, sheet: source };
+  for (let r = 1; r <= ws.rowCount; r++) {
+    const from = clean(ws.getCell(r, 1).value);
+    const to = clean(ws.getCell(r, 2).value);
+    if (!from || !to) continue;
+    if (/prior|old|last/i.test(from) && /current|new/i.test(to)) continue; // header
+    map.set(from, to); // sheet wins over the repo file
+  }
+  return { map, sheet: source ? `${source} + ${ws.name}` : ws.name };
 }
 
 async function main() {
@@ -151,7 +197,9 @@ async function main() {
     process.exit(2);
   }
 
-  const teams = parseBlocks(await readSheet(file));
+  const sheet = await readSheet(file);
+  const teams = parseBlocks(sheet);
+  const { map: aliases, sheet: aliasSheet } = readAliases(sheet.wb);
 
   const [players, league] = await Promise.all([mflJson('players'), mflJson('league')]);
   const idByName = new Map(toArray(players?.players?.player).map((p) => [p.name.trim(), p.id]));
@@ -162,6 +210,12 @@ async function main() {
   const unresolvedTeams = [];
 
   for (const t of teams) {
+    // Prior-year label -> current franchise, when the team renamed.
+    const alias = aliases.get(t.team);
+    if (alias) {
+      t.priorYearTeam = t.team;
+      t.team = alias;
+    }
     t.franchiseId = idByTeam.get(t.team) ?? null;
     if (!t.franchiseId) unresolvedTeams.push(t.team);
     for (const p of t.players) {
@@ -187,6 +241,9 @@ async function main() {
   fs.writeFileSync(OUT, JSON.stringify(payload, null, 2) + '\n');
 
   console.log(`read     ${path.basename(file)}`);
+  console.log(
+    `aliases  ${aliasSheet ? `${aliases.size} from "${aliasSheet}"` : 'no TeamAliases sheet found'}`
+  );
   console.log(`teams    ${teams.length} of ${franchises.length} in the league`);
   console.log(`players  ${totalPlayers} (${totalSelected} marked as keepers)`);
   console.log(`wrote    ${path.relative(ROOT, OUT)}`);
@@ -194,7 +251,10 @@ async function main() {
   if (unresolvedTeams.length) {
     console.warn(`\n!! ${unresolvedTeams.length} team name(s) not in MFL — franchiseId is null:`);
     for (const t of unresolvedTeams) console.warn(`     ${t}`);
-    console.warn('   Rename in the workbook to match MFL, or the board cannot link the team.');
+    console.warn(
+      '   Add a "TeamAliases" sheet to the workbook (PriorYearTeam | CurrentYearTeam)\n' +
+        '   mapping each to its current MFL name, or rename it in the workbook.'
+    );
   }
   if (unresolvedPlayers.length) {
     console.warn(`\n!! ${unresolvedPlayers.length} player(s) did not resolve to an MFL id:`);

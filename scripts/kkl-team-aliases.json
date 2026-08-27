@@ -1,0 +1,16 @@
+{
+  "_comment": [
+    "Prior-year team name -> current MFL franchise name.",
+    "The keeper workbook is built from last season's rosters, so a team that",
+    "renamed or changed owner still carries its old label and cannot be matched",
+    "to a current franchise without this.",
+    "",
+    "Maintained here OR as a 'TeamAliases' sheet in the workbook (two columns,",
+    "PriorYearTeam | CurrentYearTeam). The sheet wins where both define a name.",
+    "Clear this out when the workbook is rebuilt on current-season names."
+  ],
+  "aliases": {
+    "Wa Wa Wee Wa": "Dirty Mike and the Boys",
+    "Guinness All Blacks": "Hey Donkeys"
+  }
+}
