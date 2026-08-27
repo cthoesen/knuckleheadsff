@@ -11,7 +11,8 @@
     "minify:js": "terser public/js/common/header.js -o public/js/common/header.min.js -c -m && terser public/js/common/footer.js -o public/js/common/footer.min.js -c -m && terser public/js/common/scoreboard.js -o public/js/common/scoreboard.min.js -c -m && terser public/js/common/cyber-fab.js -o public/js/common/cyber-fab.min.js -c -m && terser public/js/common/fantasy-ticker.js -o public/js/common/fantasy-ticker.min.js -c -m && terser public/js/common/popup-gallery.js -o public/js/common/popup-gallery.min.js -c -m",
     "minify:css": "csso public/css/dark-2026.css -o public/css/dark-2026.min.css && csso public/css/dark-bsb.css -o public/css/dark-bsb.min.css && csso public/css/dark-kdl.css -o public/css/dark-kdl.min.css && csso public/css/dark-kkl.css -o public/css/dark-kkl.min.css && csso public/css/dark-mmh.css -o public/css/dark-mmh.min.css",
     "minify": "npm run minify:js && npm run minify:css",
-    "favicons": "node scripts/generate-favicons.js"
+    "favicons": "node scripts/generate-favicons.js",
+    "keepers:kkl": "node scripts/kkl-keeper-import.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.18",
@@ -29,6 +30,7 @@
     "@types/react-dom": "^18.2.18",
     "autoprefixer": "^10.4.24",
     "csso-cli": "^4.0.2",
+    "exceljs": "^4.4.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
     "terser": "^5.46.0",
