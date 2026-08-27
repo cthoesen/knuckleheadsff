@@ -1,7 +1,7 @@
 {
   "league": "kkl",
   "season": "2026",
-  "generatedAt": "2026-08-27T14:17:25.679Z",
+  "generatedAt": "2026-08-27T23:20:28.373Z",
   "source": "kkl-keeper-info-2026-distro.xlsx",
   "teamsReported": 12,
   "teamsInLeague": 12,
@@ -284,8 +284,8 @@
           "yearsRemaining": 1,
           "keeperRound": "K8",
           "eligible": true,
-          "selected": true,
-          "keeperDraftPick": "8.08",
+          "selected": false,
+          "keeperDraftPick": null,
           "playerId": "16080"
         },
         {
@@ -1135,8 +1135,8 @@
           "yearsRemaining": 3,
           "keeperRound": "K3",
           "eligible": true,
-          "selected": false,
-          "keeperDraftPick": null,
+          "selected": true,
+          "keeperDraftPick": "3.01",
           "playerId": "15754"
         },
         {
