@@ -1,7 +1,7 @@
 {
   "league": "kkl",
   "season": "2026",
-  "generatedAt": "2026-08-27T23:20:28.373Z",
+  "generatedAt": "2026-08-29T17:18:04.678Z",
   "source": "kkl-keeper-info-2026-distro.xlsx",
   "teamsReported": 12,
   "teamsInLeague": 12,
@@ -575,7 +575,7 @@
           "keeperRound": "K16",
           "eligible": true,
           "selected": true,
-          "keeperDraftPick": "16.03",
+          "keeperDraftPick": "16.05",
           "playerId": "17032"
         },
         {
@@ -586,7 +586,7 @@
           "keeperRound": "K16",
           "eligible": true,
           "selected": true,
-          "keeperDraftPick": "16.05",
+          "keeperDraftPick": "16.03",
           "playerId": "16178"
         },
         {
@@ -1392,8 +1392,8 @@
           "yearsRemaining": 2,
           "keeperRound": "K6",
           "eligible": true,
-          "selected": true,
-          "keeperDraftPick": "6.06",
+          "selected": false,
+          "keeperDraftPick": null,
           "playerId": "12611"
         },
         {
@@ -1403,8 +1403,8 @@
           "yearsRemaining": 3,
           "keeperRound": "K7",
           "eligible": true,
-          "selected": true,
-          "keeperDraftPick": "7.07",
+          "selected": false,
+          "keeperDraftPick": null,
           "playerId": "14779"
         },
         {
@@ -1502,8 +1502,8 @@
           "yearsRemaining": 3,
           "keeperRound": "K16",
           "eligible": true,
-          "selected": false,
-          "keeperDraftPick": null,
+          "selected": true,
+          "keeperDraftPick": "16.06",
           "playerId": "14717"
         },
         {
@@ -2020,8 +2020,8 @@
           "yearsRemaining": 2,
           "keeperRound": "K2",
           "eligible": true,
-          "selected": true,
-          "keeperDraftPick": "2.04",
+          "selected": false,
+          "keeperDraftPick": null,
           "playerId": "16615"
         },
         {
@@ -2086,8 +2086,8 @@
           "yearsRemaining": 3,
           "keeperRound": "K10",
           "eligible": true,
-          "selected": false,
-          "keeperDraftPick": null,
+          "selected": true,
+          "keeperDraftPick": "10.04",
           "playerId": "14823"
         },
         {
@@ -2108,8 +2108,8 @@
           "yearsRemaining": 1,
           "keeperRound": "K12",
           "eligible": true,
-          "selected": true,
-          "keeperDraftPick": "12.04",
+          "selected": false,
+          "keeperDraftPick": null,
           "playerId": "15799"
         },
         {
@@ -2174,8 +2174,8 @@
           "yearsRemaining": 3,
           "keeperRound": "K16",
           "eligible": true,
-          "selected": false,
-          "keeperDraftPick": null,
+          "selected": true,
+          "keeperDraftPick": "16.08",
           "playerId": "15712"
         },
         {
@@ -2256,8 +2256,8 @@
           "yearsRemaining": 2,
           "keeperRound": "K4",
           "eligible": true,
-          "selected": true,
-          "keeperDraftPick": "4.10",
+          "selected": false,
+          "keeperDraftPick": null,
           "playerId": "16618"
         },
         {
@@ -2344,8 +2344,8 @@
           "yearsRemaining": 3,
           "keeperRound": "K12",
           "eligible": true,
-          "selected": false,
-          "keeperDraftPick": null,
+          "selected": true,
+          "keeperDraftPick": "11.03",
           "playerId": "14059"
         },
         {
@@ -2524,8 +2524,8 @@
           "yearsRemaining": 3,
           "keeperRound": "K10",
           "eligible": true,
-          "selected": false,
-          "keeperDraftPick": null,
+          "selected": true,
+          "keeperDraftPick": "10.02",
           "playerId": "0761"
         },
         {
@@ -2557,8 +2557,8 @@
           "yearsRemaining": 3,
           "keeperRound": "K12",
           "eligible": true,
-          "selected": true,
-          "keeperDraftPick": "12.02",
+          "selected": false,
+          "keeperDraftPick": null,
           "playerId": "17171"
         },
         {
