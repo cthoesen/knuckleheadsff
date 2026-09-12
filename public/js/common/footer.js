@@ -3165,7 +3165,7 @@ if ("ajax_ls" === thisProgram && load_replace_mflScoring_h2h)
                             l +
                             '"><td style="position:relative;height:1.375rem" class="ls_og_cell ls_box_possession ls_box_possession_' +
                             l +
-                            '"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/' +
+                            '"><img src="https://knuckleheadsff.com/images/shared/icons/nfl/' +
                             l +
                             '.svg" class="ls_nfl_box_icon" style="height:1.875rem;max-width:1.25rem;max-height:1.25rem;" alt="' +
                             l +
@@ -3187,7 +3187,7 @@ if ("ajax_ls" === thisProgram && load_replace_mflScoring_h2h)
                             o +
                             '"><td style="position:relative;height:1.375rem" class="ls_og_cell ls_box_possession ls_box_possession_' +
                             o +
-                            '"><img src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/' +
+                            '"><img src="https://knuckleheadsff.com/images/shared/icons/nfl/' +
                             o +
                             '.svg" class="ls_nfl_box_icon" style="height:1.875rem;max-width:1.25rem;max-height:1.25rem;" alt="' +
                             o +
@@ -3724,15 +3724,15 @@ if ("ajax_ls" === thisProgram && load_replace_mflScoring_h2h)
                     (a =
                         "away" === ls_nfl_games[e].where
                             ? a +
-                              '<tr><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;width:1.5rem;height:1.25rem;text-align:right"><img style="margin:0;max-height:1.25rem;max-width:1.25rem" src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/' +
+                              '<tr><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;width:1.5rem;height:1.25rem;text-align:right"><img style="margin:0;max-height:1.25rem;max-width:1.25rem" src="https://knuckleheadsff.com/images/shared/icons/nfl/' +
                               e +
-                              '.svg" class="ls_nfl_icon"></td><td style="border:0!important;margin:0;box-shadow:none!important;text-align:center;padding:0 0.25rem;font-style:normal;font-size:0.75rem">&#64;</td><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;width:1.5rem;height:1.25rem;text-align:left"><img style="margin:0;max-height:1.25rem;max-width:1.25rem" src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/' +
+                              '.svg" class="ls_nfl_icon"></td><td style="border:0!important;margin:0;box-shadow:none!important;text-align:center;padding:0 0.25rem;font-style:normal;font-size:0.75rem">&#64;</td><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;width:1.5rem;height:1.25rem;text-align:left"><img style="margin:0;max-height:1.25rem;max-width:1.25rem" src="https://knuckleheadsff.com/images/shared/icons/nfl/' +
                               t +
                               '.svg" class="ls_nfl_icon"></td></tr>'
                             : a +
-                              '<tr><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;width:1.5rem;height:1.25rem;text-align:right"><img style="margin:0;max-height:1.25rem;max-width:1.25rem" src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/' +
+                              '<tr><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;width:1.5rem;height:1.25rem;text-align:right"><img style="margin:0;max-height:1.25rem;max-width:1.25rem" src="https://knuckleheadsff.com/images/shared/icons/nfl/' +
                               t +
-                              '.svg" class="ls_nfl_icon"></td><td style="border:0!important;margin:0;box-shadow:none!important;text-align:center;padding:0 0.25rem;font-style:normal;font-size:0.75rem">vs</td><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;width:1.5rem;height:1.25rem;text-align:left"><img style="margin:0;max-height:1.25rem;max-width:1.25rem" src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/' +
+                              '.svg" class="ls_nfl_icon"></td><td style="border:0!important;margin:0;box-shadow:none!important;text-align:center;padding:0 0.25rem;font-style:normal;font-size:0.75rem">vs</td><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;width:1.5rem;height:1.25rem;text-align:left"><img style="margin:0;max-height:1.25rem;max-width:1.25rem" src="https://knuckleheadsff.com/images/shared/icons/nfl/' +
                               e +
                               '.svg" class="ls_nfl_icon"></td></tr>') +
                     "</tbody></table><br>" +
@@ -3749,23 +3749,23 @@ if ("ajax_ls" === thisProgram && load_replace_mflScoring_h2h)
                     (a =
                         "away" === ls_nfl_games[e].where
                             ? a +
-                              '<tr><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;width:1.5rem;height:1.25rem;text-align:right"><img style="margin:0;max-height:1.25rem;max-width:1.25rem" src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/' +
+                              '<tr><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;width:1.5rem;height:1.25rem;text-align:right"><img style="margin:0;max-height:1.25rem;max-width:1.25rem" src="https://knuckleheadsff.com/images/shared/icons/nfl/' +
                               e +
                               '.svg" class="ls_nfl_icon"></td><td style="border:0!important;padding:0 0.188rem;font-size:0.875rem;font-weight:bold;font-style:normal;margin:0;box-shadow:none!important;text-align:center">' +
                               ls_tstats[e].TPS +
                               '</td><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;text-align:center;font-style:normal;font-size:0.75rem">&#64;</td><td style="border:0!important;padding:0 0.188rem;font-size:0.875rem;font-weight:bold;font-style:normal;margin:0;box-shadow:none!important;text-align:center">' +
                               ls_tstats[t].TPS +
-                              '</td><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;width:1.5rem;height:1.25rem;text-align:left"><img style="margin:0;max-height:1.25rem;max-width:1.25rem" src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/' +
+                              '</td><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;width:1.5rem;height:1.25rem;text-align:left"><img style="margin:0;max-height:1.25rem;max-width:1.25rem" src="https://knuckleheadsff.com/images/shared/icons/nfl/' +
                               t +
                               '.svg" class="ls_nfl_icon"></td></tr>'
                             : a +
-                              '<tr><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;width:1.5rem;height:1.25rem;text-align:right"><img style="margin:0;max-height:1.25rem;max-width:1.25rem" src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/' +
+                              '<tr><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;width:1.5rem;height:1.25rem;text-align:right"><img style="margin:0;max-height:1.25rem;max-width:1.25rem" src="https://knuckleheadsff.com/images/shared/icons/nfl/' +
                               t +
                               '.svg" class="ls_nfl_icon"></td><td style="border:0!important;padding:0 0.188rem;font-size:0.875rem;font-weight:bold;font-style:normal;margin:0;box-shadow:none!important;text-align:center">' +
                               ls_tstats[t].TPS +
                               '</td><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;text-align:center;font-style:normal;font-size:0.75rem">vs</td><td style="border:0!important;padding:0 0.188rem;font-size:0.875rem;font-weight:bold;font-style:normal;margin:0;box-shadow:none!important;text-align:center">' +
                               ls_tstats[e].TPS +
-                              '</td><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;width:1.5rem;height:1.25rem;text-align:left"><img style="margin:0;max-height:1.25rem;max-width:1.25rem" src="https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/' +
+                              '</td><td style="border:0!important;padding:0;margin:0;box-shadow:none!important;width:1.5rem;height:1.25rem;text-align:left"><img style="margin:0;max-height:1.25rem;max-width:1.25rem" src="https://knuckleheadsff.com/images/shared/icons/nfl/' +
                               e +
                               '.svg" class="ls_nfl_icon"></td></tr>'),
                     (a += "</tbody></table><br>"),

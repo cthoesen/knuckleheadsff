@@ -9346,7 +9346,7 @@ span.plus-toggle-stats + a {
 	const TEAM_RE = /^(ARI|ATL|BAL|BUF|CAR|CHI|CIN|CLE|DAL|DEN|DET|GBP|HOU|IND|JAC|KCC|LAC|SDC|LAR|STL|RAM|LVR|OAK|MIA|MIN|NEP|NOS|NYG|NYJ|PHI|PIT|SEA|SFO|TBB|TEN|WAS|FA)$/;
 	const POS_RE = /^(COACH|QB|TMQB|TM|RB|TMRB|FB|WR|TMWR|TE|TMTE|KR|PK|TMPK|PN|TMPN|DE|DT|TMDL|LB|TMLB|CB|S|TMDB|OFF|DEF|ST)$/;
 
-	const LOGO_BASE = 'https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/';
+	const LOGO_BASE = 'https://knuckleheadsff.com/images/shared/icons/nfl/';
 	const TEAM_PRIMARY_ALIAS = {
 		OAK: 'LVR',
 		SDC: 'LAC',
@@ -11847,7 +11847,7 @@ span.plus-toggle-stats + a {
 				if (extrasFound.length > 0) var thisRowSpan = 6;
 				else var thisRowSpan = 4;
 				if (MFLPopupOmitStatus && extrasFound.length === 1) thisRowSpan = 4;
-				if (includeNFLLogo && MFLPlayerPopupIncludeNFLLogo) var myNFLLogo = "<img src='https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/" + pTeam + ".svg' class='MFLPlayerPopupNFLTeamLogo' />";
+				if (includeNFLLogo && MFLPlayerPopupIncludeNFLLogo) var myNFLLogo = "<img src='https://knuckleheadsff.com/images/shared/icons/nfl/" + pTeam + ".svg' class='MFLPlayerPopupNFLTeamLogo' />";
 				else var myNFLLogo = "";
 
 				const jersey = String(playerDetail?.jersey ?? "").trim();
@@ -13533,7 +13533,7 @@ if (load_mini_boxscore) { // for template users ONLY
 		if (mflBoxUseAbbrev === undefined) var mflBoxUseAbbrev = false;
 		if (mflBoxIconBase === undefined) var mflBoxIconBase = "";
 		if (mflBoxIconExt === undefined) var mflBoxIconExt = "";
-		if (mflBoxNFLLogoPath === undefined) var mflBoxNFLLogoPath = "https://www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/";
+		if (mflBoxNFLLogoPath === undefined) var mflBoxNFLLogoPath = "https://knuckleheadsff.com/images/shared/icons/nfl/";
 		if (mflBoxNFLLogoExt === undefined) var mflBoxNFLLogoExt = "svg";
 		if (mflBoxPositionSort === undefined) var mflBoxPositionSort = new Array("Coach", "Off", "QB", "TMQB", "RB", "TMRB", "WR", "TMWR", "TE", "TMTE", "PK", "TMPK", "PN", "TMPN", "DT", "DE", "TMDL", "LB", "TMLB", "CB", "S", "TMDB", "Def", "ST");
 		if (mflBoxIncludeTiebreaker === undefined) var mflBoxIncludeTiebreaker = false;
@@ -16382,7 +16382,7 @@ if (load_marquee) {
 						}
 					}
 					var str = '';
-					var baseImage = '//www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/';
+					var baseImage = 'https://knuckleheadsff.com/images/shared/icons/nfl/';
 					var baseExt = '.svg';
 					for (var i = 0; i < 3; i++) {
 						for (var team in tickerNflGameStatus) {
@@ -17132,7 +17132,7 @@ if (load_marquee) {
 				if (tickerCompletedWeek === 0) return false;
 				if (!includeLastWeekNflResults) return false;
 				var str = '';
-				var baseImage = '//www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/';
+				var baseImage = 'https://knuckleheadsff.com/images/shared/icons/nfl/';
 				var baseExt = '.svg';
 				var last_road = '';
 				for (var team in tickerNflGameNext) {
@@ -17171,7 +17171,7 @@ if (load_marquee) {
 			function getNextWeekNflMatchups() {
 				if (!includeNextWeekNflMatchups) return false;
 				var str = '';
-				var baseImage = '//www.mflscripts.com/ImageDirectory/script-images/nflTeamsvg_2/';
+				var baseImage = 'https://knuckleheadsff.com/images/shared/icons/nfl/';
 				var baseExt = '.svg';
 				var last_road = '';
 				for (var team in tickerNflGameNext) {
