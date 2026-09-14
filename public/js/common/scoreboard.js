@@ -7053,6 +7053,9 @@ h2.lsm_error.error_box  {
 #LSscoringBox .player-row.bye .game-info {
   font-size: 0.8rem;
 }
+/* Top corner, on the same side as the team badge below it. The bottom of
+   this container is taken: the position bar spans it and the team logo sits
+   in the corner, and the opposite top corner holds the done/playing icon. */
 #LSscoringBox .matchup-box .franchise-box span.inj_status {
   position: absolute;
   right: -0.1rem;
@@ -7060,9 +7063,11 @@ h2.lsm_error.error_box  {
   text-align: center;
   font-size: 0.6rem;
   line-height: 0.875rem;
-  bottom: 0;
+  top: -0.1rem;
+  bottom: auto;
   height: 0.875rem;
   width: 0.875rem;
+  z-index: 3;
 }
 #LSscoringBox .matchup-box.head-to-head .franchise-box + .franchise-box span.inj_status {
   left: -0.1rem;
@@ -7216,6 +7221,19 @@ body:has(#MFLPlayerPopupOverlay[style*="display: block"]) #teamBoxOverlay + #tea
   #LSscoringBox .head-to-head .player-image img {
     height: 2rem;
     width: 2rem;
+  }
+  /* The rule above matches this badge too and, at equal specificity, wins on
+     source order — which blew it up to the full 2rem photo. Keep it at the
+     same ~40% of the photo it occupies on desktop. */
+  #LSscoringBox .head-to-head .player-image img.ls-team-logo {
+    height: 0.85rem;
+    width: 0.85rem;
+    bottom: -0.1rem;
+    right: -0.1rem;
+  }
+  #LSscoringBox .head-to-head .franchise-box + .franchise-box .player-image img.ls-team-logo {
+    right: auto;
+    left: -0.1rem;
   }
   #LSscoringBox .head-to-head .franchise-box .player-row.done div.player-image:before,
   #LSscoringBox .head-to-head .franchise-box .player-row.playing div.player-image:before {
