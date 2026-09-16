@@ -9088,8 +9088,8 @@ a[data-pimg-processed] .playerImgTable .playerImg {
 }
 /* CSS FOR TeamLogo */
 .playerImgTable .playerWrapper img.TeamLogo {
-    height: 1.7em;
-    width: 1.7em;
+    height: 1.6em;
+    width: 1.6em;
     position: absolute;
     bottom: 0;
     right: 0.2em;
