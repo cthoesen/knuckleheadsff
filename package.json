@@ -12,7 +12,8 @@
     "minify:css": "csso public/css/dark-2026.css -o public/css/dark-2026.min.css && csso public/css/dark-bsb.css -o public/css/dark-bsb.min.css && csso public/css/dark-kdl.css -o public/css/dark-kdl.min.css && csso public/css/dark-kkl.css -o public/css/dark-kkl.min.css && csso public/css/dark-mmh.css -o public/css/dark-mmh.min.css",
     "minify": "npm run minify:js && npm run minify:css",
     "favicons": "node scripts/generate-favicons.js",
-    "keepers:kkl": "node scripts/kkl-keeper-import.mjs"
+    "keepers:kkl": "node scripts/kkl-keeper-import.mjs",
+    "prewarm": "node scripts/prewarm-photos.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.18",
