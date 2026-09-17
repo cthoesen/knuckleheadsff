@@ -9,8 +9,13 @@
  * /api/player-photo converts a 96x96 PNG from mflscripts to webp on first
  * request, which costs about a second. After that it is served from Vercel's
  * edge for 30 days. That first hit otherwise lands on whoever opens a roster
- * page first — usually a league member during a game window. This walks every
- * rostered player and absorbs those misses ahead of time.
+ * page first — usually a league member during a game window. This absorbs
+ * those misses ahead of time.
+ *
+ * Players in lib/nfl-headshots.json are skipped: those resolve to a redirect
+ * to NFL.com's CDN, which is already warm worldwide and caches for a year, so
+ * there is nothing for us to warm. Only the handful that still fetch and
+ * convert from mflscripts actually need this — pass --all to override.
  *
  * Requests are sent with `Accept: image/webp` because the proxy sets
  * `Vary: Accept`: the webp and png variants cache separately, and webp is what
@@ -18,8 +23,12 @@
  *
  * Safe to re-run — already-cached photos come back as a HIT and cost nothing.
  */
+import fs from 'node:fs';
+import path from 'node:path';
 import process from 'node:process';
+import { fileURLToPath } from 'node:url';
 
+const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const LEAGUES = { kkl: '45267', kdl: '68756', mmh: '72966', bsb: '62908' };
 const SEASON = '2026';
 const SITE = 'https://knuckleheadsff.com';
@@ -32,6 +41,7 @@ const CONCURRENCY = 6;
 
 const args = process.argv.slice(2);
 const dryRun = args.includes('--dry');
+const warmAll = args.includes('--all');
 const picked = args.filter((a) => !a.startsWith('--')).map((a) => a.toLowerCase());
 const targets = picked.length ? picked : Object.keys(LEAGUES);
 
@@ -107,8 +117,33 @@ async function main() {
     console.log(`  ${code.toUpperCase().padEnd(4)} ${String(ids.length).padStart(4)} rostered  (+${seen.size - before} new)`);
   }
 
-  const ids = [...seen];
-  console.log(`\n${ids.length} unique players to warm`);
+  let ids = [...seen];
+  const rostered = ids.length;
+
+  // Skip anything the route serves via a redirect — see the header note.
+  let skipped = 0;
+  if (!warmAll) {
+    const mapPath = path.join(ROOT, 'lib/nfl-headshots.json');
+    if (fs.existsSync(mapPath)) {
+      const mapped = JSON.parse(fs.readFileSync(mapPath, 'utf8')).players ?? {};
+      const before = ids.length;
+      ids = ids.filter((id) => !mapped[id]);
+      skipped = before - ids.length;
+    } else {
+      console.log('  (no headshot map found — warming everything)');
+    }
+  }
+
+  console.log(
+    `\n${rostered} rostered` +
+      (skipped ? `, ${skipped} served by NFL.com (skipped)` : '') +
+      ` — ${ids.length} to warm`
+  );
+
+  if (ids.length === 0) {
+    console.log('nothing to do: every rostered player is covered by NFL.com');
+    return;
+  }
 
   if (dryRun) {
     console.log('--dry: nothing fetched');
