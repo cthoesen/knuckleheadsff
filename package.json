@@ -13,7 +13,8 @@
     "minify": "npm run minify:js && npm run minify:css",
     "favicons": "node scripts/generate-favicons.js",
     "keepers:kkl": "node scripts/kkl-keeper-import.mjs",
-    "prewarm": "node scripts/prewarm-photos.mjs"
+    "prewarm": "node scripts/prewarm-photos.mjs",
+    "headshots:build": "node scripts/build-headshot-map.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.18",

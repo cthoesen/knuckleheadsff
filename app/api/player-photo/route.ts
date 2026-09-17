@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import sharp from 'sharp';
+import headshotMap from '@/lib/nfl-headshots.json';
 
 // sharp needs the Node runtime (not edge).
 export const runtime = 'nodejs';
@@ -10,6 +11,9 @@ export const runtime = 'nodejs';
 // server-side, re-encode to webp (falling back to png for older clients),
 // and serve from our own domain so Vercel's edge can cache it hard.
 const UPSTREAM_BASE = 'https://www.mflscripts.com/playerImages_96x96';
+const NFL_CDN = 'https://static.www.nfl.com/image';
+// f_auto negotiates webp, g_face crops to the head.
+const NFL_TRANSFORM = 'f_auto,q_auto,w_96,h_96,c_fill,g_face';
 const UPSTREAM_HEADERS = {
   Referer: 'https://www.myfantasyleague.com/',
   'User-Agent':
@@ -47,6 +51,22 @@ export async function GET(request: Request) {
   // route from being turned into an open proxy — no arbitrary URLs accepted.
   if (!id || !/^\d+$/.test(id)) {
     return NextResponse.json({ error: 'invalid id' }, { status: 400 });
+  }
+
+  // Preferred source: NFL.com's CDN. f_auto negotiates webp, g_face crops to the
+  // head, and it is served with a one-year cache from an already-warm CDN — so
+  // this costs a redirect rather than a fetch, a sharp conversion, and the
+  // bandwidth of both. Redirects are cached at our edge so repeat requests do
+  // not re-enter this function.
+  // Value is "<deliveryType>/<publicId>" — the two Cloudinary types are not
+  // interchangeable, so the type has to survive into the URL.
+  const assetRef = (headshotMap.players as Record<string, string>)[id];
+  if (assetRef) {
+    const [deliveryType, publicId] = assetRef.split('/');
+    return NextResponse.redirect(
+      `${NFL_CDN}/${deliveryType}/${NFL_TRANSFORM}/league/${publicId}`,
+      { status: 302, headers: { 'Cache-Control': CACHE_OK, 'X-Photo-Source': 'nflverse' } }
+    );
   }
 
   // Prefer webp when the client advertises support (all modern browsers do).
