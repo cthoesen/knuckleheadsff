@@ -5288,6 +5288,17 @@ table#youtubevideo.homepagemodule.report embed,
   width: 100%;
   display: block;
 }
+/* Players of the Week cards. The module sits in a homepage column, so the
+   slider is capped rather than left to fill the cell. 378px pairs with the
+   w=750 the slider API requests: 378 x 2 is 756, so a 2x screen gets a real
+   pixel per rendered pixel. Next's optimizer only serves widths from its
+   configured list — 756 is rejected, 750 is the neighbour — so if this width
+   changes, check the served width still covers it at 2x. */
+.flex-wrapper {
+  max-width: 378px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .flexslider .slides:after {
   content: "\0020"; /* planet-ringed Font Awesome icon */
