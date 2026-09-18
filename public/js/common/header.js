@@ -9546,7 +9546,7 @@ span.plus-toggle-stats + a {
 	// ======================= Images / Parsing =======================
 	function pushCustomPlayerImages(position, nfl_team, playerID) {
 		return TEAM_POS_SETS.has(String(position || '').toUpperCase()) ?
-			`https://www.mflscripts.com/playerImages_96x96/mfl_${nfl_team}.svg` :
+			`https://knuckleheadsff.com/images/shared/icons/nfl-avatar/${nfl_team}.svg` :
 			playerPhotoURL(playerID);
 	}
 
@@ -19663,7 +19663,7 @@ if (typeof load_lineups_submit_scriptV3 !== "undefined" && load_lineups_submit_s
 							const profile_image = capturedPhoto ?
 								playerPhotoURL(capturedPhoto) :
 								(pos_team_img.hasOwnProperty(position) ?
-									`https://www.mflscripts.com/playerImages_96x96/mfl_${nflTeam}.svg` :
+									`https://knuckleheadsff.com/images/shared/icons/nfl-avatar/${nflTeam}.svg` :
 									playerPhotoURL(playerID_lu));
 
 							// Create a new td element for the image
@@ -21199,7 +21199,7 @@ if (typeof load_lineups_submit_scriptV3 !== "undefined" && load_lineups_submit_s
 				const profile_image = capturedPhoto ?
 					capturedPhoto :
 					(pos_team_img.hasOwnProperty(position) ?
-						"https://www.mflscripts.com/playerImages_96x96/mfl_" + nfl_team + ".svg" :
+						"https://knuckleheadsff.com/images/shared/icons/nfl-avatar/" + nfl_team + ".svg" :
 						"https://www.mflscripts.com/playerImages_96x96/mfl_" + playerID_lu + ".png");
 
 				// ---- Insert (or reuse) the photo cell before td.player ----

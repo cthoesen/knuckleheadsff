@@ -15180,7 +15180,7 @@ if ("add_drop" === thisProgram) {
                                 "TMLB",
                                 "TMDB",
                             ].includes(e.pos?.toUpperCase())
-                                ? `https://www.mflscripts.com/playerImages_96x96/mfl_${e.nfl_team}.svg`
+                                ? `https://knuckleheadsff.com/images/shared/icons/nfl-avatar/${e.nfl_team}.svg`
                                 : `https://www.mflscripts.com/playerImages_80x107/mfl_${e.id}.png`,
                             u = "https://mflscripts.com/playerImages_80x107/free_agent.png";
                         let f = "";
@@ -15810,7 +15810,7 @@ if ("options_257" === thisProgram) {
                                 "TMLB",
                                 "TMDB",
                             ].includes(e.pos?.toUpperCase())
-                                ? `https://www.mflscripts.com/playerImages_96x96/mfl_${e.nfl_team}.svg`
+                                ? `https://knuckleheadsff.com/images/shared/icons/nfl-avatar/${e.nfl_team}.svg`
                                 : `https://www.mflscripts.com/playerImages_80x107/mfl_${e.id}.png`,
                             u = "https://mflscripts.com/playerImages_80x107/free_agent.png";
                         let f = "";
@@ -16192,7 +16192,7 @@ if ("csetup_cantadd" === thisProgram) {
                             "TMLB",
                             "TMDB",
                         ].includes(e.pos?.toUpperCase())
-                            ? `https://www.mflscripts.com/playerImages_96x96/mfl_${e.nfl_team}.svg`
+                            ? `https://knuckleheadsff.com/images/shared/icons/nfl-avatar/${e.nfl_team}.svg`
                             : `https://www.mflscripts.com/playerImages_80x107/mfl_${e.id}.png`,
                         y = "https://mflscripts.com/playerImages_80x107/free_agent.png";
                     let u = "";
@@ -16543,7 +16543,7 @@ if ("csetup_cantcut" === thisProgram) {
                             "TMLB",
                             "TMDB",
                         ].includes(e.pos?.toUpperCase())
-                            ? `https://www.mflscripts.com/playerImages_96x96/mfl_${e.nfl_team}.svg`
+                            ? `https://knuckleheadsff.com/images/shared/icons/nfl-avatar/${e.nfl_team}.svg`
                             : `https://www.mflscripts.com/playerImages_80x107/mfl_${e.id}.png`,
                         y = "https://mflscripts.com/playerImages_80x107/free_agent.png";
                     let u = "";
@@ -16921,7 +16921,7 @@ if ("options_178" === thisProgram) {
                             "TMLB",
                             "TMDB",
                         ].includes(e.pos?.toUpperCase())
-                            ? `https://www.mflscripts.com/playerImages_96x96/mfl_${e.nfl_team}.svg`
+                            ? `https://knuckleheadsff.com/images/shared/icons/nfl-avatar/${e.nfl_team}.svg`
                             : `https://www.mflscripts.com/playerImages_80x107/mfl_${e.id}.png`,
                         y = "https://mflscripts.com/playerImages_80x107/free_agent.png";
                     let u = "";
@@ -17285,7 +17285,7 @@ if (
                             "TMLB",
                             "TMDB",
                         ].includes(e.pos?.toUpperCase())
-                            ? `https://www.mflscripts.com/playerImages_96x96/mfl_${e.nfl_team}.svg`
+                            ? `https://knuckleheadsff.com/images/shared/icons/nfl-avatar/${e.nfl_team}.svg`
                             : `https://www.mflscripts.com/playerImages_80x107/mfl_${e.id}.png`,
                         y = "https://mflscripts.com/playerImages_80x107/free_agent.png";
                     let u = "";
@@ -17612,7 +17612,7 @@ if ("options_129" === thisProgram) {
                             "TMLB",
                             "TMDB",
                         ].includes(e.pos?.toUpperCase())
-                            ? `https://www.mflscripts.com/playerImages_96x96/mfl_${e.nfl_team}.svg`
+                            ? `https://knuckleheadsff.com/images/shared/icons/nfl-avatar/${e.nfl_team}.svg`
                             : `https://www.mflscripts.com/playerImages_80x107/mfl_${e.id}.png`,
                         y = "https://mflscripts.com/playerImages_80x107/free_agent.png";
                     "drop" === a
@@ -18158,7 +18158,7 @@ if ("options_52" === thisProgram || "new_predraft" === thisProgram) {
                             "TMLB",
                             "TMDB",
                         ].includes(e.pos?.toUpperCase())
-                            ? `https://www.mflscripts.com/playerImages_96x96/mfl_${e.nfl_team}.svg`
+                            ? `https://knuckleheadsff.com/images/shared/icons/nfl-avatar/${e.nfl_team}.svg`
                             : `https://www.mflscripts.com/playerImages_80x107/mfl_${e.id}.png`,
                         y = "https://mflscripts.com/playerImages_80x107/free_agent.png";
                     let u = "";
@@ -18676,7 +18676,7 @@ if ("contest_lineup" === thisProgram) {
                             "TMLB",
                             "TMDB",
                         ].includes(e.pos?.toUpperCase())
-                            ? `https://www.mflscripts.com/playerImages_96x96/mfl_${e.nfl_team}.svg`
+                            ? `https://knuckleheadsff.com/images/shared/icons/nfl-avatar/${e.nfl_team}.svg`
                             : `https://www.mflscripts.com/playerImages_80x107/mfl_${e.id}.png`,
                         y = "https://mflscripts.com/playerImages_80x107/free_agent.png";
                     let u = "";
@@ -19098,7 +19098,7 @@ if ("options_256" === thisProgram) {
                             "TMLB",
                             "TMDB",
                         ].includes(e.pos?.toUpperCase())
-                            ? `https://www.mflscripts.com/playerImages_96x96/mfl_${e.nfl_team}.svg`
+                            ? `https://knuckleheadsff.com/images/shared/icons/nfl-avatar/${e.nfl_team}.svg`
                             : `https://www.mflscripts.com/playerImages_80x107/mfl_${e.id}.png`,
                         y = "https://mflscripts.com/playerImages_80x107/free_agent.png";
                     let u = "";
@@ -19576,7 +19576,7 @@ if ("options_43" === thisProgram) {
                                 "TMLB",
                                 "TMDB",
                             ].includes(e.pos?.toUpperCase())
-                                ? `https://www.mflscripts.com/playerImages_96x96/mfl_${e.nfl_team}.svg`
+                                ? `https://knuckleheadsff.com/images/shared/icons/nfl-avatar/${e.nfl_team}.svg`
                                 : `https://www.mflscripts.com/playerImages_80x107/mfl_${e.id}.png`,
                             y = "https://mflscripts.com/playerImages_80x107/free_agent.png";
                         let u = "";
