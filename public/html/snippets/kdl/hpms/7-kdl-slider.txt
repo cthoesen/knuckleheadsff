@@ -11,9 +11,24 @@ var sliderImagesPromise = fetch('https://knuckleheadsff.com/api/slider-images')
 
 jQuery(document).ready(function() {
   sliderImagesPromise.then(function(images) {
+    // The slider builds every slide up front, so without this each card is
+    // downloaded on page load even though one is visible. Slides live in
+    // display:none until their turn, which is what lets the browser defer them.
+    //
+    // The first two stay eager: the first is what you actually see, and the
+    // second is needed before the first transition (2s in) or it arrives late.
+    //
+    // width/height carry the card's aspect ratio (1265x1100) so the browser
+    // reserves the right space before a lazy image arrives — without them,
+    // smoothHeight resizes the module as each slide loads.
     var slidesHtml = '';
     for (var i = 0; i < images.length; i++) {
-      slidesHtml += '<li><img class="slider" src="' + images[i] + '" /></li>';
+      var loadAttrs = i < 2
+        ? (i === 0 ? ' fetchpriority="high"' : '')
+        : ' loading="lazy"';
+      slidesHtml += '<li><img class="slider" src="' + images[i] + '"'
+        + ' width="1265" height="1100" decoding="async" alt=""'
+        + loadAttrs + ' /></li>';
     }
     $('.flexslider .slides').html(slidesHtml);
 
