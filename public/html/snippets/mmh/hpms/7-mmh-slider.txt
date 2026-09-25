@@ -48,6 +48,8 @@ jQuery(document).ready(function() {
 });
 </script>
 
+<!----------------- Players of the Week Caption ------------------>
+
 <div class="mobile-wrap flex-wrapper">
  <table class="homepagemodule report" cellspacing="1" align="center">
   <caption><span>Players of the Week</span></caption>
@@ -63,6 +65,8 @@ jQuery(document).ready(function() {
   </tbody>
  </table>
 </div>
+
+<!--------------------------------------------------------------->
 
 <!------------------------------------------------------>
 <!------------------- End #7 - Slider ------------------>
