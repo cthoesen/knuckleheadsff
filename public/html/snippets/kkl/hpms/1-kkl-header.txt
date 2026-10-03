@@ -1,13 +1,12 @@
 <!------------------------------------------------------>
 <!----------------- Start #1 - Header ------------------>
 <!------------------------------------------------------>
-<div id="body-kkl">
 
 <!-- Pre-resolve DNS and preconnect -->
 <link rel="dns-prefetch" href="https://www.mflscripts.com">
 <link rel="preconnect" href="https://www.mflscripts.com" crossorigin>
-<link rel="dns-prefetch" href="https://knuckleheadsff.com">
-<link rel="preconnect" href="https://knuckleheadsff.com" crossorigin>
+
+<div id="body-kkl">
 
 <style>
 #tabmenu-wrap li#tab7 a:before, #tabmenu-wrap #tab_title.tab7:before{content:"\f155";}
@@ -182,28 +181,37 @@ document.head.appendChild(linkRelIco);
 
 	<div class="icon-bar-full">
 
+<!-- Knuckleheadsff SVG -->
+<a class="svg-iconlink" href="https://knuckleheadsff.com/" target="_blank">
+<svg class="svg-icon icon-knuckleheadsff anim-hover-swing" viewBox="0 0 69.06 99.5">
+<use xlink:href="#icon-knuckleheadsff"></use>
+</svg>
+<div class="svg-text">Knuckle<br>Heads</div>
+</a>
+
+
 <!-- STANDINGS SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/standings?L=%LEAGUEID%">
-<svg class="svg-icon icon-crown" viewBox="0 0 98.6 78.36">
-<use xlink:href="#icon-crown"></use>
+<svg class="svg-icon icon-rankings anim-hover-ring" viewBox="0 0 99 93.79">
+<use xlink:href="#icon-rankings"></use>
 </svg>
 <div class="svg-text">League<br>Standings</div>
 </a>
 
 
 <!-- SELECT KEEPERS SVG -->
-<!-- <a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=144">  -->
-<!-- <svg class="svg-icon icon-keeper-lock" viewBox="0 0 98 87.75">  -->
-<!-- <use xlink:href="#icon-keeper-lock" />  -->
-<!-- </svg>  -->
-<!-- <div class="svg-text">Select<br>Keepers</div>  -->
- </a>
+<!-- <a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=144">
+<svg class="svg-icon icon-keeper-check anim-hover-glow-pulse" viewBox="0 0 99 97.54">
+<use xlink:href="#icon-keeper-check"></use>
+</svg>
+<div class="svg-text">Select<br>Keepers</div>
+</a> -->
 
 
 <!-- SCOREBOARD SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/ajax_ls?L=%LEAGUEID%">
-<svg class="svg-icon icon-touchdown" viewBox="0 0 72.24 73.82">
-<use xlink:href="#icon-touchdown"></use>
+<svg class="svg-icon icon-score anim-hover-pulse" viewBox="0 0 100.01 96.83">
+<use xlink:href="#icon-score"></use>
 </svg>
 <div class="svg-text">Live<br>Scoring</div>
 </a>
@@ -211,26 +219,26 @@ document.head.appendChild(linkRelIco);
 
 <!-- LINEUP SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/lineup?L=%LEAGUEID%">
-<svg class="svg-icon icon-chess" viewBox="0 0 99 99">
-<use xlink:href="#icon-chess"></use>
+<svg class="svg-icon icon-plays anim-hover-bounce" viewBox="0 0 99.33 99.44">
+<use xlink:href="#icon-plays"></use>
 </svg>
 <div class="svg-text">Set<br>Lineup</div>
 </a>
 
 
 <!-- DRAFT SVG -->
-<!--<a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=52"> --> <!--Use this link for Live Draft Room-->
+<!-- <a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=52"> --> <!--Use this link for Live Draft Room-->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=17">  <!--Use this for Draft Results before and after live draft-->
-<svg class="svg-icon icon-draft-kkl" viewBox="0 0 76.3 72">
+<svg class="svg-icon icon-draft-kkl anim-hover-float" viewBox="0 0 76.08 72">
 <use xlink:href="#icon-draft-kkl"></use>
 </svg>
-<div class="svg-text">Draft<br>Results</div> <!--Update to Draft Results or Draft Room depending on link above-->
+<div class="svg-text">Draft<br>Results</div> <!--Update to Draft Results or Live Draft depending on link above-->
 </a>                 
 
 
 <!-- ADD DROP SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/add_drop?L=%LEAGUEID%">
-<svg class="svg-icon icon-add-drop" viewBox="0 0 98.8 98.23">
+<svg class="svg-icon icon-add-drop anim-hover-spin" viewBox="0 0 98.8 98.23">
 <use xlink:href="#icon-add-drop"></use>
 </svg>
 <div class="svg-text">Add-Drop<br>Players</div>
@@ -239,7 +247,7 @@ document.head.appendChild(linkRelIco);
  
 <!-- PLAYER RESEARCH SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/top?L=%LEAGUEID%&SEARCHTYPE=BASIC&COUNT=150&YEAR=%YEAR%&START_WEEK=1&END_WEEK=17&CATEGORY=freeagent&POSITION=*&DISPLAY=points&TEAM=*">
-<svg class="svg-icon icon-statistics" viewBox="0 0 93.13 99">
+<svg class="svg-icon icon-statistics anim-hover-wobble" viewBox="0 0 93.13 99">
 <use xlink:href="#icon-statistics"></use>
 </svg>
 <div class="svg-text">Player<br>Stats</div>
@@ -248,8 +256,8 @@ document.head.appendChild(linkRelIco);
 
 <!-- TRADES SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=05">
-<svg class="svg-icon icon-trade" viewBox="0 0 92.43 72">
-<use xlink:href="#icon-trade"></use>
+<svg class="svg-icon icon-handshake anim-hover-shake" viewBox="0 0 100 69.61">
+<use xlink:href="#icon-handshake"></use>
 </svg>
 <div class="svg-text">Trade<br>Players</div>
 </a>
@@ -257,8 +265,8 @@ document.head.appendChild(linkRelIco);
 
 <!-- INJURED RESERVE SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=18">
-<svg class="svg-icon icon-skull" viewBox="0 0 92.54 99">
-<use xlink:href="#icon-skull"></use>
+<svg class="svg-icon icon-first-aid anim-hover-swing" viewBox="0 0 99.5 82.5">
+<use xlink:href="#icon-first-aid"></use>
 </svg>
 <div class="svg-text">Injured<br>Reserve</div>
 </a>
@@ -266,7 +274,7 @@ document.head.appendChild(linkRelIco);
 
 <!-- ROSTER SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=07">
-<svg class="svg-icon icon-helmet" viewBox="0 0 80.62 72">
+<svg class="svg-icon icon-helmet anim-hover-heartbeat" viewBox="0 0 100 86.95">
 <use xlink:href="#icon-helmet"></use>
 </svg>
 <div class="svg-text">League<br>Rosters</div>
@@ -275,34 +283,34 @@ document.head.appendChild(linkRelIco);
 
 <!-- MESSAGE BOARD SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/mb/board_show.pl?bid=%YEAR%%LEAGUEID%">
-<svg class="svg-icon icon-comic-bubble" viewBox="0 0 97.24 99">
-<use xlink:href="#icon-comic-bubble"></use>
+<svg class="svg-icon icon-message-board anim-hover-jello" viewBox="0 0 99 87.91">
+<use xlink:href="#icon-message-board"></use>
 </svg>
 <div class="svg-text">Message<br>Board</div>
 </a>
 
 
 <!-- CHAT SVG -->
-<!--<a class="svg-iconlink" href="//%HOST%/%YEAR%/home/%LEAGUEID%?MODULE=LEAGUE_CHAT" onclick="openChatWindow(this); return false;" target="_blank"> 
-<svg class="svg-icon icon-chat" viewBox="0 0 119.75 100"> 
-<use xlink:href="#icon-chat"></use> 
+<a class="svg-iconlink" href="//%HOST%/%YEAR%/home/%LEAGUEID%?MODULE=LEAGUE_CHAT" onclick="openChatWindow(this); return false;" target="_blank"> 
+<svg class="svg-icon icon-chat-cool anim-hover-ring" viewBox="0 0 99 99"> 
+<use xlink:href="#icon-chat-cool"></use> 
 </svg> 
 <div class="svg-text">Chat<br>Room</div> 
-</a> -->
+</a>
 
 
 <!-- GROUPME SVG -->
-<a class="svg-iconlink" href="https://groupme.com/join_group/94782961/5PyaebDf" onclick="openChatWindow(this); return false;" target="_blank">
-<svg class="svg-icon icon-groupme" viewBox="0 0 72 94.98">
+<!-- <a class="svg-iconlink" href="https://groupme.com/join_group/94782961/5PyaebDf" onclick="openChatWindow(this); return false;" target="_blank">
+<svg class="svg-icon icon-groupme anim-hover-flip" viewBox="0 0 72 94.98">
 <use xlink:href="#icon-groupme"></use>
 </svg>
 <div class="svg-text">Chat<br>Room</div>
-</a>
+</a> -->
 
 
 <!-- CALENDAR SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=123">
-<svg class="svg-icon icon-calendar" viewBox="0 0 92.1 99">
+<svg class="svg-icon icon-calendar anim-hover-ring" viewBox="0 0 99 97.24">
 <use href="#icon-calendar"></use>
 </svg>
 <div class="svg-text">League<br>Calendar</div>
@@ -311,10 +319,10 @@ document.head.appendChild(linkRelIco);
 
 <!-- VIP CLUB SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=01">
-<svg class="svg-icon icon-whiskey-glass" viewBox="0 0 74.25 99">
-<use xlink:href="#icon-whiskey-glass"></use>
+<svg class="svg-icon icon-beer-shot anim-hover-glow-pulse" viewBox="0 0 84.07 99.75">
+<use xlink:href="#icon-beer-shot"></use>
 </svg>
-<div class="svg-text">VIP<br>Club</div>
+<div class="svg-text">Bar<br>Regulars</div>
 </a>
 
 
@@ -323,7 +331,7 @@ document.head.appendChild(linkRelIco);
 
 <!-- LEAGUE CHAMPIONS SVG -->
 <a class="svg-iconlink popup-gallery-trigger" href="#" onclick="return false">
-<svg class="svg-icon icon-trophy" viewBox="0 0 74.43 99">
+<svg class="svg-icon icon-trophy anim-hover-pulse" viewBox="0 0 74.43 99">
 <use xlink:href="#icon-trophy"></use>
 </svg>
 <div class="svg-text">League<br>Champs</div>
@@ -335,7 +343,7 @@ document.head.appendChild(linkRelIco);
 
 <!-- HISTORY SVG -->
 <a class="svg-iconlink" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=247&SEQNO=6">
-<svg class="svg-icon icon-joystick" viewBox="0 0 82.56 99">
+<svg class="svg-icon icon-joystick anim-hover-bounce" viewBox="0 0 82.56 99">
 <use xlink:href="#icon-joystick"></use>
 </svg>
 <div class="svg-text">Retro<br>Cool</div>
@@ -344,7 +352,7 @@ document.head.appendChild(linkRelIco);
 
 <!-- RULES SVG -->
 <a class="svg-iconlink" href="https://knuckleheadsff.com/docs/kkl/kkl-bylaws.pdf" target="_blank">
-<svg class="svg-icon icon-logo-kkl" viewBox="0 0 72.05 98.54">
+<svg class="svg-icon icon-logo-kkl anim-hover-float" viewBox="0 0 72.05 98.54">
 <use href="#icon-logo-kkl"></use>
 </svg>
 <div class="svg-text">League<br>Bylaws</div>
@@ -562,7 +570,7 @@ var tickerTxtTrans  = "none";                          // set the text-transform
 var tickerLinkClr   = "#eee";                          // set the color for the links in scrolling text
 var tickerLinkHvr   = "#fff";                          // set the color for the links on hover in scrolling text
 var tickerBoxShdw   = "0 0 0.313rem rgba(0,0,0,.5)";   // set box shadow - if you dont want shadow set to "none"
-var controlsGreen   = "lime";                          // set color for the controls boxes when positive setting - current color green
+var controlsGreen   = "green";                          // set color for the controls boxes when positive setting - current color green
 var controlsRed     = "red";                           // set color for the controls boxes when negative setting - current color red
 </script>
 
@@ -579,9 +587,9 @@ var controlsRed     = "red";                           // set color for the cont
 
 <!-- In-Season Mini Scoreboard -->
 <script>
-// Below is an example of the 2024 season - start date 1 day prior to preseason game 1 , end date 1 day after Superbowl
+// Below is an example - start date 1 day prior to preseason game 1 , end date 1 day after Superbowl
 //var setCustomDates = true;
-//var nflStartWk = "08/01/2026";  // define a date 1 day prior to when you want offseason script to start
+//var nflStartWk = "09/01/2026";  // define a date 1 day prior to when you want offseason script to start
 //var nflEndWk   = "02/01/2027";  // define a date 1 day after you want offseason scripts to be removed
 
 // Hide these scripts in offseason
@@ -592,7 +600,7 @@ var deactivate_all_offseason = false;     //set to true to deactivate ALL eligib
 </script>
 
 <!-- <script src="https://www.mflscripts.com/mfl-apps/global/header.js?v=1.60"></script> -->
-<script src="https://knuckleheadsff.com/js/common/header.min.js"></script>
+<script src="https://knuckleheadsff.com/js/common/header.min.js?v=20260920"></script>
 <link rel="stylesheet" type="text/css" href="https://www.mflscripts.com/mfl-apps/global/css/300x50-icons.css">
 
 <!-- WRAP ALL CONTENT -->
