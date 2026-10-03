@@ -11,11 +11,18 @@
  * a floating skull. The yellow tile keeps the silhouette readable in both
  * light and dark browser themes.
  *
- * Outputs use Next.js App Router file conventions, so the <link> tags are
+ * Site outputs use Next.js App Router file conventions, so the <link> tags are
  * generated automatically — no manual metadata.icons entry needed:
  *   app/icon.svg       scalable, preferred by modern browsers
  *   app/favicon.ico    16/32/48 multi-size fallback
  *   app/apple-icon.png 180x180 iOS home screen
+ *
+ * Each MFL league site gets the same logo on its own colour tile, taken from
+ * the first --primary in public/css/dark-<league>.css (the :root value — later
+ * ones belong to the selectable skins). Change the CSS, re-run, bump the ?v=
+ * in the league's #1 - Header. Outputs, per league:
+ *   public/images/league/<league>/favicon.ico           16/32/48
+ *   public/images/league/<league>/apple-touch-icon.png  180x180
  */
 const fs = require('fs');
 const path = require('path');
@@ -26,10 +33,11 @@ const SRC = path.join(ROOT, 'public/images/shared/icons/knuckleheads-logo.svg');
 const APP = path.join(ROOT, 'app');
 
 const BRAND_YELLOW = '#fee816';
+const LEAGUES = ['kkl', 'kdl', 'mmh', 'bsb'];
 const CANVAS = 100; // icon.svg viewBox units
 const INSET = 0.84; // fraction of the tile the logo occupies
 
-function buildSquareSvg(sourceSvg) {
+function buildSquareSvg(sourceSvg, fill) {
   // Pull the source viewBox and inner markup so the paths can be re-centred
   // on a square tile without touching the artwork itself.
   const vb = sourceSvg.match(/viewBox="([\d.\s-]+)"/);
@@ -46,7 +54,7 @@ function buildSquareSvg(sourceSvg) {
   const ty = (CANVAS - vh * scale) / 2;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${CANVAS} ${CANVAS}">
-  <rect width="${CANVAS}" height="${CANVAS}" rx="18" fill="${BRAND_YELLOW}"/>
+  <rect width="${CANVAS}" height="${CANVAS}" rx="18" fill="${fill}"/>
   <g transform="translate(${tx.toFixed(2)} ${ty.toFixed(2)}) scale(${scale.toFixed(4)})">
 ${inner}
   </g>
@@ -79,22 +87,45 @@ function encodeIco(pngs) {
   return Buffer.concat([header, ...entries, ...pngs.map((p) => p.data)]);
 }
 
-(async () => {
-  const squareSvg = buildSquareSvg(fs.readFileSync(SRC, 'utf8'));
-  fs.writeFileSync(path.join(APP, 'icon.svg'), squareSvg);
-  console.log('app/icon.svg');
+function leaguePrimary(league) {
+  const css = fs.readFileSync(path.join(ROOT, `public/css/dark-${league}.css`), 'utf8');
+  const m = css.match(/--primary\s*:\s*(#[0-9a-fA-F]{3,8})\s*;/);
+  if (!m) throw new Error(`dark-${league}.css has no hex --primary`);
+  return m[1];
+}
 
-  // density high enough that the smallest raster is still supersampled
-  const render = (size) =>
-    sharp(Buffer.from(squareSvg), { density: 900 }).resize(size, size).png().toBuffer();
+const ICO_SIZES = [16, 32, 48];
 
-  const icoSizes = [16, 32, 48];
+// density high enough that the smallest raster is still supersampled
+const render = (svg, size) =>
+  sharp(Buffer.from(svg), { density: 900 }).resize(size, size).png().toBuffer();
+
+async function writeSet(svg, icoPath, applePath) {
   const pngs = await Promise.all(
-    icoSizes.map(async (size) => ({ size, data: await render(size) }))
+    ICO_SIZES.map(async (size) => ({ size, data: await render(svg, size) }))
   );
-  fs.writeFileSync(path.join(APP, 'favicon.ico'), encodeIco(pngs));
-  console.log(`app/favicon.ico (${icoSizes.join('/')})`);
+  fs.writeFileSync(icoPath, encodeIco(pngs));
+  fs.writeFileSync(applePath, await render(svg, 180));
+  console.log(`${path.relative(ROOT, icoPath)} (${ICO_SIZES.join('/')})`);
+  console.log(`${path.relative(ROOT, applePath)} (180)`);
+}
 
-  fs.writeFileSync(path.join(APP, 'apple-icon.png'), await render(180));
-  console.log('app/apple-icon.png (180)');
+(async () => {
+  const source = fs.readFileSync(SRC, 'utf8');
+
+  const siteSvg = buildSquareSvg(source, BRAND_YELLOW);
+  fs.writeFileSync(path.join(APP, 'icon.svg'), siteSvg);
+  console.log('app/icon.svg');
+  await writeSet(siteSvg, path.join(APP, 'favicon.ico'), path.join(APP, 'apple-icon.png'));
+
+  for (const league of LEAGUES) {
+    const fill = leaguePrimary(league);
+    const dir = path.join(ROOT, 'public/images/league', league);
+    console.log(`\n${league.toUpperCase()} ${fill}`);
+    await writeSet(
+      buildSquareSvg(source, fill),
+      path.join(dir, 'favicon.ico'),
+      path.join(dir, 'apple-touch-icon.png')
+    );
+  }
 })();
