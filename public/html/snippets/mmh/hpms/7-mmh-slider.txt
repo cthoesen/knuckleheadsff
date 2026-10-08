@@ -48,11 +48,11 @@ jQuery(document).ready(function() {
 });
 </script>
 
-<!----------------- Players of the Week Caption ------------------>
+<!----------------- Wall of Fame Caption ------------------>
 
 <div class="mobile-wrap flex-wrapper">
  <table class="homepagemodule report" cellspacing="1" align="center">
-  <caption><span>Players of the Week</span></caption>
+  <caption><span>Wall of Fame</span></caption>
   <tbody>
    <tr>
     <td style="margin: 0; padding: 0">

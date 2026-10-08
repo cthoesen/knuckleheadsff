@@ -5180,7 +5180,7 @@ table#youtubevideo.homepagemodule.report embed,
   width: 100%;
   display: block;
 }
-/* Players of the Week cards. The module sits in a homepage column, so the
+/* Wall of Fame cards. The module sits in a homepage column, so the
    slider is capped rather than left to fill the cell. 378px pairs with the
    w=750 the slider API requests: 378 x 2 is 756, so a 2x screen gets a real
    pixel per rendered pixel. Next's optimizer only serves widths from its
