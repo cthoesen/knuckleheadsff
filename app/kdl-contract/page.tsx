@@ -92,6 +92,9 @@ export default function KDLContractApp() {
   const [searchTerm,      setSearchTerm]      = useState('');
   const [selectedTeam,    setSelectedTeam]    = useState('all');
   const [tagDecisions,    setTagDecisions]    = useState<Record<string, TagDecision>>({});
+  // The planner looks ahead: during the 2026 season it plans the 2027 roster.
+  // Derived from the API's season so it rolls forward with SEASON_YEAR.
+  const [planYear,        setPlanYear]        = useState<number | null>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -110,6 +113,8 @@ export default function KDLContractApp() {
         const tagData: TagPlayer[]  = await tagRes.json();
         setTagBaselines(calculateTagBaselines(tagData));
         setPlayers(data);
+        const season = Number(leagueJson.season);
+        if (season) setPlanYear(season + 1);
 
         // Build a case-insensitive map of franchise name → total dead money.
         // FRANCHISE_ALIASES remaps prior-season names to current-season names
@@ -204,7 +209,7 @@ export default function KDLContractApp() {
 
   if (isLoading) return (
     <div className="min-h-screen cyber-bg flex items-center justify-center">
-      <div className="text-[#a95ef5] font-mono animate-pulse text-xl">INITIALIZING 2026 PLANNER...</div>
+      <div className="text-[#a95ef5] font-mono animate-pulse text-xl">INITIALIZING PLANNER...</div>
     </div>
   );
 
@@ -214,7 +219,7 @@ export default function KDLContractApp() {
 
   return (
     <div className="min-h-screen league-kdl" style={{ background: 'var(--bg-base)' }}>
-      <ToolHeader code="KDL" kicker="KDL · COMMISSIONER TOOL" title="2026 Season Planner" backHref="/kdl" backLabel="KDL Hub" />
+      <ToolHeader code="KDL" kicker="KDL · COMMISSIONER TOOL" title={planYear ? `${planYear} Season Planner` : 'Season Planner'} backHref="/kdl" backLabel="KDL Hub" />
 
       <div className="max-w-7xl mx-auto px-6 pt-6 flex items-center justify-between flex-wrap gap-3">
         <p className="text-xs font-mono uppercase" style={{ color: 'var(--kff-ink-mute)' }}>
@@ -310,7 +315,7 @@ export default function KDLContractApp() {
                       <tr className="bg-zinc-950/50 text-xs text-zinc-500 uppercase font-bold tracking-wider">
                         <th className="px-6 py-3">Player</th>
                         <th className="px-6 py-3">Salary</th>
-                        <th className="px-6 py-3 text-center">2026 Years</th>
+                        <th className="px-6 py-3 text-center">{planYear ? `${planYear} Years` : 'Years'}</th>
                         <th className="px-6 py-3 text-center">Franchise Tag</th>
                         <th className="px-6 py-3 text-center">Restricted Tag</th>
                         <th className="px-6 py-3 text-right">Tag Decision</th>
@@ -344,7 +349,7 @@ export default function KDLContractApp() {
                             {/* Salary */}
                             <td className="px-6 py-3 font-mono text-[#a95ef5]">${p.status.salary}</td>
 
-                            {/* 2026 Years */}
+                            {/* Plan-year years */}
                             <td className="px-6 py-3 text-center">
                               <span className={`font-mono font-bold ${p.status.projectedYears === 0 ? 'text-rose-500' : 'text-zinc-400'}`}>
                                 {p.status.projectedYears}
