@@ -17,10 +17,12 @@
  *   app/favicon.ico    16/32/48 multi-size fallback
  *   app/apple-icon.png 180x180 iOS home screen
  *
- * Each MFL league site gets the same logo on its own colour tile, taken from
- * the first --primary in public/css/dark-<league>.css (the :root value — later
- * ones belong to the selectable skins). Change the CSS, re-run, bump the ?v=
- * in the league's #1 - Header. Outputs, per league:
+ * Each MFL league site gets a logo on its own colour tile, taken from the
+ * first --primary in public/css/dark-<league>.css (the :root value — later
+ * ones belong to the selectable skins). The logo is the league's own
+ * favicon-<league>.svg from the favicons folder below when one is there, and
+ * the knuckleheadsff logo otherwise. Change either, re-run, bump the ?v= in
+ * the league's #1 - Header. Outputs, per league:
  *   public/images/league/<league>/favicon.ico           16/32/48
  *   public/images/league/<league>/apple-touch-icon.png  180x180
  */
@@ -31,18 +33,22 @@ const sharp = require('sharp');
 const ROOT = path.join(__dirname, '..');
 const SRC = path.join(ROOT, 'public/images/shared/icons/knuckleheads-logo.svg');
 const APP = path.join(ROOT, 'app');
+// Optional per-league logos: favicon-kkl.svg, favicon-kdl.svg, ...
+const LEAGUE_SRC_DIR = path.join(ROOT, 'public/images/shared/icons/favicons');
 
 const BRAND_YELLOW = '#fee816';
 const LEAGUES = ['kkl', 'kdl', 'mmh', 'bsb'];
 const CANVAS = 100; // icon.svg viewBox units
 const INSET = 0.84; // fraction of the tile the logo occupies
 
-function buildSquareSvg(sourceSvg, fill) {
+function buildSquareSvg(sourceSvg, fill, name) {
   // Pull the source viewBox and inner markup so the paths can be re-centred
   // on a square tile without touching the artwork itself.
-  const vb = sourceSvg.match(/viewBox="([\d.\s-]+)"/);
-  if (!vb) throw new Error('source SVG has no viewBox');
-  const [, , vw, vh] = vb[1].trim().split(/\s+/).map(Number);
+  const vb = sourceSvg.match(/viewBox=["']([^"']+)["']/);
+  if (!vb) throw new Error(`${name}: SVG has no viewBox`);
+  const parts = vb[1].trim().split(/[\s,]+/).map(Number);
+  if (parts.length !== 4 || parts.some(Number.isNaN)) throw new Error(`${name}: malformed viewBox`);
+  const [minX, minY, vw, vh] = parts;
 
   const inner = sourceSvg
     .replace(/[\s\S]*?<svg[^>]*>/, '')
@@ -50,8 +56,8 @@ function buildSquareSvg(sourceSvg, fill) {
     .trim();
 
   const scale = (CANVAS * INSET) / Math.max(vw, vh);
-  const tx = (CANVAS - vw * scale) / 2;
-  const ty = (CANVAS - vh * scale) / 2;
+  const tx = (CANVAS - vw * scale) / 2 - minX * scale;
+  const ty = (CANVAS - vh * scale) / 2 - minY * scale;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${CANVAS} ${CANVAS}">
   <rect width="${CANVAS}" height="${CANVAS}" rx="18" fill="${fill}"/>
@@ -113,7 +119,7 @@ async function writeSet(svg, icoPath, applePath) {
 (async () => {
   const source = fs.readFileSync(SRC, 'utf8');
 
-  const siteSvg = buildSquareSvg(source, BRAND_YELLOW);
+  const siteSvg = buildSquareSvg(source, BRAND_YELLOW, path.relative(ROOT, SRC));
   fs.writeFileSync(path.join(APP, 'icon.svg'), siteSvg);
   console.log('app/icon.svg');
   await writeSet(siteSvg, path.join(APP, 'favicon.ico'), path.join(APP, 'apple-icon.png'));
@@ -121,9 +127,11 @@ async function writeSet(svg, icoPath, applePath) {
   for (const league of LEAGUES) {
     const fill = leaguePrimary(league);
     const dir = path.join(ROOT, 'public/images/league', league);
-    console.log(`\n${league.toUpperCase()} ${fill}`);
+    const own = path.join(LEAGUE_SRC_DIR, `favicon-${league}.svg`);
+    const srcPath = fs.existsSync(own) ? own : SRC;
+    console.log(`\n${league.toUpperCase()} ${fill}  logo: ${path.relative(ROOT, srcPath)}`);
     await writeSet(
-      buildSquareSvg(source, fill),
+      buildSquareSvg(fs.readFileSync(srcPath, 'utf8'), fill, path.relative(ROOT, srcPath)),
       path.join(dir, 'favicon.ico'),
       path.join(dir, 'apple-touch-icon.png')
     );
