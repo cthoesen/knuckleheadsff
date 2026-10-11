@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, TrendingUp } from 'lucide-react';
+import { Search, TrendingUp, Info } from 'lucide-react';
 import { ToolHeader } from '../components/kff/ToolHeader';
 import { FRANCHISE_ALIASES } from './franchise-aliases';
 
@@ -32,6 +32,11 @@ interface TagValues {
 }
 
 type TagDecision = 'franchise' | 'restricted' | 'drop' | '';
+
+// Season the tag snapshot (api/kdl-tag-data/week12-data.json) was taken from.
+// Bump this when the snapshot is replaced after Week 12; until then the page
+// notes that tag costs are carried over from the prior season.
+const TAG_DATA_SEASON = 2025;
 
 function getPositionGroup(pos: string) {
   if (pos === 'DT' || pos === 'DE') return 'DL';
@@ -234,6 +239,18 @@ export default function KDLContractApp() {
         </Link>
       </div>
 
+      {planYear && TAG_DATA_SEASON < planYear - 1 && (
+        <div className="max-w-7xl mx-auto px-6 pt-4">
+          <div className="flex items-start gap-3 rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3">
+            <Info size={16} className="text-amber-400 mt-0.5 shrink-0" />
+            <p className="text-sm text-amber-200/90">
+              Tag costs shown are from {TAG_DATA_SEASON} Week 12 salaries. They will be updated
+              after Week 12 of the {planYear - 1} season.
+            </p>
+          </div>
+        </div>
+      )}
+
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
 
         {/* Controls */}
@@ -411,7 +428,7 @@ export default function KDLContractApp() {
                         <tr className="bg-rose-500/5 border-t border-rose-500/20">
                           <td className="px-6 py-3">
                             <div className="font-bold text-rose-400 text-sm">Dead Money</div>
-                            <div className="text-[10px] text-rose-500/70 font-mono mt-0.5">2026 carry-over penalties</div>
+                            <div className="text-[10px] text-rose-500/70 font-mono mt-0.5">{planYear ? `Penalties from ${planYear - 1} cuts` : 'Penalties from cuts'}</div>
                           </td>
                           <td className="px-6 py-3 font-mono text-rose-400">${teamDeadMoney}</td>
                           <td className="px-6 py-3 text-center"><span className="text-zinc-700 font-mono">—</span></td>
