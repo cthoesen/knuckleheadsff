@@ -1,6 +1,6 @@
 'use client';
 
-import { Calculator, Zap, TrendingUp, ArrowLeftRight, FileText, ListOrdered } from 'lucide-react';
+import { Calculator, Zap, TrendingUp, ArrowLeftRight, FileText, ListOrdered, Users } from 'lucide-react';
 import LeagueHubLayout, { HubTool, HubQuickLink } from '../components/LeagueHubLayout';
 
 const TOOLS: HubTool[] = [
@@ -9,6 +9,7 @@ const TOOLS: HubTool[] = [
   { name: 'Auction Draft Tool', desc: 'Live auction helper with budget tracking', icon: <TrendingUp size={22} />, status: 'soon' },
   { name: 'Trade Analyzer', desc: 'Evaluate trades with salary cap implications', icon: <ArrowLeftRight size={22} />, href: '/mmh-trade', status: 'live' },
   { name: 'Standings', desc: 'Current standings with team names, ready to copy into Excel', icon: <ListOrdered size={22} />, href: '/standings/mmh', status: 'live' },
+  { name: 'Rosters', desc: 'Every team\u2019s roster, one team or all, ready to copy into Excel', icon: <Users size={22} />, href: '/rosters/mmh', status: 'live' },
   { name: 'League Constitution', desc: 'Official rules, salary structure, and roster limits', icon: <FileText size={22} />, externalHref: '/docs/mmh/mmh-bylaws.pdf', status: 'live' },
 ];
 

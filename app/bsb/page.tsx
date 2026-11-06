@@ -1,6 +1,6 @@
 'use client';
 
-import { Calculator, TrendingUp, Swords, ArrowLeftRight, FileText, ListOrdered } from 'lucide-react';
+import { Calculator, TrendingUp, Swords, ArrowLeftRight, FileText, ListOrdered, Users } from 'lucide-react';
 import LeagueHubLayout, { HubTool, HubQuickLink } from '../components/LeagueHubLayout';
 
 const TOOLS: HubTool[] = [
@@ -9,6 +9,7 @@ const TOOLS: HubTool[] = [
   { name: 'Matchup Analyzer', desc: 'Weekly head-to-head matchup predictions', icon: <Swords size={22} />, status: 'soon' },
   { name: 'Trade Analyzer', desc: 'Evaluate trades with keeper pick implications', icon: <ArrowLeftRight size={22} />, href: '/bsb-trade', status: 'live' },
   { name: 'Standings', desc: 'Current standings with team names, ready to copy into Excel', icon: <ListOrdered size={22} />, href: '/standings/bsb', status: 'live' },
+  { name: 'Rosters', desc: 'Every team\u2019s roster, one team or all, ready to copy into Excel', icon: <Users size={22} />, href: '/rosters/bsb', status: 'live' },
   { name: 'League Constitution', desc: 'Official rules, keeper penalties, and roster structure', icon: <FileText size={22} />, externalHref: '/docs/bsb/bsb-bylaws.pdf', status: 'live' },
 ];
 

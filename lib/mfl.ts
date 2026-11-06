@@ -119,11 +119,12 @@ export async function mflExport(
 }
 
 /** Map of player id -> YTD score, or null when the season has no scores yet. */
-async function fetchScores(season: string, leagueId: string, code: LeagueCode) {
+async function fetchScores(season: string, leagueId: string, code: LeagueCode, revalidate?: number) {
   const data = await mflExport(season, 'playerScores', {
     leagueId,
     code,
     params: { W: 'YTD' },
+    revalidate,
   });
   const list = toArray<any>(data?.playerScores?.playerScore).filter((s) => s?.id);
   if (list.length === 0) return null;
@@ -140,14 +141,14 @@ async function fetchScores(season: string, leagueId: string, code: LeagueCode) {
  * previous season before kickoff — so the column stays populated year-round
  * instead of going blank every offseason.
  */
-async function resolvePointsSeason(season: string, leagueId: string, code: LeagueCode) {
+async function resolvePointsSeason(season: string, leagueId: string, code: LeagueCode, revalidate?: number) {
   // playerScores is the one type some leagues gate behind an APIKEY (BSB does).
   // Points are supplementary, so a gated or failing fetch degrades to null
   // points rather than failing the whole roster request.
-  const current = await fetchScores(season, leagueId, code).catch(() => null);
+  const current = await fetchScores(season, leagueId, code, revalidate).catch(() => null);
   if (current) return { scores: current, pointsSeason: season };
   const prevSeason = String(Number(season) - 1);
-  const prev = await fetchScores(prevSeason, leagueId, code).catch(() => null);
+  const prev = await fetchScores(prevSeason, leagueId, code, revalidate).catch(() => null);
   return { scores: prev ?? new Map<string, number>(), pointsSeason: prev ? prevSeason : '' };
 }
 
@@ -155,16 +156,28 @@ async function resolvePointsSeason(season: string, leagueId: string, code: Leagu
  * Assemble every rostered player in a league with contract, status, and points.
  * This is the single replacement for the old per-league HTML scrapers.
  */
-export async function getLeagueRoster(cfg: LeagueConfig): Promise<LeagueRosterResult> {
+/**
+ * `fresh` skips the data cache for everything that changes week to week
+ * (rosters, franchises, injuries, scores). Cached fetches revalidate in the
+ * background — the first request after a quiet spell gets the old copy — which
+ * is fine for a page but not for an export someone pastes into a workbook.
+ * The players list (names, NFL teams) stays cached either way: it is large
+ * and a day stale is harmless.
+ */
+export async function getLeagueRoster(
+  cfg: LeagueConfig,
+  { fresh = false }: { fresh?: boolean } = {}
+): Promise<LeagueRosterResult> {
   const { season, leagueId, code } = cfg;
+  const live = fresh ? 0 : undefined;
 
   const [leagueData, rostersData, playersData, injuriesData, scoreInfo] = await Promise.all([
-    mflExport(season, 'league', { leagueId, code }),
-    mflExport(season, 'rosters', { leagueId, code, revalidate: 60 }),
+    mflExport(season, 'league', { leagueId, code, revalidate: live }),
+    mflExport(season, 'rosters', { leagueId, code, revalidate: live ?? 60 }),
     mflExport(season, 'players', { leagueId, code, params: { DETAILS: '1' }, revalidate: 86400 }),
     // League-independent: no L= (see mflExport).
-    mflExport(season, 'injuries', { code }).catch(() => null),
-    resolvePointsSeason(season, leagueId, code),
+    mflExport(season, 'injuries', { code, revalidate: live }).catch(() => null),
+    resolvePointsSeason(season, leagueId, code, live),
   ]);
 
   const playerMap = new Map<string, { name: string; position: string; team: string; draftYear: string }>();

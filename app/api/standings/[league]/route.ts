@@ -87,7 +87,9 @@ export async function GET(request: Request, { params }: { params: Promise<{ leag
   if (!cfg) return NextResponse.json({ error: 'unknown league' }, { status: 404 });
 
   try {
-    const opts = { leagueId: cfg.leagueId, code, revalidate: 300 };
+    // No data cache: a cached copy revalidates in the background, so the first
+    // request after a quiet spell would export old standings.
+    const opts = { leagueId: cfg.leagueId, code, revalidate: 0 };
     const [standingsJson, leagueJson] = await Promise.all([
       mflExport(cfg.season, 'leagueStandings', opts),
       mflExport(cfg.season, 'league', opts),

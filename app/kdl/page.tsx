@@ -1,6 +1,6 @@
 'use client';
 
-import { DollarSign, ClipboardList, TrendingUp, ArrowLeftRight, Skull, FileText, ListOrdered } from 'lucide-react';
+import { DollarSign, ClipboardList, TrendingUp, ArrowLeftRight, Skull, FileText, ListOrdered, Users } from 'lucide-react';
 import LeagueHubLayout, { HubTool, HubQuickLink } from '../components/LeagueHubLayout';
 
 const TOOLS: HubTool[] = [
@@ -10,6 +10,7 @@ const TOOLS: HubTool[] = [
   { name: 'Trade Analyzer', desc: 'Evaluate trades with contract and cap implications', icon: <ArrowLeftRight size={22} />, href: '/kdl-trade', status: 'live' },
   { name: 'Dead Money Tracker', desc: `Track dead money penalties for the ${new Date().getFullYear() + 1} season from mid-season cuts`, icon: <Skull size={22} />, href: '/kdl-dead-money', status: 'live' },
   { name: 'Standings', desc: 'Current standings with team names, ready to copy into Excel', icon: <ListOrdered size={22} />, href: '/standings/kdl', status: 'live' },
+  { name: 'Rosters', desc: 'Every team\u2019s roster, one team or all, ready to copy into Excel', icon: <Users size={22} />, href: '/rosters/kdl', status: 'live' },
   { name: 'League Constitution', desc: 'Official rules, contract structure, and tag policies', icon: <FileText size={22} />, externalHref: '/docs/kdl/kdl-bylaws.pdf', status: 'live' },
 ];
 
